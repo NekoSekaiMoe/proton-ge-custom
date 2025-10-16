@@ -289,6 +289,11 @@ if(NOT TARGET SPIRV-Tools-opt)
             endif()
             set(ENABLE_OPT OFF)
         endif()
+    else()
+        if(ENABLE_OPT)
+            message(SEND_ERROR "ENABLE_OPT set but SPIR-V tools not found. Please run update_glslang_sources.py, "
+                "set the ALLOW_EXTERNAL_SPIRV_TOOLS option to use a local install of SPIRV-Tools, or set ENABLE_OPT=0.")
+        endif()
     endif()
 endif()
 
