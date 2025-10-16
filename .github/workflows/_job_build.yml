@@ -23,6 +23,11 @@ jobs:
         key: ccache-proton-${{ github.run_id }}
         restore-keys: |
           ccache-proton
+          
+    - name: Link
+      run: |
+        sudo mkdir -pv /mnt/a
+        sudo ln -sfv /mnt/a a
 
     - name: Checkout
       uses: actions/checkout@v4
@@ -30,8 +35,10 @@ jobs:
         fetch-depth: 0
         fetch-tags: true
         submodules: false
+        path: a
 
     - name: Patch
+      working-directory: ./a
       run: |
         git submodule update --init --filter=tree:0 --recursive
         # apply proton-ge-custom patches
@@ -41,14 +48,14 @@ jobs:
         mkdir ./build
 
     - name: Configure
-      working-directory: ./build
+      working-directory: ./a/build
       run: |
         bash -x ../configure.sh --build-name=${{ inputs.name }} --container-engine=docker
 
     - name: Make ${{ inputs.name }}
-      working-directory: ./build
+      working-directory: ./a/build
       run: |
-        make -j$(nproc) redist
+        make -j$(nproc) redist VERBOSE=0 V=0
 
     - name: Save cache
       id: ccache-save
@@ -62,17 +69,17 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.name }}.tar.gz
-        path: ./build/${{ inputs.name }}.tar.gz
+        path: ./a/build/${{ inputs.name }}.tar.gz
 
     - name: Upload artifact ${{ inputs.name }}.tar.zst
       uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.name }}.tar.zst
-        path: ./build/${{ inputs.name }}.tar.zst
+        path: ./a/build/${{ inputs.name }}.tar.zst
 
     - name: Upload artifact ${{ inputs.name }}.sha512sum
       uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.name }}.sha512sum
-        path: ./build/${{ inputs.name }}.sha512sum
+        path: ./a/build/${{ inputs.name }}.sha512sum
 
