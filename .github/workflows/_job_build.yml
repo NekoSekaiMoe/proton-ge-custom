@@ -28,6 +28,7 @@ jobs:
       run: |
         sudo mkdir -pv /mnt/a
         sudo ln -sfv /mnt/a a
+        sudo chmod 777 -R a
 
     - name: Checkout
       uses: actions/checkout@v4
