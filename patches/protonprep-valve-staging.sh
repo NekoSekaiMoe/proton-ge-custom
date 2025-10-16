@@ -37,6 +37,13 @@ apply_all_in_dir() {
     apply_all_in_dir "../patches/gstreamer/"
     popd
 
+    pushd piper
+    git reset --hard HEAD
+    git clean -xdf
+    wget https://github.com/rhasspy/piper/commit/9d06b74959570772e8bcbe7a3f696664d2421167.patch -O lib.patch
+    apply_patch lib.patch
+    popd
+
     pushd protonfixes
     git reset --hard HEAD
     git clean -xdf
@@ -52,11 +59,6 @@ apply_all_in_dir() {
     pushd unzip
     git reset --hard HEAD
     git clean -xdf
-    popd
-    pushd piper
-    git reset --hard HEAD
-    git clean -xdf
-    apply_patch "../../../patches/piper/lib.patch"
     popd
     pushd winetricks
     git reset --hard HEAD
