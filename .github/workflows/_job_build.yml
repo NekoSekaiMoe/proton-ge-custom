@@ -84,3 +84,7 @@ jobs:
       with:
         name: ${{ inputs.name }}.sha512sum
         path: ./a/build/${{ inputs.name }}.sha512sum
+<<<<<<< HEAD
+=======
+
+>>>>>>> 66c48527 (Update _job_build.yml)
