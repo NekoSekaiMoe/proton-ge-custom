@@ -7,10 +7,10 @@ OBJ := $(abspath $(CURDIR))
 ifeq ($(filter s,$(MAKEFLAGS)),s)
 MAKEFLAGS += --quiet --no-print-directory
 --quiet? := --quiet
-else
-MFLAGS += V=1 VERBOSE=1
--v? := -v
---verbose? := --verbose
+#else
+#MFLAGS += V=1 VERBOSE=1
+#-v? := -v
+#--verbose? := --verbose
 endif
 
 SHELL := /bin/bash
