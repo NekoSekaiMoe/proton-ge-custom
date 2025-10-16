@@ -1,0 +1,21 @@
+*.o
+*.a
+*.so
+*.exe
+.cache/
+.vscode/
+.vs/
+tags
+TAGS
+bazel-*
+build/
+out/
+CMakeUserPresets.json
+
+# GN generated files
+.cipd/
+*.gclient_entries
+
+# Random OS stuff
+.DS_Store
+._*
