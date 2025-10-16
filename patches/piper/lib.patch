@@ -1,0 +1,555 @@
+From 9d06b74959570772e8bcbe7a3f696664d2421167 Mon Sep 17 00:00:00 2001
+From: Shaun Ren <shaun.ren@linux.com>
+Date: Sat, 4 Nov 2023 01:21:32 -0400
+Subject: [PATCH] Build piper as a library; add C API
+
+---
+ CMakeLists.txt      |  32 +++++++++----
+ piper.pc.in         |  13 +++++
+ src/cpp/main.cpp    |   6 +++
+ src/cpp/piper.cpp   |  50 +++++++++++++++-----
+ src/cpp/piper.hpp   |  33 ++++++-------
+ src/cpp/piper_c.cpp | 112 ++++++++++++++++++++++++++++++++++++++++++++
+ src/cpp/piper_c.h   |  69 +++++++++++++++++++++++++++
+ 7 files changed, 275 insertions(+), 40 deletions(-)
+ create mode 100644 piper.pc.in
+ create mode 100644 src/cpp/piper_c.cpp
+ create mode 100644 src/cpp/piper_c.h
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f96ec440b..6e41c83e9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.13)
+ 
+ project(piper C CXX)
+ 
+-file(READ "${CMAKE_CURRENT_LIST_DIR}/VERSION" piper_version)
++file(STRINGS "${CMAKE_CURRENT_LIST_DIR}/VERSION" piper_version)
+ 
+ set(CMAKE_CXX_STANDARD 17)
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+@@ -17,8 +17,10 @@ elseif(NOT APPLE)
+   string(APPEND CMAKE_C_FLAGS " -Wall -Wextra")
+ endif()
+ 
+-add_executable(piper src/cpp/main.cpp src/cpp/piper.cpp)
+-add_executable(test_piper src/cpp/test.cpp src/cpp/piper.cpp)
++add_library(piper SHARED src/cpp/piper.cpp src/cpp/piper_c.cpp)
++
++add_executable(piper_exe src/cpp/main.cpp)
++add_executable(test_piper src/cpp/test.cpp)
+ 
+ # NOTE: external project prefix are shortened because of path length restrictions on Windows
+ # NOTE: onnxruntime is pulled from piper-phonemize
+@@ -63,7 +65,7 @@ if(NOT DEFINED PIPER_PHONEMIZE_DIR)
+   ExternalProject_Add(
+     piper_phonemize_external
+     PREFIX "${CMAKE_CURRENT_BINARY_DIR}/p"
+-    URL "https://github.com/rhasspy/piper-phonemize/archive/refs/heads/master.zip"
++    URL "https://github.com/shaunren/piper-phonemize/archive/refs/heads/pic.zip"
+     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${PIPER_PHONEMIZE_DIR}
+   )
+   add_dependencies(piper piper_phonemize_external)
+@@ -76,12 +78,12 @@ if((NOT MSVC) AND (NOT APPLE))
+   # Linux flags
+   string(APPEND CMAKE_CXX_FLAGS " -Wall -Wextra -Wl,-rpath,'$ORIGIN'")
+   string(APPEND CMAKE_C_FLAGS " -Wall -Wextra")
+-  target_link_libraries(piper -static-libgcc -static-libstdc++)
++  target_link_libraries(piper_exe -static-libgcc -static-libstdc++)
+ 
+   set(PIPER_EXTRA_LIBRARIES "pthread")
+ endif()
+ 
+-target_link_libraries(piper
++target_link_libraries(piper PRIVATE
+   fmt
+   spdlog
+   espeak-ng
+@@ -104,6 +106,12 @@ target_include_directories(piper PUBLIC
+ 
+ target_compile_definitions(piper PUBLIC _PIPER_VERSION=${piper_version})
+ 
++target_link_libraries(piper_exe piper ${PIPER_EXTRA_LIBRARIES})
++
++if(NOT WIN32)
++  set_target_properties(piper_exe PROPERTIES OUTPUT_NAME piper)
++endif()
++
+ # ---- Declare test ----
+ include(CTest)
+ enable_testing()
+@@ -131,9 +139,7 @@ target_link_directories(
+ target_link_libraries(test_piper PUBLIC
+   fmt
+   spdlog
+-  espeak-ng
+-  piper_phonemize
+-  onnxruntime
++  piper
+ )
+ 
+ # ---- Declare install targets ----
+@@ -142,6 +148,14 @@ install(
+   TARGETS piper
+   DESTINATION ${CMAKE_INSTALL_PREFIX})
+ 
++install(
++  TARGETS piper_exe
++  DESTINATION ${CMAKE_INSTALL_PREFIX})
++
++install(
++  FILES src/cpp/piper.hpp src/cpp/piper_c.h
++  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/piper)
++
+ # Dependencies
+ install(
+   DIRECTORY ${PIPER_PHONEMIZE_DIR}/bin/
+diff --git a/piper.pc.in b/piper.pc.in
+new file mode 100644
+index 000000000..57d32db11
+--- /dev/null
++++ b/piper.pc.in
+@@ -0,0 +1,13 @@
++prefix="@CMAKE_INSTALL_PREFIX@"
++exec_prefix="${prefix}"
++libdir="${prefix}/@CMAKE_INSTALL_LIBDIR@"
++includedir="${prefix}/include"
++
++Name: @PROJECT_NAME@
++Description: @CMAKE_PROJECT_DESCRIPTION@
++URL: @CMAKE_PROJECT_HOMEPAGE_URL@
++Version: @PROJECT_VERSION@
++
++Requires.private: @pc_requires_private@
++Cflags: -I"${includedir}"
++Libs: -L"${libdir}" -l@PROJECT_NAME@
+diff --git a/src/cpp/main.cpp b/src/cpp/main.cpp
+index bd750066e..f8c875bff 100644
+--- a/src/cpp/main.cpp
++++ b/src/cpp/main.cpp
+@@ -12,6 +12,8 @@
+ #include <thread>
+ #include <vector>
+ 
++#include <unistd.h>
++
+ #ifdef _MSC_VER
+ #define WIN32_LEAN_AND_MEAN
+ #define NOMINMAX
+@@ -100,9 +102,12 @@ void rawOutputProc(vector<int16_t> &sharedAudioBuffer, mutex &mutAudio,
+ int main(int argc, char *argv[]) {
+   spdlog::set_default_logger(spdlog::stderr_color_st("piper"));
+ 
++  cout << "cwd: " << get_current_dir_name() << endl;
++
+   RunConfig runConfig;
+   parseArgs(argc, argv, runConfig);
+ 
++
+ #ifdef _WIN32
+   // Required on Windows to show IPA symbols
+   SetConsoleOutputCP(CP_UTF8);
+@@ -334,6 +339,7 @@ int main(int argc, char *argv[]) {
+                back_inserter(sharedAudioBuffer));
+           audioReady = true;
+           cvAudio.notify_one();
++          return true;
+         }
+       };
+       piper::textToAudio(piperConfig, voice, line, audioBuffer, result,
+diff --git a/src/cpp/piper.cpp b/src/cpp/piper.cpp
+index 00d4a47ac..4ef339eb9 100644
+--- a/src/cpp/piper.cpp
++++ b/src/cpp/piper.cpp
+@@ -8,14 +8,40 @@
+ #include <espeak-ng/speak_lib.h>
+ #include <onnxruntime_cxx_api.h>
+ #include <spdlog/spdlog.h>
++#include <piper-phonemize/tashkeel.hpp>
+ 
+ #include "json.hpp"
+ #include "piper.hpp"
+ #include "utf8.h"
+ #include "wavfile.hpp"
+ 
++using json = nlohmann::json;
++
+ namespace piper {
+ 
++struct TashkeelState : tashkeel::State {};
++
++PiperConfig::PiperConfig() = default;
++PiperConfig::~PiperConfig() = default;
++
++struct ModelSession {
++  Ort::Session onnx;
++  Ort::AllocatorWithDefaultOptions allocator;
++  Ort::SessionOptions options;
++  Ort::Env env;
++
++  ModelSession() : onnx(nullptr){};
++};
++
++struct VoiceData {
++  json configRoot;
++  ModelSession session;
++};
++
++Voice::Voice() : data(new VoiceData()) {};
++Voice::~Voice() = default;
++
++
+ #ifdef _PIPER_VERSION
+ // https://stackoverflow.com/questions/47346133/how-to-use-a-define-inside-a-format-string
+ #define _STR(x) #x
+@@ -220,7 +246,7 @@ void initialize(PiperConfig &config) {
+     spdlog::debug("Initializing eSpeak");
+     int result = espeak_Initialize(AUDIO_OUTPUT_SYNCHRONOUS,
+                                    /*buflength*/ 0,
+-                                   /*path*/ config.eSpeakDataPath.c_str(),
++                                   /*path*/ config.eSpeakDataPath.empty() ? nullptr : config.eSpeakDataPath.c_str(),
+                                    /*options*/ 0);
+     if (result < 0) {
+       throw std::runtime_error("Failed to initialize eSpeak-ng");
+@@ -239,7 +265,7 @@ void initialize(PiperConfig &config) {
+ 
+     spdlog::debug("Loading libtashkeel model from {}",
+                   config.tashkeelModelPath.value());
+-    config.tashkeelState = std::make_unique<tashkeel::State>();
++    config.tashkeelState = std::make_unique<TashkeelState>();
+     tashkeel::tashkeel_load(config.tashkeelModelPath.value(),
+                             *config.tashkeelState);
+     spdlog::debug("Initialized libtashkeel");
+@@ -311,11 +337,11 @@ void loadVoice(PiperConfig &config, std::string modelPath,
+                std::optional<SpeakerId> &speakerId, bool useCuda) {
+   spdlog::debug("Parsing voice config at {}", modelConfigPath);
+   std::ifstream modelConfigFile(modelConfigPath);
+-  voice.configRoot = json::parse(modelConfigFile);
++  voice.data->configRoot = json::parse(modelConfigFile);
+ 
+-  parsePhonemizeConfig(voice.configRoot, voice.phonemizeConfig);
+-  parseSynthesisConfig(voice.configRoot, voice.synthesisConfig);
+-  parseModelConfig(voice.configRoot, voice.modelConfig);
++  parsePhonemizeConfig(voice.data->configRoot, voice.phonemizeConfig);
++  parseSynthesisConfig(voice.data->configRoot, voice.synthesisConfig);
++  parseModelConfig(voice.data->configRoot, voice.modelConfig);
+ 
+   if (voice.modelConfig.numSpeakers > 1) {
+     // Multi-speaker model
+@@ -329,8 +355,7 @@ void loadVoice(PiperConfig &config, std::string modelPath,
+ 
+   spdlog::debug("Voice contains {} speaker(s)", voice.modelConfig.numSpeakers);
+ 
+-  loadModel(modelPath, voice.session, useCuda);
+-
++  loadModel(modelPath, voice.data->session, useCuda);
+ } /* loadVoice */
+ 
+ // Phoneme ids to WAV audio
+@@ -445,7 +470,7 @@ void synthesize(std::vector<PhonemeId> &phonemeIds,
+ // Phonemize text and synthesize audio
+ void textToAudio(PiperConfig &config, Voice &voice, std::string text,
+                  std::vector<int16_t> &audioBuffer, SynthesisResult &result,
+-                 const std::function<void()> &audioCallback) {
++                 const std::function<bool()> &audioCallback) {
+ 
+   std::size_t sentenceSilenceSamples = 0;
+   if (voice.synthesisConfig.sentenceSilenceSeconds > 0) {
+@@ -567,8 +592,8 @@ void textToAudio(PiperConfig &config, Voice &voice, std::string text,
+       }
+ 
+       // ids -> audio
+-      synthesize(phonemeIds, voice.synthesisConfig, voice.session, audioBuffer,
+-                 phraseResults[phraseIdx]);
++      synthesize(phonemeIds, voice.synthesisConfig, voice.data->session,
++                 audioBuffer, phraseResults[phraseIdx]);
+ 
+       // Add end of phrase silence
+       for (std::size_t i = 0; i < phraseSilenceSamples[phraseIdx]; i++) {
+@@ -590,7 +615,8 @@ void textToAudio(PiperConfig &config, Voice &voice, std::string text,
+ 
+     if (audioCallback) {
+       // Call back must copy audio since it is cleared afterwards.
+-      audioCallback();
++      if (!audioCallback())
++          break;
+       audioBuffer.clear();
+     }
+ 
+diff --git a/src/cpp/piper.hpp b/src/cpp/piper.hpp
+index 7b956f798..074e701ef 100644
+--- a/src/cpp/piper.hpp
++++ b/src/cpp/piper.hpp
+@@ -8,14 +8,8 @@
+ #include <string>
+ #include <vector>
+ 
+-#include <onnxruntime_cxx_api.h>
+ #include <piper-phonemize/phoneme_ids.hpp>
+ #include <piper-phonemize/phonemize.hpp>
+-#include <piper-phonemize/tashkeel.hpp>
+-
+-#include "json.hpp"
+-
+-using json = nlohmann::json;
+ 
+ namespace piper {
+ 
+@@ -25,13 +19,18 @@ struct eSpeakConfig {
+   std::string voice = "en-us";
+ };
+ 
++struct TashkeelState;
++
+ struct PiperConfig {
++  PiperConfig();
++  ~PiperConfig();
++
+   std::string eSpeakDataPath;
+   bool useESpeak = true;
+ 
+   bool useTashkeel = false;
+   std::optional<std::string> tashkeelModelPath;
+-  std::unique_ptr<tashkeel::State> tashkeelState;
++  std::unique_ptr<TashkeelState> tashkeelState;
+ };
+ 
+ enum PhonemeType { eSpeakPhonemes, TextPhonemes };
+@@ -75,27 +74,23 @@ struct ModelConfig {
+   std::optional<std::map<std::string, SpeakerId>> speakerIdMap;
+ };
+ 
+-struct ModelSession {
+-  Ort::Session onnx;
+-  Ort::AllocatorWithDefaultOptions allocator;
+-  Ort::SessionOptions options;
+-  Ort::Env env;
+-
+-  ModelSession() : onnx(nullptr){};
+-};
+-
+ struct SynthesisResult {
+   double inferSeconds;
+   double audioSeconds;
+   double realTimeFactor;
+ };
+ 
++
++struct VoiceData;
++
+ struct Voice {
+-  json configRoot;
++  Voice();
++  ~Voice();
++
+   PhonemizeConfig phonemizeConfig;
+   SynthesisConfig synthesisConfig;
+   ModelConfig modelConfig;
+-  ModelSession session;
++  std::unique_ptr<VoiceData> data;
+ };
+ 
+ // True if the string is a single UTF-8 codepoint
+@@ -121,7 +116,7 @@ void loadVoice(PiperConfig &config, std::string modelPath,
+ // Phonemize text and synthesize audio
+ void textToAudio(PiperConfig &config, Voice &voice, std::string text,
+                  std::vector<int16_t> &audioBuffer, SynthesisResult &result,
+-                 const std::function<void()> &audioCallback);
++                 const std::function<bool()> &audioCallback);
+ 
+ // Phonemize text and synthesize audio to WAV file
+ void textToWavFile(PiperConfig &config, Voice &voice, std::string text,
+diff --git a/src/cpp/piper_c.cpp b/src/cpp/piper_c.cpp
+new file mode 100644
+index 000000000..034398016
+--- /dev/null
++++ b/src/cpp/piper_c.cpp
+@@ -0,0 +1,112 @@
++#include "piper_c.h"
++#include "piper.hpp"
++#include <spdlog/spdlog.h>
++
++struct Piper {
++  piper::PiperConfig config;
++};
++
++struct PiperVoice {
++  piper::Voice voice;
++};
++
++Piper *piperInitialize(const char *eSpeakDataPath) {
++  Piper *piper = new Piper;
++
++  if (eSpeakDataPath)
++    piper->config.eSpeakDataPath = eSpeakDataPath;
++
++  try {
++    piper::initialize(piper->config);
++  } catch (...) {
++    delete piper;
++    return NULL;
++  }
++
++
++  return piper;
++}
++
++void piperTerminate(Piper *piper) {
++  piper::terminate(piper->config);
++  delete piper;
++}
++
++PiperVoice *piperLoadVoice(Piper *piper, const char *modelPath, const char *modelConfigPath,
++                           PiperSpeakerId speakerId, bool useCuda) {
++  PiperVoice *voice = new PiperVoice;
++
++  std::optional<piper::SpeakerId> speakerIdOpt(speakerId);
++  std::string modelConfigPathStr;
++
++  if (modelConfigPath)
++    modelConfigPathStr = modelConfigPath;
++  else
++    modelConfigPathStr = modelPath + std::string(".json");
++
++  try {
++    piper::loadVoice(piper->config, modelPath, modelConfigPathStr,
++                     voice->voice, speakerIdOpt, useCuda);
++  } catch (...) {
++    delete voice;
++    return NULL;
++  }
++
++  return voice;
++}
++
++void piperFreeVoice(PiperVoice *voice) {
++  delete voice;
++}
++
++void piperGetVoiceSynthesisConfig(const PiperVoice *voice, PiperSynthesisConfig *config) {
++  config->noiseScale  = voice->voice.synthesisConfig.noiseScale;
++  config->lengthScale = voice->voice.synthesisConfig.lengthScale;
++  config->noiseW      = voice->voice.synthesisConfig.noiseW;
++
++  config->sampleRate  = voice->voice.synthesisConfig.sampleRate;
++  config->sampleWidth = voice->voice.synthesisConfig.sampleWidth;
++  config->channels    = voice->voice.synthesisConfig.channels;
++
++  config->speakerId = voice->voice.synthesisConfig.speakerId.value_or(0);
++
++  config->sentenceSilenceSeconds = voice->voice.synthesisConfig.sentenceSilenceSeconds;
++}
++
++void piperSetVoiceSynthesisConfig(PiperVoice *voice,
++                                  const float *noiseScale,
++                                  const float *lengthScale,
++                                  const float *noiseW,
++                                  const PiperSpeakerId *speakerId,
++                                  const float *sentenceSilenceSeconds) {
++    if (noiseScale) voice->voice.synthesisConfig.noiseScale = *noiseScale;
++    if (lengthScale) voice->voice.synthesisConfig.lengthScale = *lengthScale;
++    if (noiseW) voice->voice.synthesisConfig.noiseW = *noiseW;
++
++    if (speakerId) voice->voice.synthesisConfig.speakerId = *speakerId;
++
++    if (sentenceSilenceSeconds)
++        voice->voice.synthesisConfig.sentenceSilenceSeconds = *sentenceSilenceSeconds;
++}
++
++bool piperTextToAudio(Piper *piper, PiperVoice *voice, const char *text,
++                      PiperSynthesisResult *result, void *userData,
++                      bool (*audioCallback)(const int16_t *data, size_t length, void *userData)) {
++  std::vector<int16_t> audioBuffer;
++  piper::SynthesisResult synthesisResult;
++
++  try {
++    piper::textToAudio(piper->config, voice->voice, text, audioBuffer, synthesisResult,
++                       [&]() { return audioCallback(audioBuffer.data(), audioBuffer.size(), userData); });
++  } catch (...) {
++    return false;
++  }
++
++  if (result) {
++    result->inferSeconds = synthesisResult.inferSeconds;
++    result->audioSeconds = synthesisResult.audioSeconds;
++    result->realTimeFactor = synthesisResult.realTimeFactor;
++  }
++
++  return true;
++}
+diff --git a/src/cpp/piper_c.h b/src/cpp/piper_c.h
+new file mode 100644
+index 000000000..74c31f649
+--- /dev/null
++++ b/src/cpp/piper_c.h
+@@ -0,0 +1,69 @@
++/* Piper C API header file. */
++
++#ifndef PIPER_C_H_
++#define PIPER_C_H_
++
++#include <stddef.h>
++#include <stdint.h>
++#include <stdbool.h>
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++typedef int64_t PiperSpeakerId;
++
++struct Piper;
++typedef struct Piper Piper;
++
++struct PiperVoice;
++typedef struct PiperVoice PiperVoice;
++
++typedef struct PiperSynthesisConfig {
++  float noiseScale;
++  float lengthScale;
++  float noiseW;
++
++  int sampleRate;
++  int sampleWidth;
++  int channels;
++
++  PiperSpeakerId speakerId;
++
++  float sentenceSilenceSeconds;
++} PiperSynthesisConfig;
++
++typedef struct PiperSynthesisResult {
++  double inferSeconds;
++  double audioSeconds;
++  double realTimeFactor;
++} PiperSynthesisResult;
++
++Piper *piperInitialize(const char *eSpeakDataPath);
++
++void piperTerminate(Piper *piper);
++
++PiperVoice *piperLoadVoice(Piper *piper, const char *modelPath, const char *modelConfigPath,
++                           PiperSpeakerId speakerId, bool useCuda);
++
++void piperFreeVoice(PiperVoice *voice);
++
++void piperGetVoiceSynthesisConfig(const PiperVoice *voice, PiperSynthesisConfig *config);
++
++void piperSetVoiceSynthesisConfig(PiperVoice *voice,
++                                  const float *noiseScale,
++                                  const float *lengthScale,
++                                  const float *noiseW,
++                                  const PiperSpeakerId *speakerId,
++                                  const float *sentenceSilenceSeconds);
++
++bool piperTextToAudio(Piper *piper, PiperVoice *voice, const char *text,
++                      PiperSynthesisResult *result,
++                      void *userData,
++                      bool (*audioCallback)(const int16_t *data, size_t length, void *userData));
++
++#ifdef __cplusplus
++}
++#endif
++
++#endif /* PIPER_C_H_ */

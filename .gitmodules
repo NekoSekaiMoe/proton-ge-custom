@@ -85,8 +85,8 @@
 	url = https://github.com/alphacep/vosk-api
 [submodule "piper"]
 	path = piper
-	url = https://github.com/OHF-Voice/piper1-gpl.git
-	branch = library
+	url = https://github.com/rhasspy/piper.git
+	branch = master
 [submodule "libxkbcommon"]
         path = libxkbcommon
         url = https://github.com/xkbcommon/libxkbcommon.git

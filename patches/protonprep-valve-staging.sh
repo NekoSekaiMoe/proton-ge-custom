@@ -53,6 +53,11 @@ apply_all_in_dir() {
     git reset --hard HEAD
     git clean -xdf
     popd
+    pushd piper
+    git reset --hard HEAD
+    git clean -xdf
+    apply_patch "../../../patches/piper/lib.patch"
+    popd
     pushd winetricks
     git reset --hard HEAD
     git clean -xdf
