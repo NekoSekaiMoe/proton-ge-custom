@@ -33,7 +33,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0
+        fetch-depth: 1
         fetch-tags: true
         submodules: false
         path: a
@@ -41,7 +41,7 @@ jobs:
     - name: Patch
       working-directory: ./a
       run: |
-        git submodule update --init --filter=tree:0 --recursive
+        git submodule update --init --filter=tree:0 --recursive --depth=1
         # apply proton-ge-custom patches
         bash -x ./patches/protonprep-valve-staging.sh || true
         # strip binaries at compile time to save space in the runner
