@@ -1,6 +1,8 @@
 name: Development
 
-on: workflow_dispatch push
+on: 
+  - workflow_dispatch 
+  - push
 
 concurrency:
   group: ${{ github.ref_name }}
