@@ -232,7 +232,7 @@ Shader version: 460
 0:19          add ( temp highp uint)
 0:19            AtomicAdd ( global highp uint)
 0:19              counter2: direct index for structure ( coherent volatile buffer highp uint)
-0:19                'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter3,  coherent volatile buffer highp uint counter2})
+0:19                'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter3,  coherent volatile buffer highp uint counter2,  coherent volatile buffer highp uint counter1})
 0:19                Constant:
 0:19                  1 (const uint)
 0:19              Constant:
@@ -240,7 +240,7 @@ Shader version: 460
 0:19            subtract ( temp highp uint)
 0:19              AtomicAdd ( global highp uint)
 0:19                counter3: direct index for structure ( coherent volatile buffer highp uint)
-0:19                  'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter3,  coherent volatile buffer highp uint counter2})
+0:19                  'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter3,  coherent volatile buffer highp uint counter2,  coherent volatile buffer highp uint counter1})
 0:19                  Constant:
 0:19                    0 (const uint)
 0:19                Constant:
@@ -254,44 +254,44 @@ Shader version: 460
 0:20            add ( temp highp 4-component vector of float)
 0:20              add ( temp highp 4-component vector of float)
 0:20                a: direct index for structure ( uniform highp 4-component vector of float)
-0:20                  'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s})
+0:20                  'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:20                  Constant:
 0:20                    0 (const uint)
 0:20                Construct vec4 ( temp highp 4-component vector of float)
 0:20                  direct index ( temp highp float)
 0:20                    b1: direct index for structure ( uniform highp 2-component vector of float)
-0:20                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s})
+0:20                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:20                      Constant:
 0:20                        2 (const uint)
 0:20                    Constant:
 0:20                      0 (const int)
 0:20                  direct index ( temp highp float)
 0:20                    b1: direct index for structure ( uniform highp 2-component vector of float)
-0:20                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s})
+0:20                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:20                      Constant:
 0:20                        2 (const uint)
 0:20                    Constant:
 0:20                      1 (const int)
 0:20                  direct index ( temp highp float)
 0:20                    b2: direct index for structure ( uniform highp 2-component vector of float)
-0:20                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s})
+0:20                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:20                      Constant:
 0:20                        1 (const uint)
 0:20                    Constant:
 0:20                      0 (const int)
 0:20                  direct index ( temp highp float)
 0:20                    b2: direct index for structure ( uniform highp 2-component vector of float)
-0:20                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s})
+0:20                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:20                      Constant:
 0:20                        1 (const uint)
 0:20                    Constant:
 0:20                      1 (const int)
 0:20              c2: direct index for structure ( uniform highp 4-component vector of float)
-0:20                'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s})
+0:20                'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:20                Constant:
 0:20                  3 (const uint)
 0:20            d: direct index for structure ( uniform highp 4-component vector of float)
-0:20              'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s})
+0:20              'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:20              Constant:
 0:20                4 (const uint)
 0:22      Branch: Return with expression
@@ -312,7 +312,7 @@ Shader version: 460
 0:28          'v' ( temp highp 4-component vector of float)
 0:28          indirect index ( temp highp 4-component vector of float)
 0:28            s: direct index for structure ( uniform 4-element array of highp 4-component vector of float)
-0:28              'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s})
+0:28              'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:28              Constant:
 0:28                5 (const uint)
 0:28            subtract ( temp int)
@@ -337,8 +337,8 @@ Shader version: 460
 0:30        'v' ( temp highp 4-component vector of float)
 0:?   Linker Objects
 0:?     'io' (layout( location=0) smooth out highp 4-component vector of float)
-0:?     'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s})
-0:?     'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter3,  coherent volatile buffer highp uint counter2})
+0:?     'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
+0:?     'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter3,  coherent volatile buffer highp uint counter2,  coherent volatile buffer highp uint counter1})
 0:?     'gl_VertexIndex' ( in int VertexIndex)
 0:?     'gl_InstanceIndex' ( in int InstanceIndex)
 Shader version: 460
@@ -353,15 +353,15 @@ gl_FragCoord origin is upper left
 0:20          add ( temp highp uint)
 0:20            AtomicAdd ( global highp uint)
 0:20              counter1: direct index for structure ( coherent volatile buffer highp uint)
-0:20                'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter1,  coherent volatile buffer highp uint counter2})
+0:20                'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter3,  coherent volatile buffer highp uint counter2,  coherent volatile buffer highp uint counter1})
 0:20                Constant:
-0:20                  0 (const uint)
+0:20                  2 (const uint)
 0:20              Constant:
 0:20                1 (const uint)
 0:20            subtract ( temp highp uint)
 0:20              AtomicAdd ( global highp uint)
 0:20                counter2: direct index for structure ( coherent volatile buffer highp uint)
-0:20                  'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter1,  coherent volatile buffer highp uint counter2})
+0:20                  'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter3,  coherent volatile buffer highp uint counter2,  coherent volatile buffer highp uint counter1})
 0:20                  Constant:
 0:20                    1 (const uint)
 0:20                Constant:
@@ -375,44 +375,44 @@ gl_FragCoord origin is upper left
 0:21            add ( temp highp 4-component vector of float)
 0:21              add ( temp highp 4-component vector of float)
 0:21                a: direct index for structure ( uniform highp 4-component vector of float)
-0:21                  'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b1,  uniform highp 2-component vector of float b2,  uniform highp 4-component vector of float c1,  uniform highp 4-component vector of float d})
+0:21                  'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:21                  Constant:
 0:21                    0 (const uint)
 0:21                Construct vec4 ( temp highp 4-component vector of float)
 0:21                  direct index ( temp highp float)
 0:21                    b1: direct index for structure ( uniform highp 2-component vector of float)
-0:21                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b1,  uniform highp 2-component vector of float b2,  uniform highp 4-component vector of float c1,  uniform highp 4-component vector of float d})
+0:21                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:21                      Constant:
-0:21                        1 (const uint)
+0:21                        2 (const uint)
 0:21                    Constant:
 0:21                      0 (const int)
 0:21                  direct index ( temp highp float)
 0:21                    b1: direct index for structure ( uniform highp 2-component vector of float)
-0:21                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b1,  uniform highp 2-component vector of float b2,  uniform highp 4-component vector of float c1,  uniform highp 4-component vector of float d})
+0:21                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:21                      Constant:
-0:21                        1 (const uint)
+0:21                        2 (const uint)
 0:21                    Constant:
 0:21                      1 (const int)
 0:21                  direct index ( temp highp float)
 0:21                    b2: direct index for structure ( uniform highp 2-component vector of float)
-0:21                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b1,  uniform highp 2-component vector of float b2,  uniform highp 4-component vector of float c1,  uniform highp 4-component vector of float d})
+0:21                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:21                      Constant:
-0:21                        2 (const uint)
+0:21                        1 (const uint)
 0:21                    Constant:
 0:21                      0 (const int)
 0:21                  direct index ( temp highp float)
 0:21                    b2: direct index for structure ( uniform highp 2-component vector of float)
-0:21                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b1,  uniform highp 2-component vector of float b2,  uniform highp 4-component vector of float c1,  uniform highp 4-component vector of float d})
+0:21                      'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:21                      Constant:
-0:21                        2 (const uint)
+0:21                        1 (const uint)
 0:21                    Constant:
 0:21                      1 (const int)
 0:21              c1: direct index for structure ( uniform highp 4-component vector of float)
-0:21                'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b1,  uniform highp 2-component vector of float b2,  uniform highp 4-component vector of float c1,  uniform highp 4-component vector of float d})
+0:21                'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:21                Constant:
-0:21                  3 (const uint)
+0:21                  6 (const uint)
 0:21            d: direct index for structure ( uniform highp 4-component vector of float)
-0:21              'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b1,  uniform highp 2-component vector of float b2,  uniform highp 4-component vector of float c1,  uniform highp 4-component vector of float d})
+0:21              'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
 0:21              Constant:
 0:21                4 (const uint)
 0:23      Branch: Return with expression
@@ -431,11 +431,11 @@ gl_FragCoord origin is upper left
 0:?   Linker Objects
 0:?     'io' (layout( location=0) smooth in highp 4-component vector of float)
 0:?     'o' ( out highp 4-component vector of float)
-0:?     'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b1,  uniform highp 2-component vector of float b2,  uniform highp 4-component vector of float c1,  uniform highp 4-component vector of float d})
-0:?     'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter1,  coherent volatile buffer highp uint counter2})
+0:?     'anon@0' (layout( column_major std140) uniform block{ uniform highp 4-component vector of float a,  uniform highp 2-component vector of float b2,  uniform highp 2-component vector of float b1,  uniform highp 4-component vector of float c2,  uniform highp 4-component vector of float d,  uniform 4-element array of highp 4-component vector of float s,  uniform highp 4-component vector of float c1})
+0:?     'anon@1' (layout( column_major std430) buffer block{ coherent volatile buffer highp uint counter3,  coherent volatile buffer highp uint counter2,  coherent volatile buffer highp uint counter1})
 
 // Module Version 10000
-// Generated by (magic number): 8000a
+// Generated by (magic number): 8000b
 // Id's are bound by 92
 
                               Capability Shader
@@ -465,22 +465,20 @@ gl_FragCoord origin is upper left
                               Name 72  "gl_VertexIndex"
                               Name 82  "gl_InstanceIndex"
                               Name 90  "io"
-                              MemberDecorate 14(gl_AtomicCounterBlock_0) 0 Coherent
+                              Decorate 14(gl_AtomicCounterBlock_0) BufferBlock
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 0 Volatile
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 0 Coherent
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 0 Offset 0
-                              MemberDecorate 14(gl_AtomicCounterBlock_0) 1 Coherent
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 1 Volatile
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 1 Coherent
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 1 Offset 4
-                              MemberDecorate 14(gl_AtomicCounterBlock_0) 2 Coherent
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 2 Volatile
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 2 Coherent
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 2 Offset 8
-                              Decorate 14(gl_AtomicCounterBlock_0) BufferBlock
-                              Decorate 16 DescriptorSet 0
                               Decorate 16 Binding 1
+                              Decorate 16 DescriptorSet 0
                               Decorate 34 ArrayStride 16
+                              Decorate 35(gl_DefaultUniformBlock) Block
                               MemberDecorate 35(gl_DefaultUniformBlock) 0 Offset 0
                               MemberDecorate 35(gl_DefaultUniformBlock) 1 Offset 16
                               MemberDecorate 35(gl_DefaultUniformBlock) 2 Offset 24
@@ -488,9 +486,8 @@ gl_FragCoord origin is upper left
                               MemberDecorate 35(gl_DefaultUniformBlock) 4 Offset 48
                               MemberDecorate 35(gl_DefaultUniformBlock) 5 Offset 64
                               MemberDecorate 35(gl_DefaultUniformBlock) 6 Offset 128
-                              Decorate 35(gl_DefaultUniformBlock) Block
-                              Decorate 37 DescriptorSet 0
                               Decorate 37 Binding 0
+                              Decorate 37 DescriptorSet 0
                               Decorate 72(gl_VertexIndex) BuiltIn VertexIndex
                               Decorate 82(gl_InstanceIndex) BuiltIn InstanceIndex
                               Decorate 90(io) Location 0
@@ -593,7 +590,7 @@ gl_FragCoord origin is upper left
                               ReturnValue 64
                               FunctionEnd
 // Module Version 10000
-// Generated by (magic number): 8000a
+// Generated by (magic number): 8000b
 // Id's are bound by 74
 
                               Capability Shader
@@ -622,22 +619,20 @@ gl_FragCoord origin is upper left
                               Name 37  ""
                               Name 68  "o"
                               Name 70  "io"
-                              MemberDecorate 14(gl_AtomicCounterBlock_0) 0 Coherent
+                              Decorate 14(gl_AtomicCounterBlock_0) BufferBlock
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 0 Volatile
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 0 Coherent
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 0 Offset 0
-                              MemberDecorate 14(gl_AtomicCounterBlock_0) 1 Coherent
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 1 Volatile
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 1 Coherent
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 1 Offset 4
-                              MemberDecorate 14(gl_AtomicCounterBlock_0) 2 Coherent
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 2 Volatile
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 2 Coherent
                               MemberDecorate 14(gl_AtomicCounterBlock_0) 2 Offset 8
-                              Decorate 14(gl_AtomicCounterBlock_0) BufferBlock
-                              Decorate 16 DescriptorSet 0
                               Decorate 16 Binding 1
+                              Decorate 16 DescriptorSet 0
                               Decorate 34 ArrayStride 16
+                              Decorate 35(gl_DefaultUniformBlock) Block
                               MemberDecorate 35(gl_DefaultUniformBlock) 0 Offset 0
                               MemberDecorate 35(gl_DefaultUniformBlock) 1 Offset 16
                               MemberDecorate 35(gl_DefaultUniformBlock) 2 Offset 24
@@ -645,9 +640,8 @@ gl_FragCoord origin is upper left
                               MemberDecorate 35(gl_DefaultUniformBlock) 4 Offset 48
                               MemberDecorate 35(gl_DefaultUniformBlock) 5 Offset 64
                               MemberDecorate 35(gl_DefaultUniformBlock) 6 Offset 128
-                              Decorate 35(gl_DefaultUniformBlock) Block
-                              Decorate 37 DescriptorSet 0
                               Decorate 37 Binding 0
+                              Decorate 37 DescriptorSet 0
                               Decorate 68(o) Location 0
                               Decorate 70(io) Location 0
                2:             TypeVoid
