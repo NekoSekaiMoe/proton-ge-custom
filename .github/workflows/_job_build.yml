@@ -10,7 +10,7 @@ on:
 jobs:
   proton:
     name: Build ${{ inputs.name }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - name: Prepare host
       run: sudo apt update && sudo apt-get install -y ccache fontforge-nox
