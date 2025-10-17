@@ -1246,11 +1246,11 @@ GECKO_DST := $(DST_DIR)/share/wine/gecko
 
 $(SRC)/contrib/$(GECKO_x86_64_TARBALL):
 	mkdir -p $(dir $@)
-	wget --no-use-server-timestamps -O $@ $(GECKO_x86_64_TARBALL_URL) || (rm $@; false)
+	wget -q --no-use-server-timestamps -O $@ $(GECKO_x86_64_TARBALL_URL) || (rm $@; false)
 
 $(SRC)/contrib/$(GECKO_i386_TARBALL):
 	mkdir -p $(dir $@)
-	wget --no-use-server-timestamps -O $@ $(GECKO_i386_TARBALL_URL) || (rm $@; false)
+	wget -q --no-use-server-timestamps -O $@ $(GECKO_i386_TARBALL_URL) || (rm $@; false)
 
 $(OBJ)/.gecko-i386-dist: $(SRC)/contrib/$(GECKO_i386_TARBALL)
 	mkdir -p $(GECKO_DST)
@@ -1279,7 +1279,7 @@ MONO_TARBALL_URL := https://github.com/madewokherd/wine-mono/releases/download/w
 
 $(SRC)/contrib/$(WINEMONO_TARBALL):
 	mkdir -p $(dir $@)
-	wget --no-use-server-timestamps -O $@ $(MONO_TARBALL_URL) || (rm $@; false)
+	wget -q --no-use-server-timestamps -O $@ $(MONO_TARBALL_URL) || (rm $@; false)
 
 $(DIST_WINEMONO): $(SRC)/contrib/$(WINEMONO_TARBALL)
 	mkdir -p $(DIST_WINEMONO_DIR)
@@ -1302,7 +1302,7 @@ XALIA_ZIP_URL := https://github.com/madewokherd/xalia/releases/download/xalia-$(
 
 $(SRC)/contrib/$(XALIA_ZIP):
 	mkdir -p $(dir $@)
-	wget --no-use-server-timestamps -O $@ $(XALIA_ZIP_URL) || (rm $@; false)
+	wget -q --no-use-server-timestamps -O $@ $(XALIA_ZIP_URL) || (rm $@; false)
 
 $(DIST_XALIA): $(SRC)/contrib/$(XALIA_ZIP) $(SRC)/xalia-fixups.gudl
 	rm -rf $(DIST_XALIA_DIR)
