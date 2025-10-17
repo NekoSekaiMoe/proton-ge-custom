@@ -18,6 +18,7 @@ $$(OBJ)/.$(1)-$(3)-configure: $$($(2)_SRC)/CMakeLists.txt
 	    -DCMAKE_INSTALL_PREFIX="$$($(2)_$(3)_DST)" \
 	    -DCMAKE_INSTALL_LIBDIR="lib/$$($(3)-$(4)_LIBDIR)" \
 	    -DCMAKE_BUILD_TYPE=plain \
+	    -GNinja \
 	    $$($(3)-$(4)_CMAKE_ARGS) \
 	    $$($(2)_CMAKE_ARGS) \
 	    $$($(2)_$(3)_CMAKE_ARGS)
@@ -27,9 +28,9 @@ $$(OBJ)/.$(1)-$(3)-configure: $$($(2)_SRC)/CMakeLists.txt
 $$(OBJ)/.$(1)-$(3)-build:
 	@echo ":: building $(1)-$(3)..." >&2
 	cd "$$($(2)_$(3)_OBJ)" && env $$($(2)_$(3)_ENV) \
-	$$(MAKE)
+	ninja
 	cd "$$($(2)_$(3)_OBJ)" && env $$($(2)_$(3)_ENV) \
-	$$(MAKE) install
+	ninja install
 	touch $$@
 endif
 endef
