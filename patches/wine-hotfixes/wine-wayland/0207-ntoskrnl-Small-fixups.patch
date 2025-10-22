@@ -1,7 +1,7 @@
-From 899cd4f892d5a74232e269d854c407939bb7c7c5 Mon Sep 17 00:00:00 2001
+From 5dd7fec1c900f52d337e72ce804f70fedefac8f4 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Sun, 27 Jul 2025 10:28:40 -0400
-Subject: [PATCH 207/347] ntoskrnl: Small fixups
+Subject: [PATCH 207/441] ntoskrnl: Small fixups
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 7 +++++--

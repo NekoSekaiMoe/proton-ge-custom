@@ -1,8 +1,8 @@
-From f0a04f265dcd3cc991e834492f6473e4e22fab7b Mon Sep 17 00:00:00 2001
+From 291bd25c438b48e9398303a4dde3fba810d8b273 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 14 Jul 2025 03:45:49 -0400
-Subject: [PATCH 162/347] ntdll/ntsync: remove unused variable & fix datatypes.
+Subject: [PATCH 162/441] ntdll/ntsync: remove unused variable & fix datatypes.
 
 ---
  dlls/ntdll/unix/sync.c         | 7 +++----

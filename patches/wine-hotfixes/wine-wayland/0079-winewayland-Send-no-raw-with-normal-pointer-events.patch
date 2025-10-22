@@ -1,8 +1,8 @@
-From d6ef53aa31c2c886eaef0152bea01238f9f3ae3f Mon Sep 17 00:00:00 2001
+From 4fedfbb81d543040f805423113a8a3744b283f0b Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 5 Jun 2025 20:38:17 -0400
-Subject: [PATCH 079/347] winewayland: Send no raw with normal pointer events.
+Subject: [PATCH 079/441] winewayland: Send no raw with normal pointer events.
 
 matches winex11 behavior
 ---

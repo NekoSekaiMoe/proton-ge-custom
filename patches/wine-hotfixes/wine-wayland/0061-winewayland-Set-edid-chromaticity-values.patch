@@ -1,8 +1,8 @@
-From 91095cd8a600ac97443e9aa56950e06d5cd915f7 Mon Sep 17 00:00:00 2001
+From 839a9afca70e08bfb8464a9a969bd8b9e3f45163 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 25 May 2025 20:00:10 -0400
-Subject: [PATCH 061/347] winewayland: Set edid chromaticity values
+Subject: [PATCH 061/441] winewayland: Set edid chromaticity values
 
 ---
  dlls/winewayland.drv/Makefile.in             |    1 +

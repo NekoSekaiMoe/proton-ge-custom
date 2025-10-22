@@ -1,0 +1,275 @@
+From 2ded3019b06b3147f00e73b66eb3883c24f62aac Mon Sep 17 00:00:00 2001
+From: Alexandre Julliard <julliard@winehq.org>
+Date: Wed, 5 Feb 2025 13:42:34 +0100
+Subject: [PATCH 376/441] ntdll: Implement language-specific manifest lookup.
+
+Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=57626
+---
+ dlls/kernel32/tests/actctx.c |  95 +++++++++++++++++++++++++++++
+ dlls/ntdll/actctx.c          | 113 ++++++++++++++++++++---------------
+ 2 files changed, 160 insertions(+), 48 deletions(-)
+
+diff --git a/dlls/kernel32/tests/actctx.c b/dlls/kernel32/tests/actctx.c
+index b6f43b12f1a..47a734119a2 100644
+--- a/dlls/kernel32/tests/actctx.c
++++ b/dlls/kernel32/tests/actctx.c
+@@ -3852,6 +3852,100 @@ cleanup:
+     }
+ }
+ 
++
++static void test_manifest_lang(void)
++{
++    sxs_info dll;
++    char *p;
++
++    /* tmp path without language prefix */
++
++    GetTempPathA(MAX_PATH, dll.path_tmp);
++    fill_sxs_paths( &dll, "1", "dummy.dll", two_dll_manifest_exe_fr, two_dll_manifest_dll_fr, NULL );
++
++    dll.context.cbSize = sizeof(ACTCTXA);
++    dll.context.lpSource = dll.path_manifest_exe;
++    dll.context.lpAssemblyDirectory = dll.path_tmp;
++    dll.context.dwFlags = ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID;
++
++    dll.handle_context = CreateActCtxA(&dll.context);
++    ok( dll.handle_context == INVALID_HANDLE_VALUE, "CreateActCtxA succeeded\n" );
++    ok( GetLastError() == ERROR_SXS_CANT_GEN_ACTCTX, "wrong error %ld\n", GetLastError() );
++
++    clean_sxs_info( &dll );
++
++    /* tmp path with language prefix */
++
++    GetTempPathA(MAX_PATH, dll.path_tmp);
++    fill_sxs_paths( &dll, "1", "dummy.dll", two_dll_manifest_exe_fr, two_dll_manifest_dll_fr, "fr-FR" );
++
++    dll.context.cbSize = sizeof(ACTCTXA);
++    dll.context.lpSource = dll.path_manifest_exe;
++    dll.context.lpAssemblyDirectory = dll.path_tmp;
++    dll.context.dwFlags = ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID;
++
++    dll.handle_context = CreateActCtxA(&dll.context);
++    ok( dll.handle_context != INVALID_HANDLE_VALUE, "CreateActCtxA failed: %ld\n", GetLastError() );
++
++    clean_sxs_info( &dll );
++
++    /* exe path without language prefix */
++
++    GetModuleFileNameA(0, dll.path_tmp, MAX_PATH);
++    if ((p = strrchr( dll.path_tmp, '\\' ))) p[1] = 0;
++    dll.path_lang[0] = 0;
++
++    sprintf(dll.path_manifest_exe, "%s%s", dll.path_tmp, "exe.manifest");
++    create_manifest_file(dll.path_manifest_exe, two_dll_manifest_exe_fr, -1, NULL, NULL);
++
++    strcat(dll.path_tmp, "sxs_dll\\");
++    CreateDirectoryA(dll.path_tmp, NULL);
++    sprintf(dll.path_dll, "%s%s", dll.path_tmp, "sxs_dll.dll");
++    extract_resource("dummy.dll", "TESTDLL", dll.path_dll);
++
++    sprintf(dll.path_manifest_dll, "%s%s", dll.path_tmp, "sxs_dll.manifest");
++    create_manifest_file(dll.path_manifest_dll, two_dll_manifest_dll_fr, -1, NULL, NULL);
++
++    dll.context.cbSize = sizeof(ACTCTXA);
++    dll.context.lpSource = dll.path_manifest_exe;
++    dll.context.lpAssemblyDirectory = dll.path_tmp;
++    dll.context.dwFlags = ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID;
++
++    dll.handle_context = CreateActCtxA(&dll.context);
++    ok( dll.handle_context == INVALID_HANDLE_VALUE, "CreateActCtxA succeeded\n" );
++    ok( GetLastError() == ERROR_SXS_CANT_GEN_ACTCTX, "wrong error %ld\n", GetLastError() );
++
++    clean_sxs_info( &dll );
++
++    /* exe path with language prefix */
++
++    GetModuleFileNameA(0, dll.path_tmp, MAX_PATH);
++    if ((p = strrchr( dll.path_tmp, '\\' ))) p[1] = 0;
++
++    sprintf(dll.path_manifest_exe, "%s%s", dll.path_tmp, "exe.manifest");
++    create_manifest_file(dll.path_manifest_exe, two_dll_manifest_exe_fr, -1, NULL, NULL);
++
++    strcat(dll.path_tmp, "sxs_dll\\");
++    CreateDirectoryA(dll.path_tmp, NULL);
++    sprintf(dll.path_lang,"%sfr-FR\\", dll.path_tmp);
++    CreateDirectoryA(dll.path_lang, NULL);
++    sprintf(dll.path_dll, "%s%s", dll.path_lang, "sxs_dll.dll");
++    extract_resource("dummy.dll", "TESTDLL", dll.path_dll);
++
++    sprintf(dll.path_manifest_dll, "%s%s", dll.path_lang, "sxs_dll.manifest");
++    create_manifest_file(dll.path_manifest_dll, two_dll_manifest_dll_fr, -1, NULL, NULL);
++
++    dll.context.cbSize = sizeof(ACTCTXA);
++    dll.context.lpSource = dll.path_manifest_exe;
++    dll.context.lpAssemblyDirectory = dll.path_tmp;
++    dll.context.dwFlags = ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID;
++
++    dll.handle_context = CreateActCtxA(&dll.context);
++    ok( dll.handle_context != INVALID_HANDLE_VALUE, "CreateActCtxA failed: %ld\n", GetLastError() );
++
++    clean_sxs_info( &dll );
++}
++
+ struct manifest_res_spec
+ {
+     const char *name;
+@@ -4424,6 +4518,7 @@ START_TEST(actctx)
+     test_manifest_in_module();
+     test_manifest_resource_name_omitted();
+     test_manifest_resources();
++    test_manifest_lang();
+     test_valid_manifest_resources_locale();
+     test_actctx();
+     test_create_fail();
+diff --git a/dlls/ntdll/actctx.c b/dlls/ntdll/actctx.c
+index 6fad3f3cba1..2dac91f961e 100644
+--- a/dlls/ntdll/actctx.c
++++ b/dlls/ntdll/actctx.c
+@@ -3287,30 +3287,69 @@ static NTSTATUS lookup_winsxs(struct actctx_loader* acl, struct assembly_identit
+     return io.Status;
+ }
+ 
++static NTSTATUS open_manifest_file( struct actctx_loader *acl, struct assembly_identity *ai,
++                                    const WCHAR *lang, const WCHAR *directory, WCHAR *buffer, DWORD len )
++{
++    UNICODE_STRING nameW;
++    NTSTATUS status;
++    HANDLE file;
++    WCHAR *p = buffer + wcslen(buffer);
++
++    nameW.Buffer = NULL;
++    if (*lang) p += swprintf( p, len - (p - buffer), L"%s\\", lang );
++
++    swprintf( p, len - (p - buffer), L"%s.dll", ai->name );
++    if (RtlDosPathNameToNtPathName_U( buffer, &nameW, NULL, NULL ))
++    {
++        status = open_nt_file( &file, &nameW );
++        if (!status)
++        {
++            status = get_manifest_in_pe_file( acl, ai, nameW.Buffer, directory, FALSE, file, NULL, 0 );
++            NtClose( file );
++            if (status == STATUS_SUCCESS) goto done;
++        }
++        RtlFreeUnicodeString( &nameW );
++    }
++
++    swprintf( p, len - (p - buffer), L"%s.manifest", ai->name );
++    if (RtlDosPathNameToNtPathName_U( buffer, &nameW, NULL, NULL ))
++    {
++        status = open_nt_file( &file, &nameW );
++        if (!status)
++        {
++            status = get_manifest_in_manifest_file( acl, ai, nameW.Buffer, directory, FALSE, file );
++            NtClose( file );
++            goto done;
++        }
++        RtlFreeUnicodeString( &nameW );
++    }
++    status = STATUS_SXS_ASSEMBLY_NOT_FOUND;
++done:
++    RtlFreeUnicodeString( &nameW );
++    return status;
++}
++
+ static NTSTATUS lookup_assembly(struct actctx_loader* acl,
+                                 struct assembly_identity* ai)
+ {
+-    unsigned int i;
+     WCHAR *buffer, *p, *directory;
++    const WCHAR *lang = ai->language;
+     NTSTATUS status;
+-    UNICODE_STRING nameW;
+-    HANDLE file;
+-    DWORD len;
++    DWORD len, total;
+ 
+-    TRACE( "looking for name=%s version=%s arch=%s\n",
+-           debugstr_w(ai->name), debugstr_version(&ai->version), debugstr_w(ai->arch) );
++    TRACE( "looking for name=%s version=%s arch=%s lang=%s\n",
++           debugstr_w(ai->name), debugstr_version(&ai->version),
++           debugstr_w(ai->arch), debugstr_w(ai->language) );
+ 
+     if ((status = lookup_winsxs(acl, ai)) != STATUS_NO_SUCH_FILE) return status;
+ 
+-    /* FIXME: add support for language specific lookup */
++    if (!lang || !wcsicmp( lang, L"neutral" ) || !wcscmp( lang, L"*")) lang = L"";
+ 
+     len = max(RtlGetFullPathName_U(acl->actctx->assemblies->manifest.info, 0, NULL, NULL) / sizeof(WCHAR),
+         wcslen(acl->actctx->appdir.info));
++    total = len + 2 * wcslen(ai->name) + wcslen(lang) + 12;
+ 
+-    nameW.Buffer = NULL;
+-    if (!(buffer = RtlAllocateHeap( GetProcessHeap(), 0,
+-                                    (len + 2 * wcslen(ai->name) + 2) * sizeof(WCHAR) + sizeof(L".manifest") )))
+-        return STATUS_NO_MEMORY;
++    if (!(buffer = RtlAllocateHeap( GetProcessHeap(), 0, total * sizeof(WCHAR) ))) return STATUS_NO_MEMORY;
+ 
+     if (!(directory = build_assembly_dir( ai )))
+     {
+@@ -3328,47 +3367,25 @@ static NTSTATUS lookup_assembly(struct actctx_loader* acl,
+      */
+     wcscpy( buffer, acl->actctx->appdir.info );
+     p = buffer + wcslen(buffer);
+-    for (i = 0; i < 4; i++)
+-    {
+-        if (i == 2)
+-        {
+-            struct assembly *assembly = acl->actctx->assemblies;
+-            if (!RtlGetFullPathName_U(assembly->manifest.info, len * sizeof(WCHAR), buffer, &p)) break;
+-        }
+-        else *p++ = '\\';
+ 
+-        wcscpy( p, ai->name );
+-        p += wcslen(p);
++    status = open_manifest_file( acl, ai, lang, directory, buffer, total );
++    if (status != STATUS_SXS_ASSEMBLY_NOT_FOUND) goto done;
+ 
+-        wcscpy( p, L".dll" );
+-        if (RtlDosPathNameToNtPathName_U( buffer, &nameW, NULL, NULL ))
+-        {
+-            status = open_nt_file( &file, &nameW );
+-            if (!status)
+-            {
+-                status = get_manifest_in_pe_file( acl, ai, nameW.Buffer, directory, FALSE, file, NULL, 0 );
+-                NtClose( file );
+-                if (status == STATUS_SUCCESS)
+-                    break;
+-            }
+-            RtlFreeUnicodeString( &nameW );
+-        }
++    swprintf( buffer, total, L"%s%s\\", acl->actctx->appdir.info, ai->name );
++    status = open_manifest_file( acl, ai, lang, directory, buffer, total );
++    if (status != STATUS_SXS_ASSEMBLY_NOT_FOUND) goto done;
+ 
+-        wcscpy( p, L".manifest" );
+-        if (RtlDosPathNameToNtPathName_U( buffer, &nameW, NULL, NULL ))
+-        {
+-            status = open_nt_file( &file, &nameW );
+-            if (!status)
+-            {
+-                status = get_manifest_in_manifest_file( acl, ai, nameW.Buffer, directory, FALSE, file );
+-                NtClose( file );
+-                break;
+-            }
+-            RtlFreeUnicodeString( &nameW );
+-        }
+-        status = STATUS_SXS_ASSEMBLY_NOT_FOUND;
++    if (RtlGetFullPathName_U( acl->actctx->assemblies->manifest.info, len * sizeof(WCHAR), buffer, &p ))
++    {
++        *p = 0;
++        status = open_manifest_file( acl, ai, lang, directory, buffer, total );
++        if (status != STATUS_SXS_ASSEMBLY_NOT_FOUND) goto done;
++
++        swprintf( p, total - (p - buffer), L"%s\\", ai->name );
++        status = open_manifest_file( acl, ai, lang, directory, buffer, total );
+     }
+-    RtlFreeUnicodeString( &nameW );
++
++done:
+     RtlFreeHeap( GetProcessHeap(), 0, directory );
+     RtlFreeHeap( GetProcessHeap(), 0, buffer );
+     return status;
+-- 
+2.51.0
+

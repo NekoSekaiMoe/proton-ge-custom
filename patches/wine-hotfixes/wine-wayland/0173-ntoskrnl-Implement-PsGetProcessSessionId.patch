@@ -1,8 +1,8 @@
-From 6e0bf6aa42604ca86e87c63777512114c361e5e6 Mon Sep 17 00:00:00 2001
+From 09d6ab8a298452d16d8ec0252f10f7c4472e7516 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 15:51:31 -0400
-Subject: [PATCH 173/347] ntoskrnl: Implement PsGetProcessSessionId.
+Subject: [PATCH 173/441] ntoskrnl: Implement PsGetProcessSessionId.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 11 +++++++++++

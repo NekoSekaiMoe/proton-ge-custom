@@ -1,0 +1,38 @@
+From dba04885a0147fd71d5ea166b095140155c0b186 Mon Sep 17 00:00:00 2001
+From: Zhiyi Zhang <zzhang@codeweavers.com>
+Date: Fri, 7 Feb 2025 09:53:48 +0800
+Subject: [PATCH 407/441] ntdll: Implement RtlLookupElementGenericTable().
+
+---
+ dlls/ntdll/rtl.c | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
+
+diff --git a/dlls/ntdll/rtl.c b/dlls/ntdll/rtl.c
+index 69f1f955af2..a4997c91cea 100644
+--- a/dlls/ntdll/rtl.c
++++ b/dlls/ntdll/rtl.c
+@@ -702,10 +702,18 @@ void * WINAPI RtlGetElementGenericTable(RTL_GENERIC_TABLE *table, ULONG index)
+ /******************************************************************************
+  *  RtlLookupElementGenericTable           [NTDLL.@]
+  */
+-void * WINAPI RtlLookupElementGenericTable(RTL_GENERIC_TABLE *table, void *buffer)
++void * WINAPI RtlLookupElementGenericTable(RTL_GENERIC_TABLE *table, void *value)
+ {
+-    FIXME("(%p, %p) stub!\n", table, buffer);
+-    return NULL;
++    RTL_SPLAY_LINKS *child;
++
++    TRACE("(%p, %p)\n", table, value);
++
++    child = rtl_splay_find(table, value);
++    if (!child)
++        return FALSE;
++
++    table->TableRoot = RtlSplay(child);
++    return get_data_from_splay_links(child);
+ }
+ 
+ /******************************************************************************
+-- 
+2.51.0
+

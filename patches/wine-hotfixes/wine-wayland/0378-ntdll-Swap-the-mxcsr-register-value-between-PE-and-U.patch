@@ -1,0 +1,87 @@
+From 6b9f5d8cbf54bfdfd935ffa01d1e4f229af6ad1b Mon Sep 17 00:00:00 2001
+From: Alexandre Julliard <julliard@winehq.org>
+Date: Tue, 2 Sep 2025 15:30:47 +0200
+Subject: [PATCH 378/441] ntdll: Swap the mxcsr register value between PE and
+ Unix.
+
+Delphi apps enable exceptions in mxcsr that the Unix side may not
+expect.
+---
+ dlls/ntdll/unix/signal_x86_64.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/dlls/ntdll/unix/signal_x86_64.c b/dlls/ntdll/unix/signal_x86_64.c
+index 188cbed50ef..fed47e889d6 100644
+--- a/dlls/ntdll/unix/signal_x86_64.c
++++ b/dlls/ntdll/unix/signal_x86_64.c
+@@ -466,6 +466,7 @@ struct amd64_thread_data
+     DWORD                 xstate_features_size;  /* 033c */
+     UINT64                xstate_features_mask;  /* 0340 */
+     void                **instrumentation_callback; /* 0348 */
++    DWORD                 mxcsr;         /* 0350 Unix-side mxcsr register */
+ };
+ 
+ C_ASSERT( sizeof(struct amd64_thread_data) <= sizeof(((struct ntdll_thread_data *)0)->cpu_data) );
+@@ -474,6 +475,7 @@ C_ASSERT( offsetof( TEB, GdiTebBatch ) + offsetof( struct amd64_thread_data, fs
+ C_ASSERT( offsetof( TEB, GdiTebBatch ) + offsetof( struct amd64_thread_data, xstate_features_size ) == 0x33c );
+ C_ASSERT( offsetof( TEB, GdiTebBatch ) + offsetof( struct amd64_thread_data, xstate_features_mask ) == 0x340 );
+ C_ASSERT( offsetof( TEB, GdiTebBatch ) + offsetof( struct amd64_thread_data, instrumentation_callback ) == 0x348 );
++C_ASSERT( offsetof( TEB, GdiTebBatch ) + offsetof( struct amd64_thread_data, mxcsr ) == 0x350 );
+ 
+ static inline struct amd64_thread_data *amd64_thread_data(void)
+ {
+@@ -1716,6 +1718,7 @@ __ASM_GLOBAL_FUNC( call_user_mode_callback,
+                    /* switch to user stack */
+                    "movq %rdi,%rsp\n\t"        /* user_rsp */
+                    "movq 0x98(%r14),%rbp\n\t"  /* prev_frame->rbp */
++                   "ldmxcsr 0xd8(%r14)\n\t"    /* prev_frame->xsave.MxCsr */
+ #ifdef __linux__
+                    "testl $4,%r10d\n\t"        /* SYSCALL_HAVE_PTHREAD_TEB */
+                    "jz 1f\n\t"
+@@ -3214,6 +3217,7 @@ __ASM_GLOBAL_FUNC( signal_start_thread,
+                    "1:\tmovq $0,0xa0(%r8)\n\t"     /* frame->prev_frame */
+                    "movq %r9,0xa8(%r8)\n\t"        /* frame->syscall_cfa */
+                    "movl $0,0xb4(%r8)\n\t"         /* frame->restore_flags */
++                   "stmxcsr 0x350(%rcx)\n\t"       /* amd64_thread_data()->mxcsr */
+                    /* switch to kernel stack */
+                    "movq %r8,%rsp\n\t"
+                    "movq %rcx,%r13\n\t"            /* teb */
+@@ -3335,6 +3339,7 @@ __ASM_GLOBAL_FUNC( __wine_syscall_dispatcher,
+                    "syscall\n\t"
+                    "leaq -0x98(%rbp),%rcx\n"
+ #endif
++                   "ldmxcsr 0x350(%r13)\n\t"       /* amd64_thread_data()->mxcsr */
+                    "movq 0x00(%rcx),%rax\n\t"
+                    "movq 0x18(%rcx),%r11\n\t"      /* 2nd argument */
+                    "movl %eax,%ebx\n\t"
+@@ -3388,6 +3393,7 @@ __ASM_GLOBAL_FUNC( __wine_syscall_dispatcher,
+                    "movl 0xb4(%rcx),%edx\n\t"      /* frame->restore_flags */
+                    "testl $0x48,%edx\n\t"          /* CONTEXT_FLOATING_POINT | CONTEXT_XSTATE */
+                    "jnz 2f\n\t"
++                   "ldmxcsr 0xd8(%rcx)\n\t"        /* frame->xsave.MxCsr */
+                    "movaps 0x1c0(%rcx),%xmm6\n\t"
+                    "movaps 0x1d0(%rcx),%xmm7\n\t"
+                    "movaps 0x1e0(%rcx),%xmm8\n\t"
+@@ -3534,6 +3540,7 @@ __ASM_GLOBAL_FUNC( __wine_unix_call_dispatcher,
+                    "movq %rbp,0x98(%rcx)\n\t"
+                    __ASM_CFI_REG_IS_AT2(rbp, rcx, 0x98, 0x01)
+                    "movq %gs:0x30,%r13\n\t"
++                   "stmxcsr 0xd8(%rcx)\n\t"        /* frame->xsave.MxCsr */
+                    "movdqa %xmm6,0x1c0(%rcx)\n\t"
+                    "movdqa %xmm7,0x1d0(%rcx)\n\t"
+                    "movdqa %xmm8,0x1e0(%rcx)\n\t"
+@@ -3577,9 +3584,11 @@ __ASM_GLOBAL_FUNC( __wine_unix_call_dispatcher,
+                    "movl $0x3000003,%eax\n\t"      /* _thread_set_tsd_base */
+                    "syscall\n\t"
+ #endif
++                   "ldmxcsr 0x350(%r13)\n\t"       /* amd64_thread_data()->mxcsr */
+                    "movq %r8,%rdi\n\t"             /* args */
+                    "callq *(%r10,%rdx,8)\n\t"
+                    "movq %rsp,%rcx\n\t"
++                   "ldmxcsr 0xd8(%rcx)\n\t"        /* frame->xsave.MxCsr */
+                    "movdqa 0x1c0(%rcx),%xmm6\n\t"
+                    "movdqa 0x1d0(%rcx),%xmm7\n\t"
+                    "movdqa 0x1e0(%rcx),%xmm8\n\t"
+-- 
+2.51.0
+

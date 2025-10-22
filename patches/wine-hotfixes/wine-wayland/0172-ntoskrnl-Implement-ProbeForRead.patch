@@ -1,8 +1,8 @@
-From 5c53d2bd3173530a6c4bf4836578aae04517737d Mon Sep 17 00:00:00 2001
+From a53e24c4af4e6f44b2c796f849a8ed57878cf287 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 15:44:05 -0400
-Subject: [PATCH 172/347] ntoskrnl: Implement ProbeForRead.
+Subject: [PATCH 172/441] ntoskrnl: Implement ProbeForRead.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 15 ++++++++++++---

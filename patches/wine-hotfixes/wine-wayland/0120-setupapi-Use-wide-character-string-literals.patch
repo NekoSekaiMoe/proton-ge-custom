@@ -1,7 +1,7 @@
-From 3358e78efdf7df87ebcde9736aa1edd2d20cf685 Mon Sep 17 00:00:00 2001
+From 03cdd0eab61fbd92ad9da8564616fa22c3508f11 Mon Sep 17 00:00:00 2001
 From: Alex Henrie <alexhenrie24@gmail.com>
 Date: Sun, 22 Jun 2025 12:06:55 -0400
-Subject: [PATCH 120/347] setupapi: Use wide character string literals.
+Subject: [PATCH 120/441] setupapi: Use wide character string literals.
 
 ---
  dlls/setupapi/devinst.c   | 306 +++++++++++++++-----------------------

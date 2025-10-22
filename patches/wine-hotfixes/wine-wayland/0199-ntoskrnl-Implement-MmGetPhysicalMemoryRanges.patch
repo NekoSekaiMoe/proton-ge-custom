@@ -1,8 +1,8 @@
-From 37da28fe422c6512679b888c1f5d24eddad48b68 Mon Sep 17 00:00:00 2001
+From 6c2aa4c95242964b7dc389bc3e56b9d764aa3fbc Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 21:56:28 -0400
-Subject: [PATCH 199/347] ntoskrnl: Implement MmGetPhysicalMemoryRanges.
+Subject: [PATCH 199/441] ntoskrnl: Implement MmGetPhysicalMemoryRanges.
 
 probably can be moved to dll attach
 ---

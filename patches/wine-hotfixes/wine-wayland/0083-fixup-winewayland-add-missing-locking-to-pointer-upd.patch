@@ -1,8 +1,8 @@
-From f004b87ea769d2f1d88e68cec1a4f6474290d210 Mon Sep 17 00:00:00 2001
+From fe4a1c91b9997371412a7e9900c318e5ba9ee232 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 7 Jun 2025 23:32:42 -0400
-Subject: [PATCH 083/347] fixup! winewayland: add missing locking to pointer
+Subject: [PATCH 083/441] fixup! winewayland: add missing locking to pointer
  updates
 
 will be needed soon... i think

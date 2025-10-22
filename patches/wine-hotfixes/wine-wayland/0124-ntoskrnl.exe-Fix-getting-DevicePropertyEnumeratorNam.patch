@@ -1,7 +1,7 @@
-From 724bb6291db910be0183151b9e743cded3acaf77 Mon Sep 17 00:00:00 2001
+From 82fbf1457690fca9ae91f85cdeec59efff845300 Mon Sep 17 00:00:00 2001
 From: Alexander Morozov <amorozov@etersoft.ru>
 Date: Thu, 24 Apr 2025 02:52:32 +0300
-Subject: [PATCH 124/347] ntoskrnl.exe: Fix getting
+Subject: [PATCH 124/441] ntoskrnl.exe: Fix getting
  DevicePropertyEnumeratorName.
 
 ---

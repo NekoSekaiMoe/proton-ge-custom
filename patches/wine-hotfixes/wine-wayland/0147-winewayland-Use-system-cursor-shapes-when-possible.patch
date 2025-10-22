@@ -1,7 +1,7 @@
-From 562f15f4a24bc8edf6b3322a987564940cfbbc2e Mon Sep 17 00:00:00 2001
+From b9b722e4684d48014a2e16eccf60946dc5706660 Mon Sep 17 00:00:00 2001
 From: Alexandros Frantzis <alexandros.frantzis@collabora.com>
 Date: Thu, 27 Mar 2025 10:01:54 +0200
-Subject: [PATCH 147/347] winewayland: Use system cursor shapes when possible.
+Subject: [PATCH 147/441] winewayland: Use system cursor shapes when possible.
 
 Use the cursor-shapes-v1 protocol to tell the compositor which system
 cursor shape to use. If a shape match is not found (or cursor-shapes-v1

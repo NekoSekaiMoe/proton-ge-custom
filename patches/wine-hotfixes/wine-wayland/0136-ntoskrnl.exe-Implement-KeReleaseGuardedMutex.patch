@@ -1,7 +1,7 @@
-From b48917d3967c19a1a499942d4bb55401583d3111 Mon Sep 17 00:00:00 2001
+From 79a1b717cc0ac7acd4e5e5ec80fb66ac1d8b3ca0 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Thu, 26 Jan 2023 15:09:21 -0500
-Subject: [PATCH 136/347] ntoskrnl.exe: Implement KeReleaseGuardedMutex.
+Subject: [PATCH 136/441] ntoskrnl.exe: Implement KeReleaseGuardedMutex.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.exe.spec |  2 ++

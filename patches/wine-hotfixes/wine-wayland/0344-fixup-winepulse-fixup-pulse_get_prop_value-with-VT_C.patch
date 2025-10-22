@@ -1,0 +1,49 @@
+From 73407db2c2b9c84dbbb59dd9867a3e28b204a888 Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Sun, 12 Oct 2025 13:48:13 -0500
+Subject: [PATCH 344/441] fixup! winepulse: fixup pulse_get_prop_value with
+ VT_CLSID.
+
+---
+ dlls/mmdevapi/devenum.c    |  2 +-
+ dlls/winepulse.drv/pulse.c | 10 ++++++++--
+ 2 files changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/dlls/mmdevapi/devenum.c b/dlls/mmdevapi/devenum.c
+index 2bbcdbfa8fa..3ce7f5fe178 100644
+--- a/dlls/mmdevapi/devenum.c
++++ b/dlls/mmdevapi/devenum.c
+@@ -310,7 +310,7 @@ static HRESULT set_driver_prop_value(GUID *id, const EDataFlow flow, const PROPE
+         if (params.result != E_NOT_SUFFICIENT_BUFFER)
+             break;
+ 
+-        CoTaskMemFree(params.buffer);
++        if (params.buffer) CoTaskMemFree(params.buffer);
+         params.buffer = CoTaskMemAlloc(*params.buffer_size);
+         if (!params.buffer) {
+             free(dev_name);
+diff --git a/dlls/winepulse.drv/pulse.c b/dlls/winepulse.drv/pulse.c
+index 8e38e9d88fe..7fa8d4ae545 100644
+--- a/dlls/winepulse.drv/pulse.c
++++ b/dlls/winepulse.drv/pulse.c
+@@ -2675,8 +2675,14 @@ static NTSTATUS pulse_get_prop_value(void *args)
+                 *params->buffer_size = sizeof(GUID);
+             }
+             else if (!params->buffer)
+-                params->result = E_INVALIDARG;
+-            else {
++            {
++                /*
++                 * if alloc fails then mmdevapi will return E_NOMEMORY
++                 */
++                params->result = E_NOT_SUFFICIENT_BUFFER;
++            }
++            else
++            {
+                 params->result = S_OK;
+                 params->value->puuid = params->buffer;
+                 *params->value->puuid = dev->container_id;
+-- 
+2.51.0
+

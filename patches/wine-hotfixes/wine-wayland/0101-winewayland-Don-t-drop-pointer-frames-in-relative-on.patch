@@ -1,8 +1,8 @@
-From c3a18cf63d84bbdbda1663048ed4398e40b540e4 Mon Sep 17 00:00:00 2001
+From 9bbd3f7baddac7ace3128dc6cdaa636c45740b28 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 18 Jun 2025 16:46:53 -0400
-Subject: [PATCH 101/347] winewayland: Don't drop pointer frames in relative
+Subject: [PATCH 101/441] winewayland: Don't drop pointer frames in relative
  only mode.
 
 ---

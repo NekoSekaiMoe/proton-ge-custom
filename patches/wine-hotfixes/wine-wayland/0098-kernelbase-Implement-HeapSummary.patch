@@ -1,7 +1,7 @@
-From 9a4fc1fd6b22cc9778e26a78444eff4389ba6145 Mon Sep 17 00:00:00 2001
+From ac7fa0605002919752eb1c989d6d80e4f90be8dc Mon Sep 17 00:00:00 2001
 From: Julius Bettin <julius.bettin@protonmail.com>
 Date: Mon, 16 Jun 2025 19:56:38 -0400
-Subject: [PATCH 098/347] kernelbase: Implement HeapSummary.
+Subject: [PATCH 098/441] kernelbase: Implement HeapSummary.
 
 ---
  dlls/kernel32/kernel32.spec     |  2 +-

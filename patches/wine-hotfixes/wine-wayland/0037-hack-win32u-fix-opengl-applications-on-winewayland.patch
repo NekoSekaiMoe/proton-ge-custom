@@ -1,8 +1,8 @@
-From 3d7e1dbc1fce184feb86b6cdc7ed0223c8330497 Mon Sep 17 00:00:00 2001
+From e2431c2da24c30ec49a2a6568a5932801b22dddc Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 10 May 2025 12:22:40 -0400
-Subject: [PATCH 037/347] hack: win32u: fix opengl applications on winewayland
+Subject: [PATCH 037/441] hack: win32u: fix opengl applications on winewayland
 
 ---
  dlls/win32u/window.c                   | 3 ++-
@@ -12,7 +12,7 @@ Subject: [PATCH 037/347] hack: win32u: fix opengl applications on winewayland
  4 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/win32u/window.c b/dlls/win32u/window.c
-index 2d32dd1bd07..43505ff9183 100644
+index 4210ec01652..ccae460be4e 100644
 --- a/dlls/win32u/window.c
 +++ b/dlls/win32u/window.c
 @@ -2040,7 +2040,8 @@ static struct window_surface *get_window_surface( HWND hwnd, UINT swp_flags, BOO

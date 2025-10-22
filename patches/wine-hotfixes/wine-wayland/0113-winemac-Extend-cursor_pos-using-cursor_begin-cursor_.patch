@@ -1,7 +1,7 @@
-From 9d1758d9b97d8f8bcddb5e7eaa37a84e71b47c32 Mon Sep 17 00:00:00 2001
+From f8eb16f3bebb127afc85a2a97372816041cb0fb7 Mon Sep 17 00:00:00 2001
 From: Byeongsik Jeon <bsjeon@hanmail.net>
 Date: Fri, 21 Feb 2025 22:40:05 +0900
-Subject: [PATCH 113/347] winemac: Extend cursor_pos using cursor_begin,
+Subject: [PATCH 113/441] winemac: Extend cursor_pos using cursor_begin,
  cursor_end.
 
 ---

@@ -1,8 +1,8 @@
-From a0c8220dba884d4c99f31ccaf0b24976c1454d39 Mon Sep 17 00:00:00 2001
+From 32aeeabe3fa1e94024eb5084963cb0355a9de755 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 21:34:12 -0400
-Subject: [PATCH 184/347] ntoskrnl: Add semi-stub for MmGetVirtualForPhysical.
+Subject: [PATCH 184/441] ntoskrnl: Add semi-stub for MmGetVirtualForPhysical.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 10 ++++++++++

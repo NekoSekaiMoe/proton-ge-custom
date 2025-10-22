@@ -1,7 +1,7 @@
-From 0ee3ee28afd53e88d9bb43b7fd1e5a091834b665 Mon Sep 17 00:00:00 2001
+From 28854baa53299bbbe516778c577c095c826b022a Mon Sep 17 00:00:00 2001
 From: Harald Sitter <sitter@kde.org>
 Date: Sun, 22 Jun 2025 14:44:12 -0400
-Subject: [PATCH 134/347] containerid: helper to generate a containerid from a 
+Subject: [PATCH 134/441] containerid: helper to generate a containerid from a 
  sysfs path
 
 ---
@@ -414,10 +414,10 @@ index 07c2024a380..3d5b3a05477 100644
  
          params->result = E_NOTIMPL;
 diff --git a/include/Makefile.in b/include/Makefile.in
-index d56bc5182d8..6271c62d5d5 100644
+index e57cd7e6fed..59fc86ea557 100644
 --- a/include/Makefile.in
 +++ b/include/Makefile.in
-@@ -918,6 +918,7 @@ SOURCES = \
+@@ -919,6 +919,7 @@ SOURCES = \
  	wine/afd.h \
  	wine/asm.h \
  	wine/atsvc.idl \

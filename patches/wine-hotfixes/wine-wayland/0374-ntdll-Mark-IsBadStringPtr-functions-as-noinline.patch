@@ -1,0 +1,40 @@
+From d5c286e002934198904653d234e550b1ca007654 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <jacek@codeweavers.com>
+Date: Wed, 21 May 2025 22:26:55 +0200
+Subject: [PATCH 374/441] ntdll: Mark IsBadStringPtr functions as noinline.
+
+Without this, the compiler may inline them into dispatch_exception. When compiler
+exceptions are enabled, this causes a handler to be set up for dispatch_exception,
+which is unintended. A side effect of this is that EXCEPTION_NESTED_CALL may be
+cleared when a nested exception is dispatched.
+
+This fixes test_nested_exception test on aarch64 when compiler exceptions are used.
+---
+ dlls/ntdll/exception.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/dlls/ntdll/exception.c b/dlls/ntdll/exception.c
+index b6f34028a05..e3d45a7d495 100644
+--- a/dlls/ntdll/exception.c
++++ b/dlls/ntdll/exception.c
+@@ -469,7 +469,7 @@ void __cdecl __wine_spec_unimplemented_stub( const char *module, const char *fun
+  *
+  * IsBadStringPtrA replacement for ntdll, to catch exception in debug traces.
+  */
+-BOOL WINAPI IsBadStringPtrA( LPCSTR str, UINT_PTR max )
++BOOL DECLSPEC_NOINLINE WINAPI IsBadStringPtrA( LPCSTR str, UINT_PTR max )
+ {
+     if (!str) return TRUE;
+     __TRY
+@@ -490,7 +490,7 @@ BOOL WINAPI IsBadStringPtrA( LPCSTR str, UINT_PTR max )
+  *
+  * IsBadStringPtrW replacement for ntdll, to catch exception in debug traces.
+  */
+-BOOL WINAPI IsBadStringPtrW( LPCWSTR str, UINT_PTR max )
++BOOL DECLSPEC_NOINLINE WINAPI IsBadStringPtrW( LPCWSTR str, UINT_PTR max )
+ {
+     if (!str) return TRUE;
+     __TRY
+-- 
+2.51.0
+

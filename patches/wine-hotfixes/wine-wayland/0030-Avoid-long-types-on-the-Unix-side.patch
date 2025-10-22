@@ -1,8 +1,8 @@
-From d8265168ee96ecbfa9f08c44b328f50d4387dc3a Mon Sep 17 00:00:00 2001
+From 06f9ec506bb919d9f86f27e10ee2e9a903b8daee Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 7 May 2025 08:37:02 -0400
-Subject: [PATCH 030/347] Avoid long types on the Unix side.
+Subject: [PATCH 030/441] Avoid long types on the Unix side.
 
 Co-Authored-By: Alexandre Julliard <1130500+julliard@users.noreply.github.com>
 ---

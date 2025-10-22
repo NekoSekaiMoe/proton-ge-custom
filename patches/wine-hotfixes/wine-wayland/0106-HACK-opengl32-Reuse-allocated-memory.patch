@@ -1,8 +1,8 @@
-From 5673a331d843902eae5c9f4f7cf4fecf8958207e Mon Sep 17 00:00:00 2001
+From 362f524630642d47022d35201b2214f1284b39c2 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 20 Jun 2025 16:18:18 -0400
-Subject: [PATCH 106/347] HACK: opengl32: Reuse allocated memory
+Subject: [PATCH 106/441] HACK: opengl32: Reuse allocated memory
 
 around 1.5x to 2x faster on top of the 20x speed up
 ---

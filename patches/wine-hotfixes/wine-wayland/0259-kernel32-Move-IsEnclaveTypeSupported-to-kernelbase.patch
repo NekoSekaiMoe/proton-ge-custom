@@ -1,0 +1,84 @@
+From 7bf0137ea39791e547db686bd8339a5f7b23828c Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Tue, 12 Aug 2025 00:40:26 -0400
+Subject: [PATCH 259/441] kernel32: Move IsEnclaveTypeSupported to kernelbase
+
+---
+ dlls/kernel32/kernel32.spec     |  2 +-
+ dlls/kernel32/kernel_main.c     | 10 ----------
+ dlls/kernelbase/kernelbase.spec |  2 +-
+ dlls/kernelbase/main.c          | 10 ++++++++++
+ 4 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/dlls/kernel32/kernel32.spec b/dlls/kernel32/kernel32.spec
+index 5e8923ef728..ec70a0b1d71 100644
+--- a/dlls/kernel32/kernel32.spec
++++ b/dlls/kernel32/kernel32.spec
+@@ -1006,7 +1006,7 @@
+ @ stdcall -import IsDBCSLeadByte(long)
+ @ stdcall -import IsDBCSLeadByteEx(long long)
+ @ stdcall -import IsDebuggerPresent()
+-@ stdcall IsEnclaveTypeSupported(long)
++@ stdcall -import IsEnclaveTypeSupported(long)
+ @ stub -i386 IsLSCallback
+ @ stdcall -import IsNLSDefinedString(long long ptr wstr long)
+ @ stdcall -import IsNormalizedString(long wstr long)
+diff --git a/dlls/kernel32/kernel_main.c b/dlls/kernel32/kernel_main.c
+index f46e6a1febf..86234e2d6c7 100644
+--- a/dlls/kernel32/kernel_main.c
++++ b/dlls/kernel32/kernel_main.c
+@@ -215,16 +215,6 @@ BOOL WINAPI GetSystemRegistryQuota(PDWORD pdwQuotaAllowed, PDWORD pdwQuotaUsed)
+     return TRUE;
+ }
+ 
+-/******************************************************************************
+- *           IsEnclaveTypeSupported       (KERNEL32.@)
+- */
+-BOOL WINAPI IsEnclaveTypeSupported(DWORD enclave)
+-{
+-    FIXME("%lx stub!\n", enclave);
+-    SetLastError(ERROR_NOT_SUPPORTED);
+-    return FALSE;
+-}
+-
+ /******************************************************************************
+  *           IsUserCetAvailableInEnvironment       (KERNEL32.@)
+  */
+diff --git a/dlls/kernelbase/kernelbase.spec b/dlls/kernelbase/kernelbase.spec
+index 2bcf1eeaa33..3fba6f45173 100644
+--- a/dlls/kernelbase/kernelbase.spec
++++ b/dlls/kernelbase/kernelbase.spec
+@@ -900,7 +900,7 @@
+ @ stdcall IsDebuggerPresent()
+ # @ stub IsDeveloperModeEnabled
+ # @ stub IsDeveloperModePolicyApplied
+-# @ stub IsEnclaveTypeSupported
++@ stdcall IsEnclaveTypeSupported(long)
+ # @ stub IsGlobalizationUserSettingsKeyRedirected
+ @ stdcall IsInternetESCEnabled()
+ @ stdcall IsNLSDefinedString(long long ptr wstr long)
+diff --git a/dlls/kernelbase/main.c b/dlls/kernelbase/main.c
+index 60173ba6513..152be9c5d19 100644
+--- a/dlls/kernelbase/main.c
++++ b/dlls/kernelbase/main.c
+@@ -521,6 +521,16 @@ static HRESULT lcid_to_rfc1766(LCID lcid, WCHAR *rfc1766, INT len)
+     return E_FAIL;
+ }
+ 
++/******************************************************************************
++ *           IsEnclaveTypeSupported       (KERNEL32.@)
++ */
++BOOL WINAPI IsEnclaveTypeSupported(DWORD enclave)
++{
++    FIXME("%lx stub!\n", enclave);
++    SetLastError(ERROR_NOT_SUPPORTED);
++    return FALSE;
++}
++
+ HRESULT WINAPI GetAcceptLanguagesW(WCHAR *langbuf, DWORD *buflen)
+ {
+     DWORD mystrlen, mytype;
+-- 
+2.51.0
+

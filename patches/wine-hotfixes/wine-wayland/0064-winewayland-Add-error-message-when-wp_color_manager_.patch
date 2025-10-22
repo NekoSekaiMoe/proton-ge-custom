@@ -1,8 +1,8 @@
-From e30ce903b09fd100ed7da9649317c71b9716c4c9 Mon Sep 17 00:00:00 2001
+From 10e512cd88a22d311eb26db00dd203a1a016d95b Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 25 May 2025 22:22:17 -0400
-Subject: [PATCH 064/347] winewayland: Add error message when
+Subject: [PATCH 064/441] winewayland: Add error message when
  wp_color_manager_v1 is missing.
 
 ---

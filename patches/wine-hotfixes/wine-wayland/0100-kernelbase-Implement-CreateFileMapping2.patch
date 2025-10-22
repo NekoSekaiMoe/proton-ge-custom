@@ -1,7 +1,7 @@
-From fe52d2a93a65400ce83a2243893348e691e20c25 Mon Sep 17 00:00:00 2001
+From 0b87a42e1fa683dab8aadddaffc5e8d4e853286e Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 17 Apr 2025 20:33:59 +0200
-Subject: [PATCH 100/347] kernelbase: Implement CreateFileMapping2().
+Subject: [PATCH 100/441] kernelbase: Implement CreateFileMapping2().
 
 ---
  dlls/kernelbase/kernelbase.spec |  1 +

@@ -1,8 +1,8 @@
-From 0d13e0d38aed0589d5d0d47ba099b7d350e709d9 Mon Sep 17 00:00:00 2001
+From 26b64b1cc62da981af79529f9624d40310e1fbf5 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 15 May 2025 19:55:01 -0400
-Subject: [PATCH 051/347] winewayland: Use discrete event when possible.
+Subject: [PATCH 051/441] winewayland: Use discrete event when possible.
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 30 ++++++++++++++++++++++++++

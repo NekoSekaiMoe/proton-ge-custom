@@ -1,17 +1,17 @@
-From d53e53d20cadffddf998b4f7aa5699517b9512d3 Mon Sep 17 00:00:00 2001
+From 3f77fa86c975f3d27b15e35c841c1d8d6199b9f9 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Mon, 20 Jan 2025 15:40:46 -0500
-Subject: [PATCH 033/347] wine.inf: Don't clobber UBR key.
+Subject: [PATCH 033/441] wine.inf: Don't clobber UBR key.
 
 ---
  loader/wine.inf.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/loader/wine.inf.in b/loader/wine.inf.in
-index aa9ea866a11..3ad3e9facca 100644
+index d8c9afc99d0..9d2a74e7bb1 100644
 --- a/loader/wine.inf.in
 +++ b/loader/wine.inf.in
-@@ -2686,7 +2686,7 @@ HKLM,%CurrentVersionNT%,"CurrentMinorVersionNumber",0x10003,0
+@@ -2687,7 +2687,7 @@ HKLM,%CurrentVersionNT%,"CurrentMinorVersionNumber",0x10003,0
  HKLM,%CurrentVersionNT%,"CurrentBuild",2,"19045"
  HKLM,%CurrentVersionNT%,"CurrentBuildNumber",2,"19045"
  HKLM,%CurrentVersionNT%,"CurrentType",2,"Multiprocessor Free"

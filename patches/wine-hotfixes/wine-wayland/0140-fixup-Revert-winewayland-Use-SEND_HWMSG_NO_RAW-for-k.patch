@@ -1,8 +1,8 @@
-From 6a0d40e4449f91c82757ec4ce702bd847a18ca70 Mon Sep 17 00:00:00 2001
+From f57b074385109b1c45d87e42ead6885290d10a74 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 24 Jun 2025 14:55:36 -0400
-Subject: [PATCH 140/347] fixup! Revert "winewayland: Use SEND_HWMSG_NO_RAW for
+Subject: [PATCH 140/441] fixup! Revert "winewayland: Use SEND_HWMSG_NO_RAW for
  keyboard."
 
 This reverts commit 6fc63b9626c4b67819e71127ce94dc69463666f6.

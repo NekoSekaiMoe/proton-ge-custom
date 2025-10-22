@@ -1,7 +1,7 @@
-From d8c95a1e601a02699a43957bd7ab5a4e5cb6afb2 Mon Sep 17 00:00:00 2001
+From 274aef85f62645926aee3d49f255b17ae929cde3 Mon Sep 17 00:00:00 2001
 From: Attila Fidan <dev@print0.net>
 Date: Thu, 20 Mar 2025 11:45:41 +0000
-Subject: [PATCH 018/347] win32u: Return 0 from NtUserGetKeyNameText if there
+Subject: [PATCH 018/441] win32u: Return 0 from NtUserGetKeyNameText if there
  is no translation.
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 018/347] win32u: Return 0 from NtUserGetKeyNameText if there
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/dlls/win32u/input.c b/dlls/win32u/input.c
-index 0faab111e98..e3446d8947c 100644
+index dcb560f5012..5fb5c73bffb 100644
 --- a/dlls/win32u/input.c
 +++ b/dlls/win32u/input.c
 @@ -1296,7 +1296,7 @@ INT WINAPI NtUserGetKeyNameText( LONG lparam, WCHAR *buffer, INT size )

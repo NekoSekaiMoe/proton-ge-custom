@@ -1,0 +1,57 @@
+From e3ecd67edca3b9407fecb454b449357eb42a25d6 Mon Sep 17 00:00:00 2001
+From: Paul Gofman <pgofman@codeweavers.com>
+Date: Wed, 6 Sep 2023 11:34:25 -0600
+Subject: [PATCH 415/441] ntdll: Add stub for
+ RtlDeriveCapabilitySidsFromName().
+
+---
+ dlls/ntdll/ntdll.spec |  1 +
+ dlls/ntdll/sec.c      | 10 ++++++++++
+ include/winternl.h    |  1 +
+ 3 files changed, 12 insertions(+)
+
+diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
+index 3d91c74f966..ccfe2c524be 100644
+--- a/dlls/ntdll/ntdll.spec
++++ b/dlls/ntdll/ntdll.spec
+@@ -631,6 +631,7 @@
+ @ stdcall RtlDeleteTimerQueueEx(ptr ptr)
+ @ stdcall RtlDeregisterWait(ptr)
+ @ stdcall RtlDeregisterWaitEx(ptr ptr)
++@ stdcall RtlDeriveCapabilitySidsFromName(ptr ptr ptr)
+ @ stdcall RtlDestroyAtomTable(ptr)
+ @ stdcall RtlDestroyEnvironment(ptr)
+ @ stdcall RtlDestroyHandleTable(ptr)
+diff --git a/dlls/ntdll/sec.c b/dlls/ntdll/sec.c
+index 2c09e31ac1a..e847d05955c 100644
+--- a/dlls/ntdll/sec.c
++++ b/dlls/ntdll/sec.c
+@@ -1866,3 +1866,13 @@ NTSTATUS WINAPI RtlDefaultNpAcl(PACL *pAcl)
+     *pAcl = NULL;
+     return STATUS_SUCCESS;
+ }
++
++/******************************************************************************
++ * RtlDeriveCapabilitySidsFromName (NTDLL.@)
++ */
++NTSTATUS WINAPI RtlDeriveCapabilitySidsFromName( UNICODE_STRING *cap_name, PSID cap_group_sid, PSID cap_sid )
++{
++    FIXME( "cap_name %s, cap_group_sid %p, cap_sid %p.\n", debugstr_us(cap_name), cap_group_sid, cap_sid );
++
++    return STATUS_NOT_SUPPORTED;
++}
+diff --git a/include/winternl.h b/include/winternl.h
+index cbb86a22463..298e06f3ada 100644
+--- a/include/winternl.h
++++ b/include/winternl.h
+@@ -4878,6 +4878,7 @@ NTSYSAPI NTSTATUS  WINAPI RtlDeleteTimerQueueEx(HANDLE, HANDLE);
+ NTSYSAPI PRTL_USER_PROCESS_PARAMETERS WINAPI RtlDeNormalizeProcessParams(RTL_USER_PROCESS_PARAMETERS*);
+ NTSYSAPI NTSTATUS  WINAPI RtlDeregisterWait(HANDLE);
+ NTSYSAPI NTSTATUS  WINAPI RtlDeregisterWaitEx(HANDLE,HANDLE);
++NTSYSAPI NTSTATUS  WINAPI RtlDeriveCapabilitySidsFromName(UNICODE_STRING *cap_name, PSID cap_group_sid, PSID cap_sid);
+ NTSYSAPI NTSTATUS  WINAPI RtlDestroyAtomTable(RTL_ATOM_TABLE);
+ NTSYSAPI NTSTATUS  WINAPI RtlDestroyEnvironment(PWSTR);
+ NTSYSAPI NTSTATUS  WINAPI RtlDestroyHandleTable(RTL_HANDLE_TABLE *);
+-- 
+2.51.0
+

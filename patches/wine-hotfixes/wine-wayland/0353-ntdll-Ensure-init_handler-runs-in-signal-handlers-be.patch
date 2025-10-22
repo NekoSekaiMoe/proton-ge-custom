@@ -1,0 +1,51 @@
+From 724987522923f678830c4fe2c146cf22472327bd Mon Sep 17 00:00:00 2001
+From: Brendan Shanks <bshanks@codeweavers.com>
+Date: Thu, 15 Aug 2024 10:53:06 -0700
+Subject: [PATCH 353/441] ntdll: Ensure init_handler runs in signal handlers
+ before any compiler-generated memset calls.
+
+---
+ dlls/ntdll/unix/signal_x86_64.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/dlls/ntdll/unix/signal_x86_64.c b/dlls/ntdll/unix/signal_x86_64.c
+index 1b25a98a0bd..39122a2ceb7 100644
+--- a/dlls/ntdll/unix/signal_x86_64.c
++++ b/dlls/ntdll/unix/signal_x86_64.c
+@@ -2440,10 +2440,10 @@ static inline BOOL check_invalid_gsbase( ucontext_t *ucontext )
+  */
+ static void segv_handler( int signal, siginfo_t *siginfo, void *sigcontext )
+ {
+-    EXCEPTION_RECORD rec = { 0 };
+-    struct xcontext context;
+     ucontext_t *ucontext = init_handler( sigcontext );
+     void *steamclient_addr = NULL;
++    EXCEPTION_RECORD rec = { 0 };
++    struct xcontext context;
+ 
+     rec.ExceptionAddress = (void *)RIP_sig(ucontext);
+     save_context( &context, ucontext );
+@@ -2532,9 +2532,9 @@ static void segv_handler( int signal, siginfo_t *siginfo, void *sigcontext )
+  */
+ static void trap_handler( int signal, siginfo_t *siginfo, void *sigcontext )
+ {
++    ucontext_t *ucontext = init_handler( sigcontext );
+     EXCEPTION_RECORD rec = { 0 };
+     struct xcontext context;
+-    ucontext_t *ucontext = init_handler( sigcontext );
+ 
+     if (handle_syscall_trap( ucontext, siginfo )) return;
+ 
+@@ -2566,8 +2566,8 @@ static void trap_handler( int signal, siginfo_t *siginfo, void *sigcontext )
+  */
+ static void fpe_handler( int signal, siginfo_t *siginfo, void *sigcontext )
+ {
+-    EXCEPTION_RECORD rec = { 0 };
+     ucontext_t *ucontext = init_handler( sigcontext );
++    EXCEPTION_RECORD rec = { 0 };
+ 
+     switch (siginfo->si_code)
+     {
+-- 
+2.51.0
+

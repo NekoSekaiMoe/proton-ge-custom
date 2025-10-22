@@ -1,7 +1,7 @@
-From 4771e518b58355dbe2d30dd28cfd73c0ef349fb0 Mon Sep 17 00:00:00 2001
+From 6f69af870448bcf8d05dee9acea864505ed6f17b Mon Sep 17 00:00:00 2001
 From: Harald Sitter <sitter@kde.org>
 Date: Sun, 19 Jan 2025 15:05:15 +0100
-Subject: [PATCH 133/347] mmdevapi: correctly read and write containerid as
+Subject: [PATCH 133/441] mmdevapi: correctly read and write containerid as
  clsid blob
 
 ContainerId on Windows is a bit special. It actually gets stored in the

@@ -1,0 +1,83 @@
+From f2132fbcd5be311221ca390e6f162e8a61f95473 Mon Sep 17 00:00:00 2001
+From: Alexandre Julliard <julliard@winehq.org>
+Date: Wed, 2 Apr 2025 11:33:35 +0200
+Subject: [PATCH 358/441] ntdll: Only check HAVE_PTHREAD_TEB when setting %fs
+ on Linux.
+
+And set SYSCALL_HAVE_WRFSGSBASE independently.
+---
+ dlls/ntdll/unix/signal_x86_64.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/dlls/ntdll/unix/signal_x86_64.c b/dlls/ntdll/unix/signal_x86_64.c
+index 8bd39d3580a..538f6dcf0c1 100644
+--- a/dlls/ntdll/unix/signal_x86_64.c
++++ b/dlls/ntdll/unix/signal_x86_64.c
+@@ -1700,7 +1700,7 @@ __ASM_GLOBAL_FUNC( call_user_mode_callback,
+                    /* switch to user stack */
+                    "movq %rdi,%rsp\n\t"        /* user_rsp */
+ #ifdef __linux__
+-                   "testl $12,%r14d\n\t"       /* SYSCALL_HAVE_PTHREAD_TEB | SYSCALL_HAVE_WRFSGSBASE */
++                   "testl $4,%r14d\n\t"        /* SYSCALL_HAVE_PTHREAD_TEB */
+                    "jz 1f\n\t"
+                    "movw 0x338(%r8),%fs\n"     /* amd64_thread_data()->fs */
+                    "1:\n\t"
+@@ -2979,6 +2979,9 @@ void signal_init_process(void)
+ 
+     if (cpu_info.ProcessorFeatureBits & CPU_FEATURE_XSAVE) syscall_flags |= SYSCALL_HAVE_XSAVE;
+     if (xstate_compaction_enabled) syscall_flags |= SYSCALL_HAVE_XSAVEC;
++#ifdef AT_HWCAP2
++    if (getauxval( AT_HWCAP2 ) & 2) syscall_flags |= SYSCALL_HAVE_WRFSGSBASE;
++#endif
+ 
+ #ifdef __linux__
+     if (wow_teb)
+@@ -2990,9 +2993,6 @@ void signal_init_process(void)
+         {
+             amd64_thread_data()->fs = fs32_sel = (sel << 3) | 3;
+             syscall_flags |= SYSCALL_HAVE_PTHREAD_TEB;
+-#ifdef AT_HWCAP2
+-            if (getauxval( AT_HWCAP2 ) & 2) syscall_flags |= SYSCALL_HAVE_WRFSGSBASE;
+-#endif
+         }
+         else ERR_(seh)( "failed to allocate %%fs selector\n" );
+     }
+@@ -3296,7 +3296,7 @@ __ASM_GLOBAL_FUNC( __wine_syscall_dispatcher,
+                     * (on macOS, signal handlers set gsbase to pthread_teb when on the kernel stack).
+                     */
+ #ifdef __linux__
+-                   "testl $12,%r14d\n\t"           /* SYSCALL_HAVE_PTHREAD_TEB | SYSCALL_HAVE_WRFSGSBASE */
++                   "testl $4,%r14d\n\t"            /* SYSCALL_HAVE_PTHREAD_TEB */
+                    "jz 2f\n\t"
+                    "movq 0xb8(%rcx),%rsi\n\t"      /* frame->teb */
+                    "movq 0x320(%rsi),%rsi\n\t"     /* amd64_thread_data()->pthread_teb */
+@@ -3354,7 +3354,7 @@ __ASM_GLOBAL_FUNC( __wine_syscall_dispatcher,
+                    __ASM_CFI_CFA_IS_AT2(rcx, 0xa8, 0x01) /* frame->syscall_cfa */
+                    "leaq 0x70(%rcx),%rsp\n\t"      /* %rsp > frame means no longer inside syscall */
+ #ifdef __linux__
+-                   "testl $12,%r14d\n\t"           /* SYSCALL_HAVE_PTHREAD_TEB | SYSCALL_HAVE_WRFSGSBASE */
++                   "testl $4,%r14d\n\t"            /* SYSCALL_HAVE_PTHREAD_TEB */
+                    "jz 1f\n\t"
+                    "movw %gs:0x338,%fs\n"          /* amd64_thread_data()->fs */
+                    "1:\n\t"
+@@ -3549,7 +3549,7 @@ __ASM_GLOBAL_FUNC( __wine_unix_call_dispatcher,
+                    __ASM_CFI(".cfi_undefined %rdi\n\t")
+                    __ASM_CFI(".cfi_undefined %rsi\n\t")
+ #ifdef __linux__
+-                   "testl $12,%r14d\n\t"           /* SYSCALL_HAVE_PTHREAD_TEB | SYSCALL_HAVE_WRFSGSBASE */
++                   "testl $4,%r14d\n\t"            /* SYSCALL_HAVE_PTHREAD_TEB */
+                    "jz 2f\n\t"
+                    "movq %gs:0x320,%rsi\n\t"       /* amd64_thread_data()->pthread_teb */
+                    "testl $8,%r14d\n\t"            /* SYSCALL_HAVE_WRFSGSBASE */
+@@ -3585,7 +3585,7 @@ __ASM_GLOBAL_FUNC( __wine_unix_call_dispatcher,
+                    "movq 0x88(%rcx),%rsp\n\t"
+                    __ASM_CFI(".cfi_restore_state\n\t")
+ #ifdef __linux__
+-                   "testl $12,%r14d\n\t"           /* SYSCALL_HAVE_PTHREAD_TEB | SYSCALL_HAVE_WRFSGSBASE */
++                   "testl $4,%r14d\n\t"            /* SYSCALL_HAVE_PTHREAD_TEB */
+                    "jz 1f\n\t"
+                    "movw %gs:0x338,%fs\n"          /* amd64_thread_data()->fs */
+                    "1:\n\t"
+-- 
+2.51.0
+

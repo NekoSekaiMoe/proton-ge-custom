@@ -1,0 +1,170 @@
+From 21d5c45a3105b1c9cf545c2f91dbf85aac8146d6 Mon Sep 17 00:00:00 2001
+From: Zhiyi Zhang <zzhang@codeweavers.com>
+Date: Wed, 5 Feb 2025 09:07:41 +0800
+Subject: [PATCH 393/441] ntdll: Implement RtlSplay().
+
+---
+ dlls/ntdll/ntdll.spec               |  2 +-
+ dlls/ntdll/rtl.c                    | 99 +++++++++++++++++++++++++++++
+ dlls/ntoskrnl.exe/ntoskrnl.exe.spec |  2 +-
+ include/ddk/ntddk.h                 |  1 +
+ 4 files changed, 102 insertions(+), 2 deletions(-)
+
+diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
+index 726e7e95572..1b4a5c38daf 100644
+--- a/dlls/ntdll/ntdll.spec
++++ b/dlls/ntdll/ntdll.spec
+@@ -1045,7 +1045,7 @@
+ @ stdcall RtlSizeHeap(long long ptr)
+ @ stdcall RtlSleepConditionVariableCS(ptr ptr ptr)
+ @ stdcall RtlSleepConditionVariableSRW(ptr ptr ptr long)
+-@ stub RtlSplay
++@ stdcall RtlSplay(ptr)
+ @ stub RtlStartRXact
+ # @ stub RtlStatMemoryStream
+ @ stdcall RtlStringFromGUID(ptr ptr)
+diff --git a/dlls/ntdll/rtl.c b/dlls/ntdll/rtl.c
+index 42a36814cbf..77ba5199a07 100644
+--- a/dlls/ntdll/rtl.c
++++ b/dlls/ntdll/rtl.c
+@@ -236,6 +236,58 @@ NTSTATUS WINAPI RtlResetNtUserPfn(void)
+     return STATUS_SUCCESS;
+ }
+ 
++static void rtl_splay_left_rotate(RTL_SPLAY_LINKS *x)
++{
++    RTL_SPLAY_LINKS *y = x->RightChild;
++
++    if (y)
++    {
++        x->RightChild = y->LeftChild;
++        if (y->LeftChild)
++            y->LeftChild->Parent = x;
++
++        y->Parent = RtlIsRoot(x) ? y : x->Parent;
++    }
++
++    if (!RtlIsRoot(x))
++    {
++        if (RtlIsLeftChild(x))
++            x->Parent->LeftChild = y;
++        else
++            x->Parent->RightChild = y;
++    }
++
++    if (y)
++        y->LeftChild = x;
++    x->Parent = y;
++}
++
++static void rtl_splay_right_rotate(RTL_SPLAY_LINKS *x)
++{
++    RTL_SPLAY_LINKS *y = x->LeftChild;
++
++    if (y)
++    {
++        x->LeftChild = y->RightChild;
++        if (y->RightChild)
++            y->RightChild->Parent = x;
++
++        y->Parent = RtlIsRoot(x) ? y : x->Parent;
++    }
++
++    if (!RtlIsRoot(x))
++    {
++        if (RtlIsLeftChild(x))
++            x->Parent->LeftChild = y;
++        else
++            x->Parent->RightChild = y;
++    }
++
++    if (y)
++        y->RightChild = x;
++    x->Parent = y;
++}
++
+ /******************************************************************************
+  *  RtlSubtreePredecessor           [NTDLL.@]
+  */
+@@ -328,6 +380,53 @@ RTL_SPLAY_LINKS * WINAPI RtlRealSuccessor(RTL_SPLAY_LINKS *links)
+     return NULL;
+ }
+ 
++/******************************************************************************
++ *  RtlSplay           [NTDLL.@]
++ */
++RTL_SPLAY_LINKS * WINAPI RtlSplay(RTL_SPLAY_LINKS *links)
++{
++    TRACE("(%p)\n", links);
++
++    while (!RtlIsRoot(links))
++    {
++        if (RtlIsRoot(links->Parent))
++        {
++            /* Zig */
++            if (RtlIsLeftChild(links))
++                rtl_splay_right_rotate(links->Parent);
++            /* Zag */
++            else
++                rtl_splay_left_rotate(links->Parent);
++        }
++        /* Zig-Zig */
++        else if (RtlIsLeftChild(links->Parent) && RtlIsLeftChild(links))
++        {
++            rtl_splay_right_rotate(links->Parent->Parent);
++            rtl_splay_right_rotate(links->Parent);
++        }
++        /* Zag-Zag */
++        else if (RtlIsRightChild(links->Parent) && RtlIsRightChild(links))
++        {
++            rtl_splay_left_rotate(links->Parent->Parent);
++            rtl_splay_left_rotate(links->Parent);
++        }
++        /* Zig-Zag */
++        else if (RtlIsRightChild(links->Parent) && RtlIsLeftChild(links))
++        {
++            rtl_splay_right_rotate(links->Parent);
++            rtl_splay_left_rotate(links->Parent);
++        }
++        /* Zag-Zig */
++        else
++        {
++            rtl_splay_left_rotate(links->Parent);
++            rtl_splay_right_rotate(links->Parent);
++        }
++    }
++
++    return links;
++}
++
+ /******************************************************************************
+  *  RtlInitializeGenericTable           [NTDLL.@]
+  */
+diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
+index ac3b75156e8..3e01899d560 100644
+--- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
++++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
+@@ -1275,7 +1275,7 @@
+ @ stdcall RtlSetSaclSecurityDescriptor(ptr long ptr long)
+ @ stdcall RtlSetTimeZoneInformation(ptr)
+ @ stdcall RtlSizeHeap(long long ptr)
+-@ stub RtlSplay
++@ stdcall RtlSplay(ptr)
+ @ stdcall RtlStringFromGUID(ptr ptr)
+ @ stdcall RtlSubAuthorityCountSid(ptr)
+ @ stdcall RtlSubAuthoritySid(ptr long)
+diff --git a/include/ddk/ntddk.h b/include/ddk/ntddk.h
+index aa56a1619a3..e2709d94c36 100644
+--- a/include/ddk/ntddk.h
++++ b/include/ddk/ntddk.h
+@@ -289,6 +289,7 @@ ULONG     WINAPI RtlNumberGenericTableElementsAvl(PRTL_AVL_TABLE);
+ BOOLEAN   WINAPI RtlPrefixUnicodeString(const UNICODE_STRING*,const UNICODE_STRING*,BOOLEAN);
+ PRTL_SPLAY_LINKS WINAPI RtlRealPredecessor(PRTL_SPLAY_LINKS);
+ PRTL_SPLAY_LINKS WINAPI RtlRealSuccessor(PRTL_SPLAY_LINKS);
++PRTL_SPLAY_LINKS WINAPI RtlSplay(PRTL_SPLAY_LINKS);
+ PRTL_SPLAY_LINKS WINAPI RtlSubtreePredecessor(PRTL_SPLAY_LINKS);
+ PRTL_SPLAY_LINKS WINAPI RtlSubtreeSuccessor(PRTL_SPLAY_LINKS);
+ NTSTATUS  WINAPI RtlUpcaseUnicodeString(UNICODE_STRING*,const UNICODE_STRING*,BOOLEAN);
+-- 
+2.51.0
+
