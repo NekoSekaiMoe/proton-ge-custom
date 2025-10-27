@@ -1,0 +1,22 @@
+From 15f721d8d1fd8f51eb640e1e25f0cb1d305cb751 Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Tue, 26 Aug 2025 15:47:21 -0500
+Subject: [PATCH 291/379] gitignore: Add .cache
+
+---
+ .gitignore | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/.gitignore b/.gitignore
+index 66d83f5f1d4..d75c16f9d6c 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,2 +1,4 @@
+ .idea
+ compile_commands.json
++.cache
++
+-- 
+2.51.0
+

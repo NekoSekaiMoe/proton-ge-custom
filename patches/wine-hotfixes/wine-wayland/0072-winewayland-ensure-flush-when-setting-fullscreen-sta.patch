@@ -1,8 +1,8 @@
-From def32a85354f74a343e74aaeb8ef1ebebc6c7420 Mon Sep 17 00:00:00 2001
+From b76c395fa7b83c02ff54d5848108dab51e5295cc Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 2 Jun 2025 15:53:52 -0400
-Subject: [PATCH 072/441] winewayland: ensure flush when setting fullscreen
+Subject: [PATCH 072/379] winewayland: ensure flush when setting fullscreen
  state.
 
 ---

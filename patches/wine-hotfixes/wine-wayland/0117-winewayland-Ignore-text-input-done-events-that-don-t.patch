@@ -1,7 +1,7 @@
-From bb75f8875d0e27d1b40029c367e6efdcbb899a97 Mon Sep 17 00:00:00 2001
+From 1a3ee3e6916ffbd3a4b11236a7b2b567588fcf66 Mon Sep 17 00:00:00 2001
 From: Alexandros Frantzis <alexandros.frantzis@collabora.com>
 Date: Tue, 3 Jun 2025 16:39:47 +0300
-Subject: [PATCH 117/441] winewayland: Ignore text-input "done" events that
+Subject: [PATCH 117/379] winewayland: Ignore text-input "done" events that
  don't modify state.
 
 Compositors send a "done" event after every text-input commit, even if

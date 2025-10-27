@@ -45,7 +45,7 @@ import protonfixes
 #To enable debug logging, copy "user_settings.sample.py" to "user_settings.py"
 #and edit it if needed.
 
-CURRENT_PREFIX_VERSION="GE-Proton10-21"
+CURRENT_PREFIX_VERSION="GE-Proton10-22"
 
 PFX="Proton: "
 ld_path_var = "LD_LIBRARY_PATH"
@@ -1444,6 +1444,8 @@ def default_compat_config():
                 "2840770", #Avatar: Frontiers of Pandora
                 "429660", #Tales of Berseria
                 "1286220", #Sea Power
+                "2827230", #Wild Assault
+                "3159330", #Assassin's Creed Shadows
                 "2507950", #Delta Force
                 ]:
             ret.add("gamedrive")
@@ -2180,6 +2182,12 @@ class Session:
             self.env["DXVK_NVAPI_ALLOW_OTHER_DRIVERS"] = "1"
             self.env["DXVK_NVAPI_DRIVER_VERSION"] = "99999"
             self.env["WINE_HIDE_AMD_GPU"] = "1"
+
+        if not ("WINEDLLOVERRIDES" in g_session.env and "atiadlxx" in g_session.env["WINEDLLOVERRIDES"]) and "SteamAppId" in os.environ:
+            if os.environ["SteamAppId"] in [
+                    "2767030",
+                ]:
+                g_session.dlloverrides["atiadlxx"] = "b"
 
         s = ""
         for dll in self.dlloverrides:

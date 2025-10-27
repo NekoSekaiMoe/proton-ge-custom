@@ -1,0 +1,59 @@
+From 7c2922e594633850e31acf25c422c9a25d8b1e65 Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Fri, 24 Oct 2025 17:41:38 -0500
+Subject: [PATCH 379/379] winepulse: Make get_prop_value on CLSID wow64
+ compatible.
+
+---
+ dlls/mmdevapi/devenum.c    |  2 +-
+ dlls/winepulse.drv/pulse.c | 11 ++++++++---
+ 2 files changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/dlls/mmdevapi/devenum.c b/dlls/mmdevapi/devenum.c
+index 7d56715f62d..0db2c9d049e 100644
+--- a/dlls/mmdevapi/devenum.c
++++ b/dlls/mmdevapi/devenum.c
+@@ -455,7 +455,7 @@ static HRESULT set_driver_prop_value(GUID *id, const EDataFlow flow, const PROPE
+         if (params.result != E_NOT_SUFFICIENT_BUFFER)
+             break;
+ 
+-        CoTaskMemFree(params.buffer);
++        if (params.buffer) CoTaskMemFree(params.buffer);
+         params.buffer = CoTaskMemAlloc(*params.buffer_size);
+         if (!params.buffer) {
+             free(dev_name);
+diff --git a/dlls/winepulse.drv/pulse.c b/dlls/winepulse.drv/pulse.c
+index 995d399b447..a3921f7ffe6 100644
+--- a/dlls/winepulse.drv/pulse.c
++++ b/dlls/winepulse.drv/pulse.c
+@@ -2743,11 +2743,15 @@ static NTSTATUS pulse_get_prop_value(void *args)
+             }
+         } else if (IsEqualGUID(&params->prop->fmtid, &DEVPKEY_Device_ContainerId)) {
+             params->value->vt = VT_CLSID;
+-            params->value->puuid = malloc(sizeof(*params->value->puuid));
+-            if (!params->value->puuid)
+-                params->result = E_OUTOFMEMORY;
++            /* allow mmdevapi to allocate a uuid for us */
++            if (*params->buffer_size < sizeof(dev->container_id) || !params->buffer)
++            {
++                params->result = E_NOT_SUFFICIENT_BUFFER;
++                *params->buffer_size = sizeof(dev->container_id);
++            }
+             else {
+                 params->result = S_OK;
++                params->value->puuid = params->buffer;
+                 *params->value->puuid = dev->container_id;
+             }
+             return STATUS_SUCCESS;
+@@ -3248,6 +3252,7 @@ static NTSTATUS pulse_wow64_get_prop_value(void *args)
+         switch (value.vt)
+         {
+         case VT_UI4:
++        case VT_CLSID:
+             value32->ulVal = value.ulVal;
+             break;
+         case VT_LPWSTR:
+-- 
+2.51.0
+

@@ -1,7 +1,7 @@
-From e5a4fe584fb3a6236560a0fc9260acb3d256bccc Mon Sep 17 00:00:00 2001
+From 30abd804ddf11f824192acc6d981f645ba69c5ed Mon Sep 17 00:00:00 2001
 From: Byeongsik Jeon <bsjeon@hanmail.net>
 Date: Tue, 8 Apr 2025 21:00:28 +0900
-Subject: [PATCH 110/441] win32u: Support WM_IME_KEYDOWN message during
+Subject: [PATCH 110/379] win32u: Support WM_IME_KEYDOWN message during
  ImeProcessKey.
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -124,10 +124,10 @@ index 717dbf43ee6..c0ed670e779 100644
          post_ime_update( hwnd, wparam, (WCHAR *)lparam, (WCHAR *)params );
          return 0;
 diff --git a/dlls/wow64win/user.c b/dlls/wow64win/user.c
-index b75c2962398..effe8ebffae 100644
+index 2ed7a933dcc..71112e36cfc 100644
 --- a/dlls/wow64win/user.c
 +++ b/dlls/wow64win/user.c
-@@ -3662,12 +3662,14 @@ NTSTATUS WINAPI wow64_NtUserMessageCall( UINT *args )
+@@ -3670,12 +3670,14 @@ NTSTATUS WINAPI wow64_NtUserMessageCall( UINT *args )
                  ULONG himc;
                  ULONG state;
                  ULONG compstr;
@@ -143,7 +143,7 @@ index b75c2962398..effe8ebffae 100644
          }
  
 diff --git a/include/ntuser.h b/include/ntuser.h
-index a9805037168..a22aef0854e 100644
+index 14c32e38a87..19cb8dca4f4 100644
 --- a/include/ntuser.h
 +++ b/include/ntuser.h
 @@ -648,6 +648,7 @@ struct ime_driver_call_params

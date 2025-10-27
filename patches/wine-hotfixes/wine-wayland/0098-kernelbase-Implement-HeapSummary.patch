@@ -1,7 +1,7 @@
-From ac7fa0605002919752eb1c989d6d80e4f90be8dc Mon Sep 17 00:00:00 2001
+From 1dc363d3b7ed01f72b5efda46725db01db164c3c Mon Sep 17 00:00:00 2001
 From: Julius Bettin <julius.bettin@protonmail.com>
 Date: Mon, 16 Jun 2025 19:56:38 -0400
-Subject: [PATCH 098/441] kernelbase: Implement HeapSummary.
+Subject: [PATCH 098/379] kernelbase: Implement HeapSummary.
 
 ---
  dlls/kernel32/kernel32.spec     |  2 +-
@@ -12,10 +12,10 @@ Subject: [PATCH 098/441] kernelbase: Implement HeapSummary.
  5 files changed, 112 insertions(+), 2 deletions(-)
 
 diff --git a/dlls/kernel32/kernel32.spec b/dlls/kernel32/kernel32.spec
-index ba36cc6f769..7148eb5819e 100644
+index 2e51fa9b294..f071f93f520 100644
 --- a/dlls/kernel32/kernel32.spec
 +++ b/dlls/kernel32/kernel32.spec
-@@ -957,7 +957,7 @@
+@@ -959,7 +959,7 @@
  @ stub HeapSetFlags
  @ stdcall -import HeapSetInformation(ptr long ptr long)
  @ stdcall HeapSize(long long ptr) NTDLL.RtlSizeHeap
@@ -91,7 +91,7 @@ index 3e13c9ef9d5..1eb3364c1ce 100644
      if (pRtlGetNtGlobalFlags)
      {
 diff --git a/dlls/kernelbase/kernelbase.spec b/dlls/kernelbase/kernelbase.spec
-index 50053a85196..624606fab2e 100644
+index d6d310d5452..cfaba3b0dd9 100644
 --- a/dlls/kernelbase/kernelbase.spec
 +++ b/dlls/kernelbase/kernelbase.spec
 @@ -820,7 +820,7 @@

@@ -1,8 +1,8 @@
-From d847539bbb9ecebf2c3f51d7a52f79caa99506b9 Mon Sep 17 00:00:00 2001
+From 0b7a9d5ee3b0ee0cfa6e7c27cc3a59b7db6e06d0 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 23 May 2025 17:45:55 -0400
-Subject: [PATCH 058/441] HACK: winewayland: Support output switching
+Subject: [PATCH 058/379] HACK: winewayland: Support output switching
 
 ---
  dlls/winewayland.drv/wayland_surface.c | 114 +++++++++++++++++++++++++

@@ -1,8 +1,8 @@
-From abe14134f9a45d1b285cfd3780d8cda2c4e435b8 Mon Sep 17 00:00:00 2001
+From f7372aa96397bd6f5abd43ece045eb78c50ec6cc Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 7 Jun 2025 22:52:48 -0400
-Subject: [PATCH 081/441] fixup! winebus: Allow disabling steam input
+Subject: [PATCH 081/379] fixup! winebus: Allow disabling steam input
  seperately
 
 ---
@@ -10,10 +10,10 @@ Subject: [PATCH 081/441] fixup! winebus: Allow disabling steam input
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/dlls/winebus.sys/bus_udev.c b/dlls/winebus.sys/bus_udev.c
-index bbb308e2a83..fcdac56a0ed 100644
+index 5eabf42add0..733ff9ac35b 100644
 --- a/dlls/winebus.sys/bus_udev.c
 +++ b/dlls/winebus.sys/bus_udev.c
-@@ -1707,7 +1707,7 @@ static void udev_add_device(struct udev_device *dev, int fd)
+@@ -1743,7 +1743,7 @@ static void udev_add_device(struct udev_device *dev, int fd)
          char *env = getenv("PROTON_NO_STEAMINPUT");
          if (env && !strcmp(env, "1"))
          {

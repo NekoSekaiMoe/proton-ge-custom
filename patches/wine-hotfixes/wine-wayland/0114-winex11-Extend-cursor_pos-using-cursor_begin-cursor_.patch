@@ -1,7 +1,7 @@
-From e9bc1f6a84d52ec2080bfae932654b3618af02c4 Mon Sep 17 00:00:00 2001
+From 09dbb72ed5be331b8d5ea651b213c54faec92f1c Mon Sep 17 00:00:00 2001
 From: Byeongsik Jeon <bsjeon@hanmail.net>
 Date: Sat, 22 Feb 2025 00:51:43 +0900
-Subject: [PATCH 114/441] winex11: Extend cursor_pos using cursor_begin,
+Subject: [PATCH 114/379] winex11: Extend cursor_pos using cursor_begin,
  cursor_end.
 
 When tested on ibus, fcitx5, and uim, the applicable bit is XIMReverse.

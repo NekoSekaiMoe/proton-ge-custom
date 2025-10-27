@@ -1,7 +1,7 @@
-From 8fee120b686c4d2ed19466a259519912ed132532 Mon Sep 17 00:00:00 2001
+From 54b65d654f44ff990b63f529c1eefc874728bed2 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 17 Apr 2025 18:52:52 +0200
-Subject: [PATCH 099/441] ntdll: Add a stub for NtCreateSectionEx().
+Subject: [PATCH 099/379] ntdll: Add a stub for NtCreateSectionEx().
 
 ---
  dlls/ntdll/ntdll.spec       |  2 ++
@@ -12,7 +12,7 @@ Subject: [PATCH 099/441] ntdll: Add a stub for NtCreateSectionEx().
  5 files changed, 46 insertions(+)
 
 diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
-index 677a48de2aa..7e759c05343 100644
+index 8d6676b9d57..753df4ba9c1 100644
 --- a/dlls/ntdll/ntdll.spec
 +++ b/dlls/ntdll/ntdll.spec
 @@ -193,6 +193,7 @@
@@ -23,7 +23,7 @@ index 677a48de2aa..7e759c05343 100644
  @ stdcall -syscall NtCreateSemaphore(ptr long ptr long long)
  @ stdcall -syscall NtCreateSymbolicLinkObject(ptr long ptr ptr)
  @ stdcall -syscall NtCreateThread(ptr long ptr long ptr ptr ptr long)
-@@ -1261,6 +1262,7 @@
+@@ -1264,6 +1265,7 @@
  # @ stub ZwCreateProcessEx
  # @ stub ZwCreateProfile
  @ stdcall -private -syscall ZwCreateSection(ptr long ptr ptr long long long) NtCreateSection
@@ -108,7 +108,7 @@ index ca362438340..5239089a0bd 100644
   *           wow64_NtFlushInstructionCache
   */
 diff --git a/include/winternl.h b/include/winternl.h
-index 5a1118f9d87..2367798e639 100644
+index 4ae1177db1e..ec9b99bc35c 100644
 --- a/include/winternl.h
 +++ b/include/winternl.h
 @@ -4554,6 +4554,7 @@ NTSYSAPI NTSTATUS  WINAPI NtCreatePort(PHANDLE,POBJECT_ATTRIBUTES,ULONG,ULONG,PU

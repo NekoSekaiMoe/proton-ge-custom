@@ -1,7 +1,7 @@
-From 0b87a42e1fa683dab8aadddaffc5e8d4e853286e Mon Sep 17 00:00:00 2001
+From 4fcf0635533bf1535bfc56e629575d9c50c9c33c Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 17 Apr 2025 20:33:59 +0200
-Subject: [PATCH 100/441] kernelbase: Implement CreateFileMapping2().
+Subject: [PATCH 100/379] kernelbase: Implement CreateFileMapping2().
 
 ---
  dlls/kernelbase/kernelbase.spec |  1 +
@@ -11,7 +11,7 @@ Subject: [PATCH 100/441] kernelbase: Implement CreateFileMapping2().
  4 files changed, 33 insertions(+), 3 deletions(-)
 
 diff --git a/dlls/kernelbase/kernelbase.spec b/dlls/kernelbase/kernelbase.spec
-index 624606fab2e..3430c37225e 100644
+index cfaba3b0dd9..89b53e0fdf6 100644
 --- a/dlls/kernelbase/kernelbase.spec
 +++ b/dlls/kernelbase/kernelbase.spec
 @@ -192,6 +192,7 @@
@@ -23,7 +23,7 @@ index 624606fab2e..3430c37225e 100644
  @ stdcall CreateFileMappingNumaW(long ptr long long long wstr long)
  @ stdcall CreateFileMappingW(long ptr long long long wstr)
 diff --git a/dlls/kernelbase/sync.c b/dlls/kernelbase/sync.c
-index 4c7efc359f2..731c5e55c95 100644
+index cca6b5be5f8..d836c1e008d 100644
 --- a/dlls/kernelbase/sync.c
 +++ b/dlls/kernelbase/sync.c
 @@ -1087,6 +1087,35 @@ HANDLE WINAPI DECLSPEC_HOTPATCH CreateFileMappingW( HANDLE file, LPSECURITY_ATTR

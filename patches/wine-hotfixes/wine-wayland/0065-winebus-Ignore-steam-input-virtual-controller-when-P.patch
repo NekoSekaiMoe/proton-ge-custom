@@ -1,8 +1,8 @@
-From 48c862f8d0673f2631854ba27be1ed769b70e2f4 Mon Sep 17 00:00:00 2001
+From 8bc3ac3314ebc7049ca6b7e3c122b1bb75191720 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 27 May 2025 00:08:02 -0400
-Subject: [PATCH 065/441] winebus: Ignore steam input virtual controller when
+Subject: [PATCH 065/379] winebus: Ignore steam input virtual controller when
  PROTON_PREFER_SDL is set.
 
 ---
@@ -10,10 +10,10 @@ Subject: [PATCH 065/441] winebus: Ignore steam input virtual controller when
  1 file changed, 9 insertions(+)
 
 diff --git a/dlls/winebus.sys/bus_udev.c b/dlls/winebus.sys/bus_udev.c
-index 9079fb2cf35..bbb308e2a83 100644
+index 2aba9b91f7b..5eabf42add0 100644
 --- a/dlls/winebus.sys/bus_udev.c
 +++ b/dlls/winebus.sys/bus_udev.c
-@@ -1703,7 +1703,16 @@ static void udev_add_device(struct udev_device *dev, int fd)
+@@ -1739,7 +1739,16 @@ static void udev_add_device(struct udev_device *dev, int fd)
      }
  
      if (desc.vid == 0x28de && desc.pid == 0x11ff && !strcmp(subsystem, "input"))

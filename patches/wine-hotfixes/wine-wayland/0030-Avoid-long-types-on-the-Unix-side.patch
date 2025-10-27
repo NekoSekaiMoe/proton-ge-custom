@@ -1,8 +1,8 @@
-From 06f9ec506bb919d9f86f27e10ee2e9a903b8daee Mon Sep 17 00:00:00 2001
+From dc5035509a176696f135310af921d02c1401fd08 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 7 May 2025 08:37:02 -0400
-Subject: [PATCH 030/441] Avoid long types on the Unix side.
+Subject: [PATCH 030/379] Avoid long types on the Unix side.
 
 Co-Authored-By: Alexandre Julliard <1130500+julliard@users.noreply.github.com>
 ---
@@ -201,7 +201,7 @@ index 8ef582d2c69..57fede1ab6e 100644
  #else
  typedef int HRESULT;
 diff --git a/include/winnt.h b/include/winnt.h
-index a361582045a..7e6f8fcc684 100644
+index a6ea3f0ba64..1414055a42a 100644
 --- a/include/winnt.h
 +++ b/include/winnt.h
 @@ -479,7 +479,7 @@ typedef VOID           *PVOID64;

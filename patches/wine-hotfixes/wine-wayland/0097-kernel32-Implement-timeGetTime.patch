@@ -1,7 +1,7 @@
-From 027fc726b7927640094d9c1cc7ea5831339b024f Mon Sep 17 00:00:00 2001
+From b0714f871b79c7707fab0ca72792c08cfd8c5f0b Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Sun, 15 Jun 2025 20:25:54 -0400
-Subject: [PATCH 097/441] kernel32: Implement timeGetTime.
+Subject: [PATCH 097/379] kernel32: Implement timeGetTime.
 
 Cheat engine's speed hack expects this function to exist in kernel32 for some reason
 ---
@@ -10,10 +10,10 @@ Cheat engine's speed hack expects this function to exist in kernel32 for some re
  2 files changed, 9 insertions(+)
 
 diff --git a/dlls/kernel32/kernel32.spec b/dlls/kernel32/kernel32.spec
-index fff2d8e4678..ba36cc6f769 100644
+index f0830ebe4ed..2e51fa9b294 100644
 --- a/dlls/kernel32/kernel32.spec
 +++ b/dlls/kernel32/kernel32.spec
-@@ -1714,6 +1714,7 @@
+@@ -1717,6 +1717,7 @@
  @ stdcall -import lstrlen(str)
  @ stdcall -import lstrlenA(str)
  @ stdcall -import lstrlenW(wstr)
