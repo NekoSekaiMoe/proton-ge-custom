@@ -33,7 +33,6 @@ AC_CHECK_FUNCS([towlower umask utime utimes])
 AC_CHECK_FUNCS([getopt_long],,[AC_CHECK_LIB([gnugetopt], [getopt_long],
   [AC_DEFINE([HAVE_GETOPT_LONG])],[AC_LIBOBJ(getopt) AC_LIBOBJ(getopt1)])])
 AC_REPLACE_FNMATCH
-AM_ICONV
 
 # use an external libmspack if requested
 cabextract_external_libmspack=no
