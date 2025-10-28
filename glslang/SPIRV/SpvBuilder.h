@@ -82,10 +82,12 @@ typedef enum {
     Spv_1_6 = (1 << 16) | (6 << 8),
 } SpvVersion;
 
-struct DebugTypeLoc {
+struct StructMemberDebugInfo {
     std::string name {};
     int line {0};
     int column {0};
+    // Set if the caller knows a better debug type than what is associated with the functional SPIR-V type.
+    spv::Id debugTypeOverride {0};
 };
 
 class Builder {
@@ -204,6 +206,14 @@ public:
         return id;
     }
 
+    // Maps the given OpType Id to a Non-Semantic DebugType Id.
+    Id getDebugType(Id type) {
+        if (emitNonSemanticShaderDebugInfo) {
+            return debugId[type];
+        }
+        return 0;
+    }
+
     // For creating new types (will return old type if the requested one was already made).
     Id makeVoidType();
     Id makeBoolType();
@@ -217,7 +227,7 @@ public:
     Id makeBFloat16Type();
     Id makeFloatE5M2Type();
     Id makeFloatE4M3Type();
-    Id makeStructType(const std::vector<Id>& members, const std::vector<spv::DebugTypeLoc>& memberDebugInfo,
+    Id makeStructType(const std::vector<Id>& members, const std::vector<spv::StructMemberDebugInfo>& memberDebugInfo,
                       const char* name, bool const compilerGenerated = true);
     Id makeStructResultType(Id type0, Id type1);
     Id makeVectorType(Id component, int size);
@@ -225,9 +235,9 @@ public:
     Id makeArrayType(Id element, Id sizeId, int stride);  // 0 stride means no stride decoration
     Id makeRuntimeArray(Id element);
     Id makeFunctionType(Id returnType, const std::vector<Id>& paramTypes);
-    Id makeImageType(Id sampledType, Dim, bool depth, bool arrayed, bool ms, unsigned sampled, ImageFormat format);
-    Id makeSamplerType();
-    Id makeSampledImageType(Id imageType);
+    Id makeImageType(Id sampledType, Dim, bool depth, bool arrayed, bool ms, unsigned sampled, ImageFormat format, const char* debugNames);
+    Id makeSamplerType(const char* debugName);
+    Id makeSampledImageType(Id imageType, const char* debugName);
     Id makeCooperativeMatrixTypeKHR(Id component, Id scope, Id rows, Id cols, Id use);
     Id makeCooperativeMatrixTypeNV(Id component, Id scope, Id rows, Id cols);
     Id makeCooperativeMatrixTypeWithSameShape(Id component, Id otherType);
@@ -244,8 +254,8 @@ public:
     Id makeArrayDebugType(Id const baseType, Id const componentCount);
     Id makeVectorDebugType(Id const baseType, int const componentCount);
     Id makeMatrixDebugType(Id const vectorType, int const vectorCount, bool columnMajor = true);
-    Id makeMemberDebugType(Id const memberType, DebugTypeLoc const& debugTypeLoc);
-    Id makeCompositeDebugType(std::vector<Id> const& memberTypes, std::vector<DebugTypeLoc> const& memberDebugInfo,
+    Id makeMemberDebugType(Id const memberType, StructMemberDebugInfo const& debugTypeLoc);
+    Id makeCompositeDebugType(std::vector<Id> const& memberTypes, std::vector<StructMemberDebugInfo> const& memberDebugInfo,
                               char const* const name, NonSemanticShaderDebugInfo100DebugCompositeType const tag);
     Id makeOpaqueDebugType(char const* const name);
     Id makePointerDebugType(StorageClass storageClass, Id const baseType);
