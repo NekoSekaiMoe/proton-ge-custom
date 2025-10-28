@@ -26,6 +26,7 @@ jobs:
           
     - name: Link
       run: |
+        sudo df -h
         sudo mkdir -pv /mnt/a
         sudo ln -sfv /mnt/a a
         sudo chmod 777 -R a
