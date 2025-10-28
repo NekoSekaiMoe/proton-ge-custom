@@ -131,15 +131,17 @@ apply_all_in_dir() {
     -W kernel32-Debugger \
     -W ntdll-ext4-case-folder \
     -W user32-FlashWindowEx \
-    -W winex11-Fixed-scancodes \
     -W winex11-Window_Style \
-    -W winex11-ime-check-thread-data \
     -W winex11.drv-Query_server_position \
     -W wininet-Cleanup \
     -W cryptext-CryptExtOpenCER \
     -W wineboot-ProxySettings \
     -W version-VerQueryValue \
-    -W setupapi-DiskSpaceList
+    -W setupapi-DiskSpaceList \
+    -W mmsystem.dll16-MIDIHDR_Refcount \
+    -W vcomp_for_dynamic_init_i8 \
+    -W winex11-ime-check-thread-data \
+    -W winex11-Fixed-scancodes
 
     # NOTE: Some patches are applied manually because they -do- apply, just not cleanly, ie with patch fuzz.
     # A detailed list of why the above patches are disabled is listed below:
@@ -156,6 +158,10 @@ apply_all_in_dir() {
     # shell32-Progress_Dialog - relies on kernel32-CopyFileEx
     # shell32-ACE_Viewer - adds a UI tab, not needed, relies on kernel32-CopyFileEx
     # dbghelp-Debug_Symbols - Ubisoft Connect games (3/3 I had installed and could test) will crash inside pe_load_debug_info function with this enabled
+    # mmsystem.dll16-MIDIHDR_Refcount - triggers Werror
+    # vcomp_for_dynamic_init_i8 - triggers Werror
+    # winex11-ime-check-thread-data - triggers Werror
+    # winex11-Fixed-scancodes - needs winex11-ime-check-thread-data
 
     # ntdll-Syscall_Emulation - already applied
     # eventfd_synchronization - already applied
@@ -211,14 +217,14 @@ apply_all_in_dir() {
     echo "WINE: -STAGING- user32-FlashWindowEx manually applied"
     apply_all_in_dir "../wine-staging/patches/user32-FlashWindowEx/"
 
-    echo "WINE: -STAGING- winex11-Fixed-scancodes manually applied"
-    apply_all_in_dir "../wine-staging/patches/winex11-Fixed-scancodes/"
+#    echo "WINE: -STAGING- winex11-Fixed-scancodes manually applied"
+#    apply_all_in_dir "../wine-staging/patches/winex11-Fixed-scancodes/"
 
     echo "WINE: -STAGING- winex11-Window_Style manually applied"
     apply_all_in_dir "../wine-staging/patches/winex11-Window_Style/"
 
-    echo "WINE: -STAGING- winex11-ime-check-thread-data manually applied"
-    apply_all_in_dir "../wine-staging/patches/winex11-ime-check-thread-data/"
+#    echo "WINE: -STAGING- winex11-ime-check-thread-data manually applied"
+#    apply_all_in_dir "../wine-staging/patches/winex11-ime-check-thread-data/"
 
     echo "WINE: -STAGING- winex11.drv-Query_server_position manually applied"
     apply_all_in_dir "../wine-staging/patches/winex11.drv-Query_server_position/"

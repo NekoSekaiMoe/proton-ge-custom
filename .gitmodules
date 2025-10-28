@@ -90,4 +90,7 @@
 [submodule "libxkbcommon"]
         path = libxkbcommon
         url = https://github.com/xkbcommon/libxkbcommon.git
-        branch = libxkbcommon-1.7.0
+	branch = libxkbcommon-1.7.0
+[submodule "libpcap"]
+	path = libpcap
+	url = https://github.com/the-tcpdump-group/libpcap.git

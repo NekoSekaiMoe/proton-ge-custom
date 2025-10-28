@@ -892,7 +892,7 @@ index 59416251dbf..9f9eed72cde 100644
  
 +    static SIZE fsr_sizes[4] = {0};
 +    SIZE fsr_custom_size = {0, 0};
-+    UINT fsr_single_mode;
++    UINT fsr_single_mode = 0;
 +    const BOOL is_fsr = fs_hack_is_fsr();
 +    const BOOL is_custom_mode = get_fsr_custom_mode( &fsr_custom_size );
 +    const BOOL is_single_mode = get_fsr_single_mode( &fsr_single_mode );
