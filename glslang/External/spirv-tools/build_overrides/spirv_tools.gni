@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2018 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-version: 2
-updates:
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: daily
-    groups:
-      github-actions:
-        patterns:
-          - "*"
-    open-pull-requests-limit: 3
+# These are variables that are overridable by projects that include
+# SPIRV-Tools. The values in this file are the defaults for when we are
+# building from SPIRV-Tools' repository.
+
+# Whether we are building from SPIRV-Tools' repository.
+# MUST be set to false in other projects.
+spirv_tools_standalone = true
+
+# The path to SPIRV-Tools' dependencies
+spirv_tools_googletest_dir = "//external/googletest"
+spirv_tools_spirv_headers_dir = "//external/spirv-headers"
