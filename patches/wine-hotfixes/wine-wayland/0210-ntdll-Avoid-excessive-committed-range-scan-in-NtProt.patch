@@ -1,0 +1,26 @@
+From b04e5ce9fe88c1e758682196f7e8e77d2feca0a0 Mon Sep 17 00:00:00 2001
+From: Paul Gofman <pgofman@codeweavers.com>
+Date: Mon, 26 May 2025 13:05:53 -0600
+Subject: [PATCH 210/378] ntdll: Avoid excessive committed range scan in
+ NtProtectVirtualMemory().
+
+---
+ dlls/ntdll/unix/virtual.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/dlls/ntdll/unix/virtual.c b/dlls/ntdll/unix/virtual.c
+index 0a123358ad2..2b59dfc851f 100644
+--- a/dlls/ntdll/unix/virtual.c
++++ b/dlls/ntdll/unix/virtual.c
+@@ -5659,7 +5659,7 @@ NTSTATUS WINAPI NtProtectVirtualMemory( HANDLE process, PVOID *addr_ptr, SIZE_T
+     if ((view = find_view( base, size )))
+     {
+         /* Make sure all the pages are committed */
+-        if (get_committed_size( view, base, ~(size_t)0, &vprot, VPROT_COMMITTED ) >= size && (vprot & VPROT_COMMITTED))
++        if (get_committed_size( view, base, size, &vprot, VPROT_COMMITTED ) >= size && (vprot & VPROT_COMMITTED))
+         {
+             old = get_win32_prot( vprot, view->protect );
+             status = set_protection( view, base, size, new_prot );
+-- 
+2.51.0
+

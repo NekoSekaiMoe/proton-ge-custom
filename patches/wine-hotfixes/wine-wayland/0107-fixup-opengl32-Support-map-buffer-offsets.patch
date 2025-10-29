@@ -1,8 +1,8 @@
-From 0dac0b9a0071fe3ea73a97752420bf9efdf00d28 Mon Sep 17 00:00:00 2001
+From a947f94d8f606ac8b72bccd414c2c85bc1391270 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 20 Jun 2025 16:53:50 -0400
-Subject: [PATCH 107/379] fixup! opengl32: Support map buffer offsets
+Subject: [PATCH 107/378] fixup! opengl32: Support map buffer offsets
 
 ---
  dlls/opengl32/unix_wgl.c | 42 +++++++++++++++++-----------------------

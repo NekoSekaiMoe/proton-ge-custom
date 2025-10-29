@@ -1,8 +1,8 @@
-From be35494cf503535f92f7c3d9f4d92de081f87041 Mon Sep 17 00:00:00 2001
+From df3afef5f4dedb53d4218f7555cc898055630cd1 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 15 May 2025 16:14:54 -0400
-Subject: [PATCH 049/379] winewayland: Implement touchpad scrolling support.
+Subject: [PATCH 049/378] winewayland: Implement touchpad scrolling support.
 
 I hate this so much, but it's the best we can do I think
 ---

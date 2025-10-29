@@ -1544,6 +1544,8 @@ def default_compat_config():
 
         if appid in [
                 "3513350", #Wuthering Waves
+                "244850", #Space Engineers
+                "3669060", #Blade & Soul NEO
                 ]:
             ret.add("noxalia")
 
@@ -2188,6 +2190,12 @@ class Session:
                     "2767030",
                 ]:
                 g_session.dlloverrides["atiadlxx"] = "b"
+
+        if not ("PROTON_LIMIT_ADDRESS_SPACE" in g_session.env) and "SteamAppId" in os.environ:
+            if os.environ["SteamAppId"] in [
+                    "1282270",
+                ]:
+                self.env["PROTON_LIMIT_ADDRESS_SPACE"] = "1"
 
         s = ""
         for dll in self.dlloverrides:

@@ -1,8 +1,8 @@
-From 1d67d3959ab6210788b724baaa6db11f0128f68c Mon Sep 17 00:00:00 2001
+From 91e9fc8f198a7e032c526db32a28e65096d105fd Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 13 Jun 2025 14:46:40 -0400
-Subject: [PATCH 094/379] Import WIP atidxx implementation
+Subject: [PATCH 094/378] Import WIP atidxx implementation
 
 ---
  configure.ac                      |   1 +
@@ -20,7 +20,7 @@ Subject: [PATCH 094/379] Import WIP atidxx implementation
  create mode 100644 dlls/atidxx64/main.c
 
 diff --git a/configure.ac b/configure.ac
-index c26954a0a44..9fb87b3cab5 100644
+index 4003ffd3b90..73deb27f9d4 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -2465,6 +2465,7 @@ WINE_CONFIG_MAKEFILE(dlls/apphelp/tests)

@@ -1,7 +1,7 @@
-From c2bc1f6359d019f619b167c28c7b66742a810c79 Mon Sep 17 00:00:00 2001
+From 1ad3d0bd301ac5e88f5e18d5f872e855ec90ab69 Mon Sep 17 00:00:00 2001
 From: Alexandros Frantzis <alexandros.frantzis@collabora.com>
 Date: Mon, 17 Mar 2025 13:51:39 +0200
-Subject: [PATCH 022/379] winewayland: Warn about missing clipboard
+Subject: [PATCH 022/378] winewayland: Warn about missing clipboard
  functionality.
 
 ---

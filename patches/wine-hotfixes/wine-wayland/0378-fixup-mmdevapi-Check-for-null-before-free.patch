@@ -1,0 +1,26 @@
+From ca9dabfc7b6c6f856467f7129ce0063eafaad76f Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Tue, 28 Oct 2025 20:41:23 -0500
+Subject: [PATCH 378/378] fixup! mmdevapi: Check for null before free.
+
+---
+ dlls/mmdevapi/devenum.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/dlls/mmdevapi/devenum.c b/dlls/mmdevapi/devenum.c
+index 7d56715f62d..0db2c9d049e 100644
+--- a/dlls/mmdevapi/devenum.c
++++ b/dlls/mmdevapi/devenum.c
+@@ -455,7 +455,7 @@ static HRESULT set_driver_prop_value(GUID *id, const EDataFlow flow, const PROPE
+         if (params.result != E_NOT_SUFFICIENT_BUFFER)
+             break;
+ 
+-        CoTaskMemFree(params.buffer);
++        if (params.buffer) CoTaskMemFree(params.buffer);
+         params.buffer = CoTaskMemAlloc(*params.buffer_size);
+         if (!params.buffer) {
+             free(dev_name);
+-- 
+2.51.0
+

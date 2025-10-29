@@ -1,0 +1,38 @@
+From 638ae7efe91c0a3b239c88bd9fa6e0fafffd34a2 Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Tue, 12 Aug 2025 00:43:16 -0400
+Subject: [PATCH 248/378] kernelbase: Implement FlsGetValue2
+
+---
+ dlls/kernel32/kernel32.spec     | 1 +
+ dlls/kernelbase/kernelbase.spec | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/dlls/kernel32/kernel32.spec b/dlls/kernel32/kernel32.spec
+index ac69a47cce7..9b6a4681756 100644
+--- a/dlls/kernel32/kernel32.spec
++++ b/dlls/kernel32/kernel32.spec
+@@ -524,6 +524,7 @@
+ @ stdcall -import FlsAlloc(ptr)
+ @ stdcall -import FlsFree(long)
+ @ stdcall -import FlsGetValue(long)
++@ stdcall -import FlsGetValue2(long)
+ @ stdcall -import FlsSetValue(long ptr)
+ @ stdcall -import FlushConsoleInputBuffer(long)
+ @ stdcall -import FlushFileBuffers(long)
+diff --git a/dlls/kernelbase/kernelbase.spec b/dlls/kernelbase/kernelbase.spec
+index 0e64cf90bb2..a2647fb3b36 100644
+--- a/dlls/kernelbase/kernelbase.spec
++++ b/dlls/kernelbase/kernelbase.spec
+@@ -387,6 +387,7 @@
+ @ stdcall FlsAlloc(ptr)
+ @ stdcall FlsFree(long)
+ @ stdcall FlsGetValue(long)
++@ stdcall FlsGetValue2(long) FlsGetValue
+ @ stdcall FlsSetValue(long ptr)
+ @ stdcall FlushConsoleInputBuffer(long)
+ @ stdcall FlushFileBuffers(long)
+-- 
+2.51.0
+

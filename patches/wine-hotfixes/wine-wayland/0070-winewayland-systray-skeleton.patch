@@ -1,8 +1,8 @@
-From 9a7563368f22442985c9c2d624ad59b3b82765a5 Mon Sep 17 00:00:00 2001
+From e7138bbd49bcc0181406e53ec091d2961d6eef05 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 1 Jun 2025 18:57:16 -0400
-Subject: [PATCH 070/379] winewayland: systray skeleton
+Subject: [PATCH 070/378] winewayland: systray skeleton
 
 ---
  dlls/winewayland.drv/Makefile.in       |   3 +-

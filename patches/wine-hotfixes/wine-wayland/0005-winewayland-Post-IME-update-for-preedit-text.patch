@@ -1,7 +1,7 @@
-From 35d44f98254cca3a737cf6de4169d39baae86ca7 Mon Sep 17 00:00:00 2001
+From aac5eb718bec3c2719521b0aaf5550b2bbdf6ad9 Mon Sep 17 00:00:00 2001
 From: Attila Fidan <dev@print0.net>
 Date: Sat, 8 Feb 2025 05:59:04 +0000
-Subject: [PATCH 005/379] winewayland: Post IME update for preedit text.
+Subject: [PATCH 005/378] winewayland: Post IME update for preedit text.
 
 ---
  dlls/winewayland.drv/wayland_text_input.c | 21 ++++++++++++++++++++-

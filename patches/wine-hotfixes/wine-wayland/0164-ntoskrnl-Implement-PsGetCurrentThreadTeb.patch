@@ -1,0 +1,44 @@
+From e939110620bce9bc297bc8abe4dd71e1d8bbbf5b Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Tue, 22 Jul 2025 16:09:07 -0400
+Subject: [PATCH 164/378] ntoskrnl: Implement PsGetCurrentThreadTeb.
+
+---
+ dlls/ntoskrnl.exe/ntoskrnl.c        | 7 +++++++
+ dlls/ntoskrnl.exe/ntoskrnl.exe.spec | 1 +
+ 2 files changed, 8 insertions(+)
+
+diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
+index fc2ab7ed0d1..6c45e4165de 100644
+--- a/dlls/ntoskrnl.exe/ntoskrnl.c
++++ b/dlls/ntoskrnl.exe/ntoskrnl.c
+@@ -3264,6 +3264,13 @@ HANDLE WINAPI PsGetCurrentThreadId(void)
+     return KeGetCurrentThread()->id.UniqueThread;
+ }
+ 
++/***********************************************************************
++ *           PsGetCurrentThreadTeb   (NTOSKRNL.EXE.@)
++ */
++TEB *WINAPI PsGetCurrentThreadTeb(void)
++{
++    return NtCurrentTeb();
++}
+ 
+ /***********************************************************************
+  *           PsIsSystemThread   (NTOSKRNL.EXE.@)
+diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
+index 06d78d2cac3..1524d526e72 100644
+--- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
++++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
+@@ -912,6 +912,7 @@
+ @ stdcall PsGetCurrentProcessSessionId()
+ @ stdcall PsGetCurrentThread() KeGetCurrentThread
+ @ stdcall PsGetCurrentThreadId()
++@ stdcall PsGetCurrentThreadTeb()
+ @ stub PsGetCurrentThreadPreviousMode
+ @ stub PsGetCurrentThreadStackBase
+ @ stub PsGetCurrentThreadStackLimit
+-- 
+2.51.0
+
