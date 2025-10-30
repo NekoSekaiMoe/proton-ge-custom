@@ -1545,6 +1545,7 @@ def default_compat_config():
         if appid in [
                 "3513350", #Wuthering Waves
                 "244850", #Space Engineers
+                "3669060", #Blade & Soul NEO
                 ]:
             ret.add("noxalia")
 
