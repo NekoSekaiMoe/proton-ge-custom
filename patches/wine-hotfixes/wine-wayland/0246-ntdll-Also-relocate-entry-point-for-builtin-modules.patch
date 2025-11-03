@@ -1,7 +1,7 @@
-From 42d1123dab99feec425446a6e7f51b7edfaaa21a Mon Sep 17 00:00:00 2001
+From e991c39a5b750e7bc1528b2eae65671e462309f9 Mon Sep 17 00:00:00 2001
 From: Yuxuan Shui <yshui@codeweavers.com>
 Date: Sat, 3 May 2025 21:57:23 +0100
-Subject: [PATCH 246/378] ntdll: Also relocate entry point for builtin modules.
+Subject: [PATCH 246/377] ntdll: Also relocate entry point for builtin modules.
 
 Discovered while I was working on ASan support. ASan shadow memory
 might be placed where the main image is normally loaded, forcing it to

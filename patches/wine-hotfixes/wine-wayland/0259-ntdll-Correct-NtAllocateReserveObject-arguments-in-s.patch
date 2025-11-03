@@ -1,7 +1,7 @@
-From a3984a7df55c2e3970cc6ed5a30312e34fe0f689 Mon Sep 17 00:00:00 2001
+From 986387ebfe3a4090604f198274d2e1cbab874617 Mon Sep 17 00:00:00 2001
 From: Alex Henrie <alexhenrie24@gmail.com>
 Date: Sun, 30 Mar 2025 20:34:04 -0600
-Subject: [PATCH 259/378] ntdll: Correct NtAllocateReserveObject arguments in
+Subject: [PATCH 259/377] ntdll: Correct NtAllocateReserveObject arguments in
  specfile.
 
 ---

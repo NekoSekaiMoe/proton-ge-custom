@@ -1,7 +1,7 @@
-From 35252c05c25013c4e19b39c68c05d9ed67f8cec0 Mon Sep 17 00:00:00 2001
+From 7baeca9398b36c0963853079628d8512a12109c1 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Wed, 6 Aug 2025 10:51:30 -0400
-Subject: [PATCH 228/378] kernel32: Implement SetThreadpoolTimerEx.
+Subject: [PATCH 228/377] kernel32: Implement SetThreadpoolTimerEx.
 
 ---
  dlls/kernel32/kernel32.spec     | 1 +

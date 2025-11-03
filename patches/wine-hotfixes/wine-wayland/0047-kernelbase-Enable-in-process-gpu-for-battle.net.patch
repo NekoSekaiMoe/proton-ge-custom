@@ -1,8 +1,8 @@
-From d86537ee45e3eba275149a8d94cf449c4f91a03b Mon Sep 17 00:00:00 2001
+From ea6268475e4c7859c1c935eaccf84ab7071c9e1a Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 15 May 2025 13:47:59 -0400
-Subject: [PATCH 047/378] kernelbase: Enable in-process-gpu for battle.net
+Subject: [PATCH 047/377] kernelbase: Enable in-process-gpu for battle.net
 
 ---
  dlls/kernelbase/process.c | 4 ++--

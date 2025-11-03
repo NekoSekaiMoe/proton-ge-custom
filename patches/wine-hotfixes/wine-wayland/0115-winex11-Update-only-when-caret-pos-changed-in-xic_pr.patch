@@ -1,7 +1,7 @@
-From 3487e6748beef0c551abae8829f6e101da807022 Mon Sep 17 00:00:00 2001
+From 6c07af3e54b00730753158916e3bf0e71465225c Mon Sep 17 00:00:00 2001
 From: Byeongsik Jeon <bsjeon@hanmail.net>
 Date: Thu, 10 Apr 2025 14:21:31 +0900
-Subject: [PATCH 115/378] winex11: Update only when caret pos changed in
+Subject: [PATCH 115/377] winex11: Update only when caret pos changed in
  xic_preedit_caret.
 
 ---

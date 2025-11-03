@@ -1,7 +1,7 @@
-From a15e0538fd46fc9b3044cbe9eb6de6584cb35a72 Mon Sep 17 00:00:00 2001
+From 77fdd5f24f33c4bffd3a504039a4660d3bfb49f7 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Sun, 21 Sep 2025 21:38:10 +0200
-Subject: [PATCH 318/378] ntdll: Consistently output one loaddll trace per
+Subject: [PATCH 318/377] ntdll: Consistently output one loaddll trace per
  module.
 
 ---

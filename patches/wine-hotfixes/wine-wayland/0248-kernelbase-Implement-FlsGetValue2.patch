@@ -1,8 +1,8 @@
-From 638ae7efe91c0a3b239c88bd9fa6e0fafffd34a2 Mon Sep 17 00:00:00 2001
+From 3bec7239c02ed8f1c708fc1c797c852e1cc17111 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 12 Aug 2025 00:43:16 -0400
-Subject: [PATCH 248/378] kernelbase: Implement FlsGetValue2
+Subject: [PATCH 248/377] kernelbase: Implement FlsGetValue2
 
 ---
  dlls/kernel32/kernel32.spec     | 1 +

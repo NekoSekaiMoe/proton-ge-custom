@@ -1,7 +1,7 @@
-From e8fe3c88f5fec4a8cd1159530a5fe8f11205f6f4 Mon Sep 17 00:00:00 2001
+From b8d5591355fce8e32fbced222ac60419241f59c9 Mon Sep 17 00:00:00 2001
 From: Jinoh Kang <jinoh.kang.kr@gmail.com>
 Date: Sat, 1 Feb 2025 23:00:05 +0900
-Subject: [PATCH 237/378] server: Fix incorrect usage of
+Subject: [PATCH 237/377] server: Fix incorrect usage of
  __WINE_ATOMIC_STORE_RELEASE in SHARED_WRITE_BEGIN/SHARED_WRITE_END.
 
 64-bit volatile stores are not atomic on i386.  Both

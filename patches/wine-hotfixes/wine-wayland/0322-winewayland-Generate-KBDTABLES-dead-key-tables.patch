@@ -1,8 +1,8 @@
-From c7f053265309b5dff103537797c56620177e9a06 Mon Sep 17 00:00:00 2001
+From 7614f94259606997a825ed3abe1ca5179ffe7a45 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 1 Oct 2025 12:52:35 -0500
-Subject: [PATCH 322/378] winewayland: Generate KBDTABLES dead key tables.
+Subject: [PATCH 322/377] winewayland: Generate KBDTABLES dead key tables.
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

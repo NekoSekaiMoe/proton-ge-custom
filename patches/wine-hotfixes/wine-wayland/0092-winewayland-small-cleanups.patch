@@ -1,8 +1,8 @@
-From 25333707980fafbf1fecde7711e75d1aa9811527 Mon Sep 17 00:00:00 2001
+From 8dc34c82fd0f29e711db2b781ea400e3e13c77cc Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 12 Jun 2025 17:30:25 -0400
-Subject: [PATCH 092/378] winewayland: small cleanups
+Subject: [PATCH 092/377] winewayland: small cleanups
 
 ---
  dlls/winewayland.drv/window.c         | 4 ++--

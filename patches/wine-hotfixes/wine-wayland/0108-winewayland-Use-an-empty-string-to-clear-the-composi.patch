@@ -1,7 +1,7 @@
-From 54ab879751bb3fa48a4c83be6ad8d687fcfcc453 Mon Sep 17 00:00:00 2001
+From 428fbe4dcb17f16c7172fe1f7514d79f56f24e43 Mon Sep 17 00:00:00 2001
 From: Byeongsik Jeon <bsjeon@hanmail.net>
 Date: Thu, 17 Apr 2025 04:21:14 +0900
-Subject: [PATCH 108/378] winewayland: Use an empty string to clear the
+Subject: [PATCH 108/377] winewayland: Use an empty string to clear the
  composition string.
 
 ---

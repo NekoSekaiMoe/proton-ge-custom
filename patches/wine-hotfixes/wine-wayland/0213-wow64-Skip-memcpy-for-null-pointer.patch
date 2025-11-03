@@ -1,7 +1,7 @@
-From 3d46da155dc27a4059f19fd4232668d31858d632 Mon Sep 17 00:00:00 2001
+From 7124b649eae96560d9b37c6059077855f65be80a Mon Sep 17 00:00:00 2001
 From: Vitaly Lipatov <lav@etersoft.ru>
 Date: Fri, 21 Mar 2025 18:23:32 +0300
-Subject: [PATCH 213/378] wow64: Skip memcpy for null pointer.
+Subject: [PATCH 213/377] wow64: Skip memcpy for null pointer.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=56154
 ---

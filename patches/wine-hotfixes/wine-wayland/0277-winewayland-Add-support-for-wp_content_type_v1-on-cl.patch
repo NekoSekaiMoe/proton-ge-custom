@@ -1,8 +1,8 @@
-From f190e5d7f1021ffaa375728c66425b304eb365bf Mon Sep 17 00:00:00 2001
+From 3871104f62da163ccbe9091aff1189af061898c4 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 14 Aug 2025 17:46:09 -0400
-Subject: [PATCH 277/378] winewayland: Add support for wp_content_type_v1 on
+Subject: [PATCH 277/377] winewayland: Add support for wp_content_type_v1 on
  client surfaces.
 
 ---

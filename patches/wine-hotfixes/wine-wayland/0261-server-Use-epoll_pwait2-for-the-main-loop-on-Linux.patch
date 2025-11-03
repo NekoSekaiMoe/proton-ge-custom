@@ -1,7 +1,7 @@
-From f4e487d818e2e48600eedb11d78a47a48a7baad2 Mon Sep 17 00:00:00 2001
+From 0fc66507ff822f88c8491d3f7798e61bdf261d59 Mon Sep 17 00:00:00 2001
 From: William Horvath <william@horvath.blog>
 Date: Thu, 20 Feb 2025 11:39:06 -0800
-Subject: [PATCH 261/378] server: Use epoll_pwait2 for the main loop on Linux.
+Subject: [PATCH 261/377] server: Use epoll_pwait2 for the main loop on Linux.
 
 This allows higher precision waits, to match the other platforms where
 we can already use a timespec directly.

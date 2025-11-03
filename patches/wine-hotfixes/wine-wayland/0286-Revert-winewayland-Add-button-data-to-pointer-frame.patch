@@ -1,8 +1,8 @@
-From 7fcadd13e0ab606e0c43c421b133fa66c298b33c Mon Sep 17 00:00:00 2001
+From fc19259f214bf41a808736661afb9a7edead5454 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 24 Aug 2025 08:39:59 -0500
-Subject: [PATCH 286/378] Revert "winewayland: Add button data to pointer
+Subject: [PATCH 286/377] Revert "winewayland: Add button data to pointer
  frame."
 
 This reverts commit e8a6c900ddc040408e04db78f10268489b61d11c.

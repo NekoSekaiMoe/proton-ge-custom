@@ -1,8 +1,8 @@
-From efae9071b0ebf788c4d813ae619cb6cbe7be9cec Mon Sep 17 00:00:00 2001
+From 7396505d425591a90360ffee6e2ec8f31cd7beee Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 17 Aug 2025 13:35:53 -0400
-Subject: [PATCH 284/378] winewayland: Fail other process GL/VK surface
+Subject: [PATCH 284/377] winewayland: Fail other process GL/VK surface
  creation.
 
 ---

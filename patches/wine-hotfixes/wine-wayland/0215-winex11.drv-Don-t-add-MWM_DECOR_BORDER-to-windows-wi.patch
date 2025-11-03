@@ -1,7 +1,7 @@
-From 672af550f0d1fb5bdceb7975f2f79f6a05feba10 Mon Sep 17 00:00:00 2001
+From d5acd1c497016a6f025196e3062b0a456699e203 Mon Sep 17 00:00:00 2001
 From: Dmitry Timoshkov <dmitry@baikal.ru>
 Date: Fri, 20 Jan 2017 17:08:19 +0800
-Subject: [PATCH 215/378] winex11.drv: Don't add MWM_DECOR_BORDER to windows
+Subject: [PATCH 215/377] winex11.drv: Don't add MWM_DECOR_BORDER to windows
  without a caption.
 
 Also don't use MWM_DECOR_RESIZEH, window resizing is controlled by MWM_FUNC_RESIZE.

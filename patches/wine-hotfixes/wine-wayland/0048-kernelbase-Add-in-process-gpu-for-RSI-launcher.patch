@@ -1,8 +1,8 @@
-From 41a94aab751c0075ab6f7af5b398f23aaa3c724e Mon Sep 17 00:00:00 2001
+From 5916a711abf5db08daa6591819c5abc298da8e7e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 15 May 2025 16:11:24 -0400
-Subject: [PATCH 048/378] kernelbase: Add in-process-gpu for RSI launcher
+Subject: [PATCH 048/377] kernelbase: Add in-process-gpu for RSI launcher
 
 ---
  dlls/kernelbase/process.c | 1 +

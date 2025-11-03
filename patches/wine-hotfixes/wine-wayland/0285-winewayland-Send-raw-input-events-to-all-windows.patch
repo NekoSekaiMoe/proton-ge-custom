@@ -1,8 +1,8 @@
-From c2368b4b00ff4588a1c815a626f9e9d2824f79b3 Mon Sep 17 00:00:00 2001
+From 2480fa09f11e2a4e120210f2a88c52f2aea24769 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 17 Aug 2025 14:20:29 -0400
-Subject: [PATCH 285/378] winewayland: Send raw input events to all windows.
+Subject: [PATCH 285/377] winewayland: Send raw input events to all windows.
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 14 +++++++++++---

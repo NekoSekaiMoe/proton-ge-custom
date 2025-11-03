@@ -1,8 +1,8 @@
-From 37d2856e69e3011628689a769f04c6f3868436ca Mon Sep 17 00:00:00 2001
+From 48a2ad6b6bd2d34fc5a11e682caa4ed0c40b7247 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 1 Jun 2025 20:42:27 -0400
-Subject: [PATCH 071/378] fixup! HACK: winewayland: Send relative event with
+Subject: [PATCH 071/377] fixup! HACK: winewayland: Send relative event with
  absolute event.
 
 ---

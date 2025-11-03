@@ -1,8 +1,8 @@
-From 27c669008a753189f80f6e67055471e0588c74ba Mon Sep 17 00:00:00 2001
+From 1c108e4fb3809fa2e7555c9734a2b4c26733ad3a Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 11 Jul 2025 22:05:57 -0400
-Subject: [PATCH 146/378] winewayland: Use a hardcoded string for monitor name
+Subject: [PATCH 146/377] winewayland: Use a hardcoded string for monitor name
  in edid.
 
 ---

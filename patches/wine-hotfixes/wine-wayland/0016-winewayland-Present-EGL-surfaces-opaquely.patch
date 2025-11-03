@@ -1,7 +1,7 @@
-From c68739c1731e2ac6cc09c3fba5170f530fec591c Mon Sep 17 00:00:00 2001
+From 4e6c33bee199c220e702215b9909a63e7654841d Mon Sep 17 00:00:00 2001
 From: Alexandros Frantzis <alexandros.frantzis@collabora.com>
 Date: Wed, 5 Mar 2025 12:15:44 +0200
-Subject: [PATCH 016/378] winewayland: Present EGL surfaces opaquely.
+Subject: [PATCH 016/377] winewayland: Present EGL surfaces opaquely.
 
 Many applications request and use GL configs with alpha, but assume that
 the windowing system will present their surfaces opaquely. Wayland

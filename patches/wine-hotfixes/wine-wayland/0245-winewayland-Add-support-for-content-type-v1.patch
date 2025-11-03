@@ -1,8 +1,8 @@
-From 9ff3c5eb13b382eb45a88ceb149e06760a77b106 Mon Sep 17 00:00:00 2001
+From 2c86b8b3af4f40c93bac71d34a736612e8a72cbd Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 11 Aug 2025 13:06:41 -0400
-Subject: [PATCH 245/378] winewayland: Add support for content-type-v1.
+Subject: [PATCH 245/377] winewayland: Add support for content-type-v1.
 
 ---
  dlls/winewayland.drv/Makefile.in         |   1 +

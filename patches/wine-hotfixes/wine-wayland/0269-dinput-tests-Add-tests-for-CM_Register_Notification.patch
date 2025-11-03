@@ -1,7 +1,7 @@
-From 4665afbbc3937206d1a022339fde3c16e49901ef Mon Sep 17 00:00:00 2001
+From bbabcb741f19dc65625a5c211e162d4b198f940d Mon Sep 17 00:00:00 2001
 From: Vibhav Pant <vibhavp@gmail.com>
 Date: Tue, 11 Mar 2025 21:53:20 +0530
-Subject: [PATCH 269/378] dinput/tests: Add tests for CM_Register_Notification.
+Subject: [PATCH 269/377] dinput/tests: Add tests for CM_Register_Notification.
 
 ---
  dlls/dinput/tests/Makefile.in |   2 +-

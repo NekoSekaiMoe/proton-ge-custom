@@ -1,8 +1,8 @@
-From 91a971a0f9de4fde8b3a0fe5cda276d19b527ed0 Mon Sep 17 00:00:00 2001
+From ea0ece1d100288a22354b5e1649d7e93a08e0e64 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 21 Sep 2025 14:50:26 -0500
-Subject: [PATCH 312/378] winewayland: Reset the requested output when
+Subject: [PATCH 312/377] winewayland: Reset the requested output when
  unsetting fullscreen.
 
 ---

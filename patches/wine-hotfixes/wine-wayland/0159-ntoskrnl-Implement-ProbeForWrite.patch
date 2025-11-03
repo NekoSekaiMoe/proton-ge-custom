@@ -1,8 +1,8 @@
-From ad3e5bacb87811a7ae075ff1ba79fb28f0c4980e Mon Sep 17 00:00:00 2001
+From f1ea16b6cc39b68709b0d233201601a5a884622e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 15:33:33 -0400
-Subject: [PATCH 159/378] ntoskrnl: Implement ProbeForWrite.
+Subject: [PATCH 159/377] ntoskrnl: Implement ProbeForWrite.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 10 +++++++++-

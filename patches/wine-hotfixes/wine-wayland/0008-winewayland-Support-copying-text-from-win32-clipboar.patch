@@ -1,7 +1,7 @@
-From bbbdeaf779aa896a3cf1a66d112bf6f02417a5e8 Mon Sep 17 00:00:00 2001
+From 00cb4e86fcbc232d0c8d1b156299c571244bfd5d Mon Sep 17 00:00:00 2001
 From: Alexandros Frantzis <alexandros.frantzis@collabora.com>
 Date: Fri, 7 Feb 2025 14:33:53 +0200
-Subject: [PATCH 008/378] winewayland: Support copying text from win32
+Subject: [PATCH 008/377] winewayland: Support copying text from win32
  clipboard to native apps.
 
 ---

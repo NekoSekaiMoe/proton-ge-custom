@@ -1,8 +1,8 @@
-From 95caaa420589b5c61a6e70f60f9b62e0ce47144d Mon Sep 17 00:00:00 2001
+From f14f0dad9035b8086aa46cc159f54b33f6695ce3 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 21 Sep 2025 13:40:13 -0500
-Subject: [PATCH 310/378] winegstreamer: Fix x11 gst display.
+Subject: [PATCH 310/377] winegstreamer: Fix x11 gst display.
 
 ---
  dlls/winegstreamer/unixlib.c | 7 ++++++-

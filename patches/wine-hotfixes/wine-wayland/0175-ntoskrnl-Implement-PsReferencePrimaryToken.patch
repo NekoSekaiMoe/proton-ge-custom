@@ -1,8 +1,8 @@
-From 18ef7c6fd31fbb63a42ea2859784a133e95774c7 Mon Sep 17 00:00:00 2001
+From e9c20c25c0c4560d9860541d41bfb0fe4b680309 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 00:34:32 -0400
-Subject: [PATCH 175/378] ntoskrnl: Implement PsReferencePrimaryToken.
+Subject: [PATCH 175/377] ntoskrnl: Implement PsReferencePrimaryToken.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 16 ++++++++++++++++

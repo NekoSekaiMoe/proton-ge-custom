@@ -1,8 +1,8 @@
-From deb06cbb603a48b445ab977806fe490091ab89b6 Mon Sep 17 00:00:00 2001
+From 0bd94ba117f4eefc249cabbd36599b4d6be83d4a Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 24 Sep 2025 17:40:59 -0500
-Subject: [PATCH 319/378] winewayland: Fix TRACE in keyboard_handle_modifiers.
+Subject: [PATCH 319/377] winewayland: Fix TRACE in keyboard_handle_modifiers.
 
 ---
  dlls/winewayland.drv/wayland_keyboard.c | 2 +-

@@ -1,7 +1,7 @@
-From 06351c3c53714d3593e892e6fed3f80fbeeace3e Mon Sep 17 00:00:00 2001
+From 5cedc7653b3ac194ebbd0fc444a0b1fe29453096 Mon Sep 17 00:00:00 2001
 From: Billy Laws <blaws05@gmail.com>
 Date: Mon, 11 Aug 2025 16:24:49 +0100
-Subject: [PATCH 295/378] ntdll/tests: Add
+Subject: [PATCH 295/377] ntdll/tests: Add
  THREAD_CREATE_FLAGS_BYPASS_PROCESS_FREEZE test.
 
 ---

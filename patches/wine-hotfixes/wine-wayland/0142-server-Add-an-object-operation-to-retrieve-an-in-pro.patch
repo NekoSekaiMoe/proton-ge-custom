@@ -1,7 +1,7 @@
-From d8a23bd32c8642134e3429c41bd6a26316ec69ab Mon Sep 17 00:00:00 2001
+From 93dbb23f986fa4fec0b0285367a17b90a01750f4 Mon Sep 17 00:00:00 2001
 From: Elizabeth Figura <zfigura@codeweavers.com>
 Date: Thu, 3 Jul 2025 16:28:01 -0400
-Subject: [PATCH 142/378] server: Add an object operation to retrieve an
+Subject: [PATCH 142/377] server: Add an object operation to retrieve an
  in-process synchronization object.
 
 ---
@@ -341,7 +341,7 @@ index 5494eb517df..249c530e9b1 100644
      debug_obj_destroy              /* destroy */
  };
 diff --git a/server/device.c b/server/device.c
-index e9304ed9036..5b62db0bdda 100644
+index 4c5eadcb399..b310e76428b 100644
 --- a/server/device.c
 +++ b/server/device.c
 @@ -82,6 +82,7 @@ static const struct object_ops irp_call_ops =
@@ -489,7 +489,7 @@ index 8097b86fcea..20049d85aed 100644
      fsync_destroy              /* destroy */
  };
 diff --git a/server/handle.c b/server/handle.c
-index 8727af88e89..5cb700165b3 100644
+index 2dca6d8155d..85e90577d48 100644
 --- a/server/handle.c
 +++ b/server/handle.c
 @@ -140,6 +140,7 @@ static const struct object_ops handle_table_ops =

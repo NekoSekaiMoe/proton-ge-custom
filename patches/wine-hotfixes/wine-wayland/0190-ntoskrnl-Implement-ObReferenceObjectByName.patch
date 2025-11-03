@@ -1,8 +1,8 @@
-From 4cd2bcf61717972de2dae1962c608c5900dbe899 Mon Sep 17 00:00:00 2001
+From 86fd713049519a699369131d9e26ec4308e6ab42 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 24 Jul 2025 17:42:00 -0400
-Subject: [PATCH 190/378] ntoskrnl: Implement ObReferenceObjectByName.
+Subject: [PATCH 190/377] ntoskrnl: Implement ObReferenceObjectByName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c   | 34 +++++++++++++++++++++++++++++-----
@@ -156,7 +156,7 @@ index 2fe15d62803..07987120bcf 100644
  
  #endif /* __WINE_WINE_SERVER_PROTOCOL_H */
 diff --git a/server/device.c b/server/device.c
-index e03e5e26bd3..2f9b596b269 100644
+index d8f00369c41..74a94f10a9e 100644
 --- a/server/device.c
 +++ b/server/device.c
 @@ -1229,3 +1229,31 @@ DECL_HANDLER(get_kernel_object_handle)

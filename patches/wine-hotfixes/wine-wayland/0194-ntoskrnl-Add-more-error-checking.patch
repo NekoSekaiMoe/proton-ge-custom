@@ -1,8 +1,8 @@
-From 8bc565d4072415b072f40336b7335f49bab5b61d Mon Sep 17 00:00:00 2001
+From 134d83526082387a0a9436bb17794fd45e7baf12 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 24 Jul 2025 19:53:46 -0400
-Subject: [PATCH 194/378] ntoskrnl: Add more error checking
+Subject: [PATCH 194/377] ntoskrnl: Add more error checking
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 33 +++++++++++++++++++--------------

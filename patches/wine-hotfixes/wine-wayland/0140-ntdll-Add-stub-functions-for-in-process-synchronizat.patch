@@ -1,7 +1,7 @@
-From 98a0523745f1742fe78239c66bda74e128334f51 Mon Sep 17 00:00:00 2001
+From 7bed98fcf6939f4daabc3dacb8367162bc2dd2d6 Mon Sep 17 00:00:00 2001
 From: Elizabeth Figura <zfigura@codeweavers.com>
 Date: Wed, 2 Jul 2025 21:08:28 -0400
-Subject: [PATCH 140/378] ntdll: Add stub functions for in-process
+Subject: [PATCH 140/377] ntdll: Add stub functions for in-process
  synchronization.
 
 ---

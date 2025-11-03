@@ -1,7 +1,7 @@
-From bf4e3358888039aabe692180992bf25557373f70 Mon Sep 17 00:00:00 2001
+From fb5ab5e26694bc182c306224c252084e2bef2507 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Sat, 14 Jun 2025 13:19:02 -0400
-Subject: [PATCH 096/378] winewayland: Implement support for HDR static
+Subject: [PATCH 096/377] winewayland: Implement support for HDR static
  metadata extension
 
 ---

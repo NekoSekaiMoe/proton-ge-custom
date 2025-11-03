@@ -1,7 +1,7 @@
-From ed570e105e8a2c9ea114733422ed73b92bb82a9b Mon Sep 17 00:00:00 2001
+From 26447805735f1b06bae99d6104c7fea8b9f220ad Mon Sep 17 00:00:00 2001
 From: Elizabeth Figura <zfigura@codeweavers.com>
 Date: Mon, 7 Jul 2025 21:44:10 -0400
-Subject: [PATCH 143/378] ntsync implementation
+Subject: [PATCH 143/377] ntsync implementation
 
 ---
  dlls/ntdll/unix/esync.c        |   2 +-
@@ -84,7 +84,7 @@ index 4d9f5cde7b2..b2b16eafb0e 100644
  
      return do_fsync_cached;
 diff --git a/dlls/ntdll/unix/process.c b/dlls/ntdll/unix/process.c
-index a4957342027..25ec92d8dba 100644
+index ee7235bf8b0..40917012c19 100644
 --- a/dlls/ntdll/unix/process.c
 +++ b/dlls/ntdll/unix/process.c
 @@ -920,7 +920,7 @@ NTSTATUS WINAPI NtCreateUserProcess( HANDLE *process_handle_ptr, HANDLE *thread_
@@ -1541,7 +1541,7 @@ index 249c530e9b1..21783fcc2b0 100644
      else
      {
 diff --git a/server/device.c b/server/device.c
-index 5b62db0bdda..e03e5e26bd3 100644
+index b310e76428b..d8f00369c41 100644
 --- a/server/device.c
 +++ b/server/device.c
 @@ -25,6 +25,7 @@

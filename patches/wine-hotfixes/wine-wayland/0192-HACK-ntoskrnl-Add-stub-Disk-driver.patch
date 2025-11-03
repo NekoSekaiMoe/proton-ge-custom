@@ -1,8 +1,8 @@
-From 5bf44864bf9d3c4d146fc25ddea196c225e5a9bd Mon Sep 17 00:00:00 2001
+From 2ba740180788488b2a886bfee9a73c7152b424fa Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 24 Jul 2025 18:27:53 -0400
-Subject: [PATCH 192/378] HACK: ntoskrnl: Add stub Disk driver.
+Subject: [PATCH 192/377] HACK: ntoskrnl: Add stub Disk driver.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 2 ++

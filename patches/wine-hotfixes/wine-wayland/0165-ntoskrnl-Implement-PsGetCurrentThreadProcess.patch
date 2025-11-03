@@ -1,8 +1,8 @@
-From 35c51d88dd68879f05bbd5815ec17131c1c4815c Mon Sep 17 00:00:00 2001
+From debbd314db161099a4c205f53db11018512365f2 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:14:35 -0400
-Subject: [PATCH 165/378] ntoskrnl: Implement PsGetCurrentThreadProcess.
+Subject: [PATCH 165/377] ntoskrnl: Implement PsGetCurrentThreadProcess.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 8 ++++++++

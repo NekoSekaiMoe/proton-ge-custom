@@ -1,7 +1,7 @@
-From ca4c9617b1e30751862f1cd98cfd4998b937b789 Mon Sep 17 00:00:00 2001
+From fce07ddd016b95e5d31acca32963bf2b6cd8d00b Mon Sep 17 00:00:00 2001
 From: Elizabeth Figura <zfigura@codeweavers.com>
 Date: Wed, 2 Jul 2025 22:35:32 -0400
-Subject: [PATCH 141/378] ntdll: Retrieve and cache an ntsync device in wait
+Subject: [PATCH 141/377] ntdll: Retrieve and cache an ntsync device in wait
  calls.
 
 ---

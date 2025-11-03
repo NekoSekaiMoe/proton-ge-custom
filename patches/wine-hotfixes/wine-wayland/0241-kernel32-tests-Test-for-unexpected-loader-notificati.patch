@@ -1,7 +1,7 @@
-From a1c8fc4459a3aa5d34cf2d08eddc4b891ea21629 Mon Sep 17 00:00:00 2001
+From 726c2cb5b5d927fcd3d8879bcff074fecfb3602c Mon Sep 17 00:00:00 2001
 From: Jinoh Kang <jinoh.kang.kr@gmail.com>
 Date: Tue, 18 Feb 2025 01:38:39 +0900
-Subject: [PATCH 241/378] kernel32/tests: Test for unexpected loader
+Subject: [PATCH 241/377] kernel32/tests: Test for unexpected loader
  notification for import dependency loaded with DONT_RESOLVE_DLL_REFERENCES.
 
 ---

@@ -1,8 +1,8 @@
-From 694ec2dfa2233cf8b037106bb5aa3b485cf54cd9 Mon Sep 17 00:00:00 2001
+From 12f40c0459e810a393c2d0a17007089dd7f24ca4 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 5 May 2025 22:08:25 -0400
-Subject: [PATCH 026/378] support older EGL headers
+Subject: [PATCH 026/377] support older EGL headers
 
 ---
  dlls/winewayland.drv/opengl.c | 6 ++++++

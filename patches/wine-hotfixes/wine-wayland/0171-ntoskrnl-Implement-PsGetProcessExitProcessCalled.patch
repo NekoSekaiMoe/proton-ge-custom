@@ -1,8 +1,8 @@
-From 4875e4b35b568b8accc002f685a6c13b8f3390b3 Mon Sep 17 00:00:00 2001
+From 0df3efb67617f3ae4a3c3af53ad1020508dcfd70 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 21:28:25 -0400
-Subject: [PATCH 171/378] ntoskrnl: Implement PsGetProcessExitProcessCalled.
+Subject: [PATCH 171/377] ntoskrnl: Implement PsGetProcessExitProcessCalled.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 9 +++++++++

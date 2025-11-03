@@ -1,7 +1,7 @@
-From 8d6a57e18922080bda499c8647cb316bd0b81604 Mon Sep 17 00:00:00 2001
+From 3c9667d53889208a431471fc4daa7300db7f0aa0 Mon Sep 17 00:00:00 2001
 From: Vibhav Pant <vibhavp@gmail.com>
 Date: Tue, 22 Oct 2024 11:45:55 +0530
-Subject: [PATCH 268/378] cfgmgr32/tests: Add basic tests for
+Subject: [PATCH 268/377] cfgmgr32/tests: Add basic tests for
  CM_(Un)Register_Notification.
 
 ---

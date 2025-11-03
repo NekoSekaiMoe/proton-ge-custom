@@ -1,7 +1,7 @@
-From 5a60bc1c0cff6a6aab331b5c61b2a5c83f000138 Mon Sep 17 00:00:00 2001
+From 570e4ac6611705ab0385bfdea874acb46b470793 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Tue, 10 Jun 2025 17:51:30 -0400
-Subject: [PATCH 089/378] fixup! winewayland: Rewrite wayland pointer
+Subject: [PATCH 089/377] fixup! winewayland: Rewrite wayland pointer
  implementation.
 
 ---

@@ -1,7 +1,7 @@
-From 8bb268279da2b62281cd7bb5dfa4f7eded6f1beb Mon Sep 17 00:00:00 2001
+From 5ceadca839d45a3ca78dd00bf29a327b32a999cc Mon Sep 17 00:00:00 2001
 From: Nikolay Sivov <nsivov@codeweavers.com>
 Date: Sat, 12 Apr 2025 21:21:49 +0200
-Subject: [PATCH 217/378] combase: Add a stub for SetRestrictedErrorInfo().
+Subject: [PATCH 217/377] combase: Add a stub for SetRestrictedErrorInfo().
 
 Foobar 2000 crashes without it.
 

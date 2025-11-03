@@ -1,7 +1,7 @@
-From 8e73d0681ad957b6bad3e09ea855300a6a69ab15 Mon Sep 17 00:00:00 2001
+From 6c52c2cdc0ee017f3c1f42d5c397298f618b5452 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Ignacy=20Kuchci=C5=84ski?= <ignacykuchcinski@gmail.com>
 Date: Thu, 19 Jun 2025 19:31:04 +0200
-Subject: [PATCH 253/378] user32: Add GetPointerPenInfo stub.
+Subject: [PATCH 253/377] user32: Add GetPointerPenInfo stub.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=57489
 ---

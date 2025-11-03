@@ -1,8 +1,8 @@
-From b4fa36959757c2f537948454e38ecc1b9a0b3864 Mon Sep 17 00:00:00 2001
+From e26990181f11f346b1492446934ff1056ad6df61 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 21:23:12 -0400
-Subject: [PATCH 170/378] ntoskrnl: Implement PsGetProcessExitStatus.
+Subject: [PATCH 170/377] ntoskrnl: Implement PsGetProcessExitStatus.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 18 ++++++++++++++++++

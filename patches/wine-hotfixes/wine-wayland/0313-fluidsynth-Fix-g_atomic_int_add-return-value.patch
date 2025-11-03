@@ -1,7 +1,7 @@
-From b86a7448bdddf728dd5e89b8766cced0c9bfabc7 Mon Sep 17 00:00:00 2001
+From c6219761dbbd3a2d674454c10e3ead7030a959a0 Mon Sep 17 00:00:00 2001
 From: Jinoh Kang <jinoh.kang.kr@gmail.com>
 Date: Sat, 20 Sep 2025 16:12:08 +0900
-Subject: [PATCH 313/378] fluidsynth: Fix g_atomic_int_add() return value.
+Subject: [PATCH 313/377] fluidsynth: Fix g_atomic_int_add() return value.
 
 FluidSynth settings table is internally a refcounted hashtable. Due to
 wrong glib atomic emulation, the hashtable might be leaked (if

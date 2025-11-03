@@ -1,7 +1,7 @@
-From 23e8a667ecf85fe00b8ef3422656bff04d08b3f7 Mon Sep 17 00:00:00 2001
+From f1058d43353266a93009750e62737b46c74d54a1 Mon Sep 17 00:00:00 2001
 From: Tobias Gruetzmacher <tobias-git@23.gs>
 Date: Thu, 3 Apr 2025 18:06:11 +0200
-Subject: [PATCH 299/378] wininet: Handle HTTP status code 308 (Permanent
+Subject: [PATCH 299/377] wininet: Handle HTTP status code 308 (Permanent
  Redirect).
 
 ---

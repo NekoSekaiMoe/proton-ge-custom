@@ -1,15 +1,15 @@
-From bf05d1b3e80183a91f149c61632b1ef78eb3c589 Mon Sep 17 00:00:00 2001
+From 781d4a7580e54e6d9ce221fd95885377c53a7d13 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 20 Jun 2025 14:18:52 -0400
-Subject: [PATCH 104/378] winebus: remove duplicate code.
+Subject: [PATCH 104/377] winebus: remove duplicate code.
 
 ---
  dlls/winebus.sys/main.c | 6 ------
  1 file changed, 6 deletions(-)
 
 diff --git a/dlls/winebus.sys/main.c b/dlls/winebus.sys/main.c
-index e21bf65f2a2..37ee2f7a537 100644
+index 658ee10243d..f5fc802ff37 100644
 --- a/dlls/winebus.sys/main.c
 +++ b/dlls/winebus.sys/main.c
 @@ -569,12 +569,6 @@ static BOOL is_hidraw_enabled(WORD vid, WORD pid, const USAGE_AND_PAGE *usages,

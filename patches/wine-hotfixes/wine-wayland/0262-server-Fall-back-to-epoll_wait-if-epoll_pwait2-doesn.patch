@@ -1,7 +1,7 @@
-From c680d8402293f3fc1de57d9f217b2dac9c247f83 Mon Sep 17 00:00:00 2001
+From d1d3da4185d1cb743b5b5201d17f4e8f7e851841 Mon Sep 17 00:00:00 2001
 From: Alfred Agrell <floating@muncher.se>
 Date: Sat, 22 Mar 2025 10:38:36 +0100
-Subject: [PATCH 262/378] server: Fall back to epoll_wait if epoll_pwait2
+Subject: [PATCH 262/377] server: Fall back to epoll_wait if epoll_pwait2
  doesn't work.
 
 Fixes: 87ca5db40e2c1b37423bdc25101a5c5e39e67e6f

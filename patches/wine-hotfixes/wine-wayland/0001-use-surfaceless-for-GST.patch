@@ -1,8 +1,8 @@
-From aa3d40f6ed9325ee139f328e8cf6b12bca0ee8ba Mon Sep 17 00:00:00 2001
+From 0afc346851ec99b3aad7895daa0131a2522ecd09 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 4 May 2025 14:13:08 -0400
-Subject: [PATCH 001/378] use surfaceless for GST
+Subject: [PATCH 001/377] use surfaceless for GST
 
 ---
  dlls/winegstreamer/unixlib.c | 3 +--

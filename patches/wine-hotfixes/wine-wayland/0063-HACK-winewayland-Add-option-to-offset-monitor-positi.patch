@@ -1,8 +1,8 @@
-From 1d4df72696659eba5665d97ae88623f14b926251 Mon Sep 17 00:00:00 2001
+From 742ab1f8d29bef8266b0fbb08c0b1a75de4565d8 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 25 May 2025 22:07:01 -0400
-Subject: [PATCH 063/378] HACK: winewayland: Add option to offset monitor
+Subject: [PATCH 063/377] HACK: winewayland: Add option to offset monitor
  positions.
 
 ---
