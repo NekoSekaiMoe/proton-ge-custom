@@ -1,8 +1,8 @@
-From 0658db187b3bb48861a19c71b0db23c4cbc26a00 Mon Sep 17 00:00:00 2001
+From d0e8849db702879506e139da9831e3d9c6d1adc5 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 8 Nov 2025 13:42:41 -0600
-Subject: [PATCH 379/406] winewayland: Implement ext-data-control-v1.
+Subject: [PATCH 379/414] winewayland: Implement ext-data-control-v1.
 
 Drop in replacement for wlr, but also keep it around to keep compat
 ---

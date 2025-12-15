@@ -1,8 +1,8 @@
-From 8ff8e3a374744ad921532ec19f4879ed73b30e83 Mon Sep 17 00:00:00 2001
+From a9c583822fe45499aa542ebcbaa3ce29c8ea0559 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 4 Oct 2025 02:40:55 -0500
-Subject: [PATCH 320/406] fixup! winewayland: Generate KBDTABLES dead key
+Subject: [PATCH 320/414] fixup! winewayland: Generate KBDTABLES dead key
  tables.
 
 ---

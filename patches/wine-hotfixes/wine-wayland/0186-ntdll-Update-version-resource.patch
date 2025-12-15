@@ -1,8 +1,8 @@
-From 4c7fe4766eaa99badb306b707e312eafba06dd90 Mon Sep 17 00:00:00 2001
+From 2c005bb0326533556b0f8f0468d44074d9024eaa Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 20:20:15 -0400
-Subject: [PATCH 186/406] ntdll: Update version resource.
+Subject: [PATCH 186/414] ntdll: Update version resource.
 
 ---
  dlls/ntdll/version.rc           | 11 ++++++-----

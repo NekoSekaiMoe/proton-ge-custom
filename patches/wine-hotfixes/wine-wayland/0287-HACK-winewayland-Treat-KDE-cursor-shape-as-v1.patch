@@ -1,8 +1,8 @@
-From e8de5234ab41db7566f5f7582ebbe44ede5381b8 Mon Sep 17 00:00:00 2001
+From 9d09f96e8e8313b4f8e612bdc603780434387ce0 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 27 Aug 2025 16:14:23 -0500
-Subject: [PATCH 287/406] HACK: winewayland: Treat KDE cursor shape as v1.
+Subject: [PATCH 287/414] HACK: winewayland: Treat KDE cursor shape as v1.
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 2 ++

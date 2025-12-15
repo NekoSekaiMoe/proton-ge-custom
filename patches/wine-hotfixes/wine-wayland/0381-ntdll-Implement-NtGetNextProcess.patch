@@ -1,7 +1,7 @@
-From a0581b0574139bf009c31be1129f1ef06da9ae67 Mon Sep 17 00:00:00 2001
+From 1bde380cb35f070653c34c70eb0fdde1032edd81 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Tue, 5 Dec 2023 22:07:07 -0500
-Subject: [PATCH 381/406] ntdll: Implement NtGetNextProcess.
+Subject: [PATCH 381/414] ntdll: Implement NtGetNextProcess.
 
 ---
  dlls/ntdll/ntdll.spec          |   1 +
@@ -18,7 +18,7 @@ Subject: [PATCH 381/406] ntdll: Implement NtGetNextProcess.
  11 files changed, 645 insertions(+), 486 deletions(-)
 
 diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
-index 958855bc169..49b28d5ddad 100644
+index 865fafa41d0..6dc66fed702 100644
 --- a/dlls/ntdll/ntdll.spec
 +++ b/dlls/ntdll/ntdll.spec
 @@ -239,6 +239,7 @@
@@ -1024,10 +1024,10 @@ index a233ba4878f..c9b35765473 100644
  DEFINE_SYSCALL(NtGetNlsSectionPtr, (ULONG type, ULONG id, void *unknown, void **ptr, SIZE_T *size))
  DEFINE_SYSCALL(NtGetWriteWatch, (HANDLE process, ULONG flags, PVOID base, SIZE_T size, PVOID *addresses, ULONG_PTR *count, ULONG *granularity))
 diff --git a/dlls/ntdll/unix/process.c b/dlls/ntdll/unix/process.c
-index e36137a4a66..597e3af04c0 100644
+index 1f65876e37a..2661be3754d 100644
 --- a/dlls/ntdll/unix/process.c
 +++ b/dlls/ntdll/unix/process.c
-@@ -2051,6 +2051,33 @@ NTSTATUS WINAPI NtResumeProcess( HANDLE handle )
+@@ -2050,6 +2050,33 @@ NTSTATUS WINAPI NtResumeProcess( HANDLE handle )
  }
  
  
@@ -1191,7 +1191,7 @@ index 07987120bcf..0d9bde785b9 100644
  
  #endif /* __WINE_WINE_SERVER_PROTOCOL_H */
 diff --git a/include/winternl.h b/include/winternl.h
-index 0541438feee..c18551a7547 100644
+index 1c01efd6475..7561062d9d6 100644
 --- a/include/winternl.h
 +++ b/include/winternl.h
 @@ -4626,6 +4626,7 @@ NTSYSAPI NTSTATUS  WINAPI NtFreeVirtualMemory(HANDLE,PVOID*,SIZE_T*,ULONG);

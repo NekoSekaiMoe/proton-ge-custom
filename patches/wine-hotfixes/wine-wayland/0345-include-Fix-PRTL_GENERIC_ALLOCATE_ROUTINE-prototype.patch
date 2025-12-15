@@ -1,7 +1,7 @@
-From 687fc70418e465d85982276a3b0085b49a1648d9 Mon Sep 17 00:00:00 2001
+From 26e3664b304d40abe6c807b7dc1b7f4a1eaab2e7 Mon Sep 17 00:00:00 2001
 From: Zhiyi Zhang <zzhang@codeweavers.com>
 Date: Thu, 6 Feb 2025 10:08:48 +0800
-Subject: [PATCH 345/406] include: Fix PRTL_GENERIC_ALLOCATE_ROUTINE prototype.
+Subject: [PATCH 345/414] include: Fix PRTL_GENERIC_ALLOCATE_ROUTINE prototype.
 
 The last parameter of PRTL_GENERIC_ALLOCATE_ROUTINE should be CLONG instead of LONG.
 ---

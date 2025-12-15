@@ -1,8 +1,8 @@
-From 510ce8f0fcba44a630d644f85de1381e0c878a08 Mon Sep 17 00:00:00 2001
+From 4e0e98edb516588fb34986cffd5cd66428ed5367 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 13 Jun 2025 14:46:40 -0400
-Subject: [PATCH 096/406] Import WIP atidxx implementation
+Subject: [PATCH 096/414] Import WIP atidxx implementation
 
 ---
  configure.ac                      |   1 +
@@ -1055,7 +1055,7 @@ index 00000000000..5d4def2d383
 +    return S_OK;
 +}
 diff --git a/loader/wine.inf.in b/loader/wine.inf.in
-index 653ee8b30f3..58240b767ff 100644
+index 3a0dd59d492..6a866240adc 100644
 --- a/loader/wine.inf.in
 +++ b/loader/wine.inf.in
 @@ -2994,6 +2994,7 @@ HKCU,Software\Wine\DllOverrides,"vcomp140",0x2,"native,builtin"

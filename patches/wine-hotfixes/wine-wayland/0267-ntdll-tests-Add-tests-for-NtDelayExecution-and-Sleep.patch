@@ -1,7 +1,7 @@
-From 3f15eecf32c3e04e0d0be966d7b2222006b2406f Mon Sep 17 00:00:00 2001
+From b4c56f501133396560b692f74426e0a3636212e7 Mon Sep 17 00:00:00 2001
 From: William Horvath <william@horvath.blog>
 Date: Wed, 22 Jan 2025 01:54:33 -0800
-Subject: [PATCH 267/406] ntdll/tests: Add tests for NtDelayExecution and
+Subject: [PATCH 267/414] ntdll/tests: Add tests for NtDelayExecution and
  Sleep(Ex).
 
 ---

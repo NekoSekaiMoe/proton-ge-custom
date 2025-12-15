@@ -1,7 +1,7 @@
-From 44d1d847ce8e8cc29224625870a817ea7224a97b Mon Sep 17 00:00:00 2001
+From b358f17271dee920b635f4f1236239bb0df8cd9a Mon Sep 17 00:00:00 2001
 From: Alexander Morozov <amorozov@etersoft.ru>
 Date: Sat, 15 Mar 2025 18:20:13 +0300
-Subject: [PATCH 122/406] ntoskrnl.exe/tests: Improve device properties test,
+Subject: [PATCH 122/414] ntoskrnl.exe/tests: Improve device properties test,
  avoid BSOD.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=57940

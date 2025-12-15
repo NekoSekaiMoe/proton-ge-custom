@@ -1,8 +1,8 @@
-From f96652ab560d880d17077f757809ad6ba4d69774 Mon Sep 17 00:00:00 2001
+From dd6f4a9c2ac1619915a6d82e46cc4043f63db882 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 13 May 2025 16:29:55 -0400
-Subject: [PATCH 045/406] ntdll: remove outdated workaround for rainbow six
+Subject: [PATCH 045/414] ntdll: remove outdated workaround for rainbow six
  extraction
 
 ---
@@ -10,10 +10,10 @@ Subject: [PATCH 045/406] ntdll: remove outdated workaround for rainbow six
  1 file changed, 7 deletions(-)
 
 diff --git a/dlls/ntdll/unix/loader.c b/dlls/ntdll/unix/loader.c
-index d0b79f4956d..f5efad48bda 100644
+index 45b24fe155b..1ee577b6797 100644
 --- a/dlls/ntdll/unix/loader.c
 +++ b/dlls/ntdll/unix/loader.c
-@@ -2356,13 +2356,6 @@ static void hacks_init(void)
+@@ -2358,13 +2358,6 @@ static void hacks_init(void)
          setenv("WINE_ENABLE_GST_LIVE_LATENCY", "1", 0);
      }
  

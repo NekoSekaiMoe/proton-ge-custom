@@ -1,7 +1,7 @@
-From 19572bc55d1e13b351ad42d917f9d76b6eb53d3f Mon Sep 17 00:00:00 2001
+From 2168e7c329e334b662ceddabca263716e5308b72 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 17 Jul 2025 15:42:54 +0200
-Subject: [PATCH 387/406] ntdll: Add more LPC stubs.
+Subject: [PATCH 387/414] ntdll: Add more LPC stubs.
 
 They need explicit syscall ids.
 ---
@@ -14,7 +14,7 @@ They need explicit syscall ids.
  6 files changed, 475 insertions(+), 332 deletions(-)
 
 diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
-index 70d9829a811..e89958e6d12 100644
+index 1a753b11823..a5439da7494 100644
 --- a/dlls/ntdll/ntdll.spec
 +++ b/dlls/ntdll/ntdll.spec
 @@ -246,7 +246,7 @@
@@ -1077,7 +1077,7 @@ index 9076f5dd871..537e695cc87 100644
   *           wow64_NtYieldExecution
   */
 diff --git a/include/winternl.h b/include/winternl.h
-index 349ef297387..af3f4a59c89 100644
+index 12780719c32..c2e18229c83 100644
 --- a/include/winternl.h
 +++ b/include/winternl.h
 @@ -4634,7 +4634,7 @@ NTSYSAPI NTSTATUS  WINAPI NtGetPlugPlayEvent(ULONG,ULONG,PVOID,ULONG);

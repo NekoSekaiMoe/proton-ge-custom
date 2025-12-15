@@ -1,7 +1,7 @@
-From bebb48649fb453642e0b1b0449d8b1e5fe5387f5 Mon Sep 17 00:00:00 2001
+From e90df2dcb08f85b00222915b43402f404c0d58e7 Mon Sep 17 00:00:00 2001
 From: Yuxuan Shui <yshui@codeweavers.com>
 Date: Mon, 14 Jul 2025 14:43:14 +0100
-Subject: [PATCH 336/406] ntdll: Also restore rbp before calling user mode
+Subject: [PATCH 336/414] ntdll: Also restore rbp before calling user mode
  callback.
 
 If wine dlls are built with frame pointers enabled, the frame pointer will be
@@ -18,10 +18,10 @@ pointer based on the frame pointer, thus derailing the unwinding process.
  2 files changed, 14 insertions(+), 9 deletions(-)
 
 diff --git a/dlls/ntdll/tests/exception.c b/dlls/ntdll/tests/exception.c
-index a90a5a75f36..f1694cf6e6e 100644
+index 51a0414ae4a..643279b4abe 100644
 --- a/dlls/ntdll/tests/exception.c
 +++ b/dlls/ntdll/tests/exception.c
-@@ -6063,14 +6063,12 @@ static LRESULT unwinding_wnd_proc(HWND w, UINT msg, WPARAM p2, LPARAM p3)
+@@ -6125,14 +6125,12 @@ static LRESULT unwinding_wnd_proc(HWND w, UINT msg, WPARAM p2, LPARAM p3)
                  found = TRUE;
  
                  /* check that non-volatile registers are set properly before entering user callback. */

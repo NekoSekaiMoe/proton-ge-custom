@@ -1,7 +1,7 @@
-From b28dddfe9849912d0a64fa66c0ee34b4138d87aa Mon Sep 17 00:00:00 2001
+From 51a4f1a0182842d4fca392892f2c048125c83e90 Mon Sep 17 00:00:00 2001
 From: Fabian Maurer <dark.shadow4@web.de>
 Date: Wed, 12 Feb 2025 18:49:57 +0100
-Subject: [PATCH 227/406] gdiplus/tests: Add test for loading .ico.
+Subject: [PATCH 227/414] gdiplus/tests: Add test for loading .ico.
 
 ---
  dlls/gdiplus/tests/image.c       |  44 +++++++++++++++++++++++++++++++

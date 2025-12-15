@@ -1,8 +1,8 @@
-From b76bf13b43835cdbe01d91efb2f51a97001f0b74 Mon Sep 17 00:00:00 2001
+From c4a08cbab64347ea5ff1bf828cc86f281dc8e964 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 25 Nov 2025 23:59:07 -0600
-Subject: [PATCH 396/406] fixup! fixup! winewayland: Fix unicode translation.
+Subject: [PATCH 396/414] fixup! fixup! winewayland: Fix unicode translation.
 
 ---
  dlls/winewayland.drv/wayland_keyboard.c | 2 +-

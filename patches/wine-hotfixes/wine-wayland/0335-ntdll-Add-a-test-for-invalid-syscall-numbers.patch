@@ -1,7 +1,7 @@
-From 038857caf8c3e2a58e525d620b91ed46a7cc760e Mon Sep 17 00:00:00 2001
+From 8444bfdec5616d34a7331c531858659f48ce30b7 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Tue, 29 Apr 2025 18:22:32 +0200
-Subject: [PATCH 335/406] ntdll: Add a test for invalid syscall numbers.
+Subject: [PATCH 335/414] ntdll: Add a test for invalid syscall numbers.
 
 ---
  dlls/ntdll/signal_arm64ec.c     |  2 +-

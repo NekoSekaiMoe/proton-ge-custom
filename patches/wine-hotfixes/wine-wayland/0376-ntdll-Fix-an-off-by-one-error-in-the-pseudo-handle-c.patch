@@ -1,7 +1,7 @@
-From 0aa18a044d08476584d6d2925daa1e5f39ae5160 Mon Sep 17 00:00:00 2001
+From a5e9b438032af0e51cd97d7e3a3dd6dd146856bb Mon Sep 17 00:00:00 2001
 From: Marc-Aurel Zent <mzent@codeweavers.com>
 Date: Thu, 30 Oct 2025 22:02:27 +0100
-Subject: [PATCH 376/406] ntdll: Fix an off-by-one error in the pseudo-handle
+Subject: [PATCH 376/414] ntdll: Fix an off-by-one error in the pseudo-handle
  check for inproc syncs.
 
 Also add an is_pseudo_handle() helper.

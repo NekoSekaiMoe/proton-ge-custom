@@ -1,7 +1,7 @@
-From d47520d7007112924e1949416722a402f894713c Mon Sep 17 00:00:00 2001
+From f3c987d4dc855e6c6ab252bdf1af1b5f586b8586 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 5 Jun 2025 12:00:23 +0200
-Subject: [PATCH 369/406] tools: Support explicit syscall numbers in
+Subject: [PATCH 369/414] tools: Support explicit syscall numbers in
  make_specfiles.
 
 ---

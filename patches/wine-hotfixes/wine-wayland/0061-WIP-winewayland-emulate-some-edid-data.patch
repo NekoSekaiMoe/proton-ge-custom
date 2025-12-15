@@ -1,8 +1,8 @@
-From 6716bb96510cd662770dbe454f5149e2e5795dbe Mon Sep 17 00:00:00 2001
+From 640c0db9906a7be1e6709d42868f74c3e6fa8162 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 24 May 2025 11:09:03 -0400
-Subject: [PATCH 061/406] WIP: winewayland: emulate some edid data.
+Subject: [PATCH 061/414] WIP: winewayland: emulate some edid data.
 
 ---
  dlls/winewayland.drv/display.c | 57 ++++++++++++++++++++++++++++++++++

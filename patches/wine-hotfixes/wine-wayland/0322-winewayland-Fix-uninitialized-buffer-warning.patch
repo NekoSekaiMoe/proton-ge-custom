@@ -1,8 +1,8 @@
-From d715b575f7fcf78268d33d4d220b5659f5add307 Mon Sep 17 00:00:00 2001
+From 76c4ea878d3d02a56dd8abfe71210dbecf306627 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 4 Oct 2025 12:11:06 -0500
-Subject: [PATCH 322/406] winewayland: Fix uninitialized buffer warning.
+Subject: [PATCH 322/414] winewayland: Fix uninitialized buffer warning.
 
 Co-Authored-By: Matthias Y <6280154+myzb@users.noreply.github.com>
 ---

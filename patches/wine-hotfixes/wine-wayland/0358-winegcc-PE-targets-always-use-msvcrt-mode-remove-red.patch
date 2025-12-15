@@ -1,7 +1,7 @@
-From e6c3071aa37ab951f711c007eff7be6786f1f726 Mon Sep 17 00:00:00 2001
+From ded13ca40552f6c0ab3d8abdb99c1b80a6cb397c Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Fri, 7 Mar 2025 15:48:16 +0100
-Subject: [PATCH 358/406] winegcc: PE targets always use msvcrt mode, remove
+Subject: [PATCH 358/414] winegcc: PE targets always use msvcrt mode, remove
  redundant checks.
 
 ---

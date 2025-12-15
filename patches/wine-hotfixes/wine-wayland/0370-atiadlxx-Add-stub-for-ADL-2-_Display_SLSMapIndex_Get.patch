@@ -1,8 +1,8 @@
-From 223481a01b4a667a1dd1ecf751afb2a8075e0fcf Mon Sep 17 00:00:00 2001
+From ca62fab66d3ac385605659671079981f2a6e4e9c Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 22 Oct 2025 15:30:05 -0500
-Subject: [PATCH 370/406] atiadlxx: Add stub for
+Subject: [PATCH 370/414] atiadlxx: Add stub for
  ADL[2]_Display_SLSMapIndex_Get.
 
 ---

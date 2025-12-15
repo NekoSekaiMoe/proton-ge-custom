@@ -1,7 +1,7 @@
-From 94e43ff91766355035819469134946eda364fb65 Mon Sep 17 00:00:00 2001
+From b982cb0a6c23e4d4c85fdc234601169f3b409d47 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Fri, 7 Mar 2025 15:49:42 +0100
-Subject: [PATCH 359/406] winegcc: Use -nodefaultlibs also for the linker
+Subject: [PATCH 359/414] winegcc: Use -nodefaultlibs also for the linker
  tests.
 
 ---

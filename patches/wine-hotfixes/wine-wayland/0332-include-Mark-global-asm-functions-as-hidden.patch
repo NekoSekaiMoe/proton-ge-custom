@@ -1,7 +1,7 @@
-From 71c171ae86f1658571fdd728bd4c287f7eb343c4 Mon Sep 17 00:00:00 2001
+From db95d86e9dce2f86fbb489bb09f176d9026f3a55 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 23 Jan 2025 12:46:54 +0100
-Subject: [PATCH 332/406] include: Mark global asm functions as hidden.
+Subject: [PATCH 332/414] include: Mark global asm functions as hidden.
 
 ---
  dlls/ntdll/unix/signal_i386.c   | 4 ++--

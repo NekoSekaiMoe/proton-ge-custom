@@ -1,8 +1,8 @@
-From d97d7c2c1503d3e41318cc07cc0f8f3d403bd4f2 Mon Sep 17 00:00:00 2001
+From a1ae17b8cba33b77a5c46d6e678490141802a128 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 5 Oct 2025 23:29:10 -0500
-Subject: [PATCH 324/406] winewayland: Fix DPI scaling.
+Subject: [PATCH 324/414] winewayland: Fix DPI scaling.
 
 I was baited into thinking this doesn't work because rocket league just doesn't support this feature LMAO. Running on winex11 shows that this change produces same result. Therefore, it only makes sense that this is here because it is how upstream wine handles fractional scaling (this is of course not how we are doing it)
 ---

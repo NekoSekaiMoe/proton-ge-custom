@@ -1,7 +1,7 @@
-From e4a8537510b95b17930a36a953ed7cddc609f956 Mon Sep 17 00:00:00 2001
+From 64bc451b48918e5589eb7f0ac992d2a713e5f07e Mon Sep 17 00:00:00 2001
 From: Keno Fischer <keno@juliacomputing.com>
 Date: Wed, 15 Dec 2021 21:09:35 -0500
-Subject: [PATCH 338/406] ntdll: Make server requests robust to spurious short
+Subject: [PATCH 338/414] ntdll: Make server requests robust to spurious short
  writes.
 
 It is possible for the write/writev functions in send_request to
@@ -24,10 +24,10 @@ Signed-off-by: Keno Fischer <keno@juliacomputing.com>
  1 file changed, 35 insertions(+), 7 deletions(-)
 
 diff --git a/dlls/ntdll/unix/server.c b/dlls/ntdll/unix/server.c
-index 44b605c8856..40d9f5d7ac5 100644
+index 71406976f4e..0d13d765a40 100644
 --- a/dlls/ntdll/unix/server.c
 +++ b/dlls/ntdll/unix/server.c
-@@ -185,18 +185,27 @@ static DECLSPEC_NORETURN void server_protocol_perror( const char *err )
+@@ -186,18 +186,27 @@ static DECLSPEC_NORETURN void server_protocol_perror( const char *err )
   */
  static unsigned int send_request( const struct __server_request_info *req )
  {
@@ -59,7 +59,7 @@ index 44b605c8856..40d9f5d7ac5 100644
  
          vec[0].iov_base = (void *)&req->u.req;
          vec[0].iov_len = sizeof(req->u.req);
-@@ -205,11 +214,30 @@ static unsigned int send_request( const struct __server_request_info *req )
+@@ -206,11 +215,30 @@ static unsigned int send_request( const struct __server_request_info *req )
              vec[i+1].iov_base = (void *)req->data[i].ptr;
              vec[i+1].iov_len = req->data[i].size;
          }

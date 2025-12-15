@@ -1,15 +1,15 @@
-From bb4d7796098f0319d39c1cf92719d0d477864bcc Mon Sep 17 00:00:00 2001
+From 3a7e7078fa366e88a5dcf92f1469fe054e91cf0b Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 7 Aug 2025 14:27:09 -0400
-Subject: [PATCH 239/406] HACK: wine.inf: Add workaround for WRC9
+Subject: [PATCH 239/414] HACK: wine.inf: Add workaround for WRC9
 
 ---
  loader/wine.inf.in | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/loader/wine.inf.in b/loader/wine.inf.in
-index c0800b3b5a3..d876d0f8bfd 100644
+index 810c1b83d15..ad178fae2ca 100644
 --- a/loader/wine.inf.in
 +++ b/loader/wine.inf.in
 @@ -3027,6 +3027,7 @@ HKCU,Software\Wine\AppDefaults\rayne1.exe\DllOverrides,"d3d8",,"native"

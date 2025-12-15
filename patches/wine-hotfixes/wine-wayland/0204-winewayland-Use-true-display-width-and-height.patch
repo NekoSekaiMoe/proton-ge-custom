@@ -1,7 +1,7 @@
-From 396d5047efcb12347973448d5281e351efd26fc3 Mon Sep 17 00:00:00 2001
+From b18ecbf2c48359d0ec4ac68feabc809c63535906 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Tue, 5 Aug 2025 12:57:56 -0400
-Subject: [PATCH 204/406] winewayland: Use true display width and height.
+Subject: [PATCH 204/414] winewayland: Use true display width and height.
 
 ---
  dlls/winewayland.drv/display.c        | 16 +++++++++++-----

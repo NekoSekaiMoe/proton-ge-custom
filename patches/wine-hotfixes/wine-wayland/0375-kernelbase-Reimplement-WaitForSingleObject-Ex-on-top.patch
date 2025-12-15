@@ -1,7 +1,7 @@
-From d506ad4a19e0a7323ee0576cb149d31a81b33ca7 Mon Sep 17 00:00:00 2001
+From b6cf02e8f8f424ee2bef996aa98e5a74398c9b0d Mon Sep 17 00:00:00 2001
 From: Marc-Aurel Zent <mzent@codeweavers.com>
 Date: Mon, 27 Oct 2025 19:19:24 +0100
-Subject: [PATCH 375/406] kernelbase: Reimplement WaitForSingleObject[Ex] on
+Subject: [PATCH 375/414] kernelbase: Reimplement WaitForSingleObject[Ex] on
  top of NtWaitForSingleObject.
 
 ---

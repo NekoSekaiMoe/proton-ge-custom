@@ -1,7 +1,7 @@
-From 5a70214a3c7793c4ade09fc32e6f4213added72e Mon Sep 17 00:00:00 2001
+From 4518473d833a867d846424542522606bf5706e3f Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Sun, 18 May 2025 12:13:06 +0200
-Subject: [PATCH 334/406] include: Add a macro to define a pointer variable in
+Subject: [PATCH 334/414] include: Add a macro to define a pointer variable in
  assembly.
 
 ---

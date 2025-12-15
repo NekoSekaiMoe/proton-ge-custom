@@ -1,7 +1,7 @@
-From 20072f824a9bdefc6b3efebaf07282d0eba2d0ae Mon Sep 17 00:00:00 2001
+From 82cf31afadf56465bcf3c51fe133af355d4612ce Mon Sep 17 00:00:00 2001
 From: Alex Henrie <alexhenrie24@gmail.com>
 Date: Sun, 30 Mar 2025 20:34:04 -0600
-Subject: [PATCH 256/406] ntdll: Correct NtAllocateReserveObject arguments in
+Subject: [PATCH 256/414] ntdll: Correct NtAllocateReserveObject arguments in
  specfile.
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 256/406] ntdll: Correct NtAllocateReserveObject arguments in
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
-index aabe4888a73..958855bc169 100644
+index 3099da106e5..865fafa41d0 100644
 --- a/dlls/ntdll/ntdll.spec
 +++ b/dlls/ntdll/ntdll.spec
 @@ -147,7 +147,7 @@

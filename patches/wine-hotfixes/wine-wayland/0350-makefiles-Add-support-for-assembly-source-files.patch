@@ -1,7 +1,7 @@
-From 7943cf35540944ce878fb6b424c68bcacd7e92b6 Mon Sep 17 00:00:00 2001
+From e79748b5f6ffef207f0f1082fa57d4185449ed54 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 27 Feb 2025 11:01:12 +0100
-Subject: [PATCH 350/406] makefiles: Add support for assembly source files.
+Subject: [PATCH 350/414] makefiles: Add support for assembly source files.
 
 ---
  tools/make_makefiles |  2 +-

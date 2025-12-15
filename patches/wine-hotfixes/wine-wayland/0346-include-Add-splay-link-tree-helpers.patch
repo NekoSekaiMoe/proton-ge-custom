@@ -1,7 +1,7 @@
-From 13bc26439f22bb34bd0c23eea8460bcff406d04e Mon Sep 17 00:00:00 2001
+From d5018ed6f0e1d2d0681a26f0d05f9b5263731b4a Mon Sep 17 00:00:00 2001
 From: Zhiyi Zhang <zzhang@codeweavers.com>
 Date: Wed, 22 Jan 2025 11:58:35 +0800
-Subject: [PATCH 346/406] include: Add splay link tree helpers.
+Subject: [PATCH 346/414] include: Add splay link tree helpers.
 
 ---
  include/ddk/ntddk.h | 26 ++++++++++++++++++++++++++

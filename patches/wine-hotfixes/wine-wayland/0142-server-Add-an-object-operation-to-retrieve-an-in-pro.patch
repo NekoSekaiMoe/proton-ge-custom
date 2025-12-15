@@ -1,7 +1,7 @@
-From 440cdd7a1144ce6cb4ffd91bda4c9d41358537bf Mon Sep 17 00:00:00 2001
+From ddc9d539352ff596a42000c3f49e364b383c89c2 Mon Sep 17 00:00:00 2001
 From: Elizabeth Figura <zfigura@codeweavers.com>
 Date: Thu, 3 Jul 2025 16:28:01 -0400
-Subject: [PATCH 142/406] server: Add an object operation to retrieve an
+Subject: [PATCH 142/414] server: Add an object operation to retrieve an
  in-process synchronization object.
 
 ---
@@ -75,10 +75,10 @@ index 58ac264c0a9..a791a054951 100644
                  }
              }
 diff --git a/include/Makefile.in b/include/Makefile.in
-index 8a124af634e..ad07fa46834 100644
+index 96ec0fe385d..1d174c2d312 100644
 --- a/include/Makefile.in
 +++ b/include/Makefile.in
-@@ -943,6 +943,7 @@ SOURCES = \
+@@ -944,6 +944,7 @@ SOURCES = \
  	wine/mscvpdb.h \
  	wine/mssign.h \
  	wine/nsi.h \

@@ -1,7 +1,7 @@
-From 9bda77abe31e3e8ebec99e39b1e4d2443fd88247 Mon Sep 17 00:00:00 2001
+From 8c5267e4db61a21c3d1497b536da7df1e6d29d85 Mon Sep 17 00:00:00 2001
 From: Alexander Morozov <amorozov@etersoft.ru>
 Date: Thu, 24 Apr 2025 02:49:56 +0300
-Subject: [PATCH 124/406] ntoskrnl.exe/tests: Test that calling some Io
+Subject: [PATCH 124/414] ntoskrnl.exe/tests: Test that calling some Io
  functions does not result in receiving IRP_MN_QUERY_ID.
 
 ---

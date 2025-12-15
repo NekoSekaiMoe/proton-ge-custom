@@ -1,14 +1,14 @@
-From 2cc12d211af8e07aa97ae5a93fa6647e80142c95 Mon Sep 17 00:00:00 2001
+From 8af8877c22cb4d9a9847df95190da67e0ed855be Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Sat, 14 Jun 2025 11:22:44 -0400
-Subject: [PATCH 097/406] wine.inf: Add override for diabotical
+Subject: [PATCH 097/414] wine.inf: Add override for diabotical
 
 ---
  loader/wine.inf.in | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/loader/wine.inf.in b/loader/wine.inf.in
-index 58240b767ff..c0800b3b5a3 100644
+index 6a866240adc..810c1b83d15 100644
 --- a/loader/wine.inf.in
 +++ b/loader/wine.inf.in
 @@ -3000,6 +3000,7 @@ HKCU,Software\Wine\DllOverrides,"vcruntime140_1",0x2,"native,builtin"

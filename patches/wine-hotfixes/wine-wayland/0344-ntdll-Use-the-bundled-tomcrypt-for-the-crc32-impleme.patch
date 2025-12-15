@@ -1,7 +1,7 @@
-From cad17f69305b88ed94effc16688bd7ad7221c79d Mon Sep 17 00:00:00 2001
+From eeae4d9a33f5305c30b16a272cd2dab658d47b42 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Mon, 24 Feb 2025 12:17:33 +0100
-Subject: [PATCH 344/406] ntdll: Use the bundled tomcrypt for the crc32
+Subject: [PATCH 344/414] ntdll: Use the bundled tomcrypt for the crc32
  implementation.
 
 ---
@@ -24,7 +24,7 @@ index 457ae577399..acc10f61fe9 100644
  UNIX_LIBS    = $(IOKIT_LIBS) $(COREFOUNDATION_LIBS) $(CORESERVICES_LIBS) $(RT_LIBS) $(PTHREAD_LIBS) $(UNWIND_LIBS) $(I386_LIBS) $(PROCSTAT_LIBS)
  
 diff --git a/dlls/ntdll/rtl.c b/dlls/ntdll/rtl.c
-index deee078faa2..f63ca0bb86b 100644
+index 230526d651a..12e27c28425 100644
 --- a/dlls/ntdll/rtl.c
 +++ b/dlls/ntdll/rtl.c
 @@ -31,6 +31,7 @@

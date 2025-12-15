@@ -1,18 +1,18 @@
-From 2e18200496b53ef192e7bc34d07d7760a2f331a5 Mon Sep 17 00:00:00 2001
+From 45f04eba2dc65dcaaed4d1583845ef47982c1c52 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 13 Aug 2025 03:56:55 -0400
-Subject: [PATCH 253/406] ntdll: Add SystemPowerInformation semi-stub.
+Subject: [PATCH 253/414] ntdll: Add SystemPowerInformation semi-stub.
 
 ---
  dlls/ntdll/unix/system.c | 13 +++++++++++++
  1 file changed, 13 insertions(+)
 
 diff --git a/dlls/ntdll/unix/system.c b/dlls/ntdll/unix/system.c
-index fa6d417e8cf..e3d8c6d3b42 100644
+index c769bc4f38d..3fb03769f1e 100644
 --- a/dlls/ntdll/unix/system.c
 +++ b/dlls/ntdll/unix/system.c
-@@ -4455,6 +4455,19 @@ NTSTATUS WINAPI NtPowerInformation( POWER_INFORMATION_LEVEL level, void *input,
+@@ -4457,6 +4457,19 @@ NTSTATUS WINAPI NtPowerInformation( POWER_INFORMATION_LEVEL level, void *input,
          return STATUS_SUCCESS;
      }
  

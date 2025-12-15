@@ -1,7 +1,7 @@
-From 528466e4408b5a2fe7a444b23e10f793831ef53b Mon Sep 17 00:00:00 2001
+From df57d58514d1fb65312744cc5a3666797ce70964 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Sun, 18 May 2025 12:07:18 +0200
-Subject: [PATCH 333/406] include: Output the name label directly in the
+Subject: [PATCH 333/414] include: Output the name label directly in the
  __ASM_GLOBL macro.
 
 ---

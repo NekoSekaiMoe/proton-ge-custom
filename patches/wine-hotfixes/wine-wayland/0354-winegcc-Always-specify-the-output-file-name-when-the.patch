@@ -1,7 +1,7 @@
-From 9bd639f8d42312198145e1e80eecfdc2d55cd7d6 Mon Sep 17 00:00:00 2001
+From 86ce5a19671824049eb2f1e7a9745a46522ac8ec Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Wed, 5 Feb 2025 11:26:25 +0100
-Subject: [PATCH 354/406] winegcc: Always specify the output file name when
+Subject: [PATCH 354/414] winegcc: Always specify the output file name when
  there's no spec file.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=41342

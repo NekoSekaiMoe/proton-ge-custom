@@ -1,15 +1,15 @@
-From 348a9a108beaf76240ba928fb46e075c362282d0 Mon Sep 17 00:00:00 2001
+From aba6431c1074f3cdc56c2d63b890447117fcaef0 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 24 Aug 2025 17:10:45 -0500
-Subject: [PATCH 284/406] wine.inf: Move WRC9 workaround next to WRCG.
+Subject: [PATCH 284/414] wine.inf: Move WRC9 workaround next to WRCG.
 
 ---
  loader/wine.inf.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/loader/wine.inf.in b/loader/wine.inf.in
-index d876d0f8bfd..7b5285f6fd8 100644
+index ad178fae2ca..3aeb6f6e31f 100644
 --- a/loader/wine.inf.in
 +++ b/loader/wine.inf.in
 @@ -2999,6 +2999,7 @@ HKCU,Software\Wine\DllOverrides,"nvcuda",0x2,"disabled"

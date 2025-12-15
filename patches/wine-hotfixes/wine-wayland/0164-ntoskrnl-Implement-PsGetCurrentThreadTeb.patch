@@ -1,8 +1,8 @@
-From 5cccfbcfd6ea5cddd315097e5c9a7cb21e93170c Mon Sep 17 00:00:00 2001
+From e7efc9b15f6970300ad5c1d63db8df1020dcee55 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:09:07 -0400
-Subject: [PATCH 164/406] ntoskrnl: Implement PsGetCurrentThreadTeb.
+Subject: [PATCH 164/414] ntoskrnl: Implement PsGetCurrentThreadTeb.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 7 +++++++

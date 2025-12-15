@@ -47,28 +47,6 @@ apply_all_in_dir() {
     pushd protonfixes
     git reset --hard HEAD
     git clean -xdf
-    pushd subprojects
-    pushd libmspack
-    git reset --hard HEAD
-    git clean -xdf
-    popd
-    pushd umu-database
-    git reset --hard HEAD
-    git clean -xdf
-    popd
-    pushd unzip
-    git reset --hard HEAD
-    git clean -xdf
-    popd
-    pushd winetricks
-    git reset --hard HEAD
-    git clean -xdf
-    echo "WINETRICKS: fix broken gnutls when fetching https"
-    apply_patch "../../../patches/winetricks/winetrick_gnutls_fix.patch"
-    echo "WINETRICKS: fix broken mono/dotnet removal"
-    apply_patch "../../../patches/winetricks/winetricks_dotnet_remove_fix.patch"
-    popd
-    popd
     popd
 
 ### END PREP SECTION ###
@@ -268,6 +246,7 @@ apply_all_in_dir() {
     echo "WINE: -GAME FIXES- add le mans ultimate patches"
     apply_patch "../patches/game-patches/lemansultimate-gameinput.patch"
 
+
 ### END GAME PATCH SECTION ###
 
 ### (2-5) WINE HOTFIX/BACKPORT SECTION ###
@@ -306,6 +285,9 @@ apply_all_in_dir() {
 
 ### (2-7) PROTON-GE ADDITIONAL CUSTOM PATCHES ###
 
+    echo "WINE: Add an env variable to override channel count in winealsa"
+    apply_patch "../patches/proton/winealsa-override-channel-count.patch"
+    
     echo "WINE: -FSR- fullscreen hack fsr patch"
     apply_patch "../patches/proton/0001-fshack-Implement-AMD-FSR-upscaler-for-fullscreen-hac.patch"
 
@@ -329,6 +311,10 @@ apply_all_in_dir() {
 
     echo "WINE: -CUSTOM- Add envvar to allow method=automatic to be set for video orientation in gstreamer"
     apply_patch "../patches/proton/proton-use_winegstreamer_and_set_orientation-PROTON_MEDIA_USE_GST-PROTON_GST_VIDEO_ORIENTATION.patch"
+
+    # https://steamcommunity.com/app/2074920/discussions/0/604168604057160448/
+    echo "WINE: --CUSTOM-- add WINE_HOSTBLOCK envvar to allow working around some failed anticheats (notably eac)"
+    apply_patch "../patches/proton/wine_host_block_envvar.patch"
 
     echo "WINE: RUN AUTOCONF TOOLS/MAKE_REQUESTS"
     autoreconf -f

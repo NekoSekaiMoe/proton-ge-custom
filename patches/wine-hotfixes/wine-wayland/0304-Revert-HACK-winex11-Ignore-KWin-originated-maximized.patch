@@ -1,8 +1,8 @@
-From 88ec0f21b0caee2dfda6ad9c879fd6172f311277 Mon Sep 17 00:00:00 2001
+From ecaf528bd3d998471e9edbdeaa07d3a946467d61 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 18 Sep 2025 15:48:30 -0500
-Subject: [PATCH 304/406] Revert "HACK: winex11: Ignore KWin-originated
+Subject: [PATCH 304/414] Revert "HACK: winex11: Ignore KWin-originated
  maximized window state changes."
 
 This reverts commit dfe45c50b5f71eb3827fe2277f35a2b75d828608.
@@ -11,7 +11,7 @@ This reverts commit dfe45c50b5f71eb3827fe2277f35a2b75d828608.
  1 file changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/dlls/winex11.drv/window.c b/dlls/winex11.drv/window.c
-index bf3a17fbefb..e9b74aba75e 100644
+index 37be6ccd276..e6edb171e3c 100644
 --- a/dlls/winex11.drv/window.c
 +++ b/dlls/winex11.drv/window.c
 @@ -1846,9 +1846,10 @@ static UINT window_update_client_state( struct x11drv_win_data *data )

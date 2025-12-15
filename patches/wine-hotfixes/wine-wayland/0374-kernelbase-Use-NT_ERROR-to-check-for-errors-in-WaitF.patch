@@ -1,7 +1,7 @@
-From 8137d3fa3153ded753940258d3aa618eb2859335 Mon Sep 17 00:00:00 2001
+From 69a82cca4958d820bf15ac9713ffc793bdb54c7e Mon Sep 17 00:00:00 2001
 From: Marc-Aurel Zent <mzent@codeweavers.com>
 Date: Thu, 30 Oct 2025 21:42:58 +0100
-Subject: [PATCH 374/406] kernelbase: Use NT_ERROR() to check for errors in
+Subject: [PATCH 374/414] kernelbase: Use NT_ERROR() to check for errors in
  WaitForMultipleObjectsEx.
 
 ---

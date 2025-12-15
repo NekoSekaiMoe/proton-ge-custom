@@ -1,7 +1,7 @@
-From eeb5ab68bf808e5cbe7c12a648b8f5bd49018c27 Mon Sep 17 00:00:00 2001
+From 3830586715cd373c82ce0c32fc616aa422f03398 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Tue, 5 Aug 2025 16:28:54 -0400
-Subject: [PATCH 207/406] kernel32: Add some stubs for chromium.
+Subject: [PATCH 207/414] kernel32: Add some stubs for chromium.
 
 ---
  dlls/kernel32/kernel32.spec |  2 ++
@@ -9,7 +9,7 @@ Subject: [PATCH 207/406] kernel32: Add some stubs for chromium.
  2 files changed, 22 insertions(+)
 
 diff --git a/dlls/kernel32/kernel32.spec b/dlls/kernel32/kernel32.spec
-index 618225a58a1..dc0aa0b975f 100644
+index 5aaf5b594dd..6d3712ce428 100644
 --- a/dlls/kernel32/kernel32.spec
 +++ b/dlls/kernel32/kernel32.spec
 @@ -1008,6 +1008,7 @@

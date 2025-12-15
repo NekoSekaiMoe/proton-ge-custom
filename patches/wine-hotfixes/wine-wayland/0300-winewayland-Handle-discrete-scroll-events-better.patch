@@ -1,8 +1,8 @@
-From b0ea11b3adb82628419a570a04831463cd3cd905 Mon Sep 17 00:00:00 2001
+From abdfe7ceae20f369a7077e24317a5895437c5791 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 10 Sep 2025 00:59:16 -0500
-Subject: [PATCH 300/406] winewayland: Handle discrete scroll events better.
+Subject: [PATCH 300/414] winewayland: Handle discrete scroll events better.
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 37 ++++++++++++++++++--------

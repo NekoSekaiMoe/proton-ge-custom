@@ -1,7 +1,7 @@
-From 19ae48e1fab4eaa5d27c753a27025bd4e9309871 Mon Sep 17 00:00:00 2001
+From d93d3bf661c7c8bf93a644054c598d6ed5754c55 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 17 Jul 2025 15:29:33 +0200
-Subject: [PATCH 386/406] ntdll: Add NtAccessCheckByTypeAndAuditAlarm() and
+Subject: [PATCH 386/414] ntdll: Add NtAccessCheckByTypeAndAuditAlarm() and
  NtCloseObjectAuditAlarm() stubs.
 
 They need explicit syscall ids.
@@ -17,7 +17,7 @@ They need explicit syscall ids.
  8 files changed, 429 insertions(+), 318 deletions(-)
 
 diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
-index e28e63efa21..70d9829a811 100644
+index 337deeaf604..1a753b11823 100644
 --- a/dlls/ntdll/ntdll.spec
 +++ b/dlls/ntdll/ntdll.spec
 @@ -134,7 +134,7 @@
@@ -951,7 +951,7 @@ index 98546854b57..982a3143fca 100644
  {
    WORD   Type;
 diff --git a/include/winternl.h b/include/winternl.h
-index c18551a7547..349ef297387 100644
+index 7561062d9d6..12780719c32 100644
 --- a/include/winternl.h
 +++ b/include/winternl.h
 @@ -4540,7 +4540,8 @@ NTSYSAPI NTSTATUS  WINAPI LdrUnlockLoaderLock(ULONG,ULONG_PTR);

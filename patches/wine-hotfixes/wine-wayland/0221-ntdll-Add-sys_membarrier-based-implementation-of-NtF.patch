@@ -1,7 +1,7 @@
-From ab336c1a7d10cc43cf51d3bed0f768f247a15b28 Mon Sep 17 00:00:00 2001
+From b28846692c9b5422ce97eafd4dacf36e6914cc02 Mon Sep 17 00:00:00 2001
 From: Torge Matthies <tmatthies@codeweavers.com>
 Date: Tue, 20 Feb 2024 16:45:49 +0100
-Subject: [PATCH 221/406] ntdll: Add sys_membarrier-based implementation of
+Subject: [PATCH 221/414] ntdll: Add sys_membarrier-based implementation of
  NtFlushProcessWriteBuffers.
 
 Uses the MEMBARRIER_CMD_PRIVATE_EXPEDITED membarrier command introduced in Linux 4.14.

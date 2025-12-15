@@ -1,8 +1,8 @@
-From 70100aea279f9f02f153927ac96a0861d19b18b5 Mon Sep 17 00:00:00 2001
+From c46eccf78f366d22045d318b977d1294aa715ac3 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 19 Nov 2025 01:36:48 -0600
-Subject: [PATCH 392/406] winewayland: Implement german scanvk mapping.
+Subject: [PATCH 392/414] winewayland: Implement german scanvk mapping.
 
 ---
  dlls/winewayland.drv/wayland_keyboard.c | 8 ++++----

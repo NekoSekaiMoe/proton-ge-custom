@@ -1,8 +1,8 @@
-From 7d4350bcedfde13a41227515a8f7d76055fec7fc Mon Sep 17 00:00:00 2001
+From 8eef799507f10d85a3b6b07408aa0ea022d62d9e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 2 Jun 2025 17:45:42 -0400
-Subject: [PATCH 075/406] winewayland: Don't scale raw input values.
+Subject: [PATCH 075/414] winewayland: Don't scale raw input values.
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 21 +++++++++++++--------

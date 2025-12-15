@@ -1,7 +1,7 @@
-From 6754d5a5f751fdc21466a9fb00b44f78f6547e04 Mon Sep 17 00:00:00 2001
+From 951c288b4851957e91a850403d02f2b5ada03731 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Fri, 28 Mar 2025 17:28:30 +0100
-Subject: [PATCH 249/406] ntdll: Use the InitializeObjectAttributes macro in
+Subject: [PATCH 249/414] ntdll: Use the InitializeObjectAttributes macro in
  more places.
 
 ---
@@ -78,7 +78,7 @@ index a4581d05b91..6fad3f3cba1 100644
                       FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT ))
      {
 diff --git a/dlls/ntdll/loader.c b/dlls/ntdll/loader.c
-index 12fd8c43ec9..a723465bf61 100644
+index 2ae1081965d..dbcb97f7223 100644
 --- a/dlls/ntdll/loader.c
 +++ b/dlls/ntdll/loader.c
 @@ -2783,12 +2783,7 @@ static NTSTATUS open_dll_file( UNICODE_STRING *nt_name, WINE_MODREF **pwm, HANDL
@@ -95,7 +95,7 @@ index 12fd8c43ec9..a723465bf61 100644
      if ((status = NtOpenFile( &handle, GENERIC_READ | SYNCHRONIZE, &attr, &io,
                                FILE_SHARE_READ | FILE_SHARE_DELETE,
                                FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE )))
-@@ -3932,13 +3927,7 @@ NTSTATUS WINAPI LdrQueryImageFileExecutionOptions( const UNICODE_STRING *key, LP
+@@ -3948,13 +3943,7 @@ NTSTATUS WINAPI LdrQueryImageFileExecutionOptions( const UNICODE_STRING *key, LP
      ULONG len;
      WCHAR *p;
  
@@ -110,7 +110,7 @@ index 12fd8c43ec9..a723465bf61 100644
      p = key->Buffer + key->Length / sizeof(WCHAR);
      while (p > key->Buffer && p[-1] != '\\') p--;
      len = key->Length - (p - key->Buffer) * sizeof(WCHAR);
-@@ -4364,13 +4353,7 @@ static void load_global_options(void)
+@@ -4380,13 +4369,7 @@ static void load_global_options(void)
      is_prefix_bootstrap =
          RtlQueryEnvironmentVariable_U( NULL, &bootstrap_mode_str, &val_str ) != STATUS_VARIABLE_NOT_FOUND;
  
@@ -125,7 +125,7 @@ index 12fd8c43ec9..a723465bf61 100644
      if (!NtOpenKey( &hkey, KEY_QUERY_VALUE, &attr ))
      {
          query_dword_option( hkey, L"SafeProcessSearchMode", &path_safe_mode );
-@@ -4948,12 +4931,7 @@ NTSTATUS WINAPI LdrAddDllDirectory( const UNICODE_STRING *dir, void **cookie )
+@@ -4964,12 +4947,7 @@ NTSTATUS WINAPI LdrAddDllDirectory( const UNICODE_STRING *dir, void **cookie )
          return STATUS_NO_MEMORY;
      memcpy( ptr->dir, nt_name.Buffer, len * sizeof(WCHAR) );
  

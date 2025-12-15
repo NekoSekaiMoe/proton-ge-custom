@@ -1,7 +1,7 @@
-From 57cb182af5efc21bc121516759f7a2262e5850e8 Mon Sep 17 00:00:00 2001
+From a5f8a74beb3f5d0c380c45966d4145b4c4995d32 Mon Sep 17 00:00:00 2001
 From: Brendan Shanks <bshanks@codeweavers.com>
 Date: Wed, 3 Sep 2025 22:03:01 -0700
-Subject: [PATCH 330/406] ntdll: Fix crash in check_invalid_gsbase() on macOS.
+Subject: [PATCH 330/414] ntdll: Fix crash in check_invalid_gsbase() on macOS.
 
 Jumping to 0x0 or a similarly invalid address would result in a
 segfault in check_invalid_gsbase().

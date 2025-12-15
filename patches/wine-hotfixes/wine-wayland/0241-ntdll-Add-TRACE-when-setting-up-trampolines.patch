@@ -1,8 +1,8 @@
-From 1d6a3cfc9ce24f3f418bd2ba0c95173235e05e15 Mon Sep 17 00:00:00 2001
+From c1854fc418499741262f606505f0821f29d08976 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 10 Aug 2025 21:53:04 -0400
-Subject: [PATCH 241/406] ntdll: Add TRACE when setting up trampolines
+Subject: [PATCH 241/414] ntdll: Add TRACE when setting up trampolines
 
 ---
  dlls/ntdll/loader.c      | 1 +
@@ -10,7 +10,7 @@ Subject: [PATCH 241/406] ntdll: Add TRACE when setting up trampolines
  2 files changed, 3 insertions(+)
 
 diff --git a/dlls/ntdll/loader.c b/dlls/ntdll/loader.c
-index 1521900e752..12fd8c43ec9 100644
+index 68ba5939af2..2ae1081965d 100644
 --- a/dlls/ntdll/loader.c
 +++ b/dlls/ntdll/loader.c
 @@ -2341,6 +2341,7 @@ static NTSTATUS build_module( LPCWSTR load_path, const UNICODE_STRING *nt_name,
@@ -22,7 +22,7 @@ index 1521900e752..12fd8c43ec9 100644
          if (is_steamclient32)
          {
 diff --git a/dlls/ntdll/unix/loader.c b/dlls/ntdll/unix/loader.c
-index f5efad48bda..c5690ba7b08 100644
+index 1ee577b6797..2a380ec1694 100644
 --- a/dlls/ntdll/unix/loader.c
 +++ b/dlls/ntdll/unix/loader.c
 @@ -650,6 +650,8 @@ NTSTATUS exec_wineloader( char **argv, int socketfd, const struct pe_image_info

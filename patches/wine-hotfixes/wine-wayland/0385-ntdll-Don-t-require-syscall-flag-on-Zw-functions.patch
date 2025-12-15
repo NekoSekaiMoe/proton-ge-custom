@@ -1,7 +1,7 @@
-From c5c90516a8a71e067a1f4c71c00e78f937889b6c Mon Sep 17 00:00:00 2001
+From 2044e61946927be15dde5797921aeeb1214cc052 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Mon, 12 May 2025 15:56:25 +0200
-Subject: [PATCH 385/406] ntdll: Don't require syscall flag on Zw functions.
+Subject: [PATCH 385/414] ntdll: Don't require syscall flag on Zw functions.
 
 ---
  dlls/ntdll/ntdll.spec | 499 +++++++++++++++++++++---------------------
@@ -9,7 +9,7 @@ Subject: [PATCH 385/406] ntdll: Don't require syscall flag on Zw functions.
  2 files changed, 249 insertions(+), 251 deletions(-)
 
 diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
-index 10445c797c3..e28e63efa21 100644
+index 99ac0ba2d8b..337deeaf604 100644
 --- a/dlls/ntdll/ntdll.spec
 +++ b/dlls/ntdll/ntdll.spec
 @@ -1208,342 +1208,341 @@

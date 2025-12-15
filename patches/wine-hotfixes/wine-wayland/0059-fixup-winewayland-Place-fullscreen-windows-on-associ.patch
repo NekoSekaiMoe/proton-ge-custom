@@ -1,8 +1,8 @@
-From 1f3c106949f8a3c706f81e29e7379b4b97056c49 Mon Sep 17 00:00:00 2001
+From 9ceefddeabfd59251e7ce17952abef6839d0b403 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 23 May 2025 14:09:14 -0400
-Subject: [PATCH 059/406] fixup! winewayland: Place fullscreen windows on
+Subject: [PATCH 059/414] fixup! winewayland: Place fullscreen windows on
  associated output.
 
 ---

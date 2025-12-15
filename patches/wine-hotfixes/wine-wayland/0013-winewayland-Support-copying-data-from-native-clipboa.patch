@@ -1,7 +1,7 @@
-From 5afe158c513037f8bf2e1a269c305484e9b4b055 Mon Sep 17 00:00:00 2001
+From e6f75389c24e0df47caa9698cb877c326ace1b23 Mon Sep 17 00:00:00 2001
 From: Alexandros Frantzis <alexandros.frantzis@collabora.com>
 Date: Wed, 29 Jan 2025 10:23:44 +0200
-Subject: [PATCH 013/406] winewayland: Support copying data from native
+Subject: [PATCH 013/414] winewayland: Support copying data from native
  clipboard to win32 apps.
 
 ---

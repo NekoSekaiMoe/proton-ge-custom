@@ -1,7 +1,7 @@
-From 6e8e7ff607c7d703be032ee1e184d27e62fd7937 Mon Sep 17 00:00:00 2001
+From 7353d087f7ec6f4635b1e5dbe03d10b46a24be91 Mon Sep 17 00:00:00 2001
 From: Torge Matthies <tmatthies@codeweavers.com>
 Date: Tue, 20 Feb 2024 16:45:49 +0100
-Subject: [PATCH 222/406] ntdll: Add thread_get_register_pointer_values-based
+Subject: [PATCH 222/414] ntdll: Add thread_get_register_pointer_values-based
  implementation of NtFlushProcessWriteBuffers.
 
 ---

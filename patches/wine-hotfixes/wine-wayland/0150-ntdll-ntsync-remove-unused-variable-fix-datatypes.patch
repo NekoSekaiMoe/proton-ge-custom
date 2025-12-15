@@ -1,8 +1,8 @@
-From 1a426d1f7bf88a0c2106386582b06c6e630b8001 Mon Sep 17 00:00:00 2001
+From 0620ba46c72a8415dc70a21b5d1f7964d978d65c Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 14 Jul 2025 03:45:49 -0400
-Subject: [PATCH 150/406] ntdll/ntsync: remove unused variable & fix datatypes.
+Subject: [PATCH 150/414] ntdll/ntsync: remove unused variable & fix datatypes.
 
 ---
  dlls/ntdll/unix/sync.c         | 7 +++----
@@ -49,10 +49,10 @@ index e877d2eae53..8ed7c50e62e 100644
      else
      {
 diff --git a/dlls/ntdll/unix/unix_private.h b/dlls/ntdll/unix/unix_private.h
-index 7357d42ff6a..5c5600713b2 100644
+index 9c1b9a0dcea..666dc6ec68e 100644
 --- a/dlls/ntdll/unix/unix_private.h
 +++ b/dlls/ntdll/unix/unix_private.h
-@@ -418,7 +418,7 @@ extern void call_raise_user_exception_dispatcher(void);
+@@ -420,7 +420,7 @@ extern void call_raise_user_exception_dispatcher(void);
  extern const char * wine_debuginfostr_pc(void *pc);
  
  #define TICKSPERSEC 10000000

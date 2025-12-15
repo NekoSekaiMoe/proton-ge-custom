@@ -1,7 +1,7 @@
-From 6420280be4846061d2b539e1fc61bbc4cbcada1c Mon Sep 17 00:00:00 2001
+From 039869bbf9afc78791f675f7a0ce5dc9eddfeaa8 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 17 Apr 2025 18:52:52 +0200
-Subject: [PATCH 101/406] ntdll: Add a stub for NtCreateSectionEx().
+Subject: [PATCH 101/414] ntdll: Add a stub for NtCreateSectionEx().
 
 ---
  dlls/ntdll/ntdll.spec       |  2 ++
@@ -12,7 +12,7 @@ Subject: [PATCH 101/406] ntdll: Add a stub for NtCreateSectionEx().
  5 files changed, 46 insertions(+)
 
 diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
-index ba1c5a039a2..aabe4888a73 100644
+index 90ba4289f7f..3099da106e5 100644
 --- a/dlls/ntdll/ntdll.spec
 +++ b/dlls/ntdll/ntdll.spec
 @@ -194,6 +194,7 @@
@@ -108,7 +108,7 @@ index 8f88be73233..b5db38ccda1 100644
   *           wow64_NtFlushInstructionCache
   */
 diff --git a/include/winternl.h b/include/winternl.h
-index 11a013f62d8..7feebf28ba1 100644
+index 477615f8b91..3aadb562466 100644
 --- a/include/winternl.h
 +++ b/include/winternl.h
 @@ -4590,6 +4590,7 @@ NTSYSAPI NTSTATUS  WINAPI NtCreatePort(PHANDLE,POBJECT_ATTRIBUTES,ULONG,ULONG,PU

@@ -1,8 +1,8 @@
-From 24d3d7afde1ebe54cfe699d6a7ddea99a07ffc04 Mon Sep 17 00:00:00 2001
+From 8a12b406afa54f06864aab5d8d6297ec09c9d918 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 15 Nov 2025 23:22:11 -0600
-Subject: [PATCH 389/406] amdxc/atidxx: Remove unused header.
+Subject: [PATCH 389/414] amdxc/atidxx: Remove unused header.
 
 ---
  dlls/amdxc64/main.c  | 1 -

@@ -1,7 +1,7 @@
-From 3e8d224ef1226f9c2d89e89d1b38c632e84c6f95 Mon Sep 17 00:00:00 2001
+From e3d86294612e71d07b3d842592fb083c213ea783 Mon Sep 17 00:00:00 2001
 From: Brendan Shanks <bshanks@codeweavers.com>
 Date: Fri, 28 Feb 2025 16:52:42 -0800
-Subject: [PATCH 356/406] winegcc: Rename TOOL_ enum constants.
+Subject: [PATCH 356/414] winegcc: Rename TOOL_ enum constants.
 
 macOS has conflicting TOOL_ defines in <mach-o/loader.h>.
 ---

@@ -1,8 +1,8 @@
-From b7ddd8b06957da9945d3d52ca0662f92165f1b08 Mon Sep 17 00:00:00 2001
+From a0f9deb7faa5acf516bead72fabbead2d4f71004 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 24 Nov 2025 23:05:08 -0600
-Subject: [PATCH 002/406] Reapply "ntdll: Implement
+Subject: [PATCH 002/414] Reapply "ntdll: Implement
  NtAlertMultipleThreadByThreadId()."
 
 This reverts commit 4eece26b263f7b6bc90016501ab59f4c065c3249.
@@ -16,7 +16,7 @@ This reverts commit 4eece26b263f7b6bc90016501ab59f4c065c3249.
  6 files changed, 100 insertions(+)
 
 diff --git a/dlls/ntdll/ntdll.spec b/dlls/ntdll/ntdll.spec
-index c4e4d6a17e8..ba1c5a039a2 100644
+index a2b80a4551a..90ba4289f7f 100644
 --- a/dlls/ntdll/ntdll.spec
 +++ b/dlls/ntdll/ntdll.spec
 @@ -142,6 +142,7 @@
@@ -211,7 +211,7 @@ index 8968bcc2d0e..573b003ac44 100644
   *           wow64_NtAlertResumeThread
   */
 diff --git a/include/winternl.h b/include/winternl.h
-index 335d972d31c..11a013f62d8 100644
+index a61377788b8..477615f8b91 100644
 --- a/include/winternl.h
 +++ b/include/winternl.h
 @@ -4544,6 +4544,7 @@ NTSYSAPI NTSTATUS  WINAPI NtAccessCheckAndAuditAlarm(PUNICODE_STRING,HANDLE,PUNI

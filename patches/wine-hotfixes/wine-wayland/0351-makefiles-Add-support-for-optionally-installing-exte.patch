@@ -1,7 +1,7 @@
-From 9fd4e35845e9abe9888a892f2d88bc150419788a Mon Sep 17 00:00:00 2001
+From a5e50d14dacc7448da6ecf8d5c1045a07cf53f21 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 27 Feb 2025 11:01:48 +0100
-Subject: [PATCH 351/406] makefiles: Add support for optionally installing
+Subject: [PATCH 351/414] makefiles: Add support for optionally installing
  external libs.
 
 ---

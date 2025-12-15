@@ -1,8 +1,8 @@
-From 89ef3f50184de81850aaf724f66b10481669b63e Mon Sep 17 00:00:00 2001
+From 24441a203dd124f1a67a4a99fd29eb4fbbd913ea Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 15 Aug 2025 21:51:16 -0400
-Subject: [PATCH 277/406] winewayland: Optimize steam overlay active detection.
+Subject: [PATCH 277/414] winewayland: Optimize steam overlay active detection.
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 10 +++++-----

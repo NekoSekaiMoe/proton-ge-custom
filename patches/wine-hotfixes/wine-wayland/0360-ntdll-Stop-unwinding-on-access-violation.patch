@@ -1,14 +1,14 @@
-From cd292839813a9e9ee686d003f6c739391897cd30 Mon Sep 17 00:00:00 2001
+From d634addaad5174729fec3df792527100b46aa56a Mon Sep 17 00:00:00 2001
 From: Dylan Donnell <dylan.donnell@student.griffith.ie>
 Date: Sun, 19 Oct 2025 13:37:58 +0200
-Subject: [PATCH 360/406] ntdll: Stop unwinding on access violation.
+Subject: [PATCH 360/414] ntdll: Stop unwinding on access violation.
 
 ---
- dlls/ntdll/signal_x86_64.c | 36 +++++++++++++++++++++++++++---------
- 1 file changed, 27 insertions(+), 9 deletions(-)
+ dlls/ntdll/signal_x86_64.c | 38 ++++++++++++++++++++++++++++----------
+ 1 file changed, 28 insertions(+), 10 deletions(-)
 
 diff --git a/dlls/ntdll/signal_x86_64.c b/dlls/ntdll/signal_x86_64.c
-index 0de3a9da61f..5402b3842a5 100644
+index bab9bf2edae..9d3a8920a19 100644
 --- a/dlls/ntdll/signal_x86_64.c
 +++ b/dlls/ntdll/signal_x86_64.c
 @@ -908,6 +908,14 @@ NTSTATUS WINAPI RtlWow64SuspendThread( HANDLE thread, ULONG *count )
@@ -26,7 +26,7 @@ index 0de3a9da61f..5402b3842a5 100644
  /*************************************************************************
   *		RtlWalkFrameChain (NTDLL.@)
   */
-@@ -923,17 +931,27 @@ ULONG WINAPI RtlWalkFrameChain( void **buffer, ULONG count, ULONG flags )
+@@ -923,18 +931,28 @@ ULONG WINAPI RtlWalkFrameChain( void **buffer, ULONG count, ULONG flags )
  
      RtlCaptureContext( &context );
  
@@ -34,6 +34,7 @@ index 0de3a9da61f..5402b3842a5 100644
 +    __TRY
      {
 -        func = RtlLookupFunctionEntry( context.Rip, &base, &table );
+-        if (!func) break;
 -        if (RtlVirtualUnwind2( UNW_FLAG_NHANDLER, base, context.Rip, func, &context, NULL,
 -                               &data, &frame, NULL, NULL, NULL, &handler, 0 ))
 -            break;
@@ -44,6 +45,7 @@ index 0de3a9da61f..5402b3842a5 100644
 +        for (i = 0; i < count; i++)
 +        {
 +            func = RtlLookupFunctionEntry( context.Rip, &base, &table );
++            if (!func) break;
 +            if (RtlVirtualUnwind2( UNW_FLAG_NHANDLER, base, context.Rip, func, &context, NULL,
 +                                &data, &frame, NULL, NULL, NULL, &handler, 0 ))
 +                break;

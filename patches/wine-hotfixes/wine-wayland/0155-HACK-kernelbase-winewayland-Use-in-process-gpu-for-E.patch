@@ -1,7 +1,7 @@
-From c11e562f4f29f17b5e2ba78eb3d9857cac62b1d8 Mon Sep 17 00:00:00 2001
+From cee211ba520b80f790e8e7282e4b3d46618fd3de Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Thu, 17 Jul 2025 09:50:37 -0400
-Subject: [PATCH 155/406] HACK: kernelbase: winewayland: Use --in-process-gpu
+Subject: [PATCH 155/414] HACK: kernelbase: winewayland: Use --in-process-gpu
  for EA App.
 
 ---

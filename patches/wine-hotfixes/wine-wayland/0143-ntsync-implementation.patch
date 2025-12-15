@@ -1,7 +1,7 @@
-From dd21b6b85f2a2c6990050bb56bf3d9d4278fc306 Mon Sep 17 00:00:00 2001
+From 3b96564dac5bbd4007496afb2c2b22cc998aad17 Mon Sep 17 00:00:00 2001
 From: Elizabeth Figura <zfigura@codeweavers.com>
 Date: Mon, 7 Jul 2025 21:44:10 -0400
-Subject: [PATCH 143/406] ntsync implementation
+Subject: [PATCH 143/414] ntsync implementation
 
 ---
  dlls/ntdll/unix/esync.c        |   2 +-
@@ -71,7 +71,7 @@ index 22d7fb35d7b..248abc7d357 100644
          }
          else  /* Unix lock conflict, sleep a bit and retry */
 diff --git a/dlls/ntdll/unix/fsync.c b/dlls/ntdll/unix/fsync.c
-index 4d9f5cde7b2..b2b16eafb0e 100644
+index a54fb0e4b7b..2f1cf481da1 100644
 --- a/dlls/ntdll/unix/fsync.c
 +++ b/dlls/ntdll/unix/fsync.c
 @@ -171,7 +171,7 @@ int do_fsync(void)
@@ -84,7 +84,7 @@ index 4d9f5cde7b2..b2b16eafb0e 100644
  
      return do_fsync_cached;
 diff --git a/dlls/ntdll/unix/process.c b/dlls/ntdll/unix/process.c
-index 32f307ce028..e36137a4a66 100644
+index a38edc9b854..1f65876e37a 100644
 --- a/dlls/ntdll/unix/process.c
 +++ b/dlls/ntdll/unix/process.c
 @@ -923,7 +923,7 @@ NTSTATUS WINAPI NtCreateUserProcess( HANDLE *process_handle_ptr, HANDLE *thread_
@@ -97,10 +97,10 @@ index 32f307ce028..e36137a4a66 100644
      {
          req->info = wine_server_obj_handle( process_info );
 diff --git a/dlls/ntdll/unix/server.c b/dlls/ntdll/unix/server.c
-index 30fc6fc9214..44b605c8856 100644
+index 92fdf68b000..71406976f4e 100644
 --- a/dlls/ntdll/unix/server.c
 +++ b/dlls/ntdll/unix/server.c
-@@ -799,7 +799,6 @@ unsigned int server_wait( const union select_op *select_op, data_size_t size, UI
+@@ -800,7 +800,6 @@ unsigned int server_wait( const union select_op *select_op, data_size_t size, UI
      return ret;
  }
  
@@ -108,7 +108,7 @@ index 30fc6fc9214..44b605c8856 100644
  /***********************************************************************
   *              NtContinue  (NTDLL.@)
   */
-@@ -876,7 +875,7 @@ unsigned int server_queue_process_apc( HANDLE process, const union apc_call *cal
+@@ -877,7 +876,7 @@ unsigned int server_queue_process_apc( HANDLE process, const union apc_call *cal
          }
          else
          {
@@ -117,7 +117,7 @@ index 30fc6fc9214..44b605c8856 100644
  
              SERVER_START_REQ( get_apc_result )
              {
-@@ -1810,12 +1809,17 @@ NTSTATUS WINAPI NtDuplicateObject( HANDLE source_process, HANDLE source, HANDLE
+@@ -1813,12 +1812,17 @@ NTSTATUS WINAPI NtDuplicateObject( HANDLE source_process, HANDLE source, HANDLE
          return result.dup_handle.status;
      }
  
@@ -135,7 +135,7 @@ index 30fc6fc9214..44b605c8856 100644
  
      SERVER_START_REQ( dup_handle )
      {
-@@ -1881,12 +1885,17 @@ NTSTATUS WINAPI NtClose( HANDLE handle )
+@@ -1884,12 +1888,17 @@ NTSTATUS WINAPI NtClose( HANDLE handle )
      if (HandleToLong( handle ) >= ~5 && HandleToLong( handle ) <= ~0)
          return STATUS_SUCCESS;
  
@@ -999,7 +999,7 @@ index 54b0420d2f1..53129999240 100644
          SERVER_START_REQ( get_thread_context )
          {
 diff --git a/dlls/ntdll/unix/unix_private.h b/dlls/ntdll/unix/unix_private.h
-index d3fea9d153d..7357d42ff6a 100644
+index 9cfe64b92ec..9c1b9a0dcea 100644
 --- a/dlls/ntdll/unix/unix_private.h
 +++ b/dlls/ntdll/unix/unix_private.h
 @@ -114,6 +114,7 @@ struct ntdll_thread_data
@@ -1010,7 +1010,7 @@ index d3fea9d153d..7357d42ff6a 100644
  };
  
  C_ASSERT( sizeof(struct ntdll_thread_data) <= sizeof(((TEB *)0)->GdiTebBatch) );
-@@ -223,6 +224,8 @@ extern void start_server( BOOL debug );
+@@ -224,6 +225,8 @@ extern void start_server( BOOL debug );
  
  extern pthread_mutex_t fd_cache_mutex;
  
@@ -1019,7 +1019,7 @@ index d3fea9d153d..7357d42ff6a 100644
  extern unsigned int server_call_unlocked( void *req_ptr );
  extern void server_enter_uninterrupted_section( pthread_mutex_t *mutex, sigset_t *sigset );
  extern void server_leave_uninterrupted_section( pthread_mutex_t *mutex, sigset_t *sigset );
-@@ -403,6 +406,8 @@ extern NTSTATUS wow64_wine_spawnvp( void *args );
+@@ -405,6 +408,8 @@ extern NTSTATUS wow64_wine_spawnvp( void *args );
  
  extern void dbg_init(void);
  
@@ -1028,7 +1028,7 @@ index d3fea9d153d..7357d42ff6a 100644
  extern NTSTATUS call_user_apc_dispatcher( CONTEXT *context_ptr, ULONG_PTR arg1, ULONG_PTR arg2, ULONG_PTR arg3,
                                            PNTAPCFUNC func, NTSTATUS status );
  extern NTSTATUS call_user_exception_dispatcher( EXCEPTION_RECORD *rec, CONTEXT *context );
-@@ -413,6 +418,7 @@ extern void call_raise_user_exception_dispatcher(void);
+@@ -415,6 +420,7 @@ extern void call_raise_user_exception_dispatcher(void);
  extern const char * wine_debuginfostr_pc(void *pc);
  
  #define TICKSPERSEC 10000000

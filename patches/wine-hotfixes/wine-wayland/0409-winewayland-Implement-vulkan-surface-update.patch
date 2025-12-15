@@ -1,0 +1,70 @@
+From 0d006108eb33a097c00f2d552442aa32ddd2cc41 Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Fri, 5 Dec 2025 09:41:28 -0600
+Subject: [PATCH 409/414] winewayland: Implement vulkan surface update.
+
+based on: https://gitlab.winehq.org/wine/wine/-/commit/9be0cf187b69f8e60c65993b8e1eba4f7d4ca0a0
+---
+ dlls/winewayland.drv/vulkan.c          | 18 ++++++++++++++++++
+ dlls/winewayland.drv/wayland_surface.c |  2 ++
+ dlls/winewayland.drv/waylanddrv.h      |  1 +
+ 3 files changed, 21 insertions(+)
+
+diff --git a/dlls/winewayland.drv/vulkan.c b/dlls/winewayland.drv/vulkan.c
+index 9b2e1ef8188..a53cdc9d786 100644
+--- a/dlls/winewayland.drv/vulkan.c
++++ b/dlls/winewayland.drv/vulkan.c
+@@ -145,6 +145,24 @@ static void wayland_vulkan_surface_detach(HWND hwnd, void *private)
+ 
+ static void wayland_vulkan_surface_update(HWND hwnd, void *private)
+ {
++    struct wayland_win_data *data;
++    struct wayland_client_surface *client = private;
++    HWND toplevel = NtUserGetAncestor(hwnd, GA_ROOT);
++
++    TRACE("%p %p\n", hwnd, private);
++
++    if (!(data = wayland_win_data_get(hwnd))) return;
++
++    if (toplevel && NtUserIsWindowVisible(hwnd))
++    {
++        /* proton updates vulkan surface in some vk query* methods, requiring this to be here */
++        if (!EqualRect(&data->rects.client, &client->rect))
++            wayland_client_surface_attach(client, toplevel);
++    }
++    else
++        wayland_client_surface_detach(client);
++
++    wayland_win_data_release(data);
+ }
+ 
+ static void wayland_vulkan_surface_presented(HWND hwnd, void *private, VkResult result)
+diff --git a/dlls/winewayland.drv/wayland_surface.c b/dlls/winewayland.drv/wayland_surface.c
+index 82bb08e2443..25a5353418d 100644
+--- a/dlls/winewayland.drv/wayland_surface.c
++++ b/dlls/winewayland.drv/wayland_surface.c
+@@ -738,6 +738,8 @@ static void wayland_surface_reconfigure_client(struct wayland_surface *surface,
+     int client_x, client_y, x, y;
+     int client_width, client_height, width, height;
+ 
++    client->rect = *client_rect;
++
+     /* The offset of the client area origin relatively to the window origin. */
+     client_x = client_rect->left + window->client_rect.left - window->rect.left;
+     client_y = client_rect->top + window->client_rect.top - window->rect.top;
+diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
+index d4f2991210c..41a6ff9d3d9 100644
+--- a/dlls/winewayland.drv/waylanddrv.h
++++ b/dlls/winewayland.drv/waylanddrv.h
+@@ -324,6 +324,7 @@ struct wayland_window_config
+ struct wayland_client_surface
+ {
+     LONG ref;
++    RECT rect;
+     HWND hwnd;
+     HWND toplevel;
+     struct wl_surface *wl_surface;
+-- 
+2.51.1
+

@@ -1,7 +1,7 @@
-From b16841fbb7f6cf85446c06095457505f2fdcead7 Mon Sep 17 00:00:00 2001
+From 4a7fc378aa49f168f141cf72aa8acf0586ce070e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Wed, 6 Aug 2025 10:51:30 -0400
-Subject: [PATCH 225/406] kernel32: Implement SetThreadpoolTimerEx.
+Subject: [PATCH 225/414] kernel32: Implement SetThreadpoolTimerEx.
 
 ---
  dlls/kernel32/kernel32.spec     | 1 +
@@ -9,7 +9,7 @@ Subject: [PATCH 225/406] kernel32: Implement SetThreadpoolTimerEx.
  2 files changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/kernel32/kernel32.spec b/dlls/kernel32/kernel32.spec
-index 47e809ec8fb..1a544d527b1 100644
+index 4741760831c..8384271f133 100644
 --- a/dlls/kernel32/kernel32.spec
 +++ b/dlls/kernel32/kernel32.spec
 @@ -1511,6 +1511,7 @@

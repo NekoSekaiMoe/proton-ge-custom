@@ -1,8 +1,8 @@
-From 07c467260a1ee6e8d6ebdd37dfeb9105241de54b Mon Sep 17 00:00:00 2001
+From 760e5c099702da240f6bcaa2d8bb8053e84941ce Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 26 Aug 2025 15:47:21 -0500
-Subject: [PATCH 286/406] gitignore: Add .cache
+Subject: [PATCH 286/414] gitignore: Add .cache
 
 ---
  .gitignore | 2 ++

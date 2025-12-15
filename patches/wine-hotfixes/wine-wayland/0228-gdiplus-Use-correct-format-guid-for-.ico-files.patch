@@ -1,7 +1,7 @@
-From 8352f967303c586d47321d63d4be0f76c23dc299 Mon Sep 17 00:00:00 2001
+From 081d36948637180c95685e096ba17ff60eda0e67 Mon Sep 17 00:00:00 2001
 From: Fabian Maurer <dark.shadow4@web.de>
 Date: Wed, 12 Feb 2025 18:59:01 +0100
-Subject: [PATCH 228/406] gdiplus: Use correct format guid for .ico files.
+Subject: [PATCH 228/414] gdiplus: Use correct format guid for .ico files.
 
 Adapted from https://github.com/reactos/reactos/pull/7714
 ---

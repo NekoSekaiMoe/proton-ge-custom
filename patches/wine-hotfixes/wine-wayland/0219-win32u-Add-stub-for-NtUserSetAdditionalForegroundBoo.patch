@@ -1,7 +1,7 @@
-From 10c86e3375cab5cb6413b1dd4211ec81f0a54eb0 Mon Sep 17 00:00:00 2001
+From 094485f79f062be9ed75c7354bcd18ba7f81ec3c Mon Sep 17 00:00:00 2001
 From: Louis Lenders <xerox.xerox2000x@gmail.com>
 Date: Tue, 18 Mar 2025 18:54:18 +0100
-Subject: [PATCH 219/406] win32u: Add stub for
+Subject: [PATCH 219/414] win32u: Add stub for
  NtUserSetAdditionalForegroundBoostProcesses.
 
 Microsoft Edge worked if windows version is set to win8.1 (or win7) but
@@ -600,7 +600,7 @@ index 1548f3e773a..18d80682101 100644
  {
      SYSCALL_FUNC( NtUserSetCapture );
 diff --git a/dlls/win32u/sysparams.c b/dlls/win32u/sysparams.c
-index 2ebb9fe42e2..70c2a1444bc 100644
+index 6f7d49ba21e..c3787943d5a 100644
 --- a/dlls/win32u/sysparams.c
 +++ b/dlls/win32u/sysparams.c
 @@ -7186,6 +7186,16 @@ BOOL WINAPI NtUserMessageBeep( UINT type )

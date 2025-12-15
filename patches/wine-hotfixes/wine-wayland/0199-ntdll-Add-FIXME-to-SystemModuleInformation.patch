@@ -1,17 +1,17 @@
-From 27a89c0493f484ff14fb21a77c62ea7f7c13baea Mon Sep 17 00:00:00 2001
+From 8aed49d98a1a8a1a8f41cf3e132b191afba1843c Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Wed, 30 Jul 2025 18:17:41 -0400
-Subject: [PATCH 199/406] ntdll: Add FIXME to SystemModuleInformation.
+Subject: [PATCH 199/414] ntdll: Add FIXME to SystemModuleInformation.
 
 ---
  dlls/ntdll/unix/system.c | 4 ++++
  1 file changed, 4 insertions(+)
 
 diff --git a/dlls/ntdll/unix/system.c b/dlls/ntdll/unix/system.c
-index b44548b8436..f82b7dd262c 100644
+index b071ea6be5f..6e186d102f5 100644
 --- a/dlls/ntdll/unix/system.c
 +++ b/dlls/ntdll/unix/system.c
-@@ -3417,6 +3417,8 @@ NTSTATUS WINAPI NtQuerySystemInformation( SYSTEM_INFORMATION_CLASS class,
+@@ -3433,6 +3433,8 @@ NTSTATUS WINAPI NtQuerySystemInformation( SYSTEM_INFORMATION_CLASS class,
          ULONG i;
          RTL_PROCESS_MODULES *smi = info;
  
@@ -20,7 +20,7 @@ index b44548b8436..f82b7dd262c 100644
          len = offsetof( RTL_PROCESS_MODULES, Modules[ARRAY_SIZE(fake_modules)] );
          if (len <= size)
          {
-@@ -3766,6 +3768,8 @@ NTSTATUS WINAPI NtQuerySystemInformation( SYSTEM_INFORMATION_CLASS class,
+@@ -3768,6 +3770,8 @@ NTSTATUS WINAPI NtQuerySystemInformation( SYSTEM_INFORMATION_CLASS class,
          ULONG i;
          RTL_PROCESS_MODULE_INFORMATION_EX *module_info = info;
  

@@ -1,7 +1,7 @@
-From 5b3f50608cf3002d3b0d47914bd9358364a3fb88 Mon Sep 17 00:00:00 2001
+From f7a5c2ea2990a44d001b4abce51eaa2d64e8cc44 Mon Sep 17 00:00:00 2001
 From: Jinoh Kang <jinoh.kang.kr@gmail.com>
 Date: Mon, 17 Feb 2025 23:56:57 +0900
-Subject: [PATCH 236/406] kernel32/tests: Add basic tests for internal flags of
+Subject: [PATCH 236/414] kernel32/tests: Add basic tests for internal flags of
  modules loaded with DONT_RESOLVE_DLL_REFERENCES.
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH 236/406] kernel32/tests: Add basic tests for internal flags of
  1 file changed, 34 insertions(+)
 
 diff --git a/dlls/kernel32/tests/module.c b/dlls/kernel32/tests/module.c
-index 6bdd175412a..631ccc0a828 100644
+index 680f2379fdf..77d6412d028 100644
 --- a/dlls/kernel32/tests/module.c
 +++ b/dlls/kernel32/tests/module.c
-@@ -1967,6 +1967,39 @@ static void test_known_dlls_load(void)
+@@ -2060,6 +2060,39 @@ static void test_known_dlls_load(void)
      DeleteFileA( dll );
  }
  
@@ -52,7 +52,7 @@ index 6bdd175412a..631ccc0a828 100644
  START_TEST(module)
  {
      WCHAR filenameW[MAX_PATH];
-@@ -2006,5 +2039,6 @@ START_TEST(module)
+@@ -2099,5 +2132,6 @@ START_TEST(module)
      test_tls_links();
      test_base_address_index_tree();
      test_hash_links();

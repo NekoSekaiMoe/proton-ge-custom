@@ -1,7 +1,7 @@
-From 8be2b8a62a9391ff6289445e73d2ac3fe534bd4e Mon Sep 17 00:00:00 2001
+From 96454d3a678fbce0ff5d6dec5d4ac875d6edffbb Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Tue, 29 Apr 2025 18:04:00 +0200
-Subject: [PATCH 367/406] tools: Add a platform-independent name for the
+Subject: [PATCH 367/414] tools: Add a platform-independent name for the
  ALL_SYSCALLS macros.
 
 ---
@@ -127,7 +127,7 @@ index dd7c33933ba..7da4a77e3d4 100644
  #undef SYSCALL_ENTRY
  
 diff --git a/dlls/ntdll/signal_x86_64.c b/dlls/ntdll/signal_x86_64.c
-index 5402b3842a5..b687ac7b6a4 100644
+index 9d3a8920a19..7de1aef813c 100644
 --- a/dlls/ntdll/signal_x86_64.c
 +++ b/dlls/ntdll/signal_x86_64.c
 @@ -44,7 +44,7 @@
@@ -140,7 +140,7 @@ index 5402b3842a5..b687ac7b6a4 100644
  
  
 diff --git a/dlls/ntdll/unix/loader.c b/dlls/ntdll/unix/loader.c
-index c5690ba7b08..17c7c0a5934 100644
+index 2a380ec1694..b95d530baa2 100644
 --- a/dlls/ntdll/unix/loader.c
 +++ b/dlls/ntdll/unix/loader.c
 @@ -124,22 +124,14 @@ SYSTEM_DLL_INIT_BLOCK *pLdrSystemDllInitBlock = NULL;

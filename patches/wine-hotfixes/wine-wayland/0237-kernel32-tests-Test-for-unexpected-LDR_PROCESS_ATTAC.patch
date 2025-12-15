@@ -1,7 +1,7 @@
-From c8783c2a8d61e8f4d83e655e5116b22eedae7cf1 Mon Sep 17 00:00:00 2001
+From d367180bbc6f30f94fc25ee6cd03feadbcd8f9d9 Mon Sep 17 00:00:00 2001
 From: Jinoh Kang <jinoh.kang.kr@gmail.com>
 Date: Tue, 18 Feb 2025 00:07:17 +0900
-Subject: [PATCH 237/406] kernel32/tests: Test for unexpected
+Subject: [PATCH 237/414] kernel32/tests: Test for unexpected
  LDR_PROCESS_ATTACHED flag in import dependency loaded with
  DONT_RESOLVE_DLL_REFERENCES.
 
@@ -10,10 +10,10 @@ Subject: [PATCH 237/406] kernel32/tests: Test for unexpected
  1 file changed, 27 insertions(+), 7 deletions(-)
 
 diff --git a/dlls/kernel32/tests/loader.c b/dlls/kernel32/tests/loader.c
-index 6714975d259..8fd1cf210ef 100644
+index fa14bc53836..83a5b7fe264 100644
 --- a/dlls/kernel32/tests/loader.c
 +++ b/dlls/kernel32/tests/loader.c
-@@ -2669,7 +2669,8 @@ static HANDLE gen_forward_chain_testdll( char testdll_path[MAX_PATH],
+@@ -2682,7 +2682,8 @@ static HANDLE gen_forward_chain_testdll( char testdll_path[MAX_PATH],
  
  static void subtest_export_forwarder_dep_chain( size_t num_chained_export_modules,
                                                  size_t exporter_index,
@@ -23,7 +23,7 @@ index 6714975d259..8fd1cf210ef 100644
  {
      size_t num_modules = num_chained_export_modules + !!test_static_import;
      size_t importer_index = test_static_import ? num_modules - 1 : 0;
-@@ -2711,7 +2712,7 @@ static void subtest_export_forwarder_dep_chain( size_t num_chained_export_module
+@@ -2724,7 +2725,7 @@ static void subtest_export_forwarder_dep_chain( size_t num_chained_export_module
          ok( !GetModuleHandleA( temp_paths[i] ), "%s already loaded\n",
              wine_dbgstr_a( temp_paths[i] ) );
  
@@ -32,7 +32,7 @@ index 6714975d259..8fd1cf210ef 100644
          ok( !!modules[i], "LoadLibraryA(temp_paths[%Iu] = %s) err=%lu\n",
              i, wine_dbgstr_a( temp_paths[i] ), GetLastError() );
  
-@@ -2765,6 +2766,17 @@ static void subtest_export_forwarder_dep_chain( size_t num_chained_export_module
+@@ -2778,6 +2779,17 @@ static void subtest_export_forwarder_dep_chain( size_t num_chained_export_module
          ultimate_depender_index = max( ultimate_depender_index, exporter_index );
      }
  
@@ -50,7 +50,7 @@ index 6714975d259..8fd1cf210ef 100644
      if (winetest_debug > 1)
          trace( "Unreference modules except the ultimate dependant DLL\n" );
  
-@@ -2828,23 +2840,31 @@ static void test_export_forwarder_dep_chain(void)
+@@ -2841,23 +2853,31 @@ static void test_export_forwarder_dep_chain(void)
  {
      winetest_push_context( "no import" );
      /* export forwarder does not introduce a dependency on its own */

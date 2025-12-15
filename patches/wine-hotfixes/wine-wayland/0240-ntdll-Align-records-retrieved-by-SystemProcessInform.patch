@@ -1,7 +1,7 @@
-From 9d5e37ccf54d872a25bc21193219e0ed8ac6120c Mon Sep 17 00:00:00 2001
+From 6674cf20d898992c43babc335a44385ac68f7e20 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Bernhard=20=C3=9Cbelacker?= <bernhardu@mailbox.org>
 Date: Wed, 14 May 2025 00:12:42 +0200
-Subject: [PATCH 240/406] ntdll: Align records retrieved by
+Subject: [PATCH 240/414] ntdll: Align records retrieved by
  SystemProcessInformation.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=55928
@@ -25,10 +25,10 @@ index c25809a8b11..1a49edfe906 100644
          {
              winetest_pop_context();
 diff --git a/dlls/ntdll/unix/system.c b/dlls/ntdll/unix/system.c
-index f82b7dd262c..fa6d417e8cf 100644
+index 6e186d102f5..c769bc4f38d 100644
 --- a/dlls/ntdll/unix/system.c
 +++ b/dlls/ntdll/unix/system.c
-@@ -3116,6 +3116,7 @@ C_ASSERT( sizeof(struct process_info) <= sizeof(SYSTEM_PROCESS_INFORMATION) );
+@@ -3132,6 +3132,7 @@ C_ASSERT( sizeof(struct process_info) <= sizeof(SYSTEM_PROCESS_INFORMATION) );
  
          proc_len = sizeof(*nt_process) + server_process->thread_count * thread_info_size
                       + (name_len + 1) * sizeof(WCHAR);

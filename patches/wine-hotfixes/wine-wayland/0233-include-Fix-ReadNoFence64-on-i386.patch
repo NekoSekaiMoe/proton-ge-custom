@@ -1,7 +1,7 @@
-From 83dbecb6cc12596a2921109e420eca2206041e3b Mon Sep 17 00:00:00 2001
+From cc3a773625494674128af68e19435fc1cf80eb79 Mon Sep 17 00:00:00 2001
 From: Jinoh Kang <jinoh.kang.kr@gmail.com>
 Date: Sat, 1 Feb 2025 17:05:08 +0900
-Subject: [PATCH 233/406] include: Fix ReadNoFence64 on i386.
+Subject: [PATCH 233/414] include: Fix ReadNoFence64 on i386.
 
 64-bit volatile loads are not atomic on i386.  Both i686-w64-mingw32-gcc
 and x86 MSVC splits 64-bit loads into a pair of load ops.

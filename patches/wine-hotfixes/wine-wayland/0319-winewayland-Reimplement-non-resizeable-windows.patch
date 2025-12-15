@@ -1,8 +1,8 @@
-From 97def04de81c97aa0b19d1fdcf61da503ef5f32c Mon Sep 17 00:00:00 2001
+From 963616d57d3844bbc48f78d4deb6c43cf73262a9 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 3 Oct 2025 22:26:11 -0500
-Subject: [PATCH 319/406] winewayland: Reimplement non-resizeable windows.
+Subject: [PATCH 319/414] winewayland: Reimplement non-resizeable windows.
 
 The old implementation causes loader section timeouts
 ---

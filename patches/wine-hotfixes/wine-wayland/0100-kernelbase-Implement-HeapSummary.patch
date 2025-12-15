@@ -1,7 +1,7 @@
-From fae848fecde50d29c6911cb10a004b41aa543048 Mon Sep 17 00:00:00 2001
+From e36bd2cf5717ad9784f7ac9819c9a27d56f55ae2 Mon Sep 17 00:00:00 2001
 From: Julius Bettin <julius.bettin@protonmail.com>
 Date: Mon, 16 Jun 2025 19:56:38 -0400
-Subject: [PATCH 100/406] kernelbase: Implement HeapSummary.
+Subject: [PATCH 100/414] kernelbase: Implement HeapSummary.
 
 ---
  dlls/kernel32/kernel32.spec     |  2 +-
@@ -12,7 +12,7 @@ Subject: [PATCH 100/406] kernelbase: Implement HeapSummary.
  5 files changed, 112 insertions(+), 2 deletions(-)
 
 diff --git a/dlls/kernel32/kernel32.spec b/dlls/kernel32/kernel32.spec
-index 2e51fa9b294..f071f93f520 100644
+index 1466f16356a..6b27d92c19c 100644
 --- a/dlls/kernel32/kernel32.spec
 +++ b/dlls/kernel32/kernel32.spec
 @@ -959,7 +959,7 @@
@@ -25,10 +25,10 @@ index 2e51fa9b294..f071f93f520 100644
  @ stub HeapUsage
  @ stdcall -import HeapValidate(long long ptr)
 diff --git a/dlls/kernel32/tests/heap.c b/dlls/kernel32/tests/heap.c
-index 93431fa55ba..9877331f08b 100644
+index b7daabb7ad5..123226d8eb1 100644
 --- a/dlls/kernel32/tests/heap.c
 +++ b/dlls/kernel32/tests/heap.c
-@@ -3785,6 +3785,53 @@ static void test_heap_sizes(void)
+@@ -3822,6 +3822,53 @@ static void test_heap_sizes(void)
      }
  }
  
@@ -82,7 +82,7 @@ index 93431fa55ba..9877331f08b 100644
  START_TEST(heap)
  {
      int argc;
-@@ -3806,6 +3853,7 @@ START_TEST(heap)
+@@ -3843,6 +3890,7 @@ START_TEST(heap)
      test_GetPhysicallyInstalledSystemMemory();
      test_GlobalMemoryStatus();
      test_heap_tail_zeroing( 0 );
