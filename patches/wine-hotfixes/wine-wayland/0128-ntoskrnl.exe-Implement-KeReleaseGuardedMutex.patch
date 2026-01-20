@@ -1,7 +1,7 @@
-From 68694d916337c9e83054c44af29e1b16a1fa8c72 Mon Sep 17 00:00:00 2001
+From c1ffdff8912d8d71a08a84a7bd404aab90758788 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Thu, 26 Jan 2023 15:09:21 -0500
-Subject: [PATCH 128/414] ntoskrnl.exe: Implement KeReleaseGuardedMutex.
+Subject: [PATCH 128/473] ntoskrnl.exe: Implement KeReleaseGuardedMutex.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.exe.spec |  2 ++
@@ -56,5 +56,5 @@ index 331c3e1bce2..a06bfcc05b6 100644
  {
      KTIMER *timer = timer_;
 -- 
-2.51.1
+2.52.0
 

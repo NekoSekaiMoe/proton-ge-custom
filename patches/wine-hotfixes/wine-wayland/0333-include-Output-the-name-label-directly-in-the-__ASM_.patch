@@ -1,7 +1,7 @@
-From df57d58514d1fb65312744cc5a3666797ce70964 Mon Sep 17 00:00:00 2001
+From 6c037ef543a522cb2855395440f98d731763da88 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Sun, 18 May 2025 12:07:18 +0200
-Subject: [PATCH 333/414] include: Output the name label directly in the
+Subject: [PATCH 333/473] include: Output the name label directly in the
  __ASM_GLOBL macro.
 
 ---
@@ -132,5 +132,5 @@ index 836ba39923a..6fef6944afd 100644
           __ASM_CFI(".cfi_startproc\n\t") \
           __ASM_EHABI(".fnstart\n\t") \
 -- 
-2.51.1
+2.52.0
 

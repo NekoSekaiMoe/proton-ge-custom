@@ -1,8 +1,8 @@
-From ca9bd1ba7a3dcd6473236278c906bf1c2e58eeb1 Mon Sep 17 00:00:00 2001
+From 9a3fcdfb10635b1447f56c8be7a6923c4f2c065f Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 15 May 2025 19:22:47 -0400
-Subject: [PATCH 052/414] winewayland: Use unaccelerated relative motion.
+Subject: [PATCH 052/473] winewayland: Use unaccelerated relative motion.
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 7 ++++---
@@ -35,5 +35,5 @@ index d37ecff7546..ea72393ce25 100644
  
      NtUserSendHardwareInput(hwnd, 0, &input, 0);
 -- 
-2.51.1
+2.52.0
 

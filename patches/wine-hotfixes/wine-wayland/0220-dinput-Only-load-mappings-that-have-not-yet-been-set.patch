@@ -1,7 +1,7 @@
-From 03ae20a8afbaefce8ec45b8e49a3dddad6854cf2 Mon Sep 17 00:00:00 2001
+From c8b24f3196195c5802c4b4511102d98e09a08eb3 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Thu, 27 Mar 2025 14:31:27 +0100
-Subject: [PATCH 220/414] dinput: Only load mappings that have not yet been
+Subject: [PATCH 220/473] dinput: Only load mappings that have not yet been
  set.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=57919
@@ -36,5 +36,5 @@ index 4166d18dd8c..dec4d2926e2 100644
          }
      }
 -- 
-2.51.1
+2.52.0
 

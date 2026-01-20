@@ -1,8 +1,8 @@
-From 55d02f46dec3686a50ef97d014ccaf4b6f6277b1 Mon Sep 17 00:00:00 2001
+From a2066fde269d498be0659839b093eb1d5aef7364 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 10 May 2025 12:22:40 -0400
-Subject: [PATCH 039/414] hack: win32u: fix opengl applications on winewayland
+Subject: [PATCH 039/473] hack: win32u: fix opengl applications on winewayland
 
 ---
  dlls/win32u/window.c                   | 3 ++-
@@ -66,5 +66,5 @@ index 36bbb2d4f67..094294fc40b 100644
 +    return !strcmp("waylanddrv", name);
 +}
 -- 
-2.51.1
+2.52.0
 

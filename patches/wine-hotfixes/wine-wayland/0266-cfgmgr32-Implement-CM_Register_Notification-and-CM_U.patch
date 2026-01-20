@@ -1,7 +1,7 @@
-From 3f4893a5f047ab8441d56b414a7cdd7ccdd506c0 Mon Sep 17 00:00:00 2001
+From 9c389ecf501c18703e7014df6c5aa5d0fc1f1152 Mon Sep 17 00:00:00 2001
 From: Vibhav Pant <vibhavp@gmail.com>
 Date: Wed, 19 Mar 2025 12:40:45 +0100
-Subject: [PATCH 266/414] cfgmgr32: Implement CM_Register_Notification and
+Subject: [PATCH 266/473] cfgmgr32: Implement CM_Register_Notification and
  CM_Unregister_Notification.
 
 ---
@@ -370,5 +370,5 @@ index 0c068d04b04..73a8bc8057c 100644
      todo_wine ok( cm_ctx.device_change_count == cm_ctx.device_change_expect, "%lu != %lu\n",
                    cm_ctx.device_change_count, cm_ctx.device_change_expect );
 -- 
-2.51.1
+2.52.0
 

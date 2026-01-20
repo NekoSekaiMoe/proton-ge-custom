@@ -1,7 +1,7 @@
-From b8b3461254bd04dc0e18b05067fc9c6177cb0025 Mon Sep 17 00:00:00 2001
+From 1760893b4f60b2ebe2ba0480a2cdb136ce0479a4 Mon Sep 17 00:00:00 2001
 From: Louis Lenders <xerox.xerox2000x@gmail.com>
 Date: Sat, 6 Sep 2025 10:26:11 +0200
-Subject: [PATCH 298/414] iphlpapi: Add stub for GetPerTcp6ConnectionEStats.
+Subject: [PATCH 298/473] iphlpapi: Add stub for GetPerTcp6ConnectionEStats.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=58635
 ---
@@ -71,5 +71,5 @@ index df8504517de..ca280a65806 100644
  IPHLPAPI_DLL_LINKAGE DWORD WINAPI GetUdpStatisticsEx(PMIB_UDPSTATS pStats, DWORD dwFamily);
  IPHLPAPI_DLL_LINKAGE DWORD WINAPI SetIfEntry(PMIB_IFROW pIfRow);
 -- 
-2.51.1
+2.52.0
 

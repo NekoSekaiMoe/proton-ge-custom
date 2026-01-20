@@ -1,7 +1,7 @@
-From 2c3ba85124fbf4e322f56eb606379c05100d4049 Mon Sep 17 00:00:00 2001
+From 2e4741a4ccc99688cd474be63bb3315896c78881 Mon Sep 17 00:00:00 2001
 From: Piotr Caban <piotr@codeweavers.com>
 Date: Thu, 24 Apr 2025 06:24:51 +0200
-Subject: [PATCH 341/414] msvcrt: Avoid dynamic allocation when storing locale
+Subject: [PATCH 341/473] msvcrt: Avoid dynamic allocation when storing locale
  name.
 
 ---
@@ -238,5 +238,5 @@ index 98c6c981f8d..74ba498a149 100644
  }
  
 -- 
-2.51.1
+2.52.0
 

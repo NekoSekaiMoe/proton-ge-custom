@@ -1,7 +1,7 @@
-From b982cb0a6c23e4d4c85fdc234601169f3b409d47 Mon Sep 17 00:00:00 2001
+From 66a220c9283e067ad979ac29b88f4734ef16a528 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Fri, 7 Mar 2025 15:49:42 +0100
-Subject: [PATCH 359/414] winegcc: Use -nodefaultlibs also for the linker
+Subject: [PATCH 359/473] winegcc: Use -nodefaultlibs also for the linker
  tests.
 
 ---
@@ -112,5 +112,5 @@ index facf734a9f8..0791aef8abd 100644
  
      strarray_addall( &link_args, flags );
 -- 
-2.51.1
+2.52.0
 

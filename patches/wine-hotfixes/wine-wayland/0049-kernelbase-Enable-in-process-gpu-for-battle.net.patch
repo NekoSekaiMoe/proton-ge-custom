@@ -1,8 +1,8 @@
-From 9dbfd0ee5d8034ef421ac19bd829dfb97c5d4b6a Mon Sep 17 00:00:00 2001
+From 10ea16d2a09dc28ca79b58bf100b295af5512471 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 15 May 2025 13:47:59 -0400
-Subject: [PATCH 049/414] kernelbase: Enable in-process-gpu for battle.net
+Subject: [PATCH 049/473] kernelbase: Enable in-process-gpu for battle.net
 
 ---
  dlls/kernelbase/process.c | 4 ++--
@@ -32,5 +32,5 @@ index dcd14346344..aafd452de06 100644
          wayland_hack_enabled, sizeof(wayland_hack_enabled));
  
 -- 
-2.51.1
+2.52.0
 

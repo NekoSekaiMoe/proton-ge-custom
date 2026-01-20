@@ -1,7 +1,7 @@
-From 888a00e52613e6409218a908b7f80d47cd76f647 Mon Sep 17 00:00:00 2001
+From 9c271167a3b78f5f1396477c8aa0ac5af242e310 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 17 Apr 2025 20:33:59 +0200
-Subject: [PATCH 102/414] kernelbase: Implement CreateFileMapping2().
+Subject: [PATCH 102/473] kernelbase: Implement CreateFileMapping2().
 
 ---
  dlls/kernelbase/kernelbase.spec |  1 +
@@ -23,7 +23,7 @@ index 7a2e36f0d0a..1ac3ce9b7d1 100644
  @ stdcall CreateFileMappingNumaW(long ptr long long long wstr long)
  @ stdcall CreateFileMappingW(long ptr long long long wstr)
 diff --git a/dlls/kernelbase/sync.c b/dlls/kernelbase/sync.c
-index cca6b5be5f8..d836c1e008d 100644
+index d1e82328893..1a6beacf162 100644
 --- a/dlls/kernelbase/sync.c
 +++ b/dlls/kernelbase/sync.c
 @@ -1087,6 +1087,35 @@ HANDLE WINAPI DECLSPEC_HOTPATCH CreateFileMappingW( HANDLE file, LPSECURITY_ATTR
@@ -88,5 +88,5 @@ index 3596e13d147..d474193c699 100644
  WINBASEAPI HANDLE      WINAPI CreateFileMappingW(HANDLE,LPSECURITY_ATTRIBUTES,DWORD,DWORD,DWORD,LPCWSTR);
  #define                       CreateFileMapping WINELIB_NAME_AW(CreateFileMapping)
 -- 
-2.51.1
+2.52.0
 

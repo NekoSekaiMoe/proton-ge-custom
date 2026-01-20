@@ -1,8 +1,8 @@
-From bbc7e3d69fdac4f75ef557c0871acf9a35e1b9ea Mon Sep 17 00:00:00 2001
+From d8a6403e13785e2b7a3a1251df858fb6d9f261a9 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 10 Dec 2025 23:47:05 -0600
-Subject: [PATCH 412/414] amdxc: Some minor code cleanups.
+Subject: [PATCH 412/473] amdxc: Some minor code cleanups.
 
 ---
  dlls/amdxc64/amdxc_interfaces.idl | 16 ++++----
@@ -10,7 +10,7 @@ Subject: [PATCH 412/414] amdxc: Some minor code cleanups.
  2 files changed, 50 insertions(+), 33 deletions(-)
 
 diff --git a/dlls/amdxc64/amdxc_interfaces.idl b/dlls/amdxc64/amdxc_interfaces.idl
-index 8a6c8e0011e..ffa6b29d52a 100644
+index 8a6c8e0011e..a3bca8400ba 100644
 --- a/dlls/amdxc64/amdxc_interfaces.idl
 +++ b/dlls/amdxc64/amdxc_interfaces.idl
 @@ -173,14 +173,14 @@ cpp_quote("#define AMD_EXT_WMMA_TYPE_FP8 11")
@@ -32,7 +32,7 @@ index 8a6c8e0011e..ffa6b29d52a 100644
 +    ULONG    bType; /* 18 */
 +    ULONG    cType; /* 1c */
 +    ULONG    resultType; /* 20 */
-+    UCHAR    saturatingAccumulation; /* 24 */
++    ULONG    saturatingAccumulation; /* 24 */
  } AmdExtWaveMatrixProperties;
  
  typedef struct
@@ -145,5 +145,5 @@ index f2623c73fda..6cadb49102b 100644
  
  static const struct IAmdExtD3DDevice8Vtbl AmdExtD3DDevice8_vtable = {
 -- 
-2.51.1
+2.52.0
 

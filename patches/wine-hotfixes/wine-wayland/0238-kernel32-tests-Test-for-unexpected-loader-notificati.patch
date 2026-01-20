@@ -1,7 +1,7 @@
-From f81b1cbb9bf5ca7a9ca022ef36c10ab63c557035 Mon Sep 17 00:00:00 2001
+From ed9d07a8afd7e13fdf89bb636ef1ea1e91940c91 Mon Sep 17 00:00:00 2001
 From: Jinoh Kang <jinoh.kang.kr@gmail.com>
 Date: Tue, 18 Feb 2025 01:38:39 +0900
-Subject: [PATCH 238/414] kernel32/tests: Test for unexpected loader
+Subject: [PATCH 238/473] kernel32/tests: Test for unexpected loader
  notification for import dependency loaded with DONT_RESOLVE_DLL_REFERENCES.
 
 ---
@@ -124,5 +124,5 @@ index 83a5b7fe264..ce9ee2ef459 100644
      pFlsSetValue = (void *)GetProcAddress(kernel32, "FlsSetValue");
      pFlsGetValue = (void *)GetProcAddress(kernel32, "FlsGetValue");
 -- 
-2.51.1
+2.52.0
 

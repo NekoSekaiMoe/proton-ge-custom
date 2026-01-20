@@ -1,8 +1,8 @@
-From 0d006108eb33a097c00f2d552442aa32ddd2cc41 Mon Sep 17 00:00:00 2001
+From d9972fa88750d965b15b5b84b07051b75201fcbf Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 5 Dec 2025 09:41:28 -0600
-Subject: [PATCH 409/414] winewayland: Implement vulkan surface update.
+Subject: [PATCH 409/473] winewayland: Implement vulkan surface update.
 
 based on: https://gitlab.winehq.org/wine/wine/-/commit/9be0cf187b69f8e60c65993b8e1eba4f7d4ca0a0
 ---
@@ -66,5 +66,5 @@ index d4f2991210c..41a6ff9d3d9 100644
      HWND toplevel;
      struct wl_surface *wl_surface;
 -- 
-2.51.1
+2.52.0
 

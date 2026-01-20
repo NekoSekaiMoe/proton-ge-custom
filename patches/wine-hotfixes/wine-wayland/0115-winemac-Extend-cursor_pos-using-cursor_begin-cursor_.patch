@@ -1,7 +1,7 @@
-From 5d61beecc5765964081b43a1f78b2cd647c87527 Mon Sep 17 00:00:00 2001
+From 91919871fe6ad768bec5860d949055691380124f Mon Sep 17 00:00:00 2001
 From: Byeongsik Jeon <bsjeon@hanmail.net>
 Date: Fri, 21 Feb 2025 22:40:05 +0900
-Subject: [PATCH 115/414] winemac: Extend cursor_pos using cursor_begin,
+Subject: [PATCH 115/473] winemac: Extend cursor_pos using cursor_begin,
  cursor_end.
 
 ---
@@ -54,5 +54,5 @@ index 20d82b9bef8..7e88e5f094b 100644
          }                                           im_set_text;
          struct {
 -- 
-2.51.1
+2.52.0
 

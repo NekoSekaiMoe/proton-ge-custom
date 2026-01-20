@@ -1,7 +1,7 @@
-From 7ce449c01f4cd1584170017f324fcdf10d0d69bd Mon Sep 17 00:00:00 2001
+From 60d8c79d9b966cbe13a09227ced75292bf5842fe Mon Sep 17 00:00:00 2001
 From: Sven Baars <sbaars@codeweavers.com>
 Date: Tue, 25 Mar 2025 20:57:36 +0100
-Subject: [PATCH 352/414] makedep: Fix a compilation warning.
+Subject: [PATCH 352/473] makedep: Fix a compilation warning.
 
 ---
  tools/makedep.c | 1 +
@@ -20,5 +20,5 @@ index 16cf7491b72..9c7ac1992e8 100644
      for (p = ret; dotdots; dotdots--, p += 3) memcpy( p, "../", 3 );
      p[-1] = 0;  /* remove trailing slash */
 -- 
-2.51.1
+2.52.0
 

@@ -1,8 +1,8 @@
-From 312988abc80c56fb02de05ab5884190ec6333155 Mon Sep 17 00:00:00 2001
+From 0fe4157549d23c0974b71e4b46a2fe3a873089f6 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 9 Dec 2025 13:07:38 -0600
-Subject: [PATCH 410/414] winewayland: Don't send pointer updates when there is
+Subject: [PATCH 410/473] winewayland: Don't send pointer updates when there is
  a pending warp.
 
 ---
@@ -42,5 +42,5 @@ index 5290990eaa1..4b3908e9c20 100644
      }
      else if (wl_surface && pointer->pending_warp)
 -- 
-2.51.1
+2.52.0
 

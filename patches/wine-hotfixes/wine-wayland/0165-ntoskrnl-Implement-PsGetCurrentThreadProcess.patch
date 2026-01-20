@@ -1,8 +1,8 @@
-From ed385ca524a9d79999cf24f6969de8f19f310f47 Mon Sep 17 00:00:00 2001
+From 19113387e96ccb822ee4c94e3b984e0a50865a87 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:14:35 -0400
-Subject: [PATCH 165/414] ntoskrnl: Implement PsGetCurrentThreadProcess.
+Subject: [PATCH 165/473] ntoskrnl: Implement PsGetCurrentThreadProcess.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 8 ++++++++
@@ -41,5 +41,5 @@ index 1524d526e72..ffe4e6561b8 100644
  @ stub PsGetCurrentThreadStackLimit
  @ stub PsGetJobLock
 -- 
-2.51.1
+2.52.0
 

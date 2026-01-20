@@ -1,8 +1,8 @@
-From fe1e659a8287e0863617e0e3c7e4c71358703363 Mon Sep 17 00:00:00 2001
+From febd8bb9c64318e1ccebc51aa403ae87724c71af Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 29 Jun 2025 10:28:03 -0400
-Subject: [PATCH 134/414] fixup! win32u: Don't move windows when it's
+Subject: [PATCH 134/473] fixup! win32u: Don't move windows when it's
  impossible.
 
 ---
@@ -48,5 +48,5 @@ index dbdea820d6d..f4479a66270 100644
              OffsetRect(&adjusted.client, offset_x, offset_y);
              OffsetRect(&adjusted.visible, offset_x, offset_y);
 -- 
-2.51.1
+2.52.0
 

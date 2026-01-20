@@ -1,0 +1,26 @@
+From 815a03c39fa5bb6e6f0d3ebcbcbc46bca5e93227 Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Thu, 25 Dec 2025 19:26:45 -0500
+Subject: [PATCH 464/473] winewayland: Add warning when xdg surface is
+ unconfigured.
+
+---
+ dlls/winewayland.drv/wayland_surface.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/dlls/winewayland.drv/wayland_surface.c b/dlls/winewayland.drv/wayland_surface.c
+index edc3367ece9..f9b0aa02824 100644
+--- a/dlls/winewayland.drv/wayland_surface.c
++++ b/dlls/winewayland.drv/wayland_surface.c
+@@ -766,6 +766,7 @@ static BOOL wayland_surface_reconfigure_xdg(struct wayland_surface *surface,
+                                                    width, height,
+                                                    window->state))
+     {
++        WARN("Failed to configure surface %p\n", surface);
+         return FALSE;
+     }
+ 
+-- 
+2.52.0
+

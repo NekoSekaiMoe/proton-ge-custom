@@ -1,8 +1,8 @@
-From ba9c4eed71ef6d0973ace669f82dd6d737ccd3ea Mon Sep 17 00:00:00 2001
+From bffb638ce94f88c4ac389b81c57ef37be5f4679c Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 4 Jun 2025 11:22:31 -0400
-Subject: [PATCH 079/414] winegstreamer: disable media converter
+Subject: [PATCH 079/473] winegstreamer: disable media converter
 
 ---
  dlls/winegstreamer/unixlib.c | 3 +++
@@ -28,5 +28,5 @@ index cd631535b50..45db94778aa 100644
      if (!GST_ELEMENT_REGISTER(winegstreamerstepper, NULL))
          GST_ERROR("Failed to register the stepper element");
 -- 
-2.51.1
+2.52.0
 

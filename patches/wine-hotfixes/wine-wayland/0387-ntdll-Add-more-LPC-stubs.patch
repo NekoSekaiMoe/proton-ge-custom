@@ -1,7 +1,7 @@
-From 2168e7c329e334b662ceddabca263716e5308b72 Mon Sep 17 00:00:00 2001
+From 5b356f7d4177e217fdbafe8c570c4ea433c319ce Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 17 Jul 2025 15:42:54 +0200
-Subject: [PATCH 387/414] ntdll: Add more LPC stubs.
+Subject: [PATCH 387/473] ntdll: Add more LPC stubs.
 
 They need explicit syscall ids.
 ---
@@ -1099,5 +1099,5 @@ index 12780719c32..c2e18229c83 100644
  NTSYSAPI NTSTATUS  WINAPI NtRequestPort(HANDLE,PLPC_MESSAGE);
  NTSYSAPI NTSTATUS  WINAPI NtRequestWaitReplyPort(HANDLE,PLPC_MESSAGE,PLPC_MESSAGE);
 -- 
-2.51.1
+2.52.0
 

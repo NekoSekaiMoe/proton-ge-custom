@@ -1,8 +1,8 @@
-From c2212fa05e8ee9f9c6e2917d27162b906c4927f9 Mon Sep 17 00:00:00 2001
+From 0176a2a7ebff345a04c8de5ff68185ac83fa788e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 15 Aug 2025 14:44:28 -0400
-Subject: [PATCH 276/414] winewayland: Add support for steam overlay event.
+Subject: [PATCH 276/473] winewayland: Add support for steam overlay event.
 
 ---
  dlls/winewayland.drv/wayland.c          | 26 +++++++++++++++++++++++++
@@ -157,5 +157,5 @@ index a9988149170..eb07bfa104b 100644
  
  /**********************************************************************
 -- 
-2.51.1
+2.52.0
 

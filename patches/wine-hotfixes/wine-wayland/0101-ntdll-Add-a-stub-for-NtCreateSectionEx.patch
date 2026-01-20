@@ -1,7 +1,7 @@
-From 039869bbf9afc78791f675f7a0ce5dc9eddfeaa8 Mon Sep 17 00:00:00 2001
+From 90a64d66962f0f42299084ad58d2c3ebcb4cbccf Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 17 Apr 2025 18:52:52 +0200
-Subject: [PATCH 101/414] ntdll: Add a stub for NtCreateSectionEx().
+Subject: [PATCH 101/473] ntdll: Add a stub for NtCreateSectionEx().
 
 ---
  dlls/ntdll/ntdll.spec       |  2 ++
@@ -120,5 +120,5 @@ index 477615f8b91..3aadb562466 100644
  NTSYSAPI NTSTATUS  WINAPI NtCreateSymbolicLinkObject(PHANDLE,ACCESS_MASK,POBJECT_ATTRIBUTES,PUNICODE_STRING);
  NTSYSAPI NTSTATUS  WINAPI NtCreateThread(PHANDLE,ACCESS_MASK,POBJECT_ATTRIBUTES,HANDLE,PCLIENT_ID,PCONTEXT,PINITIAL_TEB,BOOLEAN);
 -- 
-2.51.1
+2.52.0
 

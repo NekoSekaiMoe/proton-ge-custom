@@ -1,7 +1,7 @@
-From d93d3bf661c7c8bf93a644054c598d6ed5754c55 Mon Sep 17 00:00:00 2001
+From b1b7a3fe0ed4d008c8ab3e585acf661ea8e01950 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 17 Jul 2025 15:29:33 +0200
-Subject: [PATCH 386/414] ntdll: Add NtAccessCheckByTypeAndAuditAlarm() and
+Subject: [PATCH 386/473] ntdll: Add NtAccessCheckByTypeAndAuditAlarm() and
  NtCloseObjectAuditAlarm() stubs.
 
 They need explicit syscall ids.
@@ -965,5 +965,5 @@ index 7561062d9d6..12780719c32 100644
  NTSYSAPI NTSTATUS  WINAPI NtAdjustGroupsToken(HANDLE,BOOLEAN,PTOKEN_GROUPS,ULONG,PTOKEN_GROUPS,PULONG);
  NTSYSAPI NTSTATUS  WINAPI NtAdjustPrivilegesToken(HANDLE,BOOLEAN,PTOKEN_PRIVILEGES,DWORD,PTOKEN_PRIVILEGES,PDWORD);
 -- 
-2.51.1
+2.52.0
 

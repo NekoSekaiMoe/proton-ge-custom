@@ -93,7 +93,10 @@
         url = https://github.com/FEX-Emu/FEX.git
 [submodule "glslang"]
 	path = glslang
-	url = https://github.com/KhronosGroup/glslang
+	url = https://github.com/KhronosGroup/glslang.git
+[submodule "umu-protonfixes"]
+	path = umu-protonfixes
+	url = https://github.com/open-wine-components/umu-protonfixes.git
 [submodule "protonfixes"]
 	path = protonfixes
 	url = https://github.com/open-wine-components/umu-protonfixes.git

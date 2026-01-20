@@ -1,7 +1,7 @@
-From d5018ed6f0e1d2d0681a26f0d05f9b5263731b4a Mon Sep 17 00:00:00 2001
+From 448a45292bebd615538b7fef355f8f14866b1df2 Mon Sep 17 00:00:00 2001
 From: Zhiyi Zhang <zzhang@codeweavers.com>
 Date: Wed, 22 Jan 2025 11:58:35 +0800
-Subject: [PATCH 346/414] include: Add splay link tree helpers.
+Subject: [PATCH 346/473] include: Add splay link tree helpers.
 
 ---
  include/ddk/ntddk.h | 26 ++++++++++++++++++++++++++
@@ -45,5 +45,5 @@ index bb084424987..5ea1f71f5f5 100644
  
  typedef RTL_GENERIC_COMPARE_RESULTS (WINAPI *PRTL_GENERIC_COMPARE_ROUTINE)(struct _RTL_GENERIC_TABLE *, void *, void *);
 -- 
-2.51.1
+2.52.0
 

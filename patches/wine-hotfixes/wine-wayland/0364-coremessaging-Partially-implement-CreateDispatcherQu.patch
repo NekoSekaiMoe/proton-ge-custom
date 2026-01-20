@@ -1,7 +1,7 @@
-From 9e6b004d37d437fe922115336f6f38cf5e056f30 Mon Sep 17 00:00:00 2001
+From afb1374a5a89ba29ed87c16559b6d48424f8161a Mon Sep 17 00:00:00 2001
 From: Mohamad Al-Jaf <mohamadaljaf@gmail.com>
 Date: Sun, 27 Apr 2025 22:39:13 -0400
-Subject: [PATCH 364/414] coremessaging: Partially implement
+Subject: [PATCH 364/473] coremessaging: Partially implement
  CreateDispatcherQueueController().
 
 Needed by Paint.NET installer.
@@ -929,5 +929,5 @@ index 18081062fdb..cabc3ccd809 100644
      ok( dispatcher_queue_controller == (void *)0xdeadbeef, "got dispatcher_queue_controller %p.\n", dispatcher_queue_controller );
  
 -- 
-2.51.1
+2.52.0
 

@@ -1,8 +1,8 @@
-From bf5571407904e5a43196be31d0dfed1b87886204 Mon Sep 17 00:00:00 2001
+From 983e95eeff40831530da302a5c27d716aa8bbc38 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 19 Nov 2025 01:54:34 -0600
-Subject: [PATCH 393/414] fixup! winewayland: Fix unicode translation.
+Subject: [PATCH 393/473] fixup! winewayland: Fix unicode translation.
 
 ---
  dlls/winewayland.drv/wayland_keyboard.c | 2 +-
@@ -22,5 +22,5 @@ index 22dd45545a1..f6125a2fe56 100644
  
      if (scan & ~0xff) input.ki.dwFlags |= KEYEVENTF_EXTENDEDKEY;
 -- 
-2.51.1
+2.52.0
 

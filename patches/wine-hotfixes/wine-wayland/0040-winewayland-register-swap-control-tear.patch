@@ -1,8 +1,8 @@
-From 5ca0d377d9f12d2bc1596689498afe1aea55a356 Mon Sep 17 00:00:00 2001
+From c018ea0a5254f7df50b381cf324d029a74bc1c0a Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 10 May 2025 18:11:35 -0400
-Subject: [PATCH 040/414] winewayland: register swap control tear
+Subject: [PATCH 040/473] winewayland: register swap control tear
 
 its up to compositor anyway, just no-op.
 ---
@@ -22,5 +22,5 @@ index 0d7bf00ea0f..9d0aba68370 100644
      opengl_funcs.ext.p_wglSwapIntervalEXT = wayland_wglSwapIntervalEXT;
  
 -- 
-2.51.1
+2.52.0
 

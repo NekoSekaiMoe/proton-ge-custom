@@ -1,8 +1,8 @@
-From 6e858d3a298360ff6ae42b219263d4e39d455139 Mon Sep 17 00:00:00 2001
+From de413fe6c7d943b632b2440410a9fa6cbe6906ac Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 4 Oct 2025 13:05:18 -0500
-Subject: [PATCH 323/414] fixup! winewayland: Generate KBDTABLES dead key
+Subject: [PATCH 323/473] fixup! winewayland: Generate KBDTABLES dead key
  tables.
 
 ---
@@ -23,5 +23,5 @@ index 346596d0423..493481f6a92 100644
  #ifdef HAVE_XKBCOMMON_XKBCOMMON_COMPOSE_H
      if (xkb_compose)
 -- 
-2.51.1
+2.52.0
 

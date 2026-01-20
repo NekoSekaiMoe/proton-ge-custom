@@ -1,8 +1,8 @@
-From e5ba0ac8fe5ad139c285b59a101ef7930544ba44 Mon Sep 17 00:00:00 2001
+From e3a8393bfd54995ee3ce5699820617b1ded47439 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 19 Nov 2025 17:35:36 -0600
-Subject: [PATCH 395/414] iphlpapi: Readd export for Icmp6ParseReplies.
+Subject: [PATCH 395/473] iphlpapi: Readd export for Icmp6ParseReplies.
 
 ---
  dlls/iphlpapi/iphlpapi.spec | 2 +-
@@ -22,5 +22,5 @@ index 19b86902233..9da2a26f29f 100644
  @ stdcall IcmpCloseHandle(ptr)
  @ stdcall IcmpCreateFile()
 -- 
-2.51.1
+2.52.0
 

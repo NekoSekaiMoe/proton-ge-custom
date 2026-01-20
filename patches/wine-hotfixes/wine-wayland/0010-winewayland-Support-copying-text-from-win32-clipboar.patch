@@ -1,7 +1,7 @@
-From d313f2733b523bd8a119af1ffa43395034471de2 Mon Sep 17 00:00:00 2001
+From 6eea8912d7b4df08b16e0ea1c543ad881dafbdd4 Mon Sep 17 00:00:00 2001
 From: Alexandros Frantzis <alexandros.frantzis@collabora.com>
 Date: Fri, 7 Feb 2025 14:33:53 +0200
-Subject: [PATCH 010/414] winewayland: Support copying text from win32
+Subject: [PATCH 010/473] winewayland: Support copying text from win32
  clipboard to native apps.
 
 ---
@@ -249,5 +249,5 @@ index 12ac686fbd9..c8f0ede23ba 100644
  
  struct wayland
 -- 
-2.51.1
+2.52.0
 

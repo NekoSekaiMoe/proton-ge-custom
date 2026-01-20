@@ -1,7 +1,7 @@
-From 03e78f5c2b1ef4d3537be42ce46614d30aaf4f88 Mon Sep 17 00:00:00 2001
+From b5e231aef70da3cf8effe89c55a589bc5ffce7a1 Mon Sep 17 00:00:00 2001
 From: Mark Jansen <mark.jansen@reactos.org>
 Date: Fri, 4 Nov 2022 19:13:24 +0100
-Subject: [PATCH 261/414] version/tests: Add a test for an empty value in
+Subject: [PATCH 261/473] version/tests: Add a test for an empty value in
  VerQueryValueW.
 
 ---
@@ -172,5 +172,5 @@ index fa7ef219193..6b9cc0e7d89 100644
      test_GetFileVersionInfoEx();
      test_wow64_redirection();
 -- 
-2.51.1
+2.52.0
 

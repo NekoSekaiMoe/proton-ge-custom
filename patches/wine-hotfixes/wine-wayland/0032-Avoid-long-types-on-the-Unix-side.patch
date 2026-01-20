@@ -1,8 +1,8 @@
-From 7bb7231d9c592728662dd6c7c307d314193a2c8c Mon Sep 17 00:00:00 2001
+From 2fb95dbf50a263c1690e26c074338990918d5e03 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 7 May 2025 08:37:02 -0400
-Subject: [PATCH 032/414] Avoid long types on the Unix side.
+Subject: [PATCH 032/473] Avoid long types on the Unix side.
 
 Co-Authored-By: Alexandre Julliard <1130500+julliard@users.noreply.github.com>
 ---
@@ -223,5 +223,5 @@ index 385b373f0a7..c327b2a7219 100644
  # else
  #  define __MSABI_LONG(x)         x
 -- 
-2.51.1
+2.52.0
 

@@ -1,8 +1,8 @@
-From 593673e9567c710b969d4d48d271ec8be3b85517 Mon Sep 17 00:00:00 2001
+From e4eed157b34911fdfca95af26759c64eecefd8d9 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 23 May 2025 14:02:30 -0400
-Subject: [PATCH 058/414] HACK: ntdll: Ignore SDL_VIDEODRIVER env
+Subject: [PATCH 058/473] HACK: ntdll: Ignore SDL_VIDEODRIVER env
 
 ---
  dlls/ntdll/unix/env.c | 1 +
@@ -21,5 +21,5 @@ index 1add6fdc872..90e21f2b3da 100644
              STARTS_WITH( var, "XR_" ) ||
              STARTS_WITH( var, "XDG_SESSION_TYPE=" ));
 -- 
-2.51.1
+2.52.0
 

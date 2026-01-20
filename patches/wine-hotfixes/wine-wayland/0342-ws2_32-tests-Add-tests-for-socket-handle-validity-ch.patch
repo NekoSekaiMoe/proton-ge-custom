@@ -1,7 +1,7 @@
-From dda3e35e9038ade452907da8295509186f1ee0c9 Mon Sep 17 00:00:00 2001
+From 5ed68bb7ece392ad05f65fe80b3d38c1c49b0d20 Mon Sep 17 00:00:00 2001
 From: Elizabeth Figura <zfigura@codeweavers.com>
 Date: Fri, 18 Apr 2025 14:10:42 -0500
-Subject: [PATCH 342/414] ws2_32/tests: Add tests for socket handle validity
+Subject: [PATCH 342/473] ws2_32/tests: Add tests for socket handle validity
  checks in send functions.
 
 ---
@@ -75,5 +75,5 @@ index c3383517acd..df8adcd0343 100644
      /* There is apparently an obscure interaction between this test and
       * test_WSAGetOverlappedResult().
 -- 
-2.51.1
+2.52.0
 

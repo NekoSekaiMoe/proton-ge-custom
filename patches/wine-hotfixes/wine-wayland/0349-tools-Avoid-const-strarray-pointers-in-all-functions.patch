@@ -1,7 +1,7 @@
-From e6feb513dc402254b19850d17fbf41389b8a4c58 Mon Sep 17 00:00:00 2001
+From a933d2e645a36fc398ecf3e2a2aeae7feaf95fb9 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Wed, 26 Feb 2025 21:34:22 +0100
-Subject: [PATCH 349/414] tools: Avoid const strarray pointers in all
+Subject: [PATCH 349/473] tools: Avoid const strarray pointers in all
  functions.
 
 ---
@@ -252,5 +252,5 @@ index 6aee0fa98f8..697fec2d583 100644
  
  /* sort a name table */
 -- 
-2.51.1
+2.52.0
 

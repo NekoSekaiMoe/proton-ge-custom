@@ -1,7 +1,7 @@
-From 70a7dcd14fdb5d03aa7ca09665357c790d11ca36 Mon Sep 17 00:00:00 2001
+From e6b705dcbea9d023236f43ec20265ec3c10a201a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Fri, 30 May 2025 10:24:20 +0200
-Subject: [PATCH 135/414] winewayland: Switch client surfaces when presenting.
+Subject: [PATCH 135/473] winewayland: Switch client surfaces when presenting.
 
 ---
  dlls/winewayland.drv/opengl.c     |  5 +++-
@@ -139,5 +139,5 @@ index 32b1a00f6cd..26735e3fb51 100644
  
  BOOL set_window_surface_contents(HWND hwnd, struct wayland_shm_buffer *shm_buffer, HRGN damage_region)
 -- 
-2.51.1
+2.52.0
 

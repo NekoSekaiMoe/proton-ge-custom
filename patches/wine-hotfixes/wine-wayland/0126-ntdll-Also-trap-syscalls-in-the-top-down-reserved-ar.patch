@@ -1,7 +1,7 @@
-From 0d24354a5445841c941ff375d6f7c47ee5442b29 Mon Sep 17 00:00:00 2001
+From 6cc49251d23bfd964c6408868341d8095122a9a0 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Wed, 18 Jun 2025 19:23:02 +0200
-Subject: [PATCH 126/414] ntdll: Also trap syscalls in the top-down reserved
+Subject: [PATCH 126/473] ntdll: Also trap syscalls in the top-down reserved
  area
 
 Backport of wine-staging patch from "mkrsym1@gmail.com".
@@ -42,5 +42,5 @@ index 716600b773e..ce064dbc6e0 100644
          BPF_STMT(BPF_LD | BPF_W | BPF_ABS, offsetof(struct seccomp_data, instruction_pointer)),
          BPF_JUMP(BPF_JMP | BPF_JGE | BPF_K, 0x7d400000, 1, 0),
 -- 
-2.51.1
+2.52.0
 

@@ -1,7 +1,7 @@
-From 8af8877c22cb4d9a9847df95190da67e0ed855be Mon Sep 17 00:00:00 2001
+From b4e2e71bd627f93ee5d9b605f07758f25d0d89a1 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Sat, 14 Jun 2025 11:22:44 -0400
-Subject: [PATCH 097/414] wine.inf: Add override for diabotical
+Subject: [PATCH 097/473] wine.inf: Add override for diabotical
 
 ---
  loader/wine.inf.in | 1 +
@@ -20,5 +20,5 @@ index 6a866240adc..810c1b83d15 100644
  HKCU,Software\Wine\AppDefaults\s2_sp64_ship.exe\DllOverrides,"atiadlxx",,"builtin"
  HKCU,Software\Wine\AppDefaults\s2_mp64_ship.exe\DllOverrides,"atiadlxx",,"builtin"
 -- 
-2.51.1
+2.52.0
 

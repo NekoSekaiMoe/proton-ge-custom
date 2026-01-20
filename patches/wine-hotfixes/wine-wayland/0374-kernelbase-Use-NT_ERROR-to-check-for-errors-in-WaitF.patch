@@ -1,7 +1,7 @@
-From 69a82cca4958d820bf15ac9713ffc793bdb54c7e Mon Sep 17 00:00:00 2001
+From ce98655425367f3542eee5ccfa00ad0859e5d1e9 Mon Sep 17 00:00:00 2001
 From: Marc-Aurel Zent <mzent@codeweavers.com>
 Date: Thu, 30 Oct 2025 21:42:58 +0100
-Subject: [PATCH 374/414] kernelbase: Use NT_ERROR() to check for errors in
+Subject: [PATCH 374/473] kernelbase: Use NT_ERROR() to check for errors in
  WaitForMultipleObjectsEx.
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 374/414] kernelbase: Use NT_ERROR() to check for errors in
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/dlls/kernelbase/sync.c b/dlls/kernelbase/sync.c
-index d836c1e008d..401b9fa055c 100644
+index 1a6beacf162..3c288a6df55 100644
 --- a/dlls/kernelbase/sync.c
 +++ b/dlls/kernelbase/sync.c
 @@ -442,7 +442,7 @@ DWORD WINAPI DECLSPEC_HOTPATCH WaitForMultipleObjectsEx( DWORD count, const HAND
@@ -22,5 +22,5 @@ index d836c1e008d..401b9fa055c 100644
          SetLastError( RtlNtStatusToDosError(status) );
          status = WAIT_FAILED;
 -- 
-2.51.1
+2.52.0
 

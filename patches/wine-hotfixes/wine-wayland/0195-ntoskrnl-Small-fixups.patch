@@ -1,7 +1,7 @@
-From 5a1c82d87ed4c274fdc8ca319c66d4be959507b5 Mon Sep 17 00:00:00 2001
+From 96b296d5cdd08c70c133bd0f9fa040ac88c86d8e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Sun, 27 Jul 2025 10:28:40 -0400
-Subject: [PATCH 195/414] ntoskrnl: Small fixups
+Subject: [PATCH 195/473] ntoskrnl: Small fixups
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 7 +++++--
@@ -40,5 +40,5 @@ index 10d1056dfb3..ffd2273f7d9 100644
      NTSTATUS ret = STATUS_SUCCESS;
      struct wine_driver *driver;
 -- 
-2.51.1
+2.52.0
 

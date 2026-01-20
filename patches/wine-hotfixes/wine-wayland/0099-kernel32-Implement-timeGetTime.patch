@@ -1,7 +1,7 @@
-From 943c122cd937a6fe857ffdb33357343226bb1ea1 Mon Sep 17 00:00:00 2001
+From b8bd42204950e48d9129f7fc220fd89a4e1b22bd Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Sun, 15 Jun 2025 20:25:54 -0400
-Subject: [PATCH 099/414] kernel32: Implement timeGetTime.
+Subject: [PATCH 099/473] kernel32: Implement timeGetTime.
 
 Cheat engine's speed hack expects this function to exist in kernel32 for some reason
 ---
@@ -41,5 +41,5 @@ index 44fd01002d4..e4f22b73129 100644
   *           RegisterWaitForSingleObject   (KERNEL32.@)
   */
 -- 
-2.51.1
+2.52.0
 

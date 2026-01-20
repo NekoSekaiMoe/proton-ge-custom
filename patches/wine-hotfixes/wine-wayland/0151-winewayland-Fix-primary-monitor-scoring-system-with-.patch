@@ -1,8 +1,8 @@
-From e18e13bebde553d63d1a1e9d0f587a5664629586 Mon Sep 17 00:00:00 2001
+From 7a34d3bd28612d7a46c4d60807adafd227f15f9b Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 14 Jul 2025 14:41:48 -0400
-Subject: [PATCH 151/414] winewayland: Fix primary monitor scoring system with
+Subject: [PATCH 151/473] winewayland: Fix primary monitor scoring system with
  refresh rates
 
 ---
@@ -23,5 +23,5 @@ index a96cd6cb283..4884aa23b46 100644
                             - (UINT64)(info->output->logical_y / 100)
                             + (UINT64)info->output->max_cll;
 -- 
-2.51.1
+2.52.0
 

@@ -1,8 +1,8 @@
-From c86c816553d875ba068e4c3fa55875f222d55aa2 Mon Sep 17 00:00:00 2001
+From a2b3a94fb8f3aaa85d938123e96a454ddf4723b2 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:48:42 -0400
-Subject: [PATCH 167/414] ntoskrnl: Add stub for KeRegisterBugCheckCallback.
+Subject: [PATCH 167/473] ntoskrnl: Add stub for KeRegisterBugCheckCallback.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 11 +++++++++++
@@ -45,5 +45,5 @@ index 47e3dc597af..adb2882e8c7 100644
  @ stub KeReleaseInterruptSpinLock
  @ stub KeReleaseMutant
 -- 
-2.51.1
+2.52.0
 

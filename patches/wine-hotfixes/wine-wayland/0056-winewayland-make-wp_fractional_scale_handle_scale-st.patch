@@ -1,8 +1,8 @@
-From f3e078789f62df3e0f967a7540f43229c6dfb0b1 Mon Sep 17 00:00:00 2001
+From ddd68e0800e5f4370bda8ba6c2da6e7e418eb37d Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 22 May 2025 21:50:42 -0400
-Subject: [PATCH 056/414] winewayland: make wp_fractional_scale_handle_scale
+Subject: [PATCH 056/473] winewayland: make wp_fractional_scale_handle_scale
  static
 
 ---
@@ -23,5 +23,5 @@ index bbf307b982f..f07f995a39e 100644
  {
      struct wayland_win_data *data;
 -- 
-2.51.1
+2.52.0
 

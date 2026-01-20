@@ -1,8 +1,8 @@
-From 735714926cd3c23fa4602c2ba831569c437bc0be Mon Sep 17 00:00:00 2001
+From d36493552fa943f98411882eb094dff63a68690e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 15 Aug 2025 22:26:52 -0400
-Subject: [PATCH 278/414] winewayland: Add button data to pointer frame.
+Subject: [PATCH 278/473] winewayland: Add button data to pointer frame.
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 37 +++++++++++++++-----------
@@ -123,5 +123,5 @@ index eb07bfa104b..522a1d0a38f 100644
      pthread_mutex_t mutex;
  };
 -- 
-2.51.1
+2.52.0
 

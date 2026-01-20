@@ -1,8 +1,8 @@
-From 251c122899b0a8aab736b13a598cfa6374826493 Mon Sep 17 00:00:00 2001
+From c775c8878c094ea8df6e0e0f8680c4a6933db953 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 1 Oct 2025 12:52:35 -0500
-Subject: [PATCH 317/414] winewayland: Generate KBDTABLES dead key tables.
+Subject: [PATCH 317/473] winewayland: Generate KBDTABLES dead key tables.
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -388,5 +388,5 @@ index 82fcae9bfef..102a82086cd 100644
  #include "pointer-constraints-unstable-v1-client-protocol.h"
  #include "relative-pointer-unstable-v1-client-protocol.h"
 -- 
-2.51.1
+2.52.0
 

@@ -1,7 +1,7 @@
-From eeae4d9a33f5305c30b16a272cd2dab658d47b42 Mon Sep 17 00:00:00 2001
+From 1cf7d6fe3bdc69e1e1702ccdc6c3c9f76193ca21 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Mon, 24 Feb 2025 12:17:33 +0100
-Subject: [PATCH 344/414] ntdll: Use the bundled tomcrypt for the crc32
+Subject: [PATCH 344/473] ntdll: Use the bundled tomcrypt for the crc32
  implementation.
 
 ---
@@ -112,5 +112,5 @@ index 230526d651a..12e27c28425 100644
  
  
 -- 
-2.51.1
+2.52.0
 

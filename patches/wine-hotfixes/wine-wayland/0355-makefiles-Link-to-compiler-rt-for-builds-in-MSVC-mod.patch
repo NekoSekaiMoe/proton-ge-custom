@@ -1,7 +1,7 @@
-From 65ba34b4f9685f89de8f6671e471bc4b1f49e433 Mon Sep 17 00:00:00 2001
+From 67a40b234a65ad1deed0a8f7e354a5c3d0984784 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 27 Feb 2025 11:04:53 +0100
-Subject: [PATCH 355/414] makefiles: Link to compiler-rt for builds in MSVC
+Subject: [PATCH 355/473] makefiles: Link to compiler-rt for builds in MSVC
  mode.
 
 ---
@@ -59,5 +59,5 @@ index 2421bbe3fc8..622a769839c 100644
          {
              if (!crt_lib)
 -- 
-2.51.1
+2.52.0
 

@@ -1,8 +1,8 @@
-From 2c005bb0326533556b0f8f0468d44074d9024eaa Mon Sep 17 00:00:00 2001
+From 86017639845d74c05ac9be73e3cc68afc01b4522 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 20:20:15 -0400
-Subject: [PATCH 186/414] ntdll: Update version resource.
+Subject: [PATCH 186/473] ntdll: Update version resource.
 
 ---
  dlls/ntdll/version.rc           | 11 ++++++-----
@@ -54,5 +54,5 @@ index e605191b2eb..9bb548581e5 100644
  FILESUBTYPE    WINE_FILESUBTYPE
  {
 -- 
-2.51.1
+2.52.0
 

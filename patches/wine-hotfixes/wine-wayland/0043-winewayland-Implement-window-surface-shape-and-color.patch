@@ -1,7 +1,7 @@
-From 06974b35a0684ea8efa877a51b5260317f4bc582 Mon Sep 17 00:00:00 2001
+From 69950c65ba494ca31c0aca341807713422092744 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Fri, 28 Jun 2024 20:23:44 +0200
-Subject: [PATCH 043/414] winewayland: Implement window surface shape and color
+Subject: [PATCH 043/473] winewayland: Implement window surface shape and color
  keying.
 
 ---
@@ -57,5 +57,5 @@ index 1caff588680..408f52f3f77 100644
  
      flushed = set_window_surface_contents(window_surface->hwnd, shm_buffer, surface_damage_region);
 -- 
-2.51.1
+2.52.0
 

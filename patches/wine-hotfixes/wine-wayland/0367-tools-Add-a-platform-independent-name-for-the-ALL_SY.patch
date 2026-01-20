@@ -1,7 +1,7 @@
-From 96454d3a678fbce0ff5d6dec5d4ac875d6edffbb Mon Sep 17 00:00:00 2001
+From 0184fa8551435226569848aeac2cc6bc9675bf84 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Tue, 29 Apr 2025 18:04:00 +0200
-Subject: [PATCH 367/414] tools: Add a platform-independent name for the
+Subject: [PATCH 367/473] tools: Add a platform-independent name for the
  ALL_SYSCALLS macros.
 
 ---
@@ -752,5 +752,5 @@ index 34b35642a2b..650bec6cf1c 100755
  
  sub sync_spec_files(@)
 -- 
-2.51.1
+2.52.0
 

@@ -1,7 +1,7 @@
-From 1bde380cb35f070653c34c70eb0fdde1032edd81 Mon Sep 17 00:00:00 2001
+From 0a694c08cb5acff2d0fc9655e7b713b39b486801 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Tue, 5 Dec 2023 22:07:07 -0500
-Subject: [PATCH 381/414] ntdll: Implement NtGetNextProcess.
+Subject: [PATCH 381/473] ntdll: Implement NtGetNextProcess.
 
 ---
  dlls/ntdll/ntdll.spec          |   1 +
@@ -1411,5 +1411,5 @@ index 64dd9864f29..be58b020fb0 100644
      { "PIPE_BROKEN",                 STATUS_PIPE_BROKEN },
      { "PIPE_BUSY",                   STATUS_PIPE_BUSY },
 -- 
-2.51.1
+2.52.0
 

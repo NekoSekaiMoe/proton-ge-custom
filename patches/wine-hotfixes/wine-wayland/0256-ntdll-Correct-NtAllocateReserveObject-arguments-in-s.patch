@@ -1,7 +1,7 @@
-From 82cf31afadf56465bcf3c51fe133af355d4612ce Mon Sep 17 00:00:00 2001
+From dfc5dbd187501f1eb69fbb02e8679a891e98abc5 Mon Sep 17 00:00:00 2001
 From: Alex Henrie <alexhenrie24@gmail.com>
 Date: Sun, 30 Mar 2025 20:34:04 -0600
-Subject: [PATCH 256/414] ntdll: Correct NtAllocateReserveObject arguments in
+Subject: [PATCH 256/473] ntdll: Correct NtAllocateReserveObject arguments in
  specfile.
 
 ---
@@ -22,5 +22,5 @@ index 3099da106e5..865fafa41d0 100644
  @ stdcall -syscall NtAllocateUuids(ptr ptr ptr ptr)
  @ stdcall -syscall NtAllocateVirtualMemory(long ptr long ptr long long)
 -- 
-2.51.1
+2.52.0
 

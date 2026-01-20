@@ -1,7 +1,7 @@
-From e90df2dcb08f85b00222915b43402f404c0d58e7 Mon Sep 17 00:00:00 2001
+From 3e87220cadb0e33bd328f838ab3bbef8e1353e13 Mon Sep 17 00:00:00 2001
 From: Yuxuan Shui <yshui@codeweavers.com>
 Date: Mon, 14 Jul 2025 14:43:14 +0100
-Subject: [PATCH 336/414] ntdll: Also restore rbp before calling user mode
+Subject: [PATCH 336/473] ntdll: Also restore rbp before calling user mode
  callback.
 
 If wine dlls are built with frame pointers enabled, the frame pointer will be
@@ -82,5 +82,5 @@ index 805c9d302d7..7d8fc7d55ed 100644
  
  /***********************************************************************
 -- 
-2.51.1
+2.52.0
 

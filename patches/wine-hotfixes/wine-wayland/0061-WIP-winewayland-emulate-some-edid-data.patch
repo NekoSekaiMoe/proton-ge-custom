@@ -1,8 +1,8 @@
-From 640c0db9906a7be1e6709d42868f74c3e6fa8162 Mon Sep 17 00:00:00 2001
+From 70439b4950f2b3924dbdc4108be727a64f7de4ab Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 24 May 2025 11:09:03 -0400
-Subject: [PATCH 061/414] WIP: winewayland: emulate some edid data.
+Subject: [PATCH 061/473] WIP: winewayland: emulate some edid data.
 
 ---
  dlls/winewayland.drv/display.c | 57 ++++++++++++++++++++++++++++++++++
@@ -84,5 +84,5 @@ index c5d599efb54..d85d56f06c2 100644
      TRACE("name=%s rc_monitor=rc_work=%s\n",
            output_info->output->name, wine_dbgstr_rect(&monitor.rc_monitor));
 -- 
-2.51.1
+2.52.0
 

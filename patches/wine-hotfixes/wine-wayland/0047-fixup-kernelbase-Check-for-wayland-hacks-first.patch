@@ -1,8 +1,8 @@
-From 0897ad641bbce52431588fb37ecccf615612bef3 Mon Sep 17 00:00:00 2001
+From 9525d33eb6170299989133a548a027ee4e9febb8 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 15 May 2025 10:17:06 -0400
-Subject: [PATCH 047/414] fixup! kernelbase: Check for wayland hacks first
+Subject: [PATCH 047/473] fixup! kernelbase: Check for wayland hacks first
 
 ---
  dlls/kernelbase/process.c | 33 +++++++++++++++++----------------
@@ -61,5 +61,5 @@ index 2f08c05d767..54a2c8cede9 100644
      }
  
 -- 
-2.51.1
+2.52.0
 

@@ -1,8 +1,8 @@
-From 45f04eba2dc65dcaaed4d1583845ef47982c1c52 Mon Sep 17 00:00:00 2001
+From 6aedd8531c06d715a273c844df854d0623a98200 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 13 Aug 2025 03:56:55 -0400
-Subject: [PATCH 253/414] ntdll: Add SystemPowerInformation semi-stub.
+Subject: [PATCH 253/473] ntdll: Add SystemPowerInformation semi-stub.
 
 ---
  dlls/ntdll/unix/system.c | 13 +++++++++++++
@@ -33,5 +33,5 @@ index c769bc4f38d..3fb03769f1e 100644
      {
          if (out_size < sizeof(SYSTEM_BATTERY_STATE)) return STATUS_BUFFER_TOO_SMALL;
 -- 
-2.51.1
+2.52.0
 

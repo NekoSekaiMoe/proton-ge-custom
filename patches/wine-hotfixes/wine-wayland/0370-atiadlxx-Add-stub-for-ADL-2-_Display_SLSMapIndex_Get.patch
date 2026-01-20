@@ -1,8 +1,8 @@
-From ca62fab66d3ac385605659671079981f2a6e4e9c Mon Sep 17 00:00:00 2001
+From bb99a773d65944a6b50c1acda210085fbee2a32d Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 22 Oct 2025 15:30:05 -0500
-Subject: [PATCH 370/414] atiadlxx: Add stub for
+Subject: [PATCH 370/473] atiadlxx: Add stub for
  ADL[2]_Display_SLSMapIndex_Get.
 
 ---
@@ -75,5 +75,5 @@ index 1d840aa5a7b..9236ab12c84 100644
 +    return ADL2_Display_SLSMapIndex_Get(default_ctx, adapter_index, num_display_target, display_target, sls_index);
 +}
 -- 
-2.51.1
+2.52.0
 

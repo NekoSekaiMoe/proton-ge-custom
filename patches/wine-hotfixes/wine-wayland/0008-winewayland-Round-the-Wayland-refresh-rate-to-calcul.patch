@@ -1,7 +1,7 @@
-From 8355b48b8e9acd332ea19015db15517fbd30a298 Mon Sep 17 00:00:00 2001
+From f1162801aec9b4b3d88439c9aac0e384a60b9e0e Mon Sep 17 00:00:00 2001
 From: Alexandros Frantzis <alexandros.frantzis@collabora.com>
 Date: Thu, 6 Feb 2025 12:43:39 +0200
-Subject: [PATCH 008/414] winewayland: Round the Wayland refresh rate to
+Subject: [PATCH 008/473] winewayland: Round the Wayland refresh rate to
  calculate the win32 display frequency.
 
 Round the Wayland refresh rate instead of floor-ing it, to report a more
@@ -28,5 +28,5 @@ index 5d65fd01c54..851c9638252 100644
  
  static void wayland_add_device_modes(const struct gdi_device_manager *device_manager,
 -- 
-2.51.1
+2.52.0
 

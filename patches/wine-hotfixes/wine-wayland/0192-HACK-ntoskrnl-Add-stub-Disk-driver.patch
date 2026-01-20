@@ -1,8 +1,8 @@
-From 6c454ea97f81eea87ad2a87e2c8ee69be8869230 Mon Sep 17 00:00:00 2001
+From b7b0ea33eb9c0a234c96637dacee11a2e9b4c449 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 24 Jul 2025 18:27:53 -0400
-Subject: [PATCH 192/414] HACK: ntoskrnl: Add stub Disk driver.
+Subject: [PATCH 192/473] HACK: ntoskrnl: Add stub Disk driver.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 2 ++
@@ -29,5 +29,5 @@ index 14bb2d4cb77..34d54d0abfa 100644
      case DLL_PROCESS_DETACH:
          LdrUnregisterDllNotification( ldr_notify_cookie );
 -- 
-2.51.1
+2.52.0
 

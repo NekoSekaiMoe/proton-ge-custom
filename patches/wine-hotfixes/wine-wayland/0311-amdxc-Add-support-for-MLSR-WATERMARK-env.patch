@@ -1,8 +1,8 @@
-From 0593a9165b84b0bf0a83b1894dd7a6a53e352255 Mon Sep 17 00:00:00 2001
+From 894348cc01936e0f6452210e869f65c0f73add28 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 1 Sep 2025 17:04:15 -0500
-Subject: [PATCH 311/414] amdxc: Add support for MLSR-WATERMARK env.
+Subject: [PATCH 311/473] amdxc: Add support for MLSR-WATERMARK env.
 
 ---
  dlls/amdxc64/main.c | 22 +++++++++++++++++++++-
@@ -46,5 +46,5 @@ index 6df95578748..4b04848a862 100644
 +    return TRUE;
 +}
 -- 
-2.51.1
+2.52.0
 

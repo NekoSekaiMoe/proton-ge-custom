@@ -1,8 +1,8 @@
-From 636cf18adf0b46644d683fd9a27a1fa63f40c9b7 Mon Sep 17 00:00:00 2001
+From bb93eee0b40a86b965ad63cef4edca10b815eb62 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 24 Jul 2025 17:42:00 -0400
-Subject: [PATCH 190/414] ntoskrnl: Implement ObReferenceObjectByName.
+Subject: [PATCH 190/473] ntoskrnl: Implement ObReferenceObjectByName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c   | 34 +++++++++++++++++++++++++++++-----
@@ -295,5 +295,5 @@ index b70342f9581..64dd9864f29 100644
      "grant_process_admin_token",
      "get_token_info",
 -- 
-2.51.1
+2.52.0
 

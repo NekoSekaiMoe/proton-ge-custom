@@ -1,7 +1,7 @@
-From 9375781c017ae3d438b9d6a0c483324a40c20a2a Mon Sep 17 00:00:00 2001
+From 230c9c2ec48d0872cfc55262969b414ef64a326c Mon Sep 17 00:00:00 2001
 From: William Horvath <william@horvath.blog>
 Date: Tue, 21 Jan 2025 17:07:11 -0800
-Subject: [PATCH 329/414] ntdll: Check for invalid gs_base in the 64-bit
+Subject: [PATCH 329/473] ntdll: Check for invalid gs_base in the 64-bit
  segv_handler.
 
 Adapted from check_invalid_gs in signal_i386.c. PE-side code can
@@ -146,5 +146,5 @@ index ce064dbc6e0..cd4a2ab471c 100644
              leave_handler( ucontext );
              return;
 -- 
-2.51.1
+2.52.0
 

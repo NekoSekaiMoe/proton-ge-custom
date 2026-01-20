@@ -1,8 +1,8 @@
-From 9c2f71524ddc346bbb08983df861167e1ffbe7af Mon Sep 17 00:00:00 2001
+From f0bb2e5b5055af0ac3e187c034d4eeacdc8bc623 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 5 Jun 2025 20:38:17 -0400
-Subject: [PATCH 081/414] winewayland: Send no raw with normal pointer events.
+Subject: [PATCH 081/473] winewayland: Send no raw with normal pointer events.
 
 matches winex11 behavior
 ---
@@ -23,5 +23,5 @@ index e1be487d1d7..7aa0b0a74af 100644
      input.mi.dx -= pointer->last_x;
      input.mi.dy -= pointer->last_y;
 -- 
-2.51.1
+2.52.0
 

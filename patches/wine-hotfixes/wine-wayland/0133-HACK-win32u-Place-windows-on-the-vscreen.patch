@@ -1,8 +1,8 @@
-From 390dfa4426aa1647175d4a6b0958cc16a4b8a014 Mon Sep 17 00:00:00 2001
+From d3bf0cbb33689159fa3747046714d9f7f342ee98 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 28 Jun 2025 20:25:21 -0400
-Subject: [PATCH 133/414] HACK: win32u: Place windows on the vscreen.
+Subject: [PATCH 133/473] HACK: win32u: Place windows on the vscreen.
 
 ---
  dlls/win32u/window.c | 38 +++++++++++++++++++++++++++++++++++++-
@@ -62,5 +62,5 @@ index 980756d981f..dbdea820d6d 100644
      is_fullscreen = is_window_rect_full_screen( &new_rects->visible, get_thread_dpi() );
      is_child = parent && parent != NtUserGetDesktopWindow();
 -- 
-2.51.1
+2.52.0
 

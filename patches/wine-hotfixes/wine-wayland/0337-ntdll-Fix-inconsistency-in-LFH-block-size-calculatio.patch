@@ -1,7 +1,7 @@
-From 9330e1346accb9b5579da494a73cb67b5dc201bd Mon Sep 17 00:00:00 2001
+From 70d2a5dd8ca25da05d19484a11ece37ffca63c88 Mon Sep 17 00:00:00 2001
 From: Yuxuan Shui <yshui@codeweavers.com>
 Date: Tue, 29 Jul 2025 12:05:03 +0100
-Subject: [PATCH 337/414] ntdll: Fix inconsistency in LFH block size
+Subject: [PATCH 337/473] ntdll: Fix inconsistency in LFH block size
  calculation during realloc.
 
 For allocation, the block size calculation is snapped to block bin sizes, but
@@ -37,5 +37,5 @@ index c194f2058dc..924f889e8e4 100644
      block->tail_size = block_size - sizeof(*block) - size;
      initialize_block( block, *old_size, size, flags );
 -- 
-2.51.1
+2.52.0
 

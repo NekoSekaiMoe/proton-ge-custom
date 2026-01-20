@@ -1,7 +1,7 @@
-From 1b826ab8e71b853c8a42e97c401ffd23352cd74f Mon Sep 17 00:00:00 2001
+From 980dc216ce7620113fce4c017217d621065dcd77 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Mon, 4 Aug 2025 12:21:10 -0400
-Subject: [PATCH 201/414] winewayland: Fix uninitialized variable.
+Subject: [PATCH 201/473] winewayland: Fix uninitialized variable.
 
 ---
  dlls/winewayland.drv/display.c | 2 +-
@@ -21,5 +21,5 @@ index add844af2f1..2b652b9131c 100644
      struct output_info *output_info;
  
 -- 
-2.51.1
+2.52.0
 

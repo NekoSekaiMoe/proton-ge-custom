@@ -1,7 +1,7 @@
-From a4ac2c11ca2230fbf98404efddbcbc49c3ab3eb7 Mon Sep 17 00:00:00 2001
+From e0171fb66c5d886da344a56e0d6046771e9b3047 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Wed, 26 Feb 2025 17:02:19 +0100
-Subject: [PATCH 348/414] makefiles: Import winecrt0 by default even with
+Subject: [PATCH 348/473] makefiles: Import winecrt0 by default even with
  -nodefaultlibs.
 
 ---
@@ -170,5 +170,5 @@ index 5fd64b05e95..22f3796877b 100644
      struct strarray all_libs = empty_strarray;
      struct makefile *parent = get_parent_makefile( make );
 -- 
-2.51.1
+2.52.0
 

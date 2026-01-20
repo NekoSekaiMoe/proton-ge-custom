@@ -1,7 +1,7 @@
-From 8444bfdec5616d34a7331c531858659f48ce30b7 Mon Sep 17 00:00:00 2001
+From 7ce181801875bac5ed0b0579e82e7f7792aa0c91 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Tue, 29 Apr 2025 18:22:32 +0200
-Subject: [PATCH 335/414] ntdll: Add a test for invalid syscall numbers.
+Subject: [PATCH 335/473] ntdll: Add a test for invalid syscall numbers.
 
 ---
  dlls/ntdll/signal_arm64ec.c     |  2 +-
@@ -132,5 +132,5 @@ index f20d40fa680..805c9d302d7 100644
                     "jmp " __ASM_LOCAL_LABEL("__wine_syscall_dispatcher_return") )
  
 -- 
-2.51.1
+2.52.0
 

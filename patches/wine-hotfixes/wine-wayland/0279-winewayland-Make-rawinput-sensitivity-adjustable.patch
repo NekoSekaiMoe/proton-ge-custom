@@ -1,8 +1,8 @@
-From 1eb57e8542a4152c11c6698d04e4c93eb21c96b0 Mon Sep 17 00:00:00 2001
+From a33a46362b697ad709c8ed4d40a4e2ab180b559c Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 15 Aug 2025 23:06:45 -0400
-Subject: [PATCH 279/414] winewayland: Make rawinput sensitivity adjustable.
+Subject: [PATCH 279/473] winewayland: Make rawinput sensitivity adjustable.
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 30 ++++++++++++++------------
@@ -80,5 +80,5 @@ index e9d6d936f24..ea6d49cb6b8 100644
  
      pointer->pointer_frame.flags |= WAYLAND_POINTER_FRAME_REL;
 -- 
-2.51.1
+2.52.0
 

@@ -1,8 +1,8 @@
-From 3707ac1cd14ca26ff1d2f9cf175fc5bed2a1bfe9 Mon Sep 17 00:00:00 2001
+From 98d42fde9c97776ce408999ab200d76752d08910 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 28 May 2025 22:20:47 -0400
-Subject: [PATCH 069/414] HACK: winewayland: Send relative event with absolute
+Subject: [PATCH 069/473] HACK: winewayland: Send relative event with absolute
  event.
 
 ---
@@ -74,5 +74,5 @@ index 58a05eeee52..8bbd14b6784 100644
      double accum_x;
      double accum_y;
 -- 
-2.51.1
+2.52.0
 

@@ -1,8 +1,8 @@
-From 0faae35b7e14a95823bfb564f4faab99e76a26e4 Mon Sep 17 00:00:00 2001
+From cc27745e5a4c376e4d85718e45b48504390b481c Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 18 Jun 2025 22:09:44 -0400
-Subject: [PATCH 104/414] winewayland: Prefer using target primaries.
+Subject: [PATCH 104/473] winewayland: Prefer using target primaries.
 
 ---
  dlls/winewayland.drv/wayland_output.c | 74 +++++++++++++++++----------
@@ -144,5 +144,5 @@ index 74923ffe93e..83cef777e7c 100644
      wayland_image_description_info_v1_tfpower,
      wayland_image_description_info_v1_tfnamed,
 -- 
-2.51.1
+2.52.0
 

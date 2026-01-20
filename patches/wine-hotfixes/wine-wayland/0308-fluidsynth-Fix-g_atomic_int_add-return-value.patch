@@ -1,7 +1,7 @@
-From 2e8d5da9998be673f20ec418c37c9a13a4e84a22 Mon Sep 17 00:00:00 2001
+From 47cea17be7e6c92dea39c91f1c26f41ec03c8f99 Mon Sep 17 00:00:00 2001
 From: Jinoh Kang <jinoh.kang.kr@gmail.com>
 Date: Sat, 20 Sep 2025 16:12:08 +0900
-Subject: [PATCH 308/414] fluidsynth: Fix g_atomic_int_add() return value.
+Subject: [PATCH 308/473] fluidsynth: Fix g_atomic_int_add() return value.
 
 FluidSynth settings table is internally a refcounted hashtable. Due to
 wrong glib atomic emulation, the hashtable might be leaked (if
@@ -27,5 +27,5 @@ index 6bbd5acc75e..a2cfd2c743d 100644
  static inline void g_atomic_int_set( int *ptr, int val ) { InterlockedExchange( (LONG *)ptr, val ); }
  static inline int g_atomic_int_dec_and_test( int *ptr, int val ) { return !InterlockedAdd( (LONG *)ptr, -val ); }
 -- 
-2.51.1
+2.52.0
 

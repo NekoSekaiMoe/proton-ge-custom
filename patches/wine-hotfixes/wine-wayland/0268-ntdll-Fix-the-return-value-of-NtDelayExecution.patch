@@ -1,7 +1,7 @@
-From 742da58a7038285c29134424c499de9f5b5a94d1 Mon Sep 17 00:00:00 2001
+From c85c257a5a0311be124bc15844dfd8f60b1a2a75 Mon Sep 17 00:00:00 2001
 From: William Horvath <william@horvath.blog>
 Date: Wed, 22 Jan 2025 02:18:09 -0800
-Subject: [PATCH 268/414] ntdll: Fix the return value of NtDelayExecution.
+Subject: [PATCH 268/473] ntdll: Fix the return value of NtDelayExecution.
 
 The key change is to never return STATUS_TIMEOUT, and to instead return the result of
 NtYieldExecution() if zero timeout was passed, or STATUS_SUCCESS otherwise.
@@ -71,5 +71,5 @@ index 6b722634ed7..5e1b6de7009 100644
          for (;;)
          {
 -- 
-2.51.1
+2.52.0
 

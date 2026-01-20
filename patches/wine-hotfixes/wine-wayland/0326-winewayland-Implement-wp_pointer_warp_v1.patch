@@ -1,8 +1,8 @@
-From de51e61f8722fc4c1186349514ec96600a7e6d94 Mon Sep 17 00:00:00 2001
+From 0ec259929f0b3e1bebf503c4c2baedf9c83808ea Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 13 Oct 2025 13:04:52 -0500
-Subject: [PATCH 326/414] winewayland: Implement wp_pointer_warp_v1.
+Subject: [PATCH 326/473] winewayland: Implement wp_pointer_warp_v1.
 
 Remove the pointer frame drop hack
 ---
@@ -208,5 +208,5 @@ index ff9384a87e5..22d4a0abe03 100644
      struct wayland_keyboard keyboard;
      struct wayland_pointer pointer;
 -- 
-2.51.1
+2.52.0
 

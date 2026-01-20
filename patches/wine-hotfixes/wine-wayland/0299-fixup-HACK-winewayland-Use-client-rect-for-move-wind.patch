@@ -1,8 +1,8 @@
-From 8da748297528c925502f0c15a9047fea8d2a4f5c Mon Sep 17 00:00:00 2001
+From dfbe38811b1ff62a0842e0ebd3f1a88f69739e28 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 9 Sep 2025 17:16:52 -0500
-Subject: [PATCH 299/414] fixup! HACK: winewayland: Use client rect for move
+Subject: [PATCH 299/473] fixup! HACK: winewayland: Use client rect for move
  window hack.
 
 ---
@@ -121,5 +121,5 @@ index cdb30de062a..96951385147 100644
      if (cached == -1)
      {
 -- 
-2.51.1
+2.52.0
 

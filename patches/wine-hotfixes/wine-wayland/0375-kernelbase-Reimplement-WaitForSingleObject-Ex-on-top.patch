@@ -1,7 +1,7 @@
-From b6cf02e8f8f424ee2bef996aa98e5a74398c9b0d Mon Sep 17 00:00:00 2001
+From 22a3d71e98598f3ae8f5c0f5e6431e07c8fe92a3 Mon Sep 17 00:00:00 2001
 From: Marc-Aurel Zent <mzent@codeweavers.com>
 Date: Mon, 27 Oct 2025 19:19:24 +0100
-Subject: [PATCH 375/414] kernelbase: Reimplement WaitForSingleObject[Ex] on
+Subject: [PATCH 375/473] kernelbase: Reimplement WaitForSingleObject[Ex] on
  top of NtWaitForSingleObject.
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 375/414] kernelbase: Reimplement WaitForSingleObject[Ex] on
  1 file changed, 13 insertions(+), 2 deletions(-)
 
 diff --git a/dlls/kernelbase/sync.c b/dlls/kernelbase/sync.c
-index 401b9fa055c..ea1a44e102f 100644
+index 3c288a6df55..e612e755178 100644
 --- a/dlls/kernelbase/sync.c
 +++ b/dlls/kernelbase/sync.c
 @@ -399,7 +399,7 @@ BOOL WINAPI DECLSPEC_HOTPATCH UnregisterWaitEx( HANDLE handle, HANDLE event )
@@ -42,5 +42,5 @@ index 401b9fa055c..ea1a44e102f 100644
  
  
 -- 
-2.51.1
+2.52.0
 

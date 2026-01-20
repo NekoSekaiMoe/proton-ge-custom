@@ -1,7 +1,7 @@
-From afd870f780ecb763356725eaf985c1ff28143ecf Mon Sep 17 00:00:00 2001
+From 5ec099fadafafc1b872a254c0b442802863ba045 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Mon, 14 Jul 2025 18:01:48 -0400
-Subject: [PATCH 154/414] wdfldr.sys: Add stub dll.
+Subject: [PATCH 154/473] wdfldr.sys: Add stub dll.
 
 ---
  configure.ac                    |  1 +
@@ -117,5 +117,5 @@ index 00000000000..51c5e2ba7d7
 +@ stdcall WdfVersionUnbind(ptr ptr ptr)
 +@ stub WdfVersionUnbindClass
 -- 
-2.51.1
+2.52.0
 

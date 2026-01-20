@@ -1,7 +1,7 @@
-From f2deffe386f067740b306567634b54506995fc7f Mon Sep 17 00:00:00 2001
+From 9983e3faa82d96db99a126fc5e79662ee02b2126 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Fri, 7 Mar 2025 16:00:44 +0100
-Subject: [PATCH 353/414] winegcc: Merge the utility functions into the main
+Subject: [PATCH 353/473] winegcc: Merge the utility functions into the main
  file.
 
 ---
@@ -514,5 +514,5 @@ index 5b60c57daf7..dc7ef71ce42 100644
  {
      TOOL_CC,
 -- 
-2.51.1
+2.52.0
 

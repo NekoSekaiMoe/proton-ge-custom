@@ -1,7 +1,7 @@
-From 447dbf0f931b57a5ddd2fcb453794b572fa06936 Mon Sep 17 00:00:00 2001
+From bdfd292dcef582e694d9d3f150941cd54624df34 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Mon, 12 May 2025 13:24:55 +0200
-Subject: [PATCH 368/414] tools: Add support for syscalls with a custom entry
+Subject: [PATCH 368/473] tools: Add support for syscalls with a custom entry
  point.
 
 ---
@@ -153,5 +153,5 @@ index 650bec6cf1c..908b2371689 100755
 +update_syscalls( "ntdll", "dlls/ntdll/ntsyscalls.h", 0, { NtQueryInformationProcess => 1, NtQuerySystemTime => 1 } );
 +update_syscalls( "win32u", "dlls/win32u/win32syscalls.h", 0x1000, {} );
 -- 
-2.51.1
+2.52.0
 

@@ -1,7 +1,7 @@
-From fd0d1de1eb702ebb9f3ef25acc5fb6e645da3f2a Mon Sep 17 00:00:00 2001
+From ecb2eda61224904688d4cde2d0639cb21293d439 Mon Sep 17 00:00:00 2001
 From: Alexandros Frantzis <alexandros.frantzis@collabora.com>
 Date: Tue, 3 Jun 2025 14:57:00 +0300
-Subject: [PATCH 118/414] winewayland: Improve cleanup of text-input pending
+Subject: [PATCH 118/473] winewayland: Improve cleanup of text-input pending
  state.
 
 Ensure state resources are cleaned up when not needed, and also avoid
@@ -98,5 +98,5 @@ index 18f64797131..ddf30abe12a 100644
  };
  
 -- 
-2.51.1
+2.52.0
 

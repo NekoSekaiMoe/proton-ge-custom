@@ -1,8 +1,8 @@
-From 6f3e3f90026023747c998ab680a89de87ce48f8d Mon Sep 17 00:00:00 2001
+From ba09031e6cef1249e125feeb722e6a8c1684c527 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 24 Jul 2025 13:51:47 -0400
-Subject: [PATCH 189/414] ntoskrnl: Make OBJECT_TYPE more windows compliant
+Subject: [PATCH 189/473] ntoskrnl: Make OBJECT_TYPE more windows compliant
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 65 +++++++++++++---------------
@@ -226,5 +226,5 @@ index a06bfcc05b6..103feee023e 100644
  
  POBJECT_TYPE ExSemaphoreObjectType = &semaphore_type;
 -- 
-2.51.1
+2.52.0
 

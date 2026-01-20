@@ -1,8 +1,8 @@
-From 8a12b406afa54f06864aab5d8d6297ec09c9d918 Mon Sep 17 00:00:00 2001
+From 0b86071241a64061dbe4f5a624ddf912414bd76b Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 15 Nov 2025 23:22:11 -0600
-Subject: [PATCH 389/414] amdxc/atidxx: Remove unused header.
+Subject: [PATCH 389/473] amdxc/atidxx: Remove unused header.
 
 ---
  dlls/amdxc64/main.c  | 1 -
@@ -34,5 +34,5 @@ index b1f3240b219..2f8355cb34f 100644
  #include "wine/vulkan.h"
  #include "wine/asm.h"
 -- 
-2.51.1
+2.52.0
 

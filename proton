@@ -44,7 +44,7 @@ import protonfixes
 #To enable debug logging, copy "user_settings.sample.py" to "user_settings.py"
 #and edit it if needed.
 
-CURRENT_PREFIX_VERSION="GE-Proton10-27"
+CURRENT_PREFIX_VERSION="GE-Proton10-28"
 
 PFX="Proton: "
 ld_path_var = "LD_LIBRARY_PATH"
@@ -1452,6 +1452,7 @@ def default_compat_config():
                 "3159330", #Assassin's Creed Shadows
                 "367500", #Dragon's Dogma: Dark Arisen
                 "1890220", #Figmin XR
+                "2058180", #Judgment
                 "2507950", #Delta Force
                 ]:
             ret.add("gamedrive")
@@ -1504,7 +1505,6 @@ def default_compat_config():
                 "1418100", #Swords of Legends Online
                 "2080180", #Go Home Annie Demo
                 "1939100", #Go Home Annie
-                "108710", #Alan Wake
                 "435150", #Divinity: Original Sin 2 - Definitive Edition
                 "2176900", #Fablecraft
                 "2853730", #Skull and Bones
@@ -1519,9 +1519,7 @@ def default_compat_config():
                 "505170", #Carmageddon: Max Damage
                 "255220", #GRID Autosport
                 "44350", #GRID 2
-                "2176900", #Fablecraft
                 "407810", #Hard Reset Redux
-                "2853730", #Skull and Bones
                 "233130", #Shadow Warrior
                 "2067160", #Simulakros
                 "2621010", #Simulakros Demo
@@ -1712,7 +1710,18 @@ class Session:
             self.env["MEDIACONV_AUDIO_TRANSCODED_FILE"] = os.environ["STEAM_COMPAT_TRANSCODED_MEDIA_PATH"] + "/transcoded_audio.foz"
             self.env["MEDIACONV_VIDEO_TRANSCODED_FILE"] = os.environ["STEAM_COMPAT_TRANSCODED_MEDIA_PATH"] + "/transcoded_video.foz"
 
-        self.env["MEDIACONV_BLANK_VIDEO_FILE"] = g_proton.media_dir + "blank.mkv"
+        if os.environ.get("PROTON_MEDIACONV_NO_VIDEO",
+            "1" if os.environ.get("SteamGameId", 0) in (
+                "283640", # Salt and Sanctuary
+                "787810", # Rogue Heroes: Ruins of Tasos
+                "1199570", # Rogue Heroes: Ruins of Tasos Demo
+                "1491460", # Tor Eternum
+                "1588990", # Tor Eternum Demo
+                "1895130", # Darza's Dominion
+            ) else "0") != "0":
+            self.env["MEDIACONV_BLANK_VIDEO_FILE"] = g_proton.media_dir + "blank.mka"
+        else:
+            self.env["MEDIACONV_BLANK_VIDEO_FILE"] = g_proton.media_dir + "blank.mkv"
         self.env["MEDIACONV_BLANK_AUDIO_FILE"] = g_proton.media_dir + "blank.ptna"
 
         self.env["ESPEAK_DATA_PATH"] = g_proton.dist_dir + "share"
@@ -1981,6 +1990,10 @@ class Session:
         if os.environ.get("SteamGameId", 0) == "2471120":
             self.dlloverrides["winmm"] = "n,b"
 
+        # CW Bug 26376
+        if os.environ.get("SteamGameId", 0) == "1928420":
+            self.dlloverrides["gameinput"] = "d"
+
         if "PROTON_LIMIT_RESOLUTIONS" not in self.env:
             if os.environ.get("SteamGameId", 0) in [
                     "39540", #SpellForce: Platinum Edition
@@ -2086,14 +2099,6 @@ class Session:
         # TODO: D3D11 has a different loading mechanism because why not
         self.env["INTC_ALT_DRIVER_EXTENSIONS_PATH"] = "C:\\Windows\\System32"
 
-        if "SDL_MOUSE_EMULATE_WARP_WITH_RELATIVE" not in self.env and os.environ.get("SteamGameId", 0) in [
-                "205230", # Hell Yeah!
-                "253430", # CastleMiner Z
-                "287240", # Eterium Demo
-                "280200", # Eterium
-                "434570", # Blood and Bacon
-                ]:
-            self.env["SDL_MOUSE_EMULATE_WARP_WITH_RELATIVE"] = "0"
 
         # PROTON_DISABLE_HIDRAW workarounds
         if (os.environ.get("SteamGameId", 0) == "2322010" and    # God of War: Ragnarok
@@ -2289,6 +2294,7 @@ class Session:
         # CoD: Black Ops 3 workaround
         if os.environ.get("SteamGameId", 0) in [
                     "311210",   # CoD: Black Ops 3
+                    "1985810",  # CoD: Black Ops Cold War
                     "1549250",  # Undecember
                 ]:
             argv = [g_proton.wine_bin, "c:\\Program Files (x86)\\Steam\\steam.exe"]

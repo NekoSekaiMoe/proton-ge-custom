@@ -1,7 +1,7 @@
-From 5960bb2baaac4f4d5da06ba41220cc9e48a6b456 Mon Sep 17 00:00:00 2001
+From 23f8a8e840f9c6a53b11c2a2cc402641f3586cab Mon Sep 17 00:00:00 2001
 From: Attila Fidan <dev@print0.net>
 Date: Thu, 20 Mar 2025 11:45:41 +0000
-Subject: [PATCH 020/414] win32u: Return 0 from NtUserGetKeyNameText if there
+Subject: [PATCH 020/473] win32u: Return 0 from NtUserGetKeyNameText if there
  is no translation.
 
 ---
@@ -22,5 +22,5 @@ index 868a457d764..7849d7663d7 100644
      buffer[len] = 0;
  
 -- 
-2.51.1
+2.52.0
 

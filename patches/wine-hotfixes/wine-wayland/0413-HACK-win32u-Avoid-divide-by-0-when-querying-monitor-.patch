@@ -1,8 +1,8 @@
-From c8da9f5bfeff77531d216cd3e83d73c15b993a32 Mon Sep 17 00:00:00 2001
+From 82e02488c2e06ebae46e9479ffff4de2772f9cc6 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 13 Dec 2025 14:41:14 -0600
-Subject: [PATCH 414/414] HACK: win32u: Avoid divide by 0 when querying monitor
+Subject: [PATCH 413/473] HACK: win32u: Avoid divide by 0 when querying monitor
  dpi.
 
 ---
@@ -22,5 +22,5 @@ index 994ff7a78ff..90c1761787d 100644
      }
  
 -- 
-2.51.1
+2.52.0
 

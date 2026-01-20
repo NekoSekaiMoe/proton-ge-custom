@@ -1,8 +1,8 @@
-From 4e59baf2f4c467e7d168d842a6291d59de2ab2e6 Mon Sep 17 00:00:00 2001
+From 5cf50debb027dcb766f0f0be6adde591d213e511 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 26 Nov 2025 19:27:46 -0600
-Subject: [PATCH 398/414] HACK: winewayland: Handle extended scancode->Vk
+Subject: [PATCH 398/473] HACK: winewayland: Handle extended scancode->Vk
  mappings.
 
 ---
@@ -61,5 +61,5 @@ index 3f5fdda9e47..9c67cb8f8f9 100644
  
      NtUserSendHardwareInput(hwnd, 0, &input, 0);
 -- 
-2.51.1
+2.52.0
 

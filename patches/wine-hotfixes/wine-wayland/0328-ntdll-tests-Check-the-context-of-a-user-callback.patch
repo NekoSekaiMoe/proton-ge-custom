@@ -1,7 +1,7 @@
-From 080c98d753664bf1f10d3b36b1814255d0fc19ff Mon Sep 17 00:00:00 2001
+From d2d6937b9dd879c6338aea7190a81312524e2752 Mon Sep 17 00:00:00 2001
 From: Yuxuan Shui <yshui@codeweavers.com>
 Date: Mon, 7 Jul 2025 16:48:59 +0100
-Subject: [PATCH 328/414] ntdll/tests: Check the context of a user callback.
+Subject: [PATCH 328/473] ntdll/tests: Check the context of a user callback.
 
 Check which non-volatile registers are set to their saved values before a user
 callback is entered.
@@ -141,5 +141,5 @@ index 324dc97838b..8d4ba7ec0e4 100644
      test_nested_exception();
      test_collided_unwind();
 -- 
-2.51.1
+2.52.0
 

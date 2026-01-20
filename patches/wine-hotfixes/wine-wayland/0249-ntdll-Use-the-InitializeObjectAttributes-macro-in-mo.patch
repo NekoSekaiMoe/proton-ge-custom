@@ -1,7 +1,7 @@
-From 951c288b4851957e91a850403d02f2b5ada03731 Mon Sep 17 00:00:00 2001
+From 58f72a09f7200535850509b6ab5336bdceb1f9b4 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Fri, 28 Mar 2025 17:28:30 +0100
-Subject: [PATCH 249/414] ntdll: Use the InitializeObjectAttributes macro in
+Subject: [PATCH 249/473] ntdll: Use the InitializeObjectAttributes macro in
  more places.
 
 ---
@@ -260,5 +260,5 @@ index 031deebc1d2..5a11a6fc634 100644
  
      /* @@ Wine registry key: HKCU\Software\Wine */
 -- 
-2.51.1
+2.52.0
 

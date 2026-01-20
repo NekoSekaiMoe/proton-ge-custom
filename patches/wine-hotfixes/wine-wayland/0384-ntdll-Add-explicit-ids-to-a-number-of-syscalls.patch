@@ -1,7 +1,7 @@
-From 23d313c65dbc29ff698aa1c6aa49353cd3cfe487 Mon Sep 17 00:00:00 2001
+From 172e73a04dafd6c065490a6a5729a594253e37ff Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 5 Jun 2025 12:00:59 +0200
-Subject: [PATCH 384/414] ntdll: Add explicit ids to a number of syscalls.
+Subject: [PATCH 384/473] ntdll: Add explicit ids to a number of syscalls.
 
 For the ones that seem to be mostly stable across Windows versions,
 based on the syscall table by Mateusz "j00ru" Jurczyk.
@@ -1400,5 +1400,5 @@ index 7623f4f9139..8860c483a80 100644
      SYSCALL_ENTRY( 0x00f4, wine_unix_to_nt_file_name, 24 )
  #else
 -- 
-2.51.1
+2.52.0
 

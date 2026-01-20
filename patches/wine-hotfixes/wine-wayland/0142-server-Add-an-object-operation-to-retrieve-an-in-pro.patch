@@ -1,7 +1,7 @@
-From ddc9d539352ff596a42000c3f49e364b383c89c2 Mon Sep 17 00:00:00 2001
+From d9ad9cbf73396e4c9fecae0f42656a15a68b2c40 Mon Sep 17 00:00:00 2001
 From: Elizabeth Figura <zfigura@codeweavers.com>
 Date: Thu, 3 Jul 2025 16:28:01 -0400
-Subject: [PATCH 142/414] server: Add an object operation to retrieve an
+Subject: [PATCH 142/473] server: Add an object operation to retrieve an
  in-process synchronization object.
 
 ---
@@ -975,5 +975,5 @@ index 8803d9bf619..ad4664e2b1e 100644
      desktop_destroy               /* destroy */
  };
 -- 
-2.51.1
+2.52.0
 

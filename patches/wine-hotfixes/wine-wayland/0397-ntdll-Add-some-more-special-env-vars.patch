@@ -1,8 +1,8 @@
-From aa6756135294fda299f17a85809cd8ebdced7245 Mon Sep 17 00:00:00 2001
+From 5f4457470dcc748efe5826fc1e2cd4505c6dc033 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 26 Nov 2025 13:32:17 -0600
-Subject: [PATCH 397/414] ntdll: Add some more special env vars.
+Subject: [PATCH 397/473] ntdll: Add some more special env vars.
 
 ---
  dlls/ntdll/unix/env.c | 7 ++++++-
@@ -27,5 +27,5 @@ index 90e21f2b3da..2dd96a02776 100644
              STARTS_WITH( var, "XR_" ) ||
              STARTS_WITH( var, "XDG_SESSION_TYPE=" ));
 -- 
-2.51.1
+2.52.0
 

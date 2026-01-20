@@ -1,7 +1,7 @@
-From 6ffcd080efc123fc5818d2677a9d968d72b32344 Mon Sep 17 00:00:00 2001
+From bca0bab00847a65a92b8ab6cc440882afe231136 Mon Sep 17 00:00:00 2001
 From: Gerald Pfeifer <gerald@pfeifer.com>
 Date: Sun, 7 Sep 2025 23:32:32 +0200
-Subject: [PATCH 331/414] ntdll: Fix the build of check_invalid_gsbase() on
+Subject: [PATCH 331/473] ntdll: Fix the build of check_invalid_gsbase() on
  FreeBSD.
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -35,5 +35,5 @@ index d8ed2b30be6..a91bb78c488 100644
      sysarch( X86_64_GET_GSBASE, &cur_gsbase );
  #elif defined(__APPLE__)
 -- 
-2.51.1
+2.52.0
 

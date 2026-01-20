@@ -1,8 +1,8 @@
-From 6c67d704ddd79b2a7e09481fad43d5d4d19ccedc Mon Sep 17 00:00:00 2001
+From a1b703909268ac75cfef7d31199fb6f596b7177f Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 9 Jun 2025 08:05:26 -0400
-Subject: [PATCH 088/414] winewayland: immediately send input when entering.
+Subject: [PATCH 088/473] winewayland: immediately send input when entering.
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 28 ++++++++++++++++++--------
@@ -72,5 +72,5 @@ index 59accf2f264..59b61415721 100644
  
  static void pointer_handle_leave(void *data, struct wl_pointer *wl_pointer,
 -- 
-2.51.1
+2.52.0
 

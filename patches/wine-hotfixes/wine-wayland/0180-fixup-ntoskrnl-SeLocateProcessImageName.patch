@@ -1,8 +1,8 @@
-From d34f7e2eeffa34190018213e79c753eaafa17caa Mon Sep 17 00:00:00 2001
+From 71b12b4322f1f23511b984d03aee788394af29ff Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:39:47 -0400
-Subject: [PATCH 180/414] fixup! ntoskrnl: SeLocateProcessImageName.
+Subject: [PATCH 180/473] fixup! ntoskrnl: SeLocateProcessImageName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 72 +++++++++++++++++++++-------
@@ -188,5 +188,5 @@ index 10aebe722de..14d5a3a4e29 100644
  NTSTATUS kernel_object_from_handle( HANDLE handle, POBJECT_TYPE type, void **ret );
  
 -- 
-2.51.1
+2.52.0
 

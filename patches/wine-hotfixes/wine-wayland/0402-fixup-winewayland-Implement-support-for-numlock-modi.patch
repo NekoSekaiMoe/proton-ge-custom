@@ -1,8 +1,8 @@
-From a0bfe1ceb5c85e1e7f177a132d6ef52502e21d94 Mon Sep 17 00:00:00 2001
+From 618dcfe6490071533c0a2ec780d30b20f3b06b93 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 28 Nov 2025 15:08:23 -0500
-Subject: [PATCH 402/414] fixup! winewayland: Implement support for numlock
+Subject: [PATCH 402/473] fixup! winewayland: Implement support for numlock
  modifier.
 
 ---
@@ -50,5 +50,5 @@ index 6d8bd4f55c1..85e0809fe47 100644
  
  static void keyboard_handle_key(void *data, struct wl_keyboard *wl_keyboard,
 -- 
-2.51.1
+2.52.0
 

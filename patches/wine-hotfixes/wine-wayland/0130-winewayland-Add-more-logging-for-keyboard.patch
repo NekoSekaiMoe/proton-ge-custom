@@ -1,8 +1,8 @@
-From 8ac29807fc212ec1f7de2379f1b162696f75c6bd Mon Sep 17 00:00:00 2001
+From 412d803a7b36a6cfe8d227818741f23c164ac315 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 24 Jun 2025 13:05:02 -0400
-Subject: [PATCH 130/414] winewayland: Add more logging for keyboard.
+Subject: [PATCH 130/473] winewayland: Add more logging for keyboard.
 
 ---
  dlls/winewayland.drv/wayland_keyboard.c | 4 ++++
@@ -31,5 +31,5 @@ index 5234302884e..44d90749162 100644
  
      /* The wl_surface user data remains valid and immutable for the whole
 -- 
-2.51.1
+2.52.0
 

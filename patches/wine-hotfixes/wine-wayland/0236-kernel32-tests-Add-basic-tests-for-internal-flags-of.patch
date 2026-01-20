@@ -1,7 +1,7 @@
-From f7a5c2ea2990a44d001b4abce51eaa2d64e8cc44 Mon Sep 17 00:00:00 2001
+From e49e72f78b13d867f7ed4bf6d6014b0d1d33c180 Mon Sep 17 00:00:00 2001
 From: Jinoh Kang <jinoh.kang.kr@gmail.com>
 Date: Mon, 17 Feb 2025 23:56:57 +0900
-Subject: [PATCH 236/414] kernel32/tests: Add basic tests for internal flags of
+Subject: [PATCH 236/473] kernel32/tests: Add basic tests for internal flags of
  modules loaded with DONT_RESOLVE_DLL_REFERENCES.
 
 ---
@@ -60,5 +60,5 @@ index 680f2379fdf..77d6412d028 100644
      test_known_dlls_load();
  }
 -- 
-2.51.1
+2.52.0
 

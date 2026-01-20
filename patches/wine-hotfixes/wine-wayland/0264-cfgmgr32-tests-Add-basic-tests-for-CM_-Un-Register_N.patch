@@ -1,7 +1,7 @@
-From 7e753d24db9d0a7267c66e2cdbe6b7605d5c9009 Mon Sep 17 00:00:00 2001
+From a216351d1808fd916c5a451260b9665e4cbb9a49 Mon Sep 17 00:00:00 2001
 From: Vibhav Pant <vibhavp@gmail.com>
 Date: Tue, 22 Oct 2024 11:45:55 +0530
-Subject: [PATCH 264/414] cfgmgr32/tests: Add basic tests for
+Subject: [PATCH 264/473] cfgmgr32/tests: Add basic tests for
  CM_(Un)Register_Notification.
 
 ---
@@ -103,5 +103,5 @@ index 580d5d1cc26..43338325907 100644
  {
      CM_NOTIFY_FILTER_TYPE_DEVICEINTERFACE,
 -- 
-2.51.1
+2.52.0
 

@@ -1,7 +1,7 @@
-From c4959ea4c5372918854055c0b916159589958b79 Mon Sep 17 00:00:00 2001
+From 416899ee4d264c7d9c9f9718016fa2afc1050ab4 Mon Sep 17 00:00:00 2001
 From: Marc-Aurel Zent <mzent@codeweavers.com>
 Date: Wed, 29 Oct 2025 11:05:57 +0100
-Subject: [PATCH 377/414] ntdll: Reimplement NtWaitForSingleObject without
+Subject: [PATCH 377/473] ntdll: Reimplement NtWaitForSingleObject without
  NtWaitForMultipleObjects.
 
 ---
@@ -51,5 +51,5 @@ index e3363b54645..475bf648323 100644
  
  NTSTATUS wait_internal_server( HANDLE handle, BOOLEAN alertable, const LARGE_INTEGER *timeout )
 -- 
-2.51.1
+2.52.0
 

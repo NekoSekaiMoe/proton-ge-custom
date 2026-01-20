@@ -1,8 +1,8 @@
-From 25fc449bcec869d93c60e1bbac366edb851a6585 Mon Sep 17 00:00:00 2001
+From fabd716addb0ab888deba95dba44d56cb641d090 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 10 Sep 2025 12:29:19 -0500
-Subject: [PATCH 301/414] winewayland: redraw surface contents after fractional
+Subject: [PATCH 301/473] winewayland: redraw surface contents after fractional
  scale event.
 
 ---
@@ -52,5 +52,5 @@ index 1adc6e8dd01..9d931cf5565 100644
  
  static const struct wp_fractional_scale_v1_listener wp_fractional_scale_listener =
 -- 
-2.51.1
+2.52.0
 

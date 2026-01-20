@@ -1,8 +1,8 @@
-From 74fbb7a6b244823caa2f0ed4bf35427fd5f1bdd8 Mon Sep 17 00:00:00 2001
+From efd513f633920d45ff79a4fd64e50d322d47b4c5 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 7 Jun 2025 22:49:21 -0400
-Subject: [PATCH 082/414] winewayland: Allow disabling rawinput through env
+Subject: [PATCH 082/473] winewayland: Allow disabling rawinput through env
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 36 ++++++++++++++++++++++----
@@ -77,5 +77,5 @@ index 7aa0b0a74af..38472dbadc5 100644
  
      NtUserSendHardwareInput(hwnd, 0, &input, 0);
 -- 
-2.51.1
+2.52.0
 

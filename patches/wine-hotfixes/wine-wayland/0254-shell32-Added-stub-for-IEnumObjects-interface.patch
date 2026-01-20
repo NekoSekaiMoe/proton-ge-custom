@@ -1,7 +1,7 @@
-From 4fe954909987c3131a1a6453906ba394795f24e8 Mon Sep 17 00:00:00 2001
+From cd4e0973f9c34adc7cb0666e5b302dc6668bc8d0 Mon Sep 17 00:00:00 2001
 From: Kevin Martinez <kevinrmartinezj@gmail.com>
 Date: Wed, 17 Jul 2024 15:10:49 -0400
-Subject: [PATCH 254/414] shell32: Added stub for IEnumObjects interface.
+Subject: [PATCH 254/473] shell32: Added stub for IEnumObjects interface.
 
 ---
  dlls/actxprxy/usrmarshal.c       |  17 ++++
@@ -283,5 +283,5 @@ index 4118e3d9ba2..aa393225db1 100644
 +    HRESULT Clone([out] IEnumObjects **ppenum);
 +}
 -- 
-2.51.1
+2.52.0
 

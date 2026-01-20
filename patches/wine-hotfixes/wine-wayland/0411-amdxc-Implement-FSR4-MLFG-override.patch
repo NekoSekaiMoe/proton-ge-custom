@@ -1,8 +1,8 @@
-From 1ee987114ff41530d28e54503f07ecdb9c4b3b75 Mon Sep 17 00:00:00 2001
+From 98fc79c5d8513d82384bd021a4978680786da745 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 10 Dec 2025 19:25:44 -0600
-Subject: [PATCH 411/414] amdxc: Implement FSR4 MLFG override.
+Subject: [PATCH 411/473] amdxc: Implement FSR4 MLFG override.
 
 ---
  dlls/amdxc64/main.c | 70 ++++++++++++++++++++++++++++++++++++++-------
@@ -121,5 +121,5 @@ index 72488c66dec..f2623c73fda 100644
          this->IAmdExtD3DFactory_iface.lpVtbl = &AmdExtD3DFactory_vtable;
          this->ref = 1;
 -- 
-2.51.1
+2.52.0
 

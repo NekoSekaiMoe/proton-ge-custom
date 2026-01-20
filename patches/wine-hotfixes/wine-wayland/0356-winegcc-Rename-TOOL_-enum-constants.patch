@@ -1,7 +1,7 @@
-From e3d86294612e71d07b3d842592fb083c213ea783 Mon Sep 17 00:00:00 2001
+From 3ab47f464febd5be57fe43ce6f221a1f1e08d028 Mon Sep 17 00:00:00 2001
 From: Brendan Shanks <bshanks@codeweavers.com>
 Date: Fri, 28 Feb 2025 16:52:42 -0800
-Subject: [PATCH 356/414] winegcc: Rename TOOL_ enum constants.
+Subject: [PATCH 356/473] winegcc: Rename TOOL_ enum constants.
 
 macOS has conflicting TOOL_ defines in <mach-o/loader.h>.
 ---
@@ -92,5 +92,5 @@ index 622a769839c..1deea6f610a 100644
  
          strarray_add(&implib_args, "--implib");
 -- 
-2.51.1
+2.52.0
 

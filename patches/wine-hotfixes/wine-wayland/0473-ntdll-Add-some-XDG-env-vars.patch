@@ -1,0 +1,81 @@
+From 4068649517ed5156861d37296c9fc2c0e23aff17 Mon Sep 17 00:00:00 2001
+From: Etaash Mathamsetty
+ <45927311+Etaash-mathamsetty@users.noreply.github.com>
+Date: Mon, 29 Dec 2025 18:21:16 -0500
+Subject: [PATCH 473/473] ntdll: Add some XDG env vars.
+
+---
+ dlls/appwiz.cpl/addons.c                   | 2 +-
+ dlls/ntdll/unix/env.c                      | 6 +++++-
+ dlls/shell32/recyclebin.c                  | 2 +-
+ programs/winemenubuilder/winemenubuilder.c | 4 ++--
+ 4 files changed, 9 insertions(+), 5 deletions(-)
+
+diff --git a/dlls/appwiz.cpl/addons.c b/dlls/appwiz.cpl/addons.c
+index c805139e198..3b14a707086 100644
+--- a/dlls/appwiz.cpl/addons.c
++++ b/dlls/appwiz.cpl/addons.c
+@@ -322,7 +322,7 @@ static WCHAR *get_cache_file_name(BOOL ensure_exists)
+     WCHAR *cache_dir, *ret;
+     size_t len, size;
+ 
+-    xdg_dir = getenv( "XDG_CACHE_HOME" );
++    xdg_dir = getenv( "WINEXDG_CACHE_HOME" );
+     if (xdg_dir && *xdg_dir && p_wine_get_dos_file_name)
+     {
+         if (!(cache_dir = p_wine_get_dos_file_name( xdg_dir ))) return NULL;
+diff --git a/dlls/ntdll/unix/env.c b/dlls/ntdll/unix/env.c
+index 2dd96a02776..3437792fc66 100644
+--- a/dlls/ntdll/unix/env.c
++++ b/dlls/ntdll/unix/env.c
+@@ -355,7 +355,11 @@ static BOOL is_special_env_var( const char *var )
+             STARTS_WITH( var, "NIXPKGS=" ) ||
+             STARTS_WITH( var, "VK_" ) ||
+             STARTS_WITH( var, "XR_" ) ||
+-            STARTS_WITH( var, "XDG_SESSION_TYPE=" ));
++            STARTS_WITH( var, "XDG_SESSION_TYPE=" ) ||
++            /* broken applications read these on windows too (GTK, godot 3.4 etc) */
++            STARTS_WITH( var, "XDG_DATA_HOME=" ) ||
++            STARTS_WITH( var, "XDG_CACHE_HOME=" ) ||
++            STARTS_WITH( var, "XDG_CONFIG_HOME=" ));
+ }
+ 
+ /* check if an environment variable changes dynamically in every new process */
+diff --git a/dlls/shell32/recyclebin.c b/dlls/shell32/recyclebin.c
+index b6d9879fa39..0c148844b00 100644
+--- a/dlls/shell32/recyclebin.c
++++ b/dlls/shell32/recyclebin.c
+@@ -104,7 +104,7 @@ static BOOL WINAPI init_trash_dirs( INIT_ONCE *once, void *param, void **context
+     }
+     else
+     {
+-        const WCHAR *data_home = _wgetenv( L"XDG_DATA_HOME" );
++        const WCHAR *data_home = _wgetenv( L"WINEXDG_DATA_HOME" );
+         const WCHAR *fmt = L"%s/.local/share/Trash";
+         WCHAR *p;
+ 
+diff --git a/programs/winemenubuilder/winemenubuilder.c b/programs/winemenubuilder/winemenubuilder.c
+index 6d34fa687ad..6d78d84be15 100644
+--- a/programs/winemenubuilder/winemenubuilder.c
++++ b/programs/winemenubuilder/winemenubuilder.c
+@@ -2738,7 +2738,7 @@ static BOOL init_xdg(void)
+ 
+     if (FAILED(hr)) return FALSE;
+ 
+-    if ((p = _wgetenv( L"XDG_CONFIG_HOME" )))
++    if ((p = _wgetenv( L"WINEXDG_CONFIG_HOME" )))
+         xdg_menu_dir = heap_wprintf( L"\\??\\unix%s/menus/applications-merged", p );
+     else
+         xdg_menu_dir = heap_wprintf( L"%s/.config/menus/applications-merged", _wgetenv(L"WINEHOMEDIR") );
+@@ -2746,7 +2746,7 @@ static BOOL init_xdg(void)
+     xdg_menu_dir[1] = '\\';  /* change \??\ to \\?\ */
+     create_directories(xdg_menu_dir);
+ 
+-    if ((p = _wgetenv( L"XDG_DATA_HOME" )))
++    if ((p = _wgetenv( L"WINEXDG_DATA_HOME" )))
+         xdg_data_dir = heap_wprintf( L"\\??\\unix%s", p );
+     else
+         xdg_data_dir = heap_wprintf( L"%s/.local/share", _wgetenv(L"WINEHOMEDIR") );
+-- 
+2.52.0
+

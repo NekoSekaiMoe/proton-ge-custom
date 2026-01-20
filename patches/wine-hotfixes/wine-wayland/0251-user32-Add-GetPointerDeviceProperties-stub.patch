@@ -1,7 +1,7 @@
-From 154bb9a5441d1b1d71985e247ca9cb1690a1ede1 Mon Sep 17 00:00:00 2001
+From 64c308de4fe36292fb9ef54bbf04662424cbfec6 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Ignacy=20Kuchci=C5=84ski?= <ignacykuchcinski@gmail.com>
 Date: Wed, 25 Jun 2025 09:35:41 +0200
-Subject: [PATCH 251/414] user32: Add GetPointerDeviceProperties stub.
+Subject: [PATCH 251/473] user32: Add GetPointerDeviceProperties stub.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=57489
 ---
@@ -42,5 +42,5 @@ index 95c97cfcac3..0126acd8a5f 100644
  @ stdcall GetPointerDevices(ptr ptr)
  # @ stub GetPointerFrameInfo
 -- 
-2.51.1
+2.52.0
 

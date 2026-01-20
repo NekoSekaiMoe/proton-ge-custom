@@ -1,8 +1,8 @@
-From 917b897813e21a2c410fb53dd0b413f98d61c434 Mon Sep 17 00:00:00 2001
+From b5065cd3ccd9243352530bad62ed09eaf59038b4 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 19 Nov 2025 01:26:46 -0600
-Subject: [PATCH 391/414] win32u: Don't grab the layout twice.
+Subject: [PATCH 391/473] win32u: Don't grab the layout twice.
 
 ---
  dlls/win32u/input.c | 5 ++---
@@ -25,5 +25,5 @@ index 26d09535121..6abeaf89109 100644
      }
      buffer[len] = 0;
 -- 
-2.51.1
+2.52.0
 

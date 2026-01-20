@@ -1,8 +1,8 @@
-From 9832b5f89deae4976eff6afe051c60a856f1bf8c Mon Sep 17 00:00:00 2001
+From a3d8dc91574bebb701195911d96da22266209724 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 25 May 2025 21:37:54 -0400
-Subject: [PATCH 064/414] fixup! winewayland: Support output switching.
+Subject: [PATCH 064/473] fixup! winewayland: Support output switching.
 
 ---
  dlls/winewayland.drv/wayland_surface.c | 4 ++++
@@ -24,5 +24,5 @@ index 3de12a1afe2..ea314dea032 100644
              pthread_mutex_unlock(&process_wayland.output_mutex);
          }
 -- 
-2.51.1
+2.52.0
 

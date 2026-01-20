@@ -1,7 +1,7 @@
-From dde8acc43828a30491ae1e07cc47d85fd7255ab5 Mon Sep 17 00:00:00 2001
+From 043261029d2a81fa155cdd5ddbdd38ba986a1d3b Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Fri, 28 Mar 2025 17:54:15 +0100
-Subject: [PATCH 248/414] include: Move InitializeObjectAttributes definition
+Subject: [PATCH 248/473] include: Move InitializeObjectAttributes definition
  to ntdef.h.
 
 ---
@@ -52,5 +52,5 @@ index 3aadb562466..1c01efd6475 100644
  #define NtCurrentThread()  ((HANDLE)~(ULONG_PTR)1)
  
 -- 
-2.51.1
+2.52.0
 

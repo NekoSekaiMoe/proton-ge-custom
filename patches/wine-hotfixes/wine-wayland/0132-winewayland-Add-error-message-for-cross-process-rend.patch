@@ -1,8 +1,8 @@
-From ff1ff8dc33f9603677f8f086a145c2a813b52186 Mon Sep 17 00:00:00 2001
+From cb7474db36058d4e55f070dde3517d86ee741064 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 27 Jun 2025 16:22:01 -0400
-Subject: [PATCH 132/414] winewayland: Add error message for cross process
+Subject: [PATCH 132/473] winewayland: Add error message for cross process
  rendering.
 
 ---
@@ -61,5 +61,5 @@ index 03d1ad09db5..97b611dc980 100644
      create_info_host.pNext = NULL;
      create_info_host.flags = 0; /* reserved */
 -- 
-2.51.1
+2.52.0
 

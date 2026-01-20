@@ -1,7 +1,7 @@
-From e79748b5f6ffef207f0f1082fa57d4185449ed54 Mon Sep 17 00:00:00 2001
+From 19b342f0d1c4b59855ad998abd0feab58babcbc5 Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Thu, 27 Feb 2025 11:01:12 +0100
-Subject: [PATCH 350/414] makefiles: Add support for assembly source files.
+Subject: [PATCH 350/473] makefiles: Add support for assembly source files.
 
 ---
  tools/make_makefiles |  2 +-
@@ -69,5 +69,5 @@ index 76a4a7f1748..4ab60eb2797 100644
  
      strarray_add( &make->clean_files, name );
 -- 
-2.51.1
+2.52.0
 

@@ -1,7 +1,7 @@
-From a0e8ca9474a133816c9f78be306d9726cb10c434 Mon Sep 17 00:00:00 2001
+From 718dcaad7d8fa898d7d3f160e3100dafe6811b2a Mon Sep 17 00:00:00 2001
 From: Tobias Gruetzmacher <tobias-git@23.gs>
 Date: Thu, 3 Apr 2025 18:06:11 +0200
-Subject: [PATCH 294/414] wininet: Handle HTTP status code 308 (Permanent
+Subject: [PATCH 294/473] wininet: Handle HTTP status code 308 (Permanent
  Redirect).
 
 ---
@@ -62,5 +62,5 @@ index 0de2b830812..0537585adf8 100644
  #define HTTP_STATUS_DENIED              401
  #define HTTP_STATUS_PAYMENT_REQ         402
 -- 
-2.51.1
+2.52.0
 

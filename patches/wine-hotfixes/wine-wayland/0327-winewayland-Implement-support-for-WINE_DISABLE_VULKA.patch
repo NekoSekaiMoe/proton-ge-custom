@@ -1,8 +1,8 @@
-From b03e28b1af1585c48f5cec130e7477f5ce75c3e8 Mon Sep 17 00:00:00 2001
+From fb1d599cc85dc50ea02f7633bb37b6619c9ff6e3 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 14 Oct 2025 19:13:33 -0500
-Subject: [PATCH 327/414] winewayland: Implement support for
+Subject: [PATCH 327/473] winewayland: Implement support for
  WINE_DISABLE_VULKAN_OPWR.
 
 ---
@@ -46,5 +46,5 @@ index 3c47e3e4810..aa67378dc0f 100644
          return VK_ERROR_OUT_OF_HOST_MEMORY;
      }
 -- 
-2.51.1
+2.52.0
 

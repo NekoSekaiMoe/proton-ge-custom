@@ -1,7 +1,7 @@
-From 094485f79f062be9ed75c7354bcd18ba7f81ec3c Mon Sep 17 00:00:00 2001
+From a604ed35d25ef9fc97693a00b72841ab33331427 Mon Sep 17 00:00:00 2001
 From: Louis Lenders <xerox.xerox2000x@gmail.com>
 Date: Tue, 18 Mar 2025 18:54:18 +0100
-Subject: [PATCH 219/414] win32u: Add stub for
+Subject: [PATCH 219/473] win32u: Add stub for
  NtUserSetAdditionalForegroundBoostProcesses.
 
 Microsoft Edge worked if windows version is set to win8.1 (or win7) but
@@ -1573,5 +1573,5 @@ index 19cb8dca4f4..315fb775709 100644
  W32KAPI DWORD    WINAPI NtUserSetClassLong( HWND hwnd, INT offset, LONG newval, BOOL ansi );
  W32KAPI ULONG_PTR WINAPI NtUserSetClassLongPtr( HWND hwnd, INT offset, LONG_PTR newval, BOOL ansi );
 -- 
-2.51.1
+2.52.0
 
