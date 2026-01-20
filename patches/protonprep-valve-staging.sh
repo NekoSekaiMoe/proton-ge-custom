@@ -25,6 +25,13 @@ apply_all_in_dir() {
     git clean -xdf
     popd
 
+    pushd dxvk
+    git reset --hard HEAD
+    git clean -xdf
+    wget https://gitlab.com/Ph42oN/dxvk-gplasync/-/raw/main/patches/dxvk-gplasync-master.patch -O lib.patch
+    apply_patch lib.patch
+    popd
+
     pushd dxvk-nvapi
     git reset --hard HEAD
     git clean -xdf

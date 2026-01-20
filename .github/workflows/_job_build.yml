@@ -57,7 +57,7 @@ jobs:
     - name: Make ${{ inputs.name }}
       working-directory: ./a/build
       run: |
-        make -j$(nproc) redist VERBOSE=0 V=0
+        make -j$(nproc) redist VERBOSE=0 V=0 ENABLE_CCACHE=1
 
     - name: Save cache
       id: ccache-save

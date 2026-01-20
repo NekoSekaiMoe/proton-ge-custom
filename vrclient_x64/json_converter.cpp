@@ -3,15 +3,8 @@
 
 #include "ntstatus.h"
 #define WIN32_NO_STATUS
-<<<<<<< HEAD
 #include "windef.h"
 #include "winbase.h"
-=======
-extern "C" {
-#include "windef.h"
-#include "winbase.h"
-}
->>>>>>> a94b8c800791322e98d43812c4fbc48cd4f41f85
 
 #undef min
 #undef max

@@ -96,6 +96,19 @@ function escape_for_make() {
   echo "$escape"
 }
 
+function dep() {
+  local build_dir="$(pwd)"
+  test -d jsoncpp && rm -rf jsoncpp
+  test -d ../steam_helper/json && rm -rf ../steam_helper/json
+  git clone https://github.com/open-source-parsers/jsoncpp --depth=1
+  cd jsoncpp
+  python3 amalgamate.py
+  mv dist/* ../../steam_helper/
+  cd ../../glslang
+  python3 update_glslang_sources.py
+  cd "$build_dir"
+}
+
 function configure() {
   local steamrt_image="$arg_protonsdk_image"
   local srcdir
@@ -105,7 +118,7 @@ function configure() {
     err "Cannot do a top level in-tree build."
     die "Create a subdirectory in build/ or outside of the tree and run configure.sh from there."
   fi
-
+  dep
   # nothing specified, getting the default value from the Makefile to test the
   # container engine
   if [[ -z $steamrt_image ]]; then
