@@ -17,7 +17,7 @@ THE GE-PROTON ISSUE TRACKER IS FOR ISSUES THAT ONLY OCCUR ON GE-PROTON BUT WORK 
 
 ## System Information
 - GPU: <!-- e.g. RX 580 or GTX 970 -->
-- Driver/LLVM version: <!-- e.g. Mesa 18.2/7.0.0 or nvidia 396.54 -->
+- Video driver version: <!-- e.g. Mesa 18.2 or nvidia 396.54 -->
 - Kernel version: <!-- e.g. 4.17 -->
 - Link to full system information report as [Gist](https://gist.github.com/):
 - Proton version:
@@ -50,6 +50,8 @@ and drop the generated `$HOME/steam-$APPID.log` into this issue report -->
 4. Please copy it to your clipboard by pressing `Ctrl+A` and then `Ctrl+C`.
    Then paste it in a [Gist](https://gist.github.com/) and post the link in
    this issue.
-5. Please search for open issues and pull requests by the name of the game and
+5. Also, please copy the contents of `Help` > `Steam Runtime Diagnostics` to
+   the gist.
+6. Please search for open issues and pull requests by the name of the game and
    find out whether they are relevant and should be referenced above.
 -->
