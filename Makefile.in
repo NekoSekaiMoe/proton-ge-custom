@@ -99,6 +99,7 @@ else
 	TOOLCHAIN_PREFIX := llvm-
 	OBJCOPY_FLAGS  :=
 	MINGW_TYPE := clang
+	WITHOUT_NVIDIA_LIBS := 1
 	# TODO: move this to a configure option
 endif
 
@@ -921,6 +922,7 @@ $(eval $(call rules-makedep,vrclient,x86_64))
 $(eval $(call rules-makedep,vrclient,aarch64))
 
 
+ifneq ($(WITHOUT_OLD_DEVICE),1)
 ##
 ## dxvk
 ##
@@ -950,8 +952,46 @@ $(OBJ)/.dxvk-post-source:
 	rm -rf $(DST_LIBDIR)/wine/dxvk/version
 	echo "$(shell git -C $(SRCDIR) submodule status -- dxvk)" > $(DST_LIBDIR)/wine/dxvk/version
 	touch $@
+endif
 
 
+##
+## dxvk-sarek
+##
+ifneq ($(WITHOUT_OLD_DEVICE),1)
+# wine builds DLLs with the same names, we need to differentiate the timestamps
+DXVK_SAREK_i386_SOURCE_DATE_EPOCH := $(shell expr $(i386_SOURCE_DATE_EPOCH) - 1)
+DXVK_SAREK_x86_64_SOURCE_DATE_EPOCH := $(shell expr $(x86_64_SOURCE_DATE_EPOCH) - 1)
+
+DXVK_SAREK_SOURCE_ARGS = \
+  --exclude version.h.in \
+
+DXVK_SAREK_MESON_ARGS = -Db_ndebug=true --force-fallback-for=libdisplay-info
+DXVK_SAREK_i386_MESON_ARGS = --bindir=$(DXVK_SAREK_i386_DST)/lib/wine/dxvk-sarek/i386-windows
+DXVK_SAREK_x86_64_MESON_ARGS = --bindir=$(DXVK_SAREK_x86_64_DST)/lib/wine/dxvk-sarek/x86_64-windows
+DXVK_SAREK_HOST_DEPENDS = glslang
+
+DXVK_SAREK_i386_CFLAGS = -O3 -mno-avx $(i386_SANITY_FLAGS)
+DXVK_SAREK_x86_64_CFLAGS = -O3 -mno-avx
+DXVK_SAREK_CPPFLAGS = -msse -msse2
+DXVK_SAREK_LDFLAGS = -static -static-libgcc -static-libstdc++
+
+$(eval $(call rules-source,dxvk-sarek,$(SRCDIR)/dxvk-sarek))
+$(eval $(call rules-meson,dxvk-sarek,i386,windows))
+$(eval $(call rules-meson,dxvk-sarek,x86_64,windows))
+#$(eval $(call rules-meson,dxvk-sarek,aarch64,windows))
+
+$(OBJ)/.dxvk-sarek-post-source:
+	sed -re 's#@VCS_TAG@#$(shell git -C $(SRCDIR)/dxvk-sarek describe --always --abbrev=15 --dirty=0)#' \
+	    $(SRCDIR)/dxvk-sarek/version.h.in > $(DXVK_SAREK_SRC)/version.h.in
+	mkdir -p $(DST_LIBDIR)/wine/dxvk-sarek
+	rm -rf $(DST_LIBDIR)/wine/dxvk-sarek/version
+	echo "$(shell git -C $(SRCDIR) submodule status -- dxvk-sarek)" > $(DST_LIBDIR)/wine/dxvk-sarek/version
+	touch $@
+endif
+
+
+ifneq ($(WITHOUT_NVIDIA_LIBS),1)
 ##
 ## dxvk-nvapi
 ##
@@ -970,6 +1010,8 @@ $(OBJ)/.dxvk-nvapi-post-source:
 	echo "$(shell git -C $(SRCDIR) submodule status -- dxvk-nvapi)" > $(DST_LIBDIR)/wine/nvapi/version
 	touch $@
 
+default_pfx: dxvk-nvapi
+
 
 ##
 ## nvcuda
@@ -977,24 +1019,26 @@ $(OBJ)/.dxvk-nvapi-post-source:
 
 NVCUDA_i386_MESON_ARGS = \
   --cross-file=$(NVCUDA_SRC)/build-wine32.txt \
-  --libdir=lib/wine/nvidia-libs/nvcuda/i386-windows
+  --libdir=lib/wine/nvcuda/i386-windows
 
 NVCUDA_x86_64_MESON_ARGS = \
   --cross-file=$(NVCUDA_SRC)/build-wine64.txt \
-  --libdir=lib/wine/nvidia-libs/nvcuda/x86_64-windows
+  --libdir=lib/wine/nvcuda/x86_64-windows
 
 NVCUDA_DEPENDS = wine
 NVCUDA_HOST_DEPENDS = wine
 
-$(eval $(call rules-source,nvcuda,$(SRCDIR)/nvidia-libs/nvcuda))
+$(eval $(call rules-source,nvcuda,$(SRCDIR)/nvcuda))
 $(eval $(call rules-nvidia-libs,nvcuda,i386,windows))
 $(eval $(call rules-nvidia-libs,nvcuda,x86_64,windows))
 
 $(OBJ)/.nvcuda-post-source:
-	mkdir -p $(DST_LIBDIR)/wine/nvidia-libs/nvcuda
-	rm -rf $(DST_LIBDIR)/wine/nvidia-libs/nvcuda/version
-	echo "$(shell git -C $(SRCDIR) submodule status -- nvidia-libs/nvcuda)" > $(DST_LIBDIR)/wine/nvidia-libs/nvcuda/version
+	mkdir -p $(DST_LIBDIR)/wine/nvcuda
+	rm -rf $(DST_LIBDIR)/wine/nvcuda/version
+	echo "$(shell git -C $(SRCDIR) submodule status -- nvcuda)" > $(DST_LIBDIR)/wine/nvcuda/version
 	touch $@
+
+#default_pfx: nvcuda
 
 
 ##
@@ -1003,24 +1047,26 @@ $(OBJ)/.nvcuda-post-source:
 
 NVENC_i386_MESON_ARGS = \
   --cross-file=$(NVENC_SRC)/build-wine32.txt \
-  --libdir=lib/wine/nvidia-libs/nvenc/i386-windows
+  --libdir=lib/wine/nvenc/i386-windows
 
 NVENC_x86_64_MESON_ARGS = \
   --cross-file=$(NVENC_SRC)/build-wine64.txt \
-  --libdir=lib/wine/nvidia-libs/nvenc/x86_64-windows
+  --libdir=lib/wine/nvenc/x86_64-windows
 
 NVENC_DEPENDS = wine
 NVENC_HOST_DEPENDS = wine
 
-$(eval $(call rules-source,nvenc,$(SRCDIR)/nvidia-libs/nvenc))
+$(eval $(call rules-source,nvenc,$(SRCDIR)/nvenc))
 $(eval $(call rules-nvidia-libs,nvenc,i386,windows))
 $(eval $(call rules-nvidia-libs,nvenc,x86_64,windows))
 
 $(OBJ)/.nvenc-post-source:
-	mkdir -p $(DST_LIBDIR)/wine/nvidia-libs/nvenc
-	rm -rf $(DST_LIBDIR)/wine/nvidia-libs/nvenc/version
-	echo "$(shell git -C $(SRCDIR) submodule status -- nvidia-libs/nvenc)" > $(DST_LIBDIR)/wine/nvidia-libs/nvenc/version
+	mkdir -p $(DST_LIBDIR)/wine/nvenc
+	rm -rf $(DST_LIBDIR)/wine/nvenc/version
+	echo "$(shell git -C $(SRCDIR) submodule status -- nvenc)" > $(DST_LIBDIR)/wine/nvenc/version
 	touch $@
+
+#default_pfx: nvenc
 
 
 ##
@@ -1029,20 +1075,22 @@ $(OBJ)/.nvenc-post-source:
 
 NVML_SO_x86_64_MESON_ARGS = \
   --cross-file=$(NVML_SO_SRC)/cross-wine64.txt \
-  --libdir=lib/wine/nvidia-libs/nvml
+  --libdir=lib/wine/nvml
 
 NVML_SO_DEPENDS = wine
 NVML_SO_HOST_DEPENDS = wine
 
-$(eval $(call rules-source,nvml_so,$(SRCDIR)/nvidia-libs/wine-nvml))
+$(eval $(call rules-source,nvml_so,$(SRCDIR)/nvml))
 $(eval $(call rules-nvidia-libs,nvml_so,x86_64,unix))
 
 $(OBJ)/.nvml_so-post-source:
 	cd $(NVML_SO_SRC)/src && ./make_nvml
-	mkdir -p $(DST_LIBDIR)/wine/nvidia-libs/nvml
-	rm -rf $(DST_LIBDIR)/wine/nvidia-libs/nvml/version
-	echo "$(shell git -C $(SRCDIR) submodule status -- nvidia-libs/wine-nvml)" > $(DST_LIBDIR)/wine/nvidia-libs/nvml/version
+	mkdir -p $(DST_LIBDIR)/wine/nvml
+	rm -rf $(DST_LIBDIR)/wine/nvml/version
+	echo "$(shell git -C $(SRCDIR) submodule status -- nvml)" > $(DST_LIBDIR)/wine/nvml/version
 	touch $@
+
+#default_pfx: nvml_so
 
 
 ##
@@ -1051,20 +1099,22 @@ $(OBJ)/.nvml_so-post-source:
 
 NVML_DLL_x86_64_MESON_ARGS = \
   --cross-file=$(NVML_DLL_SRC)/cross-mingw64.txt \
-  --libdir=lib/wine/nvidia-libs/nvml
+  --libdir=lib/wine/nvml
 
 NVML_DLL_DEPENDS = wine
 NVML_DLL_HOST_DEPENDS = wine
 
-$(eval $(call rules-source,nvml_dll,$(SRCDIR)/nvidia-libs/wine-nvml))
+$(eval $(call rules-source,nvml_dll,$(SRCDIR)/nvml))
 $(eval $(call rules-nvidia-libs,nvml_dll,x86_64,windows))
 
 $(OBJ)/.nvml_dll-post-source:
 	cd $(NVML_DLL_SRC)/src && ./make_nvml
-	mkdir -p $(DST_LIBDIR)/wine/nvidia-libs/nvml
-	rm -rf $(DST_LIBDIR)/wine/nvidia-libs/nvml/version
-	echo "$(shell git -C $(SRCDIR) submodule status -- nvidia-libs/wine-nvml)" > $(DST_LIBDIR)/wine/nvidia-libs/nvml/version
+	mkdir -p $(DST_LIBDIR)/wine/nvml
+	rm -rf $(DST_LIBDIR)/wine/nvml/version
+	echo "$(shell git -C $(SRCDIR) submodule status -- nvml)" > $(DST_LIBDIR)/wine/nvml/version
 	touch $@
+
+#default_pfx: nvml_dll
 
 
 ##
@@ -1073,19 +1123,23 @@ $(OBJ)/.nvml_dll-post-source:
 
 NVOPTIX_x86_64_MESON_ARGS = \
   --cross-file=$(NVOPTIX_SRC)/build-wine64.txt \
-  --libdir=lib/wine/nvidia-libs/nvoptix/x86_64-windows
+  --libdir=lib/wine/nvoptix/x86_64-windows
 
 NVOPTIX_DEPENDS = wine
 NVOPTIX_HOST_DEPENDS = wine
 
-$(eval $(call rules-source,nvoptix,$(SRCDIR)/nvidia-libs/nvoptix))
+$(eval $(call rules-source,nvoptix,$(SRCDIR)/nvoptix))
 $(eval $(call rules-nvidia-libs,nvoptix,x86_64,windows))
 
 $(OBJ)/.nvoptix-post-source:
-	mkdir -p $(DST_LIBDIR)/wine/nvidia-libs/nvoptix
-	rm -rf $(DST_LIBDIR)/wine/nvidia-libs/nvoptix/version
-	echo "$(shell git -C $(SRCDIR) submodule status -- nvidia-libs/nvoptix)" > $(DST_LIBDIR)/wine/nvidia-libs/nvoptix/version
+	mkdir -p $(DST_LIBDIR)/wine/nvoptix
+	rm -rf $(DST_LIBDIR)/wine/nvoptix/version
+	echo "$(shell git -C $(SRCDIR) submodule status -- nvoptix)" > $(DST_LIBDIR)/wine/nvoptix/version
 	touch $@
+
+#default_pfx: nvoptix
+
+endif # WITHOUT_NVIDIA_LIBS
 
 
 ##
@@ -1689,7 +1743,7 @@ endif
 ## default_pfx
 ##
 
-default_pfx: wine gst_good gst_bad gst_libav gst_plugins_rs lsteamclient steamexe vrclient wineopenxr $(WINEOPENXR64_JSON) dxvk dxvk-nvapi vkd3d-proton nvml_dll nvcuda nvenc nvml_so
+default_pfx: wine gst_good gst_bad gst_libav gst_plugins_rs lsteamclient steamexe vrclient wineopenxr $(WINEOPENXR64_JSON) dxvk dxvk-sarek vkd3d-proton
 	find $(DST_LIBDIR)/wine -type f -execdir chmod a-w '{}' '+'
 	rm -rf $(abspath $(DIST_PREFIX))
 	rm -rf $(abspath $(DIST_PREFIX_ARM64))

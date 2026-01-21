@@ -100,15 +100,18 @@
 [submodule "protonfixes"]
 	path = protonfixes
 	url = https://github.com/open-wine-components/umu-protonfixes.git
-[submodule "nvidia-libs/nvcuda"]
-	path = nvidia-libs/nvcuda
-	url = https://github.com/SveSop/nvcuda
-[submodule "nvidia-libs/nvenc"]
-	path = nvidia-libs/nvenc
-	url = https://github.com/SveSop/nvenc
-[submodule "nvidia-libs/wine-nvml"]
-	path = nvidia-libs/wine-nvml
-	url = https://github.com/Saancreed/wine-nvml
-[submodule "nvidia-libs/nvoptix"]
-	path = nvidia-libs/nvoptix
+[submodule "dxvk-sarek"]
+	path = dxvk-sarek
+	url = https://github.com/pythonlover02/DXVK-Sarek
+[submodule "nvoptix"]
+	path = nvoptix
 	url = https://github.com/SveSop/wine-nvoptix
+[submodule "nvcuda"]
+	path = nvcuda
+	url = https://github.com/SveSop/nvcuda
+[submodule "nvenc"]
+	path = nvenc
+	url = https://github.com/SveSop/nvenc
+[submodule "nvml"]
+	path = nvml
+	url = https://github.com/SveSop/wine-nvml

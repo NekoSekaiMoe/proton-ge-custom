@@ -4,6 +4,7 @@ on:
   release:
     types: [ published ]
   push:
+    tags: Xavier*
 
 concurrency:
   group: ${{ github.ref_name }}
