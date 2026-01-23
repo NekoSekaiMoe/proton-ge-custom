@@ -1,303 +1,380 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import argparse
 import os
-import sys
-import subprocess
-import shutil
-import tempfile
 import re
-import logging
-import atexit
+import shlex
+import shutil
+import subprocess
+import sys
 from pathlib import Path
 
-# --- Global flags ---
-VERBOSE = False
-LOG_FILE_PATH = None
+DEFAULT_BUILD_NAME = "proton-localbuild"  # If no --build-name specified
 
-# --- ANSI color stripping for logs ---
-def strip_ansi(text):
-    ansi_escape = re.compile(r'\x1B[@-_][0-?]*[ -/]*[@-~]')
-    return ansi_escape.sub('', text)
 
-# --- Custom logger setup ---
-class ColoredFormatter(logging.Formatter):
-    def format(self, record):
-        msg = super().format(record)
-        if hasattr(record, 'color') and supports_color():
-            return record.color + msg + COLOR_CLEAR
-        return msg
-
-class FileFormatter(logging.Formatter):
-    def format(self, record):
-        msg = super().format(record)
-        return strip_ansi(msg)
-
-def setup_logging(log_file=None, verbose=False):
-    global VERBOSE, LOG_FILE_PATH
-    VERBOSE = verbose
-    LOG_FILE_PATH = log_file
-
-    # Root logger
-    logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
-
-    # Clear existing handlers
-    for h in logger.handlers[:]:
-        logger.removeHandler(h)
-
-    # Console handler
-    ch = logging.StreamHandler(sys.stderr)
-    ch.setLevel(logging.DEBUG)
-    ch.setFormatter(ColoredFormatter('%(message)s'))
-    logger.addHandler(ch)
-
-    # File handler (if requested)
-    if log_file:
-        fh = logging.FileHandler(log_file, mode='w', encoding='utf-8')
-        fh.setLevel(logging.DEBUG)
-        fh.setFormatter(FileFormatter('%(asctime)s %(levelname)s: %(message)s'))
-        logger.addHandler(fh)
-
-    # Add custom methods
-    def log_with_color(level, color, msg, *args, **kwargs):
-        extra = {'color': color}
-        logger.log(level, msg, *args, extra=extra, **kwargs)
-
-    def err(msg): log_with_color(logging.ERROR, COLOR_ERR, f"!! {msg}")
-    def stat(msg): log_with_color(logging.INFO, COLOR_STAT, f":: {msg}")
-    def info(msg): log_with_color(logging.INFO, COLOR_INFO, f":: {msg}")
-    def showcmd(*cmd):
-        if VERBOSE:
-            quoted = " ".join(repr(c) for c in cmd)
-            log_with_color(logging.DEBUG, COLOR_CMD, f"+ {quoted}")
-
-    # Attach to module globals
-    import __main__ as main
-    main.err = err
-    main.stat = stat
-    main.info = info
-    main.showcmd = showcmd
-    main.die = lambda msg: (err(msg), sys.exit(1))
-
-# --- Color support ---
-def supports_color():
-    return hasattr(sys.stderr, "isatty") and sys.stderr.isatty() and os.getenv("TERM") != "dumb"
-
-COLOR_ERR = "\033[31;1m"
-COLOR_STAT = "\033[32;1m"
-COLOR_INFO = "\033[30;1m"
-COLOR_CMD = "\033[93;1m"
-COLOR_CLEAR = "\033[0m"
-
-# --- Command execution ---
-def run_cmd(*cmd, **kwargs):
-    showcmd(*cmd)
-    return subprocess.run(cmd, **kwargs)
-
-def check_call(*cmd, **kwargs):
-    kwargs.setdefault("check", True)
-    return run_cmd(*cmd, **kwargs)
-
-# --- Dependency checks ---
-def dependency_command(command, package_name=None):
-    if not shutil.which(command):
-        pkg = package_name or command
-        err(f"Couldn't find command '{command}'. Please install {pkg}.")
+# -----------------------------
+# Output helpers (similar to bash)
+# -----------------------------
+def _supports_color() -> bool:
+    if not sys.stderr.isatty():
         return False
-    return True
-
-# --- Container engine test ---
-def check_container_engine(engine, image, relabel_volumes=False):
-    stat(f"Trying {engine}.")
-    mount_opts = ":Z" if relabel_volumes else ""
+    tput = shutil.which("tput")
+    if not tput:
+        return True
     try:
-        check_call(engine, "run", "--rm", image, "true")
-    except subprocess.CalledProcessError:
-        info(f"{engine} is unable to run the container.")
-        return False
+        out = subprocess.check_output([tput, "colors"], stderr=subprocess.DEVNULL, text=True).strip()
+        return int(out or "0") > 0
+    except Exception:
+        return True
 
-    with tempfile.NamedTemporaryFile(delete=False) as tf:
-        test_file = tf.name
+
+_COLOR = _supports_color()
+COLOR_ERR = "\033[31;1m" if _COLOR else ""
+COLOR_STAT = "\033[32;1m" if _COLOR else ""
+COLOR_INFO = "\033[30;1m" if _COLOR else ""
+COLOR_CMD = "\033[93;1m" if _COLOR else ""
+COLOR_CLEAR = "\033[0m" if _COLOR else ""
+
+
+def sh_quote(args):
+    return " ".join(shlex.quote(str(a)) for a in args)
+
+
+def err(msg: str):
+    print(f"{COLOR_ERR}!!{COLOR_CLEAR} {msg}", file=sys.stderr)
+
+
+def stat(msg: str):
+    print(f"{COLOR_STAT}::{COLOR_CLEAR} {msg}", file=sys.stderr)
+
+
+def info(msg: str):
+    print(f"{COLOR_INFO}::{COLOR_CLEAR} {msg}", file=sys.stderr)
+
+
+def showcmd(argv):
+    print(f"+ {COLOR_CMD}{sh_quote(argv)}{COLOR_CLEAR}", file=sys.stderr)
+
+
+class Die(SystemExit):
+    pass
+
+
+def die(msg: str):
+    err(msg)
+    raise Die(1)
+
+
+def cmd(argv, *, check=True, capture_output=False, text=True, cwd=None):
+    showcmd(argv)
     try:
-        os.chmod(test_file, 0o644)
-        cmd = [
-            engine, "run",
-            "-v", f"{os.getcwd()}:/test{mount_opts}",
-            "--rm", image,
-            "stat", "--format", "%u", f"/test/{os.path.basename(test_file)}"
-        ]
-        result = run_cmd(*cmd, capture_output=True, text=True)
-        inner_uid = result.stdout.strip()
-
-        if "Permission denied" in inner_uid or result.returncode != 0:
-            err("The container cannot access files. Are you using SELinux?")
-            die("Please read README.md and check your container setup.")
-
-        if "Emulate Docker CLI" in inner_uid:
-            err("Detected podman-docker in use without the warning being silenced.")
-            die("Please create /etc/containers/nodocker or specify --container-engine=podman.")
-
-        uid = os.getuid()
-        if inner_uid == "0":
-            rootless = True
-        elif inner_uid == str(uid):
-            rootless = False
+        if capture_output:
+            p = subprocess.run(argv, check=check, cwd=cwd, text=text, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            return p.stdout
         else:
-            err(f"File owner's UID doesn't map to 0 or {uid} in the container.")
-            die(f"Don't know how to map permissions. Please check your {engine} setup.")
-        return rootless
-    finally:
-        os.unlink(test_file)
+            subprocess.run(argv, check=check, cwd=cwd)
+            return ""
+    except subprocess.CalledProcessError as e:
+        if capture_output and e.stdout:
+            return e.stdout
+        if check:
+            raise
+        return ""
 
-# --- Escape for Makefile ---
-def escape_for_make(s):
+
+# -----------------------------
+# Makefile escaping (same as bash escape_for_make)
+# -----------------------------
+def escape_for_make(s: str) -> str:
+    #  '\' -> '\\'
     s = s.replace("\\", "\\\\")
+    #  '#' -> '\#'
     s = s.replace("#", "\\#")
+    #  '$' -> '$$'
     s = s.replace("$", "$$")
+    #  ' ' -> '\ '
     s = s.replace(" ", "\\ ")
     return s
 
-# --- dep() function ---
-def dep(srcdir):
+
+# -----------------------------
+# Dependencies / container engine
+# -----------------------------
+def dependency_command(command: str, hint: str | None = None) -> bool:
+    if shutil.which(command) is None:
+        err(f"Couldn't find command '{command}'. Please install {hint or command}.")
+        return False
+    return True
+
+
+def check_container_engine(engine: str, steamrt_image: str, container_mount_opts: str) -> int:
+    """
+    Returns:
+      ROOTLESS_CONTAINER value:
+        1 if uid inside container is 0 (root mapped / host root),
+        0 if uid matches host uid.
+    Raises Die on fatal mapping errors.
+    Returns -1 if engine cannot run container at all (discovery continues).
+    """
+    stat(f"Trying {engine}.")
+    # Try to run container image (same behavior as bash: engine run --rm <image>)
+    try:
+        cmd([engine, "run", "--rm", steamrt_image], check=True)
+    except Exception:
+        info(f"{engine} is unable to run the container.")
+        return -1
+
+    permission_check = Path.cwd() / "permission_check"
+    permission_check.write_text("", encoding="utf-8")
+
+    mount = f"{Path.cwd()}:/test{container_mount_opts}"
+    out = cmd(
+        [engine, "run", "-v", mount, "--rm", steamrt_image, "stat", "--format", "%u", "/test/permission_check"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    try:
+        permission_check.unlink(missing_ok=True)
+    except Exception:
+        pass
+
+    if "Permission denied" in out:
+        err("The container cannot access files. Are you using SELinux?")
+        die(f"Please read README.md and check your {engine} setup works.")
+    if "Emulate Docker CLI" in out:
+        err("Detected podman-docker in use without the warning being silenced.")
+        die("Please create /etc/containers/nodocker or specify --container-engine=podman.")
+
+    out = out.strip()
+    # If output is not a number, treat as unknown failure.
+    if not re.fullmatch(r"\d+", out):
+        err(f"Unexpected output from permission check: {out!r}")
+        die(f"Don't know how to map permissions. Please check your {engine} setup.")
+
+    inner_uid = int(out)
+    host_uid = os.getuid()
+
+    if inner_uid == 0:
+        return 1
+    if inner_uid == host_uid:
+        return 0
+
+    err(f"File owner's UID doesn't map to 0 or {host_uid} in the container.")
+    die(f"Don't know how to map permissions. Please check your {engine} setup.")
+    raise AssertionError("unreachable")
+
+
+# -----------------------------
+# dep() equivalent
+# -----------------------------
+def dep():
+    """
+    Mirrors the bash dep() function:
+      - remove jsoncpp and ../steam_helper/json if exist
+      - git clone jsoncpp (depth=1)
+      - run python3 amalgamate.py
+      - move dist/* -> ../../steam_helper/
+      - cd ../../glslang && python3 update_glslang_sources.py
+    """
     build_dir = Path.cwd()
-    jsoncpp_dir = Path("jsoncpp")
-    steam_helper_json = Path("../steam_helper/json")
+
+    # NOTE: This function assumes it's executed from a directory where these relative paths make sense,
+    # same as the original bash.
+    jsoncpp_dir = build_dir / "jsoncpp"
+    steam_helper_json = build_dir / ".." / "steam_helper" / "json"
 
     if jsoncpp_dir.exists():
         shutil.rmtree(jsoncpp_dir)
     if steam_helper_json.exists():
         shutil.rmtree(steam_helper_json)
 
-    check_call("git", "clone", "https://github.com/open-source-parsers/jsoncpp", "--depth=1")
-    os.chdir("jsoncpp")
-    check_call(sys.executable, "amalgamate.py")
-    dist_files = list(Path("dist").iterdir())
-    for f in dist_files:
-        shutil.move(str(f), "../../steam_helper/")
-    os.chdir(build_dir)
+    cmd(["git", "clone", "https://github.com/open-source-parsers/jsoncpp", "--depth=1"], check=True, cwd=build_dir.as_posix())
+    cmd(["python3", "amalgamate.py"], check=True, cwd=jsoncpp_dir.as_posix())
 
-    os.chdir("glslang")
-    check_call(sys.executable, "update_glslang_sources.py")
-    os.chdir(build_dir)
+    dist_dir = jsoncpp_dir / "dist"
+    steam_helper_dir = build_dir / ".." / ".." / "steam_helper"
+    steam_helper_dir.mkdir(parents=True, exist_ok=True)
 
-# --- Main configure logic ---
-def configure(args):
-    srcdir = Path(args.script_dir).resolve()
-    if str(srcdir) == str(Path.cwd()):
-        die("Cannot do a top level in-tree build.\nCreate a subdirectory in build/ or outside of the tree and run configure.py from there.")
+    # Move dist/* to ../../steam_helper/
+    if dist_dir.exists():
+        for p in dist_dir.iterdir():
+            target = steam_helper_dir / p.name
+            if target.exists():
+                if target.is_dir():
+                    shutil.rmtree(target)
+                else:
+                    target.unlink()
+            shutil.move(p.as_posix(), target.as_posix())
 
-    dep(srcdir)
+    glslang_dir = build_dir / ".." / ".." / "glslang"
+    cmd(["python3", "update_glslang_sources.py"], check=True, cwd=glslang_dir.as_posix())
 
+
+# -----------------------------
+# Configure main
+# -----------------------------
+def read_default_steamrt_image(srcdir: Path) -> str:
     makefile_in = srcdir / "Makefile.in"
-    if not args.proton_sdk_image:
-        with open(makefile_in, "r") as f:
-            for line in f:
-                if line.startswith("STEAMRT_IMAGE ?= "):
-                    args.proton_sdk_image = line.split("=", 1)[1].strip()
-                    break
+    if not makefile_in.exists():
+        die(f"Can't find {makefile_in} to read default STEAMRT_IMAGE.")
+    txt = makefile_in.read_text(encoding="utf-8", errors="replace").splitlines()
+    for line in txt:
+        m = re.match(r"^STEAMRT_IMAGE\s*\?=\s*(.*)$", line)
+        if m:
+            return m.group(1).strip()
+    die("Could not infer STEAMRT_IMAGE from Makefile.in (missing 'STEAMRT_IMAGE ?=').")
+    raise AssertionError("unreachable")
 
-    build_name = args.build_name or "proton-localbuild"
-    info(f"Configuring with build name: {build_name}")
 
-    internal_tool_name = build_name if "proton" in build_name.lower() else f"{build_name}-proton"
+def configure(args) -> None:
+    this_command = " ".join(shlex.quote(a) for a in sys.argv)
+    makefile_path = Path.cwd() / "Makefile"
+
+    # srcdir is directory containing this script
+    srcdir = Path(__file__).resolve().parent
+
+    # Same check: if srcdir == ".", means running from top-level in-tree build
+    # In python, we check whether current directory equals srcdir.
+    if Path.cwd().resolve() == srcdir.resolve():
+        err("Cannot do a top level in-tree build.")
+        die("Create a subdirectory in build/ or outside of the tree and run configure from there.")
+
+    # dep() step (same timing as bash: before container/image stuff)
+    dep()
+
+    steamrt_image = args.proton_sdk_image
+    if not steamrt_image:
+        steamrt_image = read_default_steamrt_image(srcdir)
+
+    # Build name
+    build_name = args.build_name or DEFAULT_BUILD_NAME
+    if args.build_name:
+        info(f"Configuring with build name: {build_name}")
+    else:
+        info(f"No build name specified, using default: {build_name}")
+
+    if "proton" in build_name.lower():
+        internal_tool_name = build_name
+    else:
+        internal_tool_name = f"{build_name}-proton"
+
     target_arch = args.target_arch or "x86_64"
-    info(f"Build targeting: {target_arch}")
+    info(f"Build targetting: {target_arch}")
 
+    missing = 0
     if not dependency_command("make", "GNU Make"):
+        missing = 1
+    if missing:
         die("Missing dependencies, cannot continue.")
 
-    relabel_volumes = bool(args.relabel_volumes)
+    container_mount_opts = ":Z" if args.relabel_volumes else ""
+
+    # Container engine selection
+    rootless_container = None
     container_engine = args.container_engine
+
     if container_engine:
-        rootless = check_container_engine(container_engine, args.proton_sdk_image, relabel_volumes)
+        r = check_container_engine(container_engine, steamrt_image, container_mount_opts)
+        if r < 0:
+            die(f'Specified container engine "{container_engine}" doesn\'t work')
+        rootless_container = r
     else:
         stat("Trying to find usable container engine.")
-        for ce in ["docker", "podman"]:
-            try:
-                rootless = check_container_engine(ce, args.proton_sdk_image, relabel_volumes)
-                container_engine = ce
-                break
-            except SystemExit:
-                continue
+        r = check_container_engine("docker", steamrt_image, container_mount_opts)
+        if r >= 0:
+            container_engine = "docker"
+            rootless_container = r
         else:
-            die("Container engine discovery has failed. Please fix your setup.")
+            r = check_container_engine("podman", steamrt_image, container_mount_opts)
+            if r >= 0:
+                container_engine = "podman"
+                rootless_container = r
+            else:
+                die("Container engine discovery has failed. Please fix your setup.")
 
     stat(f"Using {container_engine}.")
 
-    makefile_path = Path("Makefile")
+    # Write Makefile (remove existing first)
     if makefile_path.exists():
         makefile_path.unlink()
 
-    with open(makefile_path, "w") as f:
-        f.write(f"# Generated by: {' '.join(sys.argv)}\n\n")
-        f.write(f"SRCDIR     := {escape_for_make(str(srcdir))}\n")
-        f.write(f"BUILD_NAME := {escape_for_make(build_name)}\n")
-        f.write(f"TARGET_ARCH := {escape_for_make(target_arch)}\n")
-        f.write(f"INTERNAL_TOOL_NAME := {escape_for_make(internal_tool_name)}\n")
+    lines = []
+    lines.append(f"# Generated by: {this_command}")
+    lines.append("")
+    lines.append(f"SRCDIR     := {escape_for_make(str(srcdir))}")
+    lines.append(f"BUILD_NAME := {escape_for_make(build_name)}")
+    lines.append(f"TARGET_ARCH := {escape_for_make(target_arch)}")
+    lines.append(f"INTERNAL_TOOL_NAME := {escape_for_make(internal_tool_name)}")
 
-        if args.proton_sdk_image:
-            f.write(f"STEAMRT_IMAGE := {escape_for_make(args.proton_sdk_image)}\n")
+    if args.proton_sdk_image:
+        lines.append(f"STEAMRT_IMAGE := {escape_for_make(args.proton_sdk_image)}")
 
-        f.write(f"ROOTLESS_CONTAINER := {int(rootless)}\n")
-        f.write(f"CONTAINER_ENGINE := {container_engine}\n")
+    lines.append(f"ROOTLESS_CONTAINER := {int(rootless_container)}")
+    lines.append(f"CONTAINER_ENGINE := {container_engine}")
 
-        if args.docker_opts:
-            f.write(f"DOCKER_OPTS := {args.docker_opts}\n")
-        if relabel_volumes:
-            f.write(f"CONTAINER_MOUNT_OPTS := :Z\n")
+    if args.docker_opts:
+        # original bash writes DOCKER_OPTS := $arg_docker_opts (no escaping)
+        lines.append(f"DOCKER_OPTS := {args.docker_opts}")
+    if container_mount_opts:
+        lines.append(f"CONTAINER_MOUNT_OPTS := {container_mount_opts}")
 
-        f.write("ENABLE_CCACHE := 1\n")
-        if args.enable_bear:
-            f.write("ENABLE_BEAR := 1\n")
+    lines.append("ENABLE_CCACHE := 1")
+    if args.enable_bear:
+        lines.append("ENABLE_BEAR := 1")
 
-        f.write("\ninclude $(SRCDIR)/Makefile.in\n")
+    lines.append("")
+    lines.append("include $(SRCDIR)/Makefile.in")
+    lines.append("")
+
+    makefile_path.write_text("\n".join(lines), encoding="utf-8")
 
     stat(f"Created {makefile_path}, now run make to build.")
     stat("  See README.md for make targets and instructions")
 
-# --- Cleanup log file on success (optional) ---
-def cleanup_log_on_success():
-    global LOG_FILE_PATH
-    if LOG_FILE_PATH and Path(LOG_FILE_PATH).exists():
-        # Only remove if no error occurred? Or keep always?
-        # Here we keep it — useful for debugging even on success.
-        pass
 
-# --- Main ---
-def main():
-    parser = argparse.ArgumentParser(
-        description="Generate a Makefile for building Proton.",
+# -----------------------------
+# CLI / usage
+# -----------------------------
+def build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(
+        prog=Path(sys.argv[0]).name,
+        add_help=True,
         formatter_class=argparse.RawTextHelpFormatter,
-        epilog="""
-Steam Runtime:
-  Proton builds that are to be installed & run under the steam client must be built with
-  the Steam Runtime SDK to ensure compatibility. See README.md for more information.
-""",
+        description=(
+            "Generate a Makefile for building Proton. May be run from another directory to create\n"
+            "out-of-tree build directories (e.g. mkdir mybuild && cd mybuild && ../configure.py)"
+        ),
     )
-    parser.add_argument("--build-name", help="Set the name of the build that displays when used in Steam")
-    parser.add_argument("--target-arch", choices=["x86_64", "arm64"], default="x86_64",
-                        help="Builds for given architecture. x86_64 (default) and arm64 are supported.")
-    parser.add_argument("--container-engine", help="Which Docker-compatible container engine to use, e.g. podman")
-    parser.add_argument("--docker-opts", help="Extra options to pass to Docker when invoking the runtime.")
-    parser.add_argument("--relabel-volumes", action="store_true",
-                        help="Bind-mounted volumes will be relabeled. Use with caution.")
-    parser.add_argument("--enable-bear", action="store_true",
-                        help="Invokes make via bear creating compile_commands.json.")
-    parser.add_argument("--proton-sdk-image", help="Steam Runtime SDK image to use for building")
-    parser.add_argument("-v", "--verbose", action="store_true", help="Show detailed command execution")
-    parser.add_argument("--log-file", metavar="FILE", help="Write full log to FILE (in addition to terminal)")
+    p.add_argument("--build-name", dest="build_name", default="", help="Set the name of the build that displays when used in Steam")
+    p.add_argument("--target-arch", dest="target_arch", default="", help="Builds for given architecture. x86_64 (default) and arm64 are supported.")
+    p.add_argument("--container-engine", dest="container_engine", default="", help="Which Docker-compatible container engine to use, e.g. podman.")
+    p.add_argument("--docker-opts", dest="docker_opts", default="", help="Extra options to pass to Docker when invoking the runtime.")
+    p.add_argument("--relabel-volumes", dest="relabel_volumes", action="store_true", help="Bind-mounted volumes will be relabeled. Use with caution.")
+    p.add_argument("--enable-bear", dest="enable_bear", action="store_true", help="Invokes make via bear creating compile_commands.json.")
+    p.add_argument("--proton-sdk-image", dest="proton_sdk_image", default="", help="Automatically invoke the Steam Runtime SDK in <image>.")
+    # Support --usage like the bash script
+    p.add_argument("--usage", action="store_true", help="Show this help text and exit")
+    return p
 
-    script_dir = Path(sys.argv[0]).parent.resolve()
+
+def main():
+    parser = build_parser()
     args = parser.parse_args()
-    args.script_dir = script_dir
 
-    # Setup logging early
-    setup_logging(log_file=args.log_file, verbose=args.verbose)
+    if args.usage:
+        parser.print_help(sys.stderr)
+        return 1
 
-    atexit.register(cleanup_log_on_success)
+    try:
+        configure(args)
+        return 0
+    except Die as e:
+        return int(e.code) if isinstance(e.code, int) else 1
 
-    configure(args)
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
+
