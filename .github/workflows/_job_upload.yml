@@ -17,7 +17,6 @@ jobs:
       matrix:
         include:
           - file: ${{ inputs.name }}.tar.gz
-          - file: ${{ inputs.name }}.tar.zst
           - file: ${{ inputs.name }}.sha512sum
 
     runs-on: ubuntu-latest

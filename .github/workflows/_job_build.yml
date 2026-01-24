@@ -32,7 +32,7 @@ jobs:
         sudo chmod 777 -R a
 
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 4
         fetch-tags: true
@@ -70,19 +70,13 @@ jobs:
         key: ${{ steps.ccache-restore.outputs.cache-primary-key }}
 
     - name: Upload artifact ${{ inputs.name }}.tar.gz
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ inputs.name }}.tar.gz
         path: ./a/build/${{ inputs.name }}.tar.gz
 
-    - name: Upload artifact ${{ inputs.name }}.tar.zst
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ inputs.name }}.tar.zst
-        path: ./a/build/${{ inputs.name }}.tar.zst
-
     - name: Upload artifact ${{ inputs.name }}.sha512sum
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ inputs.name }}.sha512sum
         path: ./a/build/${{ inputs.name }}.sha512sum
