@@ -1,7 +1,7 @@
-From 8d966fd0fcdf385e261c297135f2ec42f4651ceb Mon Sep 17 00:00:00 2001
+From 0d95b5630f7c1b18b442bf9fce3d4d16652e3f36 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Fri, 1 Aug 2025 12:53:09 -0400
-Subject: [PATCH 200/473] mountmgr.sys: Add stub for StorageDeviceTrimProperty.
+Subject: [PATCH 200/479] mountmgr.sys: Add stub for StorageDeviceTrimProperty.
 
 ---
  dlls/mountmgr.sys/device.c | 27 +++++++++++++++++++++++++++

@@ -1,8 +1,8 @@
-From 12239a92213578355419c348272446616b7fe7f7 Mon Sep 17 00:00:00 2001
+From b11d153a4c7d4357347151a87892629c6be6497c Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 15:17:03 -0400
-Subject: [PATCH 183/473] HACK: ntoskrnl: Add stub pci driver.
+Subject: [PATCH 183/479] HACK: ntoskrnl: Add stub pci driver.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 9 +++++++++

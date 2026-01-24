@@ -1,7 +1,7 @@
-From 591090a528bfe59fe6744f1d52b1625f54ea3a2a Mon Sep 17 00:00:00 2001
+From 961065945336de381438e3373ee60699c3a0f9fc Mon Sep 17 00:00:00 2001
 From: Alexandre Julliard <julliard@winehq.org>
 Date: Mon, 31 Mar 2025 12:00:42 +0200
-Subject: [PATCH 210/473] wineboot: Fetch the list of supported machines once
+Subject: [PATCH 210/479] wineboot: Fetch the list of supported machines once
  at startup.
 
 ---

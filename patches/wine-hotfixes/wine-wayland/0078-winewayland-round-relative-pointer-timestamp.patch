@@ -1,8 +1,8 @@
-From 2fcad2fca445e02aadc9a0d3ecc92f584a49bdd3 Mon Sep 17 00:00:00 2001
+From 476081e2a7a431e3e24efdba381df07f79ba77c9 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 3 Jun 2025 18:49:14 -0400
-Subject: [PATCH 078/473] winewayland: round relative pointer timestamp
+Subject: [PATCH 078/479] winewayland: round relative pointer timestamp
 
 ---
  dlls/winewayland.drv/wayland_pointer.c | 2 +-

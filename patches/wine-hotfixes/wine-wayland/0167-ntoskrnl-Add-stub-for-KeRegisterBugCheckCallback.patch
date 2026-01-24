@@ -1,8 +1,8 @@
-From a2b3a94fb8f3aaa85d938123e96a454ddf4723b2 Mon Sep 17 00:00:00 2001
+From ec253ea8d90b8e39357764a0bbb2e1ad6f935d85 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:48:42 -0400
-Subject: [PATCH 167/473] ntoskrnl: Add stub for KeRegisterBugCheckCallback.
+Subject: [PATCH 167/479] ntoskrnl: Add stub for KeRegisterBugCheckCallback.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 11 +++++++++++

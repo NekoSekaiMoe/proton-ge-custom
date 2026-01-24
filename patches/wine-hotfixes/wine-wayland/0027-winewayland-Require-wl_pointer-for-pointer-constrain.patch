@@ -1,7 +1,7 @@
-From 432f48b5c0d580a6a2e560d950b5ca07ea23ec04 Mon Sep 17 00:00:00 2001
+From bf09c837784469ee65ae33e4f1a03b1577691866 Mon Sep 17 00:00:00 2001
 From: Attila Fidan <dev@print0.net>
 Date: Sun, 20 Apr 2025 11:30:03 +0000
-Subject: [PATCH 027/473] winewayland: Require wl_pointer for pointer
+Subject: [PATCH 027/479] winewayland: Require wl_pointer for pointer
  constraints.
 
 If ClipCursor is called while the seat doesn't have a pointer and the

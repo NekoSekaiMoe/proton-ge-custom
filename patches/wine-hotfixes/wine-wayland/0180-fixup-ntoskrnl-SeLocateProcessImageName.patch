@@ -1,8 +1,8 @@
-From 71b12b4322f1f23511b984d03aee788394af29ff Mon Sep 17 00:00:00 2001
+From a3e3c1f3874147fdb0fa6f746fc9b4824616af13 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:39:47 -0400
-Subject: [PATCH 180/473] fixup! ntoskrnl: SeLocateProcessImageName.
+Subject: [PATCH 180/479] fixup! ntoskrnl: SeLocateProcessImageName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 72 +++++++++++++++++++++-------

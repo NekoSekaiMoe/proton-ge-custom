@@ -1,8 +1,8 @@
-From a8cd85be9e688f72fe0524c7d4e7197205cd36e3 Mon Sep 17 00:00:00 2001
+From cc3164e6b9a47738bd255ad085cd2f41a4c3c555 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 7 Aug 2025 14:27:09 -0400
-Subject: [PATCH 239/473] HACK: wine.inf: Add workaround for WRC9
+Subject: [PATCH 239/479] HACK: wine.inf: Add workaround for WRC9
 
 ---
  loader/wine.inf.in | 1 +

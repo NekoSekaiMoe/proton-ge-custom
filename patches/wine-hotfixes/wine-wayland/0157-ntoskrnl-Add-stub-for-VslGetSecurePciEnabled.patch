@@ -1,8 +1,8 @@
-From 1011043913468ab64076d6412f9f4d7e94e99a4e Mon Sep 17 00:00:00 2001
+From 7a9f8f9135d69d9a3f3c44c654982387c7c074b4 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 15:22:55 -0400
-Subject: [PATCH 157/473] ntoskrnl: Add stub for VslGetSecurePciEnabled.
+Subject: [PATCH 157/479] ntoskrnl: Add stub for VslGetSecurePciEnabled.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 6 ++++++

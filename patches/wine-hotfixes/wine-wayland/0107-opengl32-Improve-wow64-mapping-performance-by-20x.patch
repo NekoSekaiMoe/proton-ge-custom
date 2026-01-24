@@ -1,8 +1,8 @@
-From ee21315ecd6bf012884233675f61e27d6d72ade5 Mon Sep 17 00:00:00 2001
+From 95bf45774b7aa99709421e6ea92fe85764addf94 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 20 Jun 2025 15:42:58 -0400
-Subject: [PATCH 107/473] opengl32: Improve wow64 mapping performance by 20x
+Subject: [PATCH 107/479] opengl32: Improve wow64 mapping performance by 20x
 
 TODO: determine if NtAllocateVirtualMemory helps performance (I believe it does)
 ---

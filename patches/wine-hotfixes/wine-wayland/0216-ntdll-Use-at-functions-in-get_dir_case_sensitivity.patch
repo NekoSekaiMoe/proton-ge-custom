@@ -1,7 +1,7 @@
-From 5ef2189c3b1ff7e6ae3c16540b4e320ae17f62dc Mon Sep 17 00:00:00 2001
+From 3798417044f444417153d87102b0d42695e00369 Mon Sep 17 00:00:00 2001
 From: Brendan Shanks <bshanks@codeweavers.com>
 Date: Thu, 13 Mar 2025 09:56:03 -0700
-Subject: [PATCH 216/473] ntdll: Use *at() functions in
+Subject: [PATCH 216/479] ntdll: Use *at() functions in
  get_dir_case_sensitivity().
 
 ---

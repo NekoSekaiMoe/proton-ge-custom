@@ -1,8 +1,8 @@
-From 1f2a1c59594fe35caff07fe552843ef5a177618f Mon Sep 17 00:00:00 2001
+From 9f6035485c72c9b0a0d7cc67cf3113ee54096958 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 24 Nov 2025 23:05:08 -0600
-Subject: [PATCH 002/473] Reapply "ntdll: Implement
+Subject: [PATCH 002/479] Reapply "ntdll: Implement
  NtAlertMultipleThreadByThreadId()."
 
 This reverts commit 4eece26b263f7b6bc90016501ab59f4c065c3249.

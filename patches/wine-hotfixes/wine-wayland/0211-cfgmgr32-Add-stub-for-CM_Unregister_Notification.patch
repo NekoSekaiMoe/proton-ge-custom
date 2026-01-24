@@ -1,7 +1,7 @@
-From a826d93869f3dc3833be6070fbece965cce60247 Mon Sep 17 00:00:00 2001
+From 63a589afb45a3918a61577acee1fcd9210b7dec4 Mon Sep 17 00:00:00 2001
 From: Vibhav Pant <vibhavp@gmail.com>
 Date: Tue, 22 Oct 2024 11:43:37 +0530
-Subject: [PATCH 211/473] cfgmgr32: Add stub for CM_Unregister_Notification.
+Subject: [PATCH 211/479] cfgmgr32: Add stub for CM_Unregister_Notification.
 
 ---
  dlls/cfgmgr32/cfgmgr32.spec |  1 +

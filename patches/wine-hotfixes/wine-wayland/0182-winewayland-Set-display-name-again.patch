@@ -1,8 +1,8 @@
-From 1a526d5a3d059b42e0e87a66bb2e7c75aa093ab4 Mon Sep 17 00:00:00 2001
+From 7dfc9195c0df63436fdaf0f2af87b4ce64e1db90 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 14:45:57 -0400
-Subject: [PATCH 182/473] winewayland: Set display name again
+Subject: [PATCH 182/479] winewayland: Set display name again
 
 ---
  dlls/winewayland.drv/display.c | 21 ++++++++++++++++++++-

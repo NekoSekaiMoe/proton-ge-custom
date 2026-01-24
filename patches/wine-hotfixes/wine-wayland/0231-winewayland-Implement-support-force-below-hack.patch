@@ -1,8 +1,8 @@
-From 178bed8841d59306d05dba20ab6616251455eb86 Mon Sep 17 00:00:00 2001
+From 7c2b30422c1b9711898e0e211a17594b5d96a067 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 6 Aug 2025 19:53:18 -0400
-Subject: [PATCH 231/473] winewayland: Implement support force below hack.
+Subject: [PATCH 231/479] winewayland: Implement support force below hack.
 
 ---
  dlls/winewayland.drv/wayland_surface.c | 38 ++++++++------------------

@@ -1,8 +1,8 @@
-From ddd68e0800e5f4370bda8ba6c2da6e7e418eb37d Mon Sep 17 00:00:00 2001
+From 33565a94f74edc7e4b6f57f48d24aceaf4b41f39 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 22 May 2025 21:50:42 -0400
-Subject: [PATCH 056/473] winewayland: make wp_fractional_scale_handle_scale
+Subject: [PATCH 056/479] winewayland: make wp_fractional_scale_handle_scale
  static
 
 ---

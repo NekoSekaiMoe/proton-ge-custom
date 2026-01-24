@@ -1,8 +1,8 @@
-From 412d803a7b36a6cfe8d227818741f23c164ac315 Mon Sep 17 00:00:00 2001
+From 52c84bb6cb86e8f1dcdfec1459533d464c8b1b06 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 24 Jun 2025 13:05:02 -0400
-Subject: [PATCH 130/473] winewayland: Add more logging for keyboard.
+Subject: [PATCH 130/479] winewayland: Add more logging for keyboard.
 
 ---
  dlls/winewayland.drv/wayland_keyboard.c | 4 ++++

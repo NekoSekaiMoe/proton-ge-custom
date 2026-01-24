@@ -1,8 +1,8 @@
-From bffb638ce94f88c4ac389b81c57ef37be5f4679c Mon Sep 17 00:00:00 2001
+From 2b2e6aa1ec62e324022cfe46af7052ba33da27c0 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 4 Jun 2025 11:22:31 -0400
-Subject: [PATCH 079/473] winegstreamer: disable media converter
+Subject: [PATCH 079/479] winegstreamer: disable media converter
 
 ---
  dlls/winegstreamer/unixlib.c | 3 +++

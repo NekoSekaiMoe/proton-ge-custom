@@ -46,6 +46,7 @@ REDIST_DIR := ./redist
 i386_CFLAGS    := -mstackrealign -march=nocona -mtune=core-avx2 -mfpmath=sse
 x86_64_CFLAGS  := -mcmodel=small -march=nocona -mtune=core-avx2 -mfpmath=sse
 aarch64_CFLAGS := -march=armv8.2-a -mtune=cortex-x3
+arm64ec_CFLAGS := -march=armv8.2-a -mtune=cortex-x3
 
 CFLAGS  = -O2 -fwrapv -fno-strict-aliasing
 CFLAGS += -ggdb -ffunction-sections -fdata-sections -fno-omit-frame-pointer
@@ -74,7 +75,7 @@ TARGET_ARCH ?= x86_64
 ifeq ($(TARGET_ARCH),x86_64)
 	ARCHS += i386-unix x86_64-unix
 else ifeq ($(TARGET_ARCH),arm64)
-	ARCHS += aarch64-unix aarch64-windows
+	ARCHS += aarch64-unix aarch64-windows arm64ec-windows
 else
 	ARCHS := $(error Unknown TARGET_ARCH=$(TARGET_ARCH))
 endif
@@ -85,6 +86,7 @@ windows_ARCHS = $(subst -windows,,$(filter %-windows,$(ARCHS)))
 i386_SOURCE_DATE_EPOCH := $(BASE_SOURCE_DATE_EPOCH)
 x86_64_SOURCE_DATE_EPOCH := $(shell expr $(BASE_SOURCE_DATE_EPOCH) - 10)
 aarch64_SOURCE_DATE_EPOCH := $(shell expr $(BASE_SOURCE_DATE_EPOCH) - 20)
+arm64ec_SOURCE_DATE_EPOCH := $(shell expr $(BASE_SOURCE_DATE_EPOCH) - 30)
 
 ifeq ($(shell cc --version|grep 'clang'),)
 	# GCC-specific flags
@@ -158,6 +160,7 @@ LIBXKBCOMMON_MESON_ARGS := \
 	-Denable-xkbregistry=true \
 	-Denable-docs=false \
 	-Denable-x11=false \
+	-Denable-bash-completion=false \
 	-Denable-wayland=false
 
 $(eval $(call rules-source,libxkbcommon,$(SRCDIR)/libxkbcommon))
@@ -598,6 +601,7 @@ $(eval $(call rules-source,vulkan-headers,$(SRCDIR)/Vulkan-Headers))
 $(eval $(call rules-cmake,vulkan-headers,i386,windows))
 $(eval $(call rules-cmake,vulkan-headers,x86_64,windows))
 $(eval $(call rules-cmake,vulkan-headers,aarch64,windows))
+$(eval $(call rules-cmake,vulkan-headers,arm64ec,windows))
 
 
 ##
@@ -608,6 +612,7 @@ $(eval $(call rules-source,spirv-headers,$(SRCDIR)/SPIRV-Headers))
 $(eval $(call rules-cmake,spirv-headers,i386,windows))
 $(eval $(call rules-cmake,spirv-headers,x86_64,windows))
 $(eval $(call rules-cmake,spirv-headers,aarch64,windows))
+$(eval $(call rules-cmake,spirv-headers,arm64ec,windows))
 
 
 ##
@@ -650,7 +655,7 @@ $(eval $(call rules-cmake,openxr,aarch64,unix))
 ## Note 32-bit is not supported by SteamVR, so we don't build it.
 ##
 
-WINEOPENXR_LDFLAGS = -lopenxr_loader
+WINEOPENXR_LDFLAGS = -lopenxr_loader -lvulkan
 WINEOPENXR_DEPENDS = wine openxr
 
 $(eval $(call rules-source,wineopenxr,$(SRCDIR)/wineopenxr))
@@ -821,6 +826,8 @@ WINE_AUTOCONF_ARGS = \
   --enable-werror \
   --with-wayland \
   --with-mingw=$(MINGW_TYPE) \
+  --with-gstreamer \
+  --with-ffmpeg \
   --disable-tests
 
 WINE_x86_64_AUTOCONF_ARGS = \
@@ -828,8 +835,7 @@ WINE_x86_64_AUTOCONF_ARGS = \
   --enable-win64 \
 
 WINE_aarch64_AUTOCONF_ARGS = \
-  --enable-archs=$(call list-join,$(comma),arm64ec aarch64 $(filter-out aarch64 $(unix_ARCHS),$(windows_ARCHS)))
-
+  --enable-archs=$(call list-join,$(comma),arm64ec aarch64 $(filter-out arm64ec aarch64 $(unix_ARCHS),$(windows_ARCHS)))
 
 WINE_i386_AUTOCONF_ARGS += \
   VKD3D_PE_CFLAGS="-I$(VULKAN_HEADERS_i386_DST)/include -I$(VKD3D_i386_DST)/include/vkd3d" \
@@ -930,20 +936,20 @@ ifneq ($(WITHOUT_OLD_DEVICE),1)
 # wine builds DLLs with the same names, we need to differentiate the timestamps
 DXVK_i386_SOURCE_DATE_EPOCH := $(shell expr $(i386_SOURCE_DATE_EPOCH) - 1)
 DXVK_x86_64_SOURCE_DATE_EPOCH := $(shell expr $(x86_64_SOURCE_DATE_EPOCH) - 1)
-DXVK_aarch64_SOURCE_DATE_EPOCH := $(shell expr $(aarch64_SOURCE_DATE_EPOCH) - 1)
+DXVK_arm64ec_SOURCE_DATE_EPOCH := $(shell expr $(arm64ec_SOURCE_DATE_EPOCH) - 1)
 
 DXVK_SOURCE_ARGS = \
   --exclude version.h.in \
 
 DXVK_i386_MESON_ARGS = --bindir=$(DXVK_i386_DST)/lib/wine/dxvk/i386-windows
 DXVK_x86_64_MESON_ARGS = --bindir=$(DXVK_x86_64_DST)/lib/wine/dxvk/x86_64-windows
-DXVK_aarch64_MESON_ARGS = --bindir=$(DXVK_aarch64_DST)/lib/wine/dxvk/aarch64-windows
+DXVK_arm64ec_MESON_ARGS = --bindir=$(DXVK_arm64ec_DST)/lib/wine/dxvk/aarch64-windows
 DXVK_HOST_DEPENDS = glslang
 
 $(eval $(call rules-source,dxvk,$(SRCDIR)/dxvk))
 $(eval $(call rules-meson,dxvk,i386,windows))
 $(eval $(call rules-meson,dxvk,x86_64,windows))
-$(eval $(call rules-meson,dxvk,aarch64,windows))
+$(eval $(call rules-meson,dxvk,arm64ec,windows))
 
 $(OBJ)/.dxvk-post-source:
 	sed -re 's#@VCS_TAG@#$(shell git -C $(SRCDIR)/dxvk describe --always --abbrev=15 --dirty=0)#' \
@@ -998,7 +1004,7 @@ ifneq ($(WITHOUT_NVIDIA_LIBS),1)
 
 DXVK_NVAPI_i386_MESON_ARGS = --bindir=$(DXVK_NVAPI_i386_DST)/lib/wine/nvapi/i386-windows
 DXVK_NVAPI_x86_64_MESON_ARGS = --bindir=$(DXVK_NVAPI_x86_64_DST)/lib/wine/nvapi/x86_64-windows
-DXVK_NVAPI_aarch64_MESON_ARGS = --bindir=$(DXVK_NVAPI_aarch64_DST)/lib/wine/nvapi/aarch64-windows
+DXVK_NVAPI_arm64ec_MESON_ARGS = --bindir=$(DXVK_NVAPI_arm64ec_DST)/lib/wine/nvapi/aarch64-windows
 
 $(eval $(call rules-source,dxvk-nvapi,$(SRCDIR)/dxvk-nvapi))
 $(eval $(call rules-meson,dxvk-nvapi,i386,windows))
@@ -1210,7 +1216,7 @@ $(OBJ)/.vkd3d-i386-post-build: $(OBJ)/.wine-$(HOST_ARCH)-tools
 # wine builds DLLs with the same names, we need to differentiate the timestamps
 VKD3D_PROTON_i386_SOURCE_DATE_EPOCH := $(shell expr $(i386_SOURCE_DATE_EPOCH) - 2)
 VKD3D_PROTON_x86_64_SOURCE_DATE_EPOCH := $(shell expr $(x86_64_SOURCE_DATE_EPOCH) - 2)
-VKD3D_PROTON_aarch64_SOURCE_DATE_EPOCH := $(shell expr $(aarch64_SOURCE_DATE_EPOCH) - 2)
+VKD3D_PROTON_arm64ec_SOURCE_DATE_EPOCH := $(shell expr $(arm64ec_SOURCE_DATE_EPOCH) - 2)
 
 VKD3D_PROTON_SOURCE_ARGS = \
   --exclude vkd3d_build.h.in \
@@ -1218,7 +1224,7 @@ VKD3D_PROTON_SOURCE_ARGS = \
 
 VKD3D_PROTON_i386_MESON_ARGS = --bindir=$(VKD3D_PROTON_i386_DST)/lib/wine/vkd3d-proton/i386-windows
 VKD3D_PROTON_x86_64_MESON_ARGS = --bindir=$(VKD3D_PROTON_x86_64_DST)/lib/wine/vkd3d-proton/x86_64-windows
-VKD3D_PROTON_aarch64_MESON_ARGS = --bindir=$(VKD3D_PROTON_aarch64_DST)/lib/wine/vkd3d-proton/aarch64-windows
+VKD3D_PROTON_arm64ec_MESON_ARGS = --bindir=$(VKD3D_PROTON_arm64ec_DST)/lib/wine/vkd3d-proton/aarch64-windows
 VKD3D_PROTON_HOST_DEPENDS = glslang
 
 ifneq ($(UNSTRIPPED_BUILD),)
@@ -1230,7 +1236,7 @@ endif
 $(eval $(call rules-source,vkd3d-proton,$(SRCDIR)/vkd3d-proton))
 $(eval $(call rules-meson,vkd3d-proton,i386,windows))
 $(eval $(call rules-meson,vkd3d-proton,x86_64,windows))
-$(eval $(call rules-meson,vkd3d-proton,aarch64,windows))
+$(eval $(call rules-meson,vkd3d-proton,arm64ec,windows))
 
 $(OBJ)/.vkd3d-proton-post-source:
 	sed -re 's#@VCS_TAG@#$(shell git -C $(SRCDIR)/vkd3d-proton describe --always --exclude=* --abbrev=15 --dirty=0)#' \
@@ -1250,33 +1256,29 @@ $(OBJ)/.vkd3d-proton-post-source:
 ifneq ($(findstring aarch64,$(unix_ARCHS)),)
 FEX_CMAKE_ARGS = \
   -DENABLE_FEXCORE_PROFILER=True -DCMAKE_BUILD_TYPE=Release -DENABLE_LTO=False \
-  -DBUILD_TESTS=False -DOVERRIDE_VERSION=0000
+  -DBUILD_TESTING=False -DTUNE_CPU=none \
+  -DCMAKE_TOOLCHAIN_FILE=$(FEX_SRC)/Data/CMake/toolchain_mingw.cmake \
+  -DOVERRIDE_VERSION=$$(cat $(FEX_SRC)/.git_describe) \
+  -DOVERRIDE_HASH=$$(cat $(FEX_SRC)/.git_rev)
 
-FEX_ARM64EC_CMAKE_ARGS = \
-  $(FEX_CMAKE_ARGS) \
-  -DCMAKE_TOOLCHAIN_FILE=$(FEX_ARM64EC_SRC)/Data/CMake/toolchain_mingw.cmake \
-  -DCMAKE_INSTALL_LIBDIR=$(FEX_ARM64EC_aarch64_DST)/lib/wine/aarch64-windows \
-  -DMINGW_TRIPLE=arm64ec-w64-mingw32
+FEX_aarch64_CMAKE_ARGS = -DMINGW_TRIPLE=aarch64-w64-mingw32 -DCMAKE_INSTALL_LIBDIR=$(FEX_aarch64_DST)/lib/wine/aarch64-windows
+FEX_arm64ec_CMAKE_ARGS = -DMINGW_TRIPLE=arm64ec-w64-mingw32 -DCMAKE_INSTALL_LIBDIR=$(FEX_arm64ec_DST)/lib/wine/aarch64-windows
 
-$(eval $(call rules-source,fex-arm64ec,$(SRCDIR)/FEX))
-$(eval $(call rules-cmake,fex-arm64ec,aarch64,windows))
+$(eval $(call rules-source,fex,$(SRCDIR)/FEX))
+$(eval $(call rules-cmake,fex,aarch64,windows))
+$(eval $(call rules-cmake,fex,arm64ec,windows))
 
-FEX_WOW64_CMAKE_ARGS = \
-  $(FEX_CMAKE_ARGS) \
-  -DCMAKE_TOOLCHAIN_FILE=$(FEX_WOW64_SRC)/Data/CMake/toolchain_mingw.cmake \
-  -DCMAKE_INSTALL_LIBDIR=$(FEX_WOW64_aarch64_DST)/lib/wine/aarch64-windows \
-  -DMINGW_TRIPLE=aarch64-w64-mingw32
-
-$(eval $(call rules-source,fex-wow64,$(SRCDIR)/FEX))
-$(eval $(call rules-cmake,fex-wow64,aarch64,windows))
-
+$(OBJ)/.fex-post-source:
+	git -C $(SRCDIR)/FEX describe --abbrev=7 > $(FEX_SRC)/.git_describe
+	git -C $(SRCDIR)/FEX rev-parse --short=7 HEAD > $(FEX_SRC)/.git_rev
+	touch $@
 
 FEX_CONFIG_JSON := $(DST_DIR)/share/fex-emu/Config.json
 $(FEX_CONFIG_JSON): $(SRCDIR)/FEX_Config.json
 	mkdir -p $(dir $@)
 	cp -a $< $@
 
-default_pfx: fex-arm64ec fex-wow64 $(FEX_CONFIG_JSON)
+default_pfx: fex $(FEX_CONFIG_JSON)
 endif
 
 
@@ -1616,7 +1618,7 @@ all-dist: $(OBJ)/.gecko-i386-dist $(OBJ)/.gecko-x86_64-dist
 ## wine-mono
 ##
 
-WINEMONO_VER := 10.4.0
+WINEMONO_VER := 10.4.1
 WINEMONO_TARBALL := wine-mono-$(WINEMONO_VER)-x86.tar.xz
 DIST_WINEMONO_DIR := $(DST_DIR)/share/wine/mono
 DIST_WINEMONO := $(OBJ)/.wine-mono-dist
@@ -1807,20 +1809,35 @@ all-dist: $(DIST_LICENSE) $(DIST_OFL_LICENSE) $(DIST_AV1_PATENTS)
 ## protonfixes
 ##
 
-PROTONFIXES_OBJ := $(addprefix $(OBJ)/,obj-protonfixes)
+$(eval $(call rules-source,protonfixes,$(SRCDIR)/protonfixes))
+$(eval $(call rules-common,protonfixes,x86_64,unix))
+$(eval $(call rules-common,protonfixes,aarch64,unix))
+
+$(OBJ)/.protonfixes-x86_64-build:
+	cd $(PROTONFIXES_SRC) && \
+	env $(PROTONFIXES_x86_64_ENV) BUILD=$(PROTONFIXES_x86_64_OBJ) TARGET_ARCH=$(TARGET_ARCH) make
+	cd $(PROTONFIXES_SRC) && \
+	env $(PROTONFIXES_x86_64_ENV) BUILD=$(PROTONFIXES_x86_64_OBJ) DIST=$(PROTONFIXES_x86_64_DST) TARGET_ARCH=$(TARGET_ARCH) make install
+	touch $@
+
+$(OBJ)/.protonfixes-aarch64-build:
+	cd $(PROTONFIXES_SRC) && \
+	env $(PROTONFIXES_aarch64_ENV) BUILD=$(PROTONFIXES_aarch64_OBJ) TARGET_ARCH=$(TARGET_ARCH) make
+	cd $(PROTONFIXES_SRC) && \
+	env $(PROTONFIXES_aarch64_ENV) BUILD=$(PROTONFIXES_aarch64_OBJ) DIST=$(PROTONFIXES_aarch64_DST) TARGET_ARCH=$(TARGET_ARCH) make install
+	touch $@
+
 PROTONFIXES_TARGET := $(addprefix $(DST_BASE)/,protonfixes)
-$(PROTONFIXES_TARGET): $(addprefix $(SRCDIR)/,protonfixes)
 
-$(OBJ)/.build-protonfixes:
-	cd $(SRCDIR)/protonfixes && \
-	env BUILD=$(PROTONFIXES_OBJ) make
-	touch $(@)
+$(OBJ)/.protonfixes-x86_64-dist:
+	mkdir -p $(PROTONFIXES_TARGET)
+	rsync --delete -arx $(PROTONFIXES_x86_64_DST)/ $(PROTONFIXES_TARGET)
+	touch $@
 
-$(PROTONFIXES_TARGET): $(OBJ)/.build-protonfixes
-	cd $(SRCDIR)/protonfixes && \
-	env BUILD=$(PROTONFIXES_OBJ) DIST=$(PROTONFIXES_TARGET) make install
-
-all-dist: $(PROTONFIXES_TARGET)
+$(OBJ)/.protonfixes-aarch64-dist:
+	mkdir -p $(PROTONFIXES_TARGET)
+	rsync --delete -arx $(PROTONFIXES_aarch64_DST)/ $(PROTONFIXES_TARGET)
+	touch $@
 
 ##
 ## proton(.py), filelock.py, etc.
@@ -1875,7 +1892,6 @@ redist: all
 	mv $(REDIST_DIR) $(BUILD_NAME)
 	tar -cvzf $(BUILD_NAME).tar.gz $(BUILD_NAME)
 	sha512sum $(BUILD_NAME).tar.gz > $(BUILD_NAME).sha512sum
-	tar -cvaf $(BUILD_NAME).tar.zst $(BUILD_NAME)
 	sha256sum $(BUILD_NAME).* > SHA256SUMS
 	@echo "Proton build available at $(BUILD_NAME).tar.gz"
 

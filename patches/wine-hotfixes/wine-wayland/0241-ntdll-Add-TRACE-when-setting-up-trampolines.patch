@@ -1,8 +1,8 @@
-From 339572de52435736e8c58e28db183591eb1561a4 Mon Sep 17 00:00:00 2001
+From d8b9836020a87cff6bed3c293bfcb3fc9ee62c11 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 10 Aug 2025 21:53:04 -0400
-Subject: [PATCH 241/473] ntdll: Add TRACE when setting up trampolines
+Subject: [PATCH 241/479] ntdll: Add TRACE when setting up trampolines
 
 ---
  dlls/ntdll/loader.c      | 1 +

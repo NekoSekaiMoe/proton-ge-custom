@@ -1,7 +1,7 @@
-From 6798404e4e68f9474184eae1eb2868b9025dee89 Mon Sep 17 00:00:00 2001
+From a6a5c3c96a725772ecd762bec549b71d57c51117 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty <etaash.mathamsetty@gmail.com>
 Date: Tue, 5 Aug 2025 13:14:29 -0400
-Subject: [PATCH 205/473] winewayland: Add support for model name.
+Subject: [PATCH 205/479] winewayland: Add support for model name.
 
 ---
  dlls/winewayland.drv/display.c        | 19 +++++++++++++------

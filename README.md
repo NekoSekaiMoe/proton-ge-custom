@@ -307,6 +307,11 @@ It should work if you have:
 PROTON_ENABLE_HDR=1 %command%
 ```
 
+> [!NOTE]
+> Enabling HDR auto-enables the wine-wayland driver as it is a requirement.
+> As of right now, in-game Steam overlay WILL NOT work with Wayland enabled.
+> Please also note that Steam Input also does not work properly with the wine-wayland driver due to the overlay being broken.
+
 ##### Enabling NTSync
 For NTSync to work, your kernel must be version 6.14 or newer and built with `CONFIG_NTSYNC=y` or `CONFIG_NTSYNC=m`.
 If using `CONFIG_NTSYNC=m`, a module loading configuration is required followed by a reboot:
@@ -320,49 +325,6 @@ You can also manually enable the module without reboot, just keep in mind the ab
 sudo modprobe ntsync
 ```
 
-> [!NOTE]
-> As of right now, in-game Steam overlay WILL NOT work with Wayland enabled.
-
-
-## Building
-
-1. Clone this repo by executing:
-
-```sh
-git clone --recurse-submodules http://github.com/gloriouseggroll/proton-ge-custom
-```
-After this, a device `/dev/ntsync` should now exist on your system.
-
-Once NTSync is enabled on the system, if you launch a game with GE-Proton10-10 or newer using PROTON_LOG=1, a log will be generated for the game in your home folder with the filename `steam-XXXXXX.log`. Inside that log you should see `wineserver: NTSync up and running!`
-
-##### Enabling Wayland
-
-GE-Proton includes support for Wine's Wayland driver (`winewayland.drv`). By default, Proton uses X11 or XWayland.
-
-###### Required graphics driver versions for Wayland
-
-* **AMD / Intel:** Mesa **≥ 25.x**
-* **NVIDIA:** **≥ 575.x**
-
-###### How to enable
-
-Add to a game’s launch options:
-
-```bash
-PROTON_ENABLE_WAYLAND=1 %command%
-```
-
-Verify with logging:
-
-```bash
-PROTON_LOG=1 %command%
-```
-
-Check `steam-XXXX.log` for:
-
-```
-Loaded L"C:\windows\system32\winewayland.drv"
-```
 
 Environment variable options:
 

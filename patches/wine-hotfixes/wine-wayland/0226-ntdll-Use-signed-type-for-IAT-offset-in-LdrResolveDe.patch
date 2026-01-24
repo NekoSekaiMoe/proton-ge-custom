@@ -1,7 +1,7 @@
-From b823be3966c68b48b45a14cb850743d2ca0a19ef Mon Sep 17 00:00:00 2001
+From bbe5fdb0d651db9d9639d765f2c5057cdcd93f77 Mon Sep 17 00:00:00 2001
 From: Jacek Caban <jacek@codeweavers.com>
 Date: Thu, 13 Feb 2025 14:34:25 +0100
-Subject: [PATCH 226/473] ntdll: Use signed type for IAT offset in
+Subject: [PATCH 226/479] ntdll: Use signed type for IAT offset in
  LdrResolveDelayLoadedAPI.
 
 Allows negative IAT offsets.
