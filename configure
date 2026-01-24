@@ -22,7 +22,6 @@ class Color:
 
 class ProtonConfigure:
     def __init__(self):
-        # 获取脚本所在目录（源码目录）
         self.srcdir = Path(__file__).parent.resolve()
         self.default_build_name = "proton-localbuild"
         self.missing_dependencies = 0
@@ -31,19 +30,19 @@ class ProtonConfigure:
         self.args = None
         self.this_command = " ".join(sys.argv)
         self.makefile_path = Path("Makefile")
-        
+
     def print_error(self, *args):
         """打印错误信息"""
         print(f"{Color.ERR}!!{Color.CLEAR}", *args, file=sys.stderr)
-        
+
     def print_status(self, *args):
         """打印状态信息"""
         print(f"{Color.STAT}::{Color.CLEAR}", *args, file=sys.stderr)
-        
+
     def print_info(self, *args):
         """打印信息"""
         print(f"{Color.INFO}::{Color.CLEAR}", *args, file=sys.stderr)
-        
+
     def print_command(self, cmd):
         """打印要执行的命令"""
         if isinstance(cmd, list):
@@ -51,15 +50,15 @@ class ProtonConfigure:
         else:
             cmd_str = cmd
         print(f"+ {Color.CMD}{cmd_str}{Color.CLEAR}", file=sys.stderr)
-        
+
     def run_command(self, cmd, check=True, capture_output=False, cwd=None, **kwargs):
         """运行命令"""
         self.print_command(cmd)
-        
+
         if capture_output:
             kwargs['stdout'] = subprocess.PIPE
             kwargs['stderr'] = subprocess.PIPE
-            
+
         try:
             result = subprocess.run(cmd, check=check, cwd=cwd, **kwargs)
             return result
@@ -71,39 +70,35 @@ class ProtonConfigure:
         except FileNotFoundError as e:
             self.print_error(f"Command not found: {cmd[0] if isinstance(cmd, list) else cmd}")
             sys.exit(1)
-            
+
     def dependency_check(self, command: str, package: str = None):
         """检查依赖命令是否存在"""
         if not shutil.which(command):
             package = package or command
             self.print_error(f"Couldn't find command '{command}'. Please install {package}.")
             self.missing_dependencies = 1
-            
+
     def check_container_engine(self, engine: str, image: str) -> bool:
         """检查容器引擎是否可用"""
         self.print_status(f"Trying {engine}.")
-        
-        # 测试基本容器运行
+
         try:
             self.run_command([engine, "run", "--rm", image, "true"], check=False)
         except:
             self.print_info(f"{engine} is unable to run the container.")
             return False
-            
-        # 测试文件权限映射
+
         test_file = Path("permission_check")
         try:
             test_file.touch()
-            
-            # 在容器内检查文件所有者UID
+
             cmd = [
                 engine, "run", "-v", f"{Path.cwd()}:/test{self.container_mount_opts}",
                 "--rm", image, "stat", "--format", "%u", "/test/permission_check"
             ]
             result = self.run_command(cmd, capture_output=True, text=True)
             inner_uid = result.stdout.strip()
-            
-            # 检查输出
+
             if "Permission denied" in inner_uid:
                 self.print_error("The container cannot access files. Are you using SELinux?")
                 self.print_error("Please read README.md and check your container setup works.")
@@ -113,7 +108,6 @@ class ProtonConfigure:
                 self.print_error("Please create /etc/containers/nodocker or specify --container-engine=podman.")
                 return False
             elif inner_uid == "0":
-                # namespace maps the user as root or the build is performed as host's root
                 self.rootless_container = 1
             elif inner_uid == str(os.getuid()):
                 self.rootless_container = 0
@@ -121,52 +115,44 @@ class ProtonConfigure:
                 self.print_error(f"File owner's UID doesn't map to 0 or {os.getuid()} in the container.")
                 self.print_error("Don't know how to map permissions. Please check your container setup.")
                 return False
-                
+
         finally:
             if test_file.exists():
                 test_file.unlink()
-                
+
         return True
-        
+
     def escape_for_make(self, text: str) -> str:
         """转义字符串用于Makefile（不安全，仅用于受信任的输入）"""
-        # 这不是严格的转义。不要用于不受信任的输入。
         escape = text
         escape = escape.replace('\\', '\\\\')  # '\' -> '\\'
         escape = escape.replace('#', '\\#')    # '#' -> '\#'
         escape = escape.replace('$', '$$')     # '$' -> '$$'
         escape = escape.replace(' ', '\\ ')    # ' ' -> '\ '
         return escape
-        
+
     def fetch_dependencies(self):
         """获取依赖项（jsoncpp和glslang）"""
         build_dir = Path.cwd()
-        
-        # 清理并获取jsoncpp
+
         jsoncpp_dir = build_dir / "jsoncpp"
         if jsoncpp_dir.exists():
             shutil.rmtree(jsoncpp_dir)
-            
-        # 清理steam_helper/json目录
+
         steam_helper_dir = self.srcdir / "steam_helper"
         json_target_dir = steam_helper_dir / "json"
         if json_target_dir.exists():
             shutil.rmtree(json_target_dir)
-            
+
         self.run_command(["git", "clone", "https://github.com/open-source-parsers/jsoncpp", "--depth=1"])
-        
-        # 运行amalgamate.py
+
         os.chdir(jsoncpp_dir)
         self.run_command(["python3", "amalgamate.py"])
-        
-        # 移动文件 - 按照原bash脚本的逻辑：mv dist/* ../../steam_helper/
-        # 从构建目录（o）看，../../steam_helper/ 就是 srcdir/steam_helper/
+
         dist_dir = jsoncpp_dir / "dist"
         if dist_dir.exists():
-            # 确保steam_helper目录存在
             steam_helper_dir.mkdir(parents=True, exist_ok=True)
-            
-            # 复制dist目录下的所有内容到steam_helper目录
+
             for item in dist_dir.iterdir():
                 dest_path = steam_helper_dir / item.name
                 if item.is_file():
@@ -175,9 +161,7 @@ class ProtonConfigure:
                     if dest_path.exists():
                         shutil.rmtree(dest_path)
                     shutil.copytree(item, dest_path)
-        
-        # 更新glslang - 按照原bash脚本的逻辑：cd ../../glslang
-        # 从构建目录（o）看，../../glslang 就是 srcdir/glslang
+
         glslang_dir = self.srcdir / "glslang"
         if glslang_dir.exists():
             os.chdir(glslang_dir)
@@ -185,24 +169,20 @@ class ProtonConfigure:
         else:
             self.print_error(f"glslang directory not found at {glslang_dir}")
             sys.exit(1)
-        
-        # 返回构建目录
+
         os.chdir(build_dir)
-        
+
     def configure(self):
         """配置并生成Makefile"""
         steamrt_image = self.args.proton_sdk_image
-        
-        # 检查是否在源码目录内构建
+
         if self.srcdir == Path.cwd():
             self.print_error("Cannot do a top level in-tree build.")
             self.print_error("Create a subdirectory in build/ or outside of the tree and run configure from there.")
             sys.exit(1)
-            
-        # 获取依赖项
+
         self.fetch_dependencies()
-        
-        # 如果没有指定镜像，从Makefile.in获取默认值
+
         if not steamrt_image:
             makefile_in = self.srcdir / "Makefile.in"
             if makefile_in.exists():
@@ -214,36 +194,30 @@ class ProtonConfigure:
             else:
                 self.print_error(f"Makefile.in not found at {makefile_in}")
                 sys.exit(1)
-                
-        # 构建名称
+
         build_name = self.args.build_name or self.default_build_name
         if self.args.build_name:
             self.print_info(f"Configuring with build name: {build_name}")
         else:
             self.print_info(f"No build name specified, using default: {build_name}")
-            
-        # 内部工具名称
+
         if "proton" in build_name.lower():
             internal_tool_name = build_name
         else:
             internal_tool_name = f"{build_name}-proton"
-            
-        # 目标架构
+
         target_arch = self.args.target_arch or "x86_64"
         self.print_info(f"Build targeting: {target_arch}")
-        
-        # 检查依赖
+
         self.dependency_check("make")
-        
+
         if self.missing_dependencies != 0:
             self.print_error("Missing dependencies, cannot continue.")
             sys.exit(1)
-            
-        # 卷标签选项
+
         if self.args.relabel_volumes:
             self.container_mount_opts = ":Z"
-            
-        # 检查容器引擎
+
         if self.args.container_engine:
             if not self.check_container_engine(self.args.container_engine, steamrt_image):
                 self.print_error(f'Specified container engine "{self.args.container_engine}" doesn\'t work')
@@ -257,47 +231,43 @@ class ProtonConfigure:
             else:
                 self.print_error("Container engine discovery has failed. Please fix your setup.")
                 sys.exit(1)
-                
+
         self.print_status(f"Using {self.args.container_engine}.")
-        
-        # 写入Makefile
+
         if self.makefile_path.exists():
             self.makefile_path.unlink()
-            
+
         with open(self.makefile_path, 'w') as f:
-            # 配置
             f.write(f"# Generated by: {self.this_command}\n")
             f.write("\n")
             f.write(f"SRCDIR     := {self.escape_for_make(str(self.srcdir))}\n")
             f.write(f"BUILD_NAME := {self.escape_for_make(build_name)}\n")
             f.write(f"TARGET_ARCH := {self.escape_for_make(target_arch)}\n")
             f.write(f"INTERNAL_TOOL_NAME := {self.escape_for_make(internal_tool_name)}\n")
-            
-            # SteamRT镜像（如果指定）
+
             if self.args.proton_sdk_image:
                 f.write(f"STEAMRT_IMAGE := {self.escape_for_make(self.args.proton_sdk_image)}\n")
-                
+
             f.write(f"ROOTLESS_CONTAINER := {self.rootless_container}\n")
             f.write(f"CONTAINER_ENGINE := {self.args.container_engine}\n")
-            
+
             if self.args.docker_opts:
                 f.write(f"DOCKER_OPTS := {self.args.docker_opts}\n")
-                
+
             if self.container_mount_opts:
                 f.write(f"CONTAINER_MOUNT_OPTS := {self.container_mount_opts}\n")
-                
+
             f.write("ENABLE_CCACHE := 1\n")
-            
+
             if self.args.enable_bear:
                 f.write("ENABLE_BEAR := 1\n")
-                
-            # 包含基础Makefile
+
             f.write("\n")
             f.write("include $(SRCDIR)/Makefile.in\n")
-            
+
         self.print_status(f"Created {self.makefile_path}, now run make to build.")
         self.print_status("  See README.md for make targets and instructions")
-        
+
     def parse_arguments(self):
         """解析命令行参数"""
         parser = argparse.ArgumentParser(
@@ -314,54 +284,54 @@ Steam Runtime:
                               create this image.
             """
         )
-        
+
         parser.add_argument(
             "--build-name",
             help="Set the name of the build that displays when used in Steam"
         )
-        
+
         parser.add_argument(
             "--target-arch",
             default="x86_64",
             help="Builds for given architecture. x86_64 (default) and arm64 are supported."
         )
-        
+
         parser.add_argument(
             "--container-engine",
             help="Which Docker-compatible container engine to use, e.g. podman. "
                  "Tries to do autodiscovery when not specified."
         )
-        
+
         parser.add_argument(
             "--docker-opts",
             help="Extra options to pass to Docker when invoking the runtime."
         )
-        
+
         parser.add_argument(
             "--relabel-volumes",
             action="store_true",
             help="Bind-mounted volumes will be relabeled. Use with caution."
         )
-        
+
         parser.add_argument(
             "--enable-bear",
             action="store_true",
             help="Invokes make via bear creating compile_commands.json."
         )
-        
+
         parser.add_argument(
             "--proton-sdk-image",
             help="Automatically invoke the Steam Runtime SDK in <image> for build steps "
                  "that must be run in an SDK environment."
         )
-        
+
         self.args = parser.parse_args()
-        
+
     def main(self):
         """主函数"""
         self.parse_arguments()
         self.configure()
-        
+
 if __name__ == "__main__":
     try:
         configurator = ProtonConfigure()
