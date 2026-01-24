@@ -88,7 +88,7 @@ jobs:
         path: ./a/build/${{ inputs.name }}.sha512sum
 
   proton-a64:
-    name: Build ${{ inputs.name }}
+    name: Build ${{ inputs.name }} Arm64
     runs-on: ubuntu-22.04-arm
     steps:
     - name: Prepare host
