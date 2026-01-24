@@ -289,6 +289,7 @@ apply_all_in_dir() {
     #https://github.com/Open-Wine-Components/umu-protonfixes/pull/370#issuecomment-3368898328
     echo "WINE: -PENDING- add nvidia DLSS upgrade patch"
     apply_patch "../patches/wine-hotfixes/pending/0001-HACK-kernelbase-allow-overriding-dlls-for-DLSS-XeSS-.patch"
+    apply_patch "../patches/wine-hotfixes/pending/0002-HACK-kernelbase-add-redirection-for-libxess_dx11.dll.patch"
 
 
 ### END WINE PENDING UPSTREAM SECTION ###
