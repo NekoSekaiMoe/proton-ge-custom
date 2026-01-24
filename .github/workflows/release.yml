@@ -5,6 +5,7 @@ on:
     types: [ published ]
   push:
     tags: Xavier*
+  workflow_dispatch: 
 
 concurrency:
   group: ${{ github.ref_name }}
