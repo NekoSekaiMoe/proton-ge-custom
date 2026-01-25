@@ -15,11 +15,6 @@ apply_all_in_dir() {
 
 ### (1) PREP SECTION ###
 
-    pushd dxvk
-    git reset --hard HEAD
-    git clean -xdf
-    popd
-
     pushd vkd3d-proton
     git reset --hard HEAD
     git clean -xdf
@@ -30,6 +25,11 @@ apply_all_in_dir() {
     git clean -xdf
     wget https://gitlab.com/Ph42oN/dxvk-gplasync/-/raw/main/patches/dxvk-gplasync-master.patch -O lib.patch
     apply_patch lib.patch
+    popd
+
+    pushd dxvk-sarek
+    git reset --hard HEAD
+    git clean -xdf
     popd
 
     pushd dxvk-nvapi
@@ -211,14 +211,14 @@ apply_all_in_dir() {
     echo "WINE: -STAGING- user32-FlashWindowEx manually applied"
     apply_all_in_dir "../wine-staging/patches/user32-FlashWindowEx/"
 
-#    echo "WINE: -STAGING- winex11-Fixed-scancodes manually applied"
-#    apply_all_in_dir "../wine-staging/patches/winex11-Fixed-scancodes/"
+    echo "WINE: -STAGING- winex11-Fixed-scancodes manually applied"
+    apply_all_in_dir "../wine/0002-misc/"
 
     echo "WINE: -STAGING- winex11-Window_Style manually applied"
     apply_all_in_dir "../wine-staging/patches/winex11-Window_Style/"
 
-#    echo "WINE: -STAGING- winex11-ime-check-thread-data manually applied"
-#    apply_all_in_dir "../wine-staging/patches/winex11-ime-check-thread-data/"
+    echo "WINE: -STAGING- winex11-ime-check-thread-data manually applied"
+    apply_all_in_dir "../wine/0001-spritz/"
 
     echo "WINE: -STAGING- winex11.drv-Query_server_position manually applied"
     apply_all_in_dir "../wine-staging/patches/winex11.drv-Query_server_position/"
@@ -293,7 +293,7 @@ apply_all_in_dir() {
 
 
 ### END WINE PENDING UPSTREAM SECTION ###
-
+    apply_all_in_dir "../wine/0003-dna/"
 
 ### (2-7) PROTON-GE ADDITIONAL CUSTOM PATCHES ###
 

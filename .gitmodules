@@ -103,12 +103,21 @@
 [submodule "nvoptix"]
 	path = nvoptix
 	url = https://github.com/SveSop/wine-nvoptix
-[submodule "nvcuda"]
-	path = nvcuda
-	url = https://github.com/SveSop/nvcuda
 [submodule "nvenc"]
 	path = nvenc
 	url = https://github.com/SveSop/nvenc
 [submodule "nvml"]
 	path = nvml
 	url = https://github.com/SveSop/wine-nvml
+[submodule "meson"]
+	path = meson
+	url = https://github.com/mesonbuild/meson
+[submodule "libxml2"]
+	path = libxml2
+	url = https://gitlab.gnome.org/GNOME/libxml2
+[submodule "wayland-protocols"]
+	path = wayland-protocols
+	url = https://gitlab.freedesktop.org/wayland/wayland-protocols
+[submodule "d7vk"]
+	path = d7vk
+	url = https://github.com/WinterSnowfall/d7vk

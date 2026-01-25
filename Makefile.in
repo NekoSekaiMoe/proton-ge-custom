@@ -96,12 +96,18 @@ ifeq ($(shell cc --version|grep 'clang'),)
 	TOOLCHAIN_PREFIX :=
 	OBJCOPY_FLAGS  := -p
 	MINGW_TYPE := gcc
+	i386_CFLAGS += -s -mprefer-avx128
+	i386_CFLAGS += -fvect-cost-model=cheap -fno-semantic-interposition -fipa-pta
+	x86_64_CFLAGS += -s -mprefer-avx128
+	x86_64_CFLAGS += -fvect-cost-model=cheap -fno-semantic-interposition -fipa-pta
+	i386_SANITY_FLAGS := -mpreferred-stack-boundary=2
 else
 	# CLANG-specific flags
 	TOOLCHAIN_PREFIX := llvm-
 	OBJCOPY_FLAGS  :=
 	MINGW_TYPE := clang
 	WITHOUT_NVIDIA_LIBS := 1
+	i386_SANITY_FLAGS := -mstack-alignment=4
 	# TODO: move this to a configure option
 endif
 
@@ -132,11 +138,19 @@ include $(SRC)/make/rules-makedep.mk
 include $(SRC)/make/rules-meson.mk
 include $(SRC)/make/rules-cmake.mk
 include $(SRC)/make/rules-autoconf.mk
+include $(SRC)/make/rules-nvidia-libs.mk
 include $(SRC)/make/rules-configure.mk
 include $(SRC)/make/rules-winemaker.mk
 include $(SRC)/make/rules-wine-requests.mk
 include $(SRC)/make/rules-wine-tools.mk
 include $(SRC)/make/rules-cargo.mk
+
+
+##
+## meson
+##
+
+$(eval $(call rules-source,meson,$(SRCDIR)/meson))
 
 
 ##
@@ -151,6 +165,23 @@ $(eval $(call rules-source,dav1d,$(SRCDIR)/dav1d))
 $(eval $(call rules-meson,dav1d,i386,unix))
 $(eval $(call rules-meson,dav1d,x86_64,unix))
 $(eval $(call rules-meson,dav1d,aarch64,unix))
+
+
+##
+## libxml2
+##
+
+LIBXML2_MESON_ARGS := \
+	-Ddocs=disabled \
+	-Dicu=disabled \
+	-Dlegacy=enabled \
+	-Dpython=disabled
+
+$(eval $(call rules-source,libxml2,$(SRCDIR)/libxml2))
+$(eval $(call rules-meson,libxml2,i386,unix))
+$(eval $(call rules-meson,libxml2,x86_64,unix))
+$(eval $(call rules-meson,libxml2,aarch64,unix))
+
 
 ##
 ## xkbcommon
@@ -167,6 +198,18 @@ $(eval $(call rules-source,libxkbcommon,$(SRCDIR)/libxkbcommon))
 $(eval $(call rules-meson,libxkbcommon,i386,unix))
 $(eval $(call rules-meson,libxkbcommon,x86_64,unix))
 $(eval $(call rules-meson,libxkbcommon,aarch64,unix))
+
+
+##
+## wayland-protocols
+##
+
+WAYLAND_PROTOCOLS_MESON_ARGS := \
+	-Dtests=false
+
+$(eval $(call rules-source,wayland-protocols,$(SRCDIR)/wayland-protocols))
+$(eval $(call rules-meson,wayland-protocols,aarch64,unix))
+
 
 ##
 ## libpcap
@@ -413,8 +456,9 @@ GST_BAD_MESON_ARGS := \
 	-Dwebp=enabled \
 	-Dorc=enabled
 
-GST_BAD_DEPENDS = gst_orc gstreamer gst_base
+GST_BAD_DEPENDS = gst_orc gstreamer gst_base libxml2
 GST_BAD_HOST_DEPENDS = gst_orc
+GST_BASE_aarch64_DEPENDS = wayland-protocols
 
 $(eval $(call rules-source,gst_bad,$(SRCDIR)/gstreamer/subprojects/gst-plugins-bad/))
 $(eval $(call rules-meson,gst_bad,i386,unix))
@@ -440,6 +484,7 @@ GST_UGLY_MESON_ARGS := \
 	-Dorc=enabled
 
 GST_UGLY_DEPENDS = gst_orc gstreamer gst_base
+GST_GOOD_DEPENDS += libxml2
 GST_UGLY_HOST_DEPENDS = gst_orc
 
 $(eval $(call rules-source,gst_ugly,$(SRCDIR)/gstreamer/subprojects/gst-plugins-ugly))
@@ -667,6 +712,17 @@ $(WINEOPENXR_SRC)/wineopenxr64.json: wineopenxr
 $(WINEOPENXR64_JSON): $(WINEOPENXR_SRC)/wineopenxr64.json
 	mkdir -p $(dir $@)
 	cp -a $< $@
+
+##
+## umu.exe
+##
+
+UMUEXE_DEPENDS = wine
+
+$(eval $(call rules-source,umuexe,$(SRCDIR)/umu_helper))
+$(eval $(call rules-makedep,umuexe,i386))
+$(eval $(call rules-makedep,umuexe,x86_64))
+$(eval $(call rules-makedep,umuexe,aarch64))
 
 
 ##
@@ -997,6 +1053,39 @@ $(OBJ)/.dxvk-sarek-post-source:
 endif
 
 
+##
+## d7vk
+##
+
+# wine builds DLLs with the same names, we need to differentiate the timestamps
+D7VK_i386_SOURCE_DATE_EPOCH := $(shell expr $(i386_SOURCE_DATE_EPOCH) - 1)
+
+D7VK_SOURCE_ARGS = \
+  --exclude version.h.in \
+
+D7VK_MESON_ARGS  = -Db_ndebug=true --force-fallback-for=libdisplay-info
+D7VK_MESON_ARGS += -Denable_dxgi=false -Denable_d3d8=false -Denable_d3d10=false -Denable_d3d11=false
+D7VK_i386_MESON_ARGS = --bindir=$(D7VK_i386_DST)/lib/wine/d7vk/i386-windows
+D7VK_HOST_DEPENDS = glslang
+
+D7VK_i386_CFLAGS = -O3 -mno-avx $(i386_SANITY_FLAGS)
+D7VK_CPPFLAGS = -msse -msse2
+D7VK_LDFLAGS = -static -static-libgcc -static-libstdc++
+
+$(eval $(call rules-source,d7vk,$(SRCDIR)/d7vk))
+$(eval $(call rules-meson,d7vk,i386,windows))
+
+$(OBJ)/.d7vk-post-source:
+	sed -re 's#@VCS_TAG@#$(shell git -C $(SRCDIR)/d7vk describe --always --abbrev=15 --dirty=0)#' \
+	    $(SRCDIR)/d7vk/version.h.in > $(D7VK_SRC)/version.h.in
+	mkdir -p $(DST_LIBDIR)/wine/d7vk
+	rm -rf $(DST_LIBDIR)/wine/d7vk/version
+	echo "$(shell git -C $(SRCDIR) submodule status -- d7vk)" > $(DST_LIBDIR)/wine/d7vk/version
+	touch $@
+
+default_pfx: d7vk
+
+
 ifneq ($(WITHOUT_NVIDIA_LIBS),1)
 ##
 ## dxvk-nvapi
@@ -1020,40 +1109,8 @@ default_pfx: dxvk-nvapi
 
 
 ##
-## nvcuda
-##
-
-NVCUDA_i386_MESON_ARGS = \
-  --cross-file=$(NVCUDA_SRC)/build-wine32.txt \
-  --libdir=lib/wine/nvcuda/i386-windows
-
-NVCUDA_x86_64_MESON_ARGS = \
-  --cross-file=$(NVCUDA_SRC)/build-wine64.txt \
-  --libdir=lib/wine/nvcuda/x86_64-windows
-
-NVCUDA_DEPENDS = wine
-NVCUDA_HOST_DEPENDS = wine
-
-$(eval $(call rules-source,nvcuda,$(SRCDIR)/nvcuda))
-$(eval $(call rules-nvidia-libs,nvcuda,i386,windows))
-$(eval $(call rules-nvidia-libs,nvcuda,x86_64,windows))
-
-$(OBJ)/.nvcuda-post-source:
-	mkdir -p $(DST_LIBDIR)/wine/nvcuda
-	rm -rf $(DST_LIBDIR)/wine/nvcuda/version
-	echo "$(shell git -C $(SRCDIR) submodule status -- nvcuda)" > $(DST_LIBDIR)/wine/nvcuda/version
-	touch $@
-
-#default_pfx: nvcuda
-
-
-##
 ## nvenc
 ##
-
-NVENC_i386_MESON_ARGS = \
-  --cross-file=$(NVENC_SRC)/build-wine32.txt \
-  --libdir=lib/wine/nvenc/i386-windows
 
 NVENC_x86_64_MESON_ARGS = \
   --cross-file=$(NVENC_SRC)/build-wine64.txt \
@@ -1063,7 +1120,6 @@ NVENC_DEPENDS = wine
 NVENC_HOST_DEPENDS = wine
 
 $(eval $(call rules-source,nvenc,$(SRCDIR)/nvenc))
-$(eval $(call rules-nvidia-libs,nvenc,i386,windows))
 $(eval $(call rules-nvidia-libs,nvenc,x86_64,windows))
 
 $(OBJ)/.nvenc-post-source:
@@ -1072,7 +1128,7 @@ $(OBJ)/.nvenc-post-source:
 	echo "$(shell git -C $(SRCDIR) submodule status -- nvenc)" > $(DST_LIBDIR)/wine/nvenc/version
 	touch $@
 
-#default_pfx: nvenc
+default_pfx: nvenc
 
 
 ##
@@ -1096,7 +1152,7 @@ $(OBJ)/.nvml_so-post-source:
 	echo "$(shell git -C $(SRCDIR) submodule status -- nvml)" > $(DST_LIBDIR)/wine/nvml/version
 	touch $@
 
-#default_pfx: nvml_so
+default_pfx: nvml_so
 
 
 ##
@@ -1120,7 +1176,7 @@ $(OBJ)/.nvml_dll-post-source:
 	echo "$(shell git -C $(SRCDIR) submodule status -- nvml)" > $(DST_LIBDIR)/wine/nvml/version
 	touch $@
 
-#default_pfx: nvml_dll
+default_pfx: nvml_dll
 
 
 ##
@@ -1143,7 +1199,7 @@ $(OBJ)/.nvoptix-post-source:
 	echo "$(shell git -C $(SRCDIR) submodule status -- nvoptix)" > $(DST_LIBDIR)/wine/nvoptix/version
 	touch $@
 
-#default_pfx: nvoptix
+default_pfx: nvoptix
 
 endif # WITHOUT_NVIDIA_LIBS
 
@@ -1655,7 +1711,7 @@ $(SRC)/contrib/$(XALIA_ZIP):
 $(DIST_XALIA): $(SRC)/contrib/$(XALIA_ZIP) $(SRC)/xalia-fixups.gudl
 	rm -rf $(DIST_XALIA_DIR)
 	mkdir -p $(DIST_XALIA_DIR)
-	unzip $< -d $(DIST_XALIA_DIR)
+	unzip -q $< -d $(DIST_XALIA_DIR)
 	mv $(DIST_XALIA_DIR)/main.gudl $(DIST_XALIA_DIR)/main.gudl.orig
 	cat $(SRC)/xalia-fixups.gudl $(DIST_XALIA_DIR)/main.gudl.orig|sed 's/\xef\xbb\xbf//' > $(DIST_XALIA_DIR)/main.gudl
 	rm $(DIST_XALIA_DIR)/main.gudl.orig
@@ -1890,7 +1946,7 @@ redist: all
 	mkdir -p $(REDIST_DIR)
 	rsync --delete -arx $(DST_BASE)/ $(REDIST_DIR)
 	mv $(REDIST_DIR) $(BUILD_NAME)
-	tar -cvzf $(BUILD_NAME).tar.gz $(BUILD_NAME)
+	XZ_OPT="-9 -T$(J)" tar -cvzf $(BUILD_NAME).tar.gz $(BUILD_NAME)
 	sha512sum $(BUILD_NAME).tar.gz > $(BUILD_NAME).sha512sum
 	sha256sum $(BUILD_NAME).* > SHA256SUMS
 	@echo "Proton build available at $(BUILD_NAME).tar.gz"
