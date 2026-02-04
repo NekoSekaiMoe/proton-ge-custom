@@ -10,7 +10,6 @@ from pathlib import Path
 from typing import List, Optional, Dict, Any
 
 class Color:
-    """ANSI 颜色代码"""
     if sys.stdout.isatty():
         ERR = '\033[31;1m'
         STAT = '\033[32;1m'
@@ -32,19 +31,15 @@ class ProtonConfigure:
         self.makefile_path = Path("Makefile")
 
     def print_error(self, *args):
-        """打印错误信息"""
         print(f"{Color.ERR}!!{Color.CLEAR}", *args, file=sys.stderr)
 
     def print_status(self, *args):
-        """打印状态信息"""
         print(f"{Color.STAT}::{Color.CLEAR}", *args, file=sys.stderr)
 
     def print_info(self, *args):
-        """打印信息"""
         print(f"{Color.INFO}::{Color.CLEAR}", *args, file=sys.stderr)
 
     def print_command(self, cmd):
-        """打印要执行的命令"""
         if isinstance(cmd, list):
             cmd_str = " ".join(shlex.quote(arg) for arg in cmd)
         else:
@@ -52,7 +47,6 @@ class ProtonConfigure:
         print(f"+ {Color.CMD}{cmd_str}{Color.CLEAR}", file=sys.stderr)
 
     def run_command(self, cmd, check=True, capture_output=False, cwd=None, **kwargs):
-        """运行命令"""
         self.print_command(cmd)
 
         if capture_output:
@@ -72,14 +66,12 @@ class ProtonConfigure:
             sys.exit(1)
 
     def dependency_check(self, command: str, package: str = None):
-        """检查依赖命令是否存在"""
         if not shutil.which(command):
             package = package or command
             self.print_error(f"Couldn't find command '{command}'. Please install {package}.")
             self.missing_dependencies = 1
 
     def check_container_engine(self, engine: str, image: str) -> bool:
-        """检查容器引擎是否可用"""
         self.print_status(f"Trying {engine}.")
 
         try:
@@ -123,7 +115,6 @@ class ProtonConfigure:
         return True
 
     def escape_for_make(self, text: str) -> str:
-        """转义字符串用于Makefile（不安全，仅用于受信任的输入）"""
         escape = text
         escape = escape.replace('\\', '\\\\')  # '\' -> '\\'
         escape = escape.replace('#', '\\#')    # '#' -> '\#'
@@ -132,36 +123,7 @@ class ProtonConfigure:
         return escape
 
     def fetch_dependencies(self):
-        """获取依赖项（jsoncpp和glslang）"""
         build_dir = Path.cwd()
-
-        jsoncpp_dir = build_dir / "jsoncpp"
-        if jsoncpp_dir.exists():
-            shutil.rmtree(jsoncpp_dir)
-
-        steam_helper_dir = self.srcdir / "steam_helper"
-        json_target_dir = steam_helper_dir / "json"
-        if json_target_dir.exists():
-            shutil.rmtree(json_target_dir)
-
-        self.run_command(["git", "clone", "https://github.com/open-source-parsers/jsoncpp", "--depth=1"])
-
-        os.chdir(jsoncpp_dir)
-        self.run_command(["python3", "amalgamate.py"])
-
-        dist_dir = jsoncpp_dir / "dist"
-        if dist_dir.exists():
-            steam_helper_dir.mkdir(parents=True, exist_ok=True)
-
-            for item in dist_dir.iterdir():
-                dest_path = steam_helper_dir / item.name
-                if item.is_file():
-                    shutil.copy2(item, dest_path)
-                else:
-                    if dest_path.exists():
-                        shutil.rmtree(dest_path)
-                    shutil.copytree(item, dest_path)
-
         glslang_dir = self.srcdir / "glslang"
         if glslang_dir.exists():
             os.chdir(glslang_dir)
@@ -173,7 +135,6 @@ class ProtonConfigure:
         os.chdir(build_dir)
 
     def configure(self):
-        """配置并生成Makefile"""
         steamrt_image = self.args.proton_sdk_image
 
         if self.srcdir == Path.cwd():
@@ -269,7 +230,6 @@ class ProtonConfigure:
         self.print_status("  See README.md for make targets and instructions")
 
     def parse_arguments(self):
-        """解析命令行参数"""
         parser = argparse.ArgumentParser(
             description="Generate a Makefile for building Proton.",
             formatter_class=argparse.RawDescriptionHelpFormatter,
