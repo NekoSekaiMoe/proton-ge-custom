@@ -122,7 +122,7 @@ jobs:
     - name: Make ${{ inputs.name }}
       working-directory: ./a/build
       run: |
-        make -j$(nproc) redist VERBOSE=0 V=0 ENABLE_CCACHE=1
+        make -j$(nproc) redist VERBOSE=0 V=0 ENABLE_CCACHE=1 WITHOUT_NVIDIA_LIBS=1
     - name: Upload artifact ${{ inputs.name }}-arm64.tar.gz
       uses: actions/upload-artifact@v4
       with:
