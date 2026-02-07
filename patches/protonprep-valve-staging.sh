@@ -293,7 +293,7 @@ apply_all_in_dir() {
 
 
 ### END WINE PENDING UPSTREAM SECTION ###
-    apply_all_in_dir "../wine/0003-dna/"
+    apply_all_in_dir "../wine/0003-em-backports/"
 
 ### (2-7) PROTON-GE ADDITIONAL CUSTOM PATCHES ###
 
