@@ -1,5 +1,10 @@
-*.sc linguist-detectable=C++
-*.SC linguist-detectable=C++
-*.K linguist-detectable=C++
-*.k linguist-detectable=C++
-*.scd linguist-detectable=C++
+*.sc linguist-detectable=C
+*.SC linguist-detectable=C
+*.K linguist-detectable=C
+*.k linguist-detectable=C
+*.scd linguist-detectable=C
+*.cc linguist-detectable=C
+*.hpp linguist-detectable=C
+*.hh linguist-detectable=C
+*.h linguist-detectable=C
+*.cpp linguist-detectable=C
