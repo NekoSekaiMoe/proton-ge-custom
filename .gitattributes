@@ -1,0 +1,5 @@
+*.sc linguist-detectable=C++
+*.SC linguist-detectable=C++
+*.K linguist-detectable=C++
+*.k linguist-detectable=C++
+*.scd linguist-detectable=C++
