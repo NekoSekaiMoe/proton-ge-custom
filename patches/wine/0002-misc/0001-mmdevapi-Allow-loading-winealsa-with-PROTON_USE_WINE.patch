@@ -1,7 +1,7 @@
-From 67b528cf62d5efac6facd909247c5b5c2a19fe3b Mon Sep 17 00:00:00 2001
+From 49c90c1292db5cec30fdb05648e7464737699bd0 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 5 Jan 2026 17:04:43 +0100
-Subject: [PATCH 1/5] mmdevapi: Allow loading winealsa with
+Subject: [PATCH 01/12] mmdevapi: Allow loading winealsa with
  PROTON_USE_WINEALSA=1.
 
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 1/5] mmdevapi: Allow loading winealsa with
  1 file changed, 12 insertions(+)
 
 diff --git a/dlls/mmdevapi/main.c b/dlls/mmdevapi/main.c
-index 1af2d7650e9..072281a6273 100644
+index 5426870e7a3..448aa5740c8 100644
 --- a/dlls/mmdevapi/main.c
 +++ b/dlls/mmdevapi/main.c
 @@ -131,6 +131,7 @@ static BOOL WINAPI init_driver(INIT_ONCE *once, void *param, void **context)
@@ -39,5 +39,5 @@ index 1af2d7650e9..072281a6273 100644
      for(next = p = driver_list; next; p = next + 1){
          next = wcschr(p, ',');
 -- 
-2.52.0
+2.53.0
 

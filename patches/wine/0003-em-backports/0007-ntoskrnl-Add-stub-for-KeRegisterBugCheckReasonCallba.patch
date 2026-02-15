@@ -1,8 +1,8 @@
-From 50f4781a36c9b8f7580d658af316c9bf215e525b Mon Sep 17 00:00:00 2001
+From d6b66b9fc155abec3dae5ff39e92d70e9d78fea0 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 16:53:06 -0400
-Subject: [PATCH 07/17] ntoskrnl: Add stub for
+Subject: [PATCH 07/18] ntoskrnl: Add stub for
  KeRegisterBugCheckReasonCallback.
 
 ---
@@ -45,5 +45,5 @@ index 735d7f1b3ea..eb1d7020770 100644
  @ stub KeReleaseMutant
  @ stdcall KeReleaseMutex(ptr long)
 -- 
-2.52.0
+2.53.0
 

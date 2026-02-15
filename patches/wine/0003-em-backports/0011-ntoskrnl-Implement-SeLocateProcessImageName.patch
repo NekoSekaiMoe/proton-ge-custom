@@ -1,8 +1,8 @@
-From c36052126f25f51637ba8dff3b0ea74b3c0f6f54 Mon Sep 17 00:00:00 2001
+From c0a35ce9795362c682a64b8c69a8aa5bb577debb Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 23:32:46 -0400
-Subject: [PATCH 11/17] ntoskrnl: Implement SeLocateProcessImageName.
+Subject: [PATCH 11/18] ntoskrnl: Implement SeLocateProcessImageName.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c         | 51 ++++++++++++++++++++++++----
@@ -118,5 +118,5 @@ index c7bcce2c7e3..f75ff74d55c 100644
  
  struct _KTHREAD
 -- 
-2.52.0
+2.53.0
 

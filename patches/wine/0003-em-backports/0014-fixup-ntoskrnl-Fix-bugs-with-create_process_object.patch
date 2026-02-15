@@ -1,8 +1,8 @@
-From c1a115718a2677276221b8f79832974ccfc21c9b Mon Sep 17 00:00:00 2001
+From 15dbf8108bfa5b0f1a7c9ac664c7e0229621bfdc Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 02:34:36 -0400
-Subject: [PATCH 14/17] fixup! ntoskrnl: Fix bugs with create_process_object.
+Subject: [PATCH 14/18] fixup! ntoskrnl: Fix bugs with create_process_object.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c | 48 +++++++++++++++++++-----------------
@@ -84,5 +84,5 @@ index 8e8bd728b09..3ab73b5edba 100644
  }
  
 -- 
-2.52.0
+2.53.0
 

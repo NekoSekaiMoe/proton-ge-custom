@@ -1,8 +1,8 @@
-From 8afbf06fd376716d4257df2fd4f743e57f53ab21 Mon Sep 17 00:00:00 2001
+From c9db3bb274dc6ea4fd0683d4271eefbe9b4b35f3 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 12:46:14 -0400
-Subject: [PATCH 16/17] ntoskrnl: Add stub for KeCapturePersistentThreadState.
+Subject: [PATCH 16/18] ntoskrnl: Add stub for KeCapturePersistentThreadState.
 
 ---
  dlls/ntoskrnl.exe/ntoskrnl.c        | 8 ++++++++
@@ -42,5 +42,5 @@ index f7e25ddf868..079e8ecde0b 100644
  @ stub KeConnectInterrupt
  @ stub KeDcacheFlushCount
 -- 
-2.52.0
+2.53.0
 
