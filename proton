@@ -44,7 +44,7 @@ import protonfixes
 #To enable debug logging, copy "user_settings.sample.py" to "user_settings.py"
 #and edit it if needed.
 
-CURRENT_PREFIX_VERSION="GE-Proton10-30"
+CURRENT_PREFIX_VERSION="GE-Proton10-31"
 
 PFX="Proton: "
 ld_path_var = "LD_LIBRARY_PATH"
@@ -1567,6 +1567,7 @@ def default_compat_config():
                 "367500", #Dragon's Dogma: Dark Arisen
                 "1890220", #Figmin XR
                 "2058180", #Judgment
+                "3950020", #Duet Night Abyss
                 "2507950", #Delta Force
                 "3950020", #Duet Night Abyss
                 ]:
