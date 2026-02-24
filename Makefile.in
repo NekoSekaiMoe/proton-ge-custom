@@ -950,8 +950,8 @@ WINE_x86_64_AUTOCONF_ARGS += \
 
 WINE_DEPENDS = gst_orc gstreamer gst_base ffmpeg openfst kaldi vosk libxml2 libxkbcommon libpcap
 WINE_i386_DEPENDS = vkd3d
-WINE_x86_64_DEPENDS = piper vkd3d
-WINE_aarch64_DEPENDS = piper
+WINE_x86_64_DEPENDS = piper vkd3d openxr
+WINE_aarch64_DEPENDS = piper openxr
 
 WINE_i386_LIBDIR = $(WINE_i386_DST)/lib
 WINE_x86_64_LIBDIR = $(WINE_x86_64_DST)/lib
@@ -972,6 +972,9 @@ $(OBJ)/.wine-post-source:
 	cd $(WINE_SRC) && XDG_CACHE_HOME=$(OBJ) dlls/winevulkan/make_vulkan -x vk.xml -X video.xml
 	-cd $(WINE_SRC) && tools/make_specfiles
 	touch $@
+
+WINEOPENXR64_JSON := $(DST_DIR)/share/openxr/wineopenxr64.json
+WINEOPENXR64_JSON_SRC := $(SRCDIR)/wine/dlls/wineopenxr/wineopenxr64.json
 
 $(OBJ)/.wine-x86_64-post-build:
 ifeq ($(findstring i386,$(unix_ARCHS)),)
@@ -996,9 +999,15 @@ else
 	$(call install-strip,$(WINE_x86_64_DST)/bin/wineserver,$(DST_DIR)/bin-wow64)
 	cp -a $(WINE_x86_64_DST)/bin/msidb $(DST_DIR)/bin-wow64/
 endif
-
 	mkdir -p $(DST_DIR)/share
 	cp -a $(WINE_x86_64_DST)/share/wine $(DST_DIR)/share
+
+	# Install wineopenxr runtime json
+	mkdir -p $(DST_DIR)/share/openxr
+	if [ -f "$(WINEOPENXR64_JSON_SRC)" ]; then \
+		cp -a "$(WINEOPENXR64_JSON_SRC)" "$(WINEOPENXR64_JSON)"; \
+	fi
+
 	touch $@
 
 $(OBJ)/.wine-i386-post-build:
@@ -1017,6 +1026,12 @@ ifeq ($(findstring x86_64,$(unix_ARCHS)),)
 	mkdir -p $(DST_DIR)/share
 	cp -a $(WINE_aarch64_DST)/share/wine $(DST_DIR)/share
 endif
+	# Install wineopenxr runtime json
+	mkdir -p $(DST_DIR)/share/openxr
+	if [ -f "$(WINEOPENXR64_JSON_SRC)" ]; then \
+		cp -a "$(WINEOPENXR64_JSON_SRC)" "$(WINEOPENXR64_JSON)"; \
+	fi
+
 	touch $@
 
 
@@ -1874,7 +1889,7 @@ endif
 ## default_pfx
 ##
 
-default_pfx: wine gst_good gst_bad gst_libav gst_plugins_rs lsteamclient steamexe vrclient wineopenxr $(WINEOPENXR64_JSON) dxvk vkd3d-proton vkd3d
+default_pfx: vkd3d wine gst_good gst_bad gst_libav gst_plugins_rs lsteamclient steamexe vrclient wineopenxr $(WINEOPENXR64_JSON) dxvk vkd3d-proton
 	find $(DST_LIBDIR)/wine -type f -execdir chmod go-w '{}' '+'
 	rm -rf $(abspath $(DIST_PREFIX))
 	rm -rf $(abspath $(DIST_PREFIX_ARM64))
