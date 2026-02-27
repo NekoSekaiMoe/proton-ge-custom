@@ -198,13 +198,13 @@ apply_all_in_dir() {
 
     echo "WINE: -STAGING- loader-KeyboardLayouts manually applied"
     apply_all_in_dir "../wine-staging/patches/loader-KeyboardLayouts/"
-
+    apply_all_in_dir "../patches/vkd3d/"
     echo "WINE: -STAGING- ntdll-Hide_Wine_Exports manually applied"
     apply_all_in_dir "../patches/wine-hotfixes/staging/ntdll-Hide_Wine_Exports/"
-
+    apply_all_in_dir "../patches/spirtz/"
     echo "WINE: -STAGING- kernel32-Debugger manually applied"
     apply_all_in_dir "../wine-staging/patches/kernel32-Debugger/"
-
+    apply_all_in_dir "../patches/dxvk/"
     echo "WINE: -STAGING- ntdll-ext4-case-folder manually applied"
     apply_all_in_dir "../wine-staging/patches/ntdll-ext4-case-folder/"
 
