@@ -927,7 +927,7 @@ WINE_SOURCE_ARGS = \
   --exclude server/request_trace.h \
 
 WINE_AUTOCONF_ARGS = \
-  --enable-werror \
+  --disable-werror \
   --with-wayland \
   --with-mingw=$(MINGW_TYPE) \
   --with-gstreamer \
