@@ -212,13 +212,13 @@ apply_all_in_dir() {
     apply_all_in_dir "../wine-staging/patches/user32-FlashWindowEx/"
 
     echo "WINE: -STAGING- winex11-Fixed-scancodes manually applied"
-    apply_all_in_dir "../wine/0002-misc/"
+    apply_all_in_dir "../wine/0001-em-backports/"
 
     echo "WINE: -STAGING- winex11-Window_Style manually applied"
     apply_all_in_dir "../wine-staging/patches/winex11-Window_Style/"
 
     echo "WINE: -STAGING- winex11-ime-check-thread-data manually applied"
-    apply_all_in_dir "../wine/0001-spritz/"
+    apply_all_in_dir "../wine/0002-misc-dw/"
 
     echo "WINE: -STAGING- winex11.drv-Query_server_position manually applied"
     apply_all_in_dir "../wine-staging/patches/winex11.drv-Query_server_position/"
@@ -301,7 +301,7 @@ apply_all_in_dir() {
     # https://github.com/ValveSoftware/Proton/issues/651#issuecomment-3564552601
     echo "WINE: -PENDING- add akibas trip undead & undressed patches"
     apply_patch "../patches/wine-hotfixes/pending/akibastrip-video-voice.patch"
-
+    apply_all_in_dir "../wine/0005-reverts/"
     # Separate OpenXR steam reliance
     # https://github.com/GloriousEggroll/proton-ge-custom/issues/214
     echo "WINE: -PENDING- add OpenXR patches"
@@ -309,19 +309,19 @@ apply_all_in_dir() {
 
 
 ### END WINE PENDING UPSTREAM SECTION ###
-    apply_all_in_dir "../wine/0003-em-backports/"
-
+    apply_all_in_dir "../wine/0003-spritz/"
+    apply_all_in_dir "../wine/0004-upstream/"
 ### (2-7) PROTON-GE ADDITIONAL CUSTOM PATCHES ###
 
     echo "WINE: Add winepulse fast polling env variable"
     apply_patch "../patches/proton/winepulse-fast-polling.patch"
-
+    apply_all_in_dir "../protonfixes/0001-upscalers/"
     echo "WINE: Add an env variable to override channel count in winealsa"
     apply_patch "../patches/proton/winealsa-override-channel-count.patch"
-
+    apply_all_in_dir "../protonfixes/0002-early-stage/"
     echo "WINE: -FSR- fullscreen hack fsr patch"
     apply_patch "../patches/proton/0001-fshack-Implement-AMD-FSR-upscaler-for-fullscreen-hac.patch"
-
+    apply_all_in_dir "../protonfixes/0003-dwfixes/"
     echo "WINE: -Nvidia Reflex- Support VK_NV_low_latency2"
     apply_patch "../patches/proton/83-nv_low_latency_wine.patch"
 
