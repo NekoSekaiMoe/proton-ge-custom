@@ -1115,8 +1115,7 @@ $(eval $(call rules-meson,dxvk-llasync,x86_64,windows))
 $(eval $(call rules-meson,dxvk-llasync,aarch64,windows))
 $(eval $(call rules-meson,dxvk-llasync,arm64ec,windows))
 
-$(OBJ)/.dxvk-llasync-post-source: patches-source
-	find $(PATCHES_SRC)/dxvk-llasync/ -name "*.patch" | sort | xargs -n1 patch -d $(DXVK_LLASYNC_SRC) -Np1 -i
+$(OBJ)/.dxvk-llasync-post-source:
 	sed -re 's#@VCS_TAG@#$(shell git -C $(SRCDIR)/dxvk-llasync describe --always --abbrev=15 --dirty=0)#' \
 	    $(SRCDIR)/dxvk-llasync/version.h.in > $(DXVK_LLASYNC_SRC)/version.h.in
 	mkdir -p $(DST_LIBDIR)/wine/dxvk-llasync
