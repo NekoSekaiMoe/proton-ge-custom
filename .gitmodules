@@ -127,3 +127,6 @@
 [submodule "d7vk"]
 	path = d7vk
 	url = https://github.com/WinterSnowfall/d7vk
+[submodule "dxvk-llasync"]
+	path = dxvk-llasync
+	url = https://github.com/Digger1955/dxvk-gplasync-lowlatency
