@@ -1,4 +1,4 @@
-From b0e401d2ac3c69d83fb1c0862f41e8d08c37f119 Mon Sep 17 00:00:00 2001
+From 4e3986a72f4fd67800f789e8a2853f6873290a18 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 15:51:31 -0400
@@ -11,10 +11,10 @@ Subject: [PATCH 03/18] ntoskrnl: Implement PsGetProcessSessionId.
  3 files changed, 13 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 41cfcef3fa8..ff1206d3d51 100644
+index 71f4d329122..d47c08f19eb 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2471,7 +2471,9 @@ static void *create_process_object( HANDLE handle )
+@@ -2496,7 +2496,9 @@ static void *create_process_object( HANDLE handle )
      process->header.Type = 3;
      process->header.WaitListHead.Blink = INVALID_HANDLE_VALUE; /* mark as kernel object */
      NtQueryInformationProcess( handle, ProcessBasicInformation, &process->info, sizeof(process->info), NULL );
@@ -24,7 +24,7 @@ index 41cfcef3fa8..ff1206d3d51 100644
      return process;
  }
  
-@@ -2532,6 +2534,15 @@ HANDLE WINAPI PsGetProcessInheritedFromUniqueProcessId( PEPROCESS process )
+@@ -2557,6 +2559,15 @@ HANDLE WINAPI PsGetProcessInheritedFromUniqueProcessId( PEPROCESS process )
      return id;
  }
  
@@ -41,10 +41,10 @@ index 41cfcef3fa8..ff1206d3d51 100644
  {
      THREAD_BASIC_INFORMATION info;
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 1c2449d9f4d..d810dcb91b2 100644
+index 1c697770558..a1a6955875c 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -931,7 +931,7 @@
+@@ -932,7 +932,7 @@
  @ stub PsGetProcessPriorityClass
  @ stdcall PsGetProcessSectionBaseAddress(ptr)
  @ stub PsGetProcessSecurityPort

@@ -1,4 +1,4 @@
-From 726d9fa736beaf4d783378dee2995cdf84505506 Mon Sep 17 00:00:00 2001
+From 6d277a1234443a2796885f783b81a662cfc4f1c8 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Wed, 11 Mar 2026 17:46:00 +0100
 Subject: [PATCH 2/2] Revert "Apply patch to fall back on async bytestream read
@@ -37,7 +37,7 @@ index 5b6550f969b..0a7c294294e 100644
  
      if (length < sizeof(buffer))
 diff --git a/dlls/mfsrcsnk/media_source.c b/dlls/mfsrcsnk/media_source.c
-index 5306e5a9c82..cd56b032bd6 100644
+index 78ba86bc934..accc06524ef 100644
 --- a/dlls/mfsrcsnk/media_source.c
 +++ b/dlls/mfsrcsnk/media_source.c
 @@ -72,8 +72,6 @@ WINE_DEFAULT_DEBUG_CHANNEL(mfplat);
@@ -49,7 +49,7 @@ index 5306e5a9c82..cd56b032bd6 100644
  #define DEFINE_MF_ASYNC_CALLBACK_(type, name, impl_from, pfx, mem, expr)                           \
      static struct type *impl_from(IMFAsyncCallback *iface)                                         \
      {                                                                                              \
-@@ -1796,7 +1794,7 @@ static NTSTATUS CDECL media_source_read_cb(struct winedmo_stream *stream, BYTE *
+@@ -1798,7 +1796,7 @@ static NTSTATUS CDECL media_source_read_cb(struct winedmo_stream *stream, BYTE *
              && FAILED(IMFByteStream_SetCurrentPosition(source->stream, source->position)))
          WARN("Failed to set current position\n");
  

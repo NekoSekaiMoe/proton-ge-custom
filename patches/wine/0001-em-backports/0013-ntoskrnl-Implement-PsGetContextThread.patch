@@ -1,4 +1,4 @@
-From 7a6319f4ab4918069b6c01c47ebf59b309eeb29f Mon Sep 17 00:00:00 2001
+From ecc71115608ca3fb2a20c646967e2e5dac58a6e1 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 23 Jul 2025 01:06:02 -0400
@@ -10,10 +10,10 @@ Subject: [PATCH 13/18] ntoskrnl: Implement PsGetContextThread.
  2 files changed, 18 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index d0aa4e6fb9e..8e8bd728b09 100644
+index ecbf14e0eb3..1c8581e00ef 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2729,6 +2729,23 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
+@@ -2754,6 +2754,23 @@ HANDLE WINAPI PsGetThreadProcessId( PETHREAD thread )
      return thread->kthread.id.UniqueProcess;
  }
  
@@ -38,10 +38,10 @@ index d0aa4e6fb9e..8e8bd728b09 100644
   *           KeInsertQueue   (NTOSKRNL.EXE.@)
   */
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index 471a35facc2..9df5642878d 100644
+index b9906bef824..574a8cbae0b 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -906,7 +906,7 @@
+@@ -907,7 +907,7 @@
  @ stub PsDereferencePrimaryToken
  @ stub PsDisableImpersonation
  @ stub PsEstablishWin32Callouts

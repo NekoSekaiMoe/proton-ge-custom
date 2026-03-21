@@ -1,4 +1,4 @@
-From 1252f9d0535c90e6aae93873d261d6951d2ebd49 Mon Sep 17 00:00:00 2001
+From b4a596644109271feac949aa13b99a9a1e342942 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Thu, 17 Jul 2025 15:09:56 +0200
 Subject: [PATCH 2/2] HACK: winex11: make WM focus window with
@@ -26,5 +26,5 @@ index 69656ec42bb..e6762fcb15d 100644
  
      if (!XInitThreads()) ERR( "XInitThreads failed, trouble ahead\n" );
 -- 
-2.52.0
+2.53.0
 

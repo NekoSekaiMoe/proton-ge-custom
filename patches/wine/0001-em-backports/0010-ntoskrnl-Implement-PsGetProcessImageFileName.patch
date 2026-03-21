@@ -1,4 +1,4 @@
-From 6ec2515c50535f6ab5fda9d3c812ef16a590eaaa Mon Sep 17 00:00:00 2001
+From b9bbe03a6499c8fe01de177c56ae87ad3e847f84 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 22 Jul 2025 22:11:36 -0400
@@ -11,10 +11,10 @@ Subject: [PATCH 10/18] ntoskrnl: Implement PsGetProcessImageFileName.
  3 files changed, 21 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.c b/dlls/ntoskrnl.exe/ntoskrnl.c
-index 357d19a4df1..62a1b17b813 100644
+index 1d83a353fb6..98ebd9d9f6c 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.c
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.c
-@@ -2465,6 +2465,8 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
+@@ -2490,6 +2490,8 @@ NTSTATUS WINAPI FsRtlRegisterUncProvider(PHANDLE MupHandle, PUNICODE_STRING Redi
  static void *create_process_object( HANDLE handle )
  {
      PEPROCESS process;
@@ -23,7 +23,7 @@ index 357d19a4df1..62a1b17b813 100644
  
      if (!(process = alloc_kernel_object( PsProcessType, handle, sizeof(*process), 0 ))) return NULL;
  
-@@ -2473,6 +2475,14 @@ static void *create_process_object( HANDLE handle )
+@@ -2498,6 +2500,14 @@ static void *create_process_object( HANDLE handle )
      NtQueryInformationProcess( handle, ProcessBasicInformation, &process->info, sizeof(process->info), NULL );
      NtQueryInformationProcess( handle, ProcessSessionInformation, &process->session_id, sizeof(process->session_id), NULL );
      NtQueryInformationProcess( handle, ProcessTimes, &process->times, sizeof(process->times), NULL );
@@ -38,7 +38,7 @@ index 357d19a4df1..62a1b17b813 100644
      IsWow64Process( handle, &process->wow64 );
  
      return process;
-@@ -2553,6 +2563,15 @@ LONGLONG WINAPI PsGetProcessCreateTimeQuadPart( PEPROCESS process )
+@@ -2578,6 +2588,15 @@ LONGLONG WINAPI PsGetProcessCreateTimeQuadPart( PEPROCESS process )
      return process->times.CreateTime.QuadPart;
  }
  
@@ -55,10 +55,10 @@ index 357d19a4df1..62a1b17b813 100644
  {
      THREAD_BASIC_INFORMATION info;
 diff --git a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-index e9a99513e11..ca2f255f056 100644
+index 25b4f2fece7..0106c569199 100644
 --- a/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
 +++ b/dlls/ntoskrnl.exe/ntoskrnl.exe.spec
-@@ -924,7 +924,7 @@
+@@ -925,7 +925,7 @@
  @ stub PsGetProcessExitStatus
  @ stub PsGetProcessExitTime
  @ stdcall PsGetProcessId(ptr)

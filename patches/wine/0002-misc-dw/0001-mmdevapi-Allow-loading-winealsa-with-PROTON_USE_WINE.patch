@@ -1,4 +1,4 @@
-From 2d006a8f9fb350e88314aaf7f4690190bf99397e Mon Sep 17 00:00:00 2001
+From 91daaed20d4b167aa3db8bcb6d29fe2df5c631a5 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 5 Jan 2026 17:04:43 +0100
 Subject: [PATCH 01/11] mmdevapi: Allow loading winealsa with
