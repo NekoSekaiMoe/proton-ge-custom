@@ -130,3 +130,6 @@
 [submodule "dxvk-llasync"]
 	path = dxvk-llasync
 	url = https://github.com/Digger1955/dxvk-gplasync-lowlatency
+[submodule "vkd3d-bratan"]
+	path = vkd3d-bratan
+	url = https://github.com/HansKristian-Work/vkd3d-proton
