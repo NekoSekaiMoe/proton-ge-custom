@@ -10,7 +10,7 @@ on:
 jobs:
   proton:
     name: Build ${{ inputs.name }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - name: Prepare host
       run: sudo apt update && sudo apt-get install -y ccache fontforge-nox
@@ -23,13 +23,6 @@ jobs:
         key: ccache-proton-${{ github.run_id }}
         restore-keys: |
           ccache-proton
-          
-    - name: Link
-      run: |
-        sudo df -h
-        sudo mkdir -pv /mnt/a
-        sudo ln -sfv /mnt/a a
-        sudo chmod 777 -R a
 
     - name: Checkout
       uses: actions/checkout@v6
