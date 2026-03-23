@@ -298,12 +298,12 @@ apply_all_in_dir() {
     # https://github.com/GloriousEggroll/proton-ge-custom/issues/433
     echo "WINE: -PENDING- add Duet Knight Abyss fixes"
     apply_patch "../patches/wine-hotfixes/pending/0009-HACK-kernel32-Spoof-GetProcAddress-of-KiUserApcDispa.patch"
-
+    apply_all_in_dir "../wine/0005-temp/"
     # https://github.com/StephenCWills/wine/commits/akiba/
     # https://github.com/ValveSoftware/Proton/issues/651#issuecomment-3564552601
     echo "WINE: -PENDING- add akibas trip undead & undressed patches"
     apply_patch "../patches/wine-hotfixes/pending/akibastrip-video-voice.patch"
-    apply_all_in_dir "../wine/0005-reverts/"
+    apply_all_in_dir "../wine/0004-reverts/"
     # Separate OpenXR steam reliance
     # https://github.com/GloriousEggroll/proton-ge-custom/issues/214
     echo "WINE: -PENDING- add OpenXR patches"
