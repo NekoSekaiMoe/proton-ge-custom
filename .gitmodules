@@ -112,3 +112,24 @@
 [submodule "Vulkan-Utility-Libraries"]
 	path = Vulkan-Utility-Libraries
 	url = https://github.com/KhronosGroup/Vulkan-Utility-Libraries
+[submodule "nvidia-libs/nvcuda"]
+	path = nvidia-libs/nvcuda
+	url = https://github.com/SveSop/nvcuda
+[submodule "nvidia-libs/nvenc"]
+	path = nvidia-libs/nvenc
+	url = https://github.com/SveSop/nvenc
+[submodule "nvidia-libs/wine-nvml"]
+	path = nvidia-libs/wine-nvml
+	url = https://github.com/Saancreed/wine-nvml
+[submodule "nvidia-libs/wine-nvoptix"]
+	path = nvidia-libs/wine-nvoptix
+	url = https://github.com/SveSop/wine-nvoptix
+[submodule "vklayers/low_latency_layer"]
+	path = vklayers/low_latency_layer
+	url = https://github.com/Korthos-Software/low_latency_layer
+[submodule "vklayers/pyroveil"]
+	path = vklayers/pyroveil
+	url = https://github.com/HansKristian-Work/pyroveil
+[submodule "vklayers/vkbasalt"]
+	path = vklayers/vkbasalt
+	url = https://github.com/DadSchoorse/vkBasalt
