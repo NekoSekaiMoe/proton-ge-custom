@@ -133,3 +133,6 @@
 [submodule "vklayers/vkbasalt"]
 	path = vklayers/vkbasalt
 	url = https://github.com/DadSchoorse/vkBasalt
+[submodule "libwebp"]
+	path = libwebp
+	url = https://github.com/webmproject/libwebp
