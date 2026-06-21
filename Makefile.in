@@ -635,7 +635,7 @@ GST_PLUGINS_RS_CARGO_ARGS = \
 
 GST_PLUGINS_RS_DEPENDS = gst_orc gstreamer gst_base dav1d
 
-$(eval $(call rules-source,gst_plugins_rs,$(SRCDIR)/gst-plugins-rs))
+$(eval $(call rules-source,gst_plugins_rs,$(SRCDIR)/gst-plugin-rs))
 $(eval $(call rules-cargo,gst_plugins_rs,i386,unix))
 $(eval $(call rules-cargo,gst_plugins_rs,x86_64,unix))
 $(eval $(call rules-cargo,gst_plugins_rs,aarch64,unix))
