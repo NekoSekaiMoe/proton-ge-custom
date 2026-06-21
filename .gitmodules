@@ -88,3 +88,21 @@
 [submodule "d7vk"]
 	path = d7vk
 	url = https://github.com/WinterSnowfall/d7vk.git
+[submodule "discord-rpc-bridge"]
+	path = discord-rpc-bridge
+	url = https://github.com/enderice2/rpc-bridge
+[submodule "dxvk-llasync"]
+	path = dxvk-llasync
+	url = https://github.com/netborg-afps/dxvk-low-latency
+[submodule "dxvk-sarek"]
+	path = dxvk-sarek
+	url = https://github.com/pythonlover02/DXVK-Sarek
+[submodule "gst-orc"]
+	path = gst-orc
+	url = https://github.com/GStreamer/orc
+[submodule "gst-plugin-rs"]
+	path = gst-plugin-rs
+	url = https://github.com/sdroege/gst-plugin-rs
+[submodule "gstreamer"]
+	path = gstreamer
+	url = https://github.com/GStreamer/gstreamer
