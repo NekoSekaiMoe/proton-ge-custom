@@ -19,6 +19,7 @@ apply_all_in_dir() {
     git reset --hard HEAD
     git clean -xdf
     patch -Np1 < ../patches/dxvk/layered-overlay-dxvk.patch
+    patch -Np1 < ../patches/dxvk/0001-dxvk-Implement-support-for-HDR-detection-via-NtUserD.patch
     popd
 
     pushd vkd3d-proton
@@ -26,14 +27,23 @@ apply_all_in_dir() {
     git clean -xdf
     popd
 
+    pushd dxvk-llasync
+    git reset --hard HEAD
+    git clean -xdf
+    patch -Np1 < ../patches/dxvk-llasync/0001-dxvk-Apply-Ph42oN-gplasync-patch.patch
+    patch -Np1 < ../patches/dxvk-llasync/0001-dxvk-Implement-support-for-HDR-detection-via-NtUserD.patch
+    popd
+    
     pushd dxvk-nvapi
     git reset --hard HEAD
     git clean -xdf
+    patch -Np1 < ../patches/dxvk-nvapi-vkreflex-layer/0001-meson-local-source.patch
     popd
 
     pushd protonfixes
     git reset --hard HEAD
     git clean -xdf
+    apply_all_in_dir ../patches/protonfixes/
     popd
 
     pushd wineopenxr
@@ -42,6 +52,31 @@ apply_all_in_dir() {
     echo "WINEOPENXR: patch wineopenxr so it can be built as part of wine"
     apply_all_in_dir "../patches/wineopenxr/"
     popd
+
+    pushd vklayers/low_latency_layer
+    git checkout .
+    git clean -xdf
+    apply_all_in_dir "../patches/vklayers/low_latency_layer/"
+    popd
+
+    pushd vklayers/vkbasalt
+    git checkout .
+    git clean -xdf
+    apply_all_in_dir "../patches/vklayers/vkbasalt/"
+    popd
+
+    pushd discord-rpc-bridge
+    git checkout .
+    git clean -xdf
+    apply_all_in_dir "../patches/discord-rpc-bridge"
+    popd
+
+    pushd glslang
+    git checkout .
+    git clean -xdf
+    apply_all_in_dir "../patches/glslang/"
+    popd
+
 
 ### END PREP SECTION ###
 
