@@ -106,3 +106,9 @@
 [submodule "gstreamer"]
 	path = gstreamer
 	url = https://github.com/GStreamer/gstreamer
+[submodule "nghttp2"]
+	path = nghttp2
+	url = https://github.com/nghttp2/nghttp2
+[submodule "Vulkan-Utility-Libraries"]
+	path = Vulkan-Utility-Libraries
+	url = https://github.com/KhronosGroup/Vulkan-Utility-Libraries
