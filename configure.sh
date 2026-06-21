@@ -187,9 +187,7 @@ function configure() {
     if [[ -n "$arg_enable_ccache" ]]; then
       echo "ENABLE_CCACHE := 1"
     fi
-    if [[ -n "$arg_enable_wow64" ]]; then
-      echo "ENABLE_WOW64 := 1"
-    fi
+    echo "ENABLE_WOW64 := 1"
     if [[ -n "$arg_without_tts" ]]; then
       echo "WITHOUT_TTS := 1"
     fi
