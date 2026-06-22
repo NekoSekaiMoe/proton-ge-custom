@@ -77,15 +77,6 @@ apply_all_in_dir() {
     apply_all_in_dir "../patches/glslang/"
     popd
 
-
-### END PREP SECTION ###
-
-    git checkout steam_helper
-    git checkout umu_helper
-
-    echo "DISCORD: -DISCORD RPC BRIDGE- patch steam/umu helpers"
-    apply_all_in_dir "patches/discordrpc/helpers"
-
 ### (2) WINE PATCHING ###
 
     pushd wine
