@@ -89,7 +89,7 @@
 	path = d7vk
 	url = https://github.com/WinterSnowfall/d7vk.git
 [submodule "discord-rpc-bridge"]
-	path = discord-rpc-bridgw
+	path = discord-rpc-bridge
 	url = https://github.com/enderice2/rpc-bridge
 [submodule "dxvk-llasync"]
 	path = dxvk-llasync
