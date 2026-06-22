@@ -394,4 +394,6 @@ usage() {
 parse_args "$@" || usage err
 [[ -z $arg_help ]] || usage info
 
+cd glslang && python3 update_glslang_sources.py
+cd ..
 configure
