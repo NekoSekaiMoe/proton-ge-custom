@@ -1046,7 +1046,7 @@ $(eval $(call rules-source,discord-rpc-bridge,$(SRCDIR)/discord-rpc-bridge))
 $(eval $(call create-rules-common,discord-rpc-bridge,DISCORD_RPC_BRIDGE,x86_64,unix))
 $(eval $(call create-rules-common,discord-rpc-bridge,DISCORD_RPC_BRIDGE,aarch64,unix))
 
-$(OBJ)/.discord-rpc-bridge-post-source: patches-source
+$(OBJ)/.discord-rpc-bridge-post-source:
 	$(foreach p,$(shell find $(PATCHES_SRC)/discord-rpc-bridge/ -name "*.patch" | sort),patch -d $(DISCORD_RPC_BRIDGE_SRC) -Np1 -i $(p) &&) true
 	touch $@
 
@@ -1180,7 +1180,7 @@ $(eval $(call rules-meson,dxvk-llasync,i386,windows))
 $(eval $(call rules-meson,dxvk-llasync,x86_64,windows))
 $(eval $(call rules-meson,dxvk-llasync,arm64ec,windows))
 
-$(OBJ)/.dxvk-llasync-post-source: patches-source
+$(OBJ)/.dxvk-llasync-post-source:
 	$(foreach p,$(shell find $(PATCHES_SRC)/dxvk-llasync/ -name "*.patch" | sort),patch -d $(DXVK_LLASYNC_SRC) -Np1 -i $(p) &&) true
 	sed -re 's#@VCS_TAG@#$(shell git -C $(SRCDIR)/dxvk-llasync describe --always --abbrev=15 --dirty=0)#' \
 	    $(SRCDIR)/dxvk-llasync/version.h.in > $(DXVK_LLASYNC_SRC)/version.h.in
@@ -1302,7 +1302,7 @@ $(eval $(call rules-source,dxvk-nvapi-vkreflex-layer,$(SRCDIR)/dxvk-nvapi/layer)
 $(eval $(call rules-meson,dxvk-nvapi-vkreflex-layer,x86_64,unix))
 $(eval $(call rules-meson,dxvk-nvapi-vkreflex-layer,aarch64,unix))
 
-$(OBJ)/.dxvk-nvapi-vkreflex-layer-post-source: patches-source dxvk-nvapi-source
+$(OBJ)/.dxvk-nvapi-vkreflex-layer-post-source: dxvk-nvapi-source
 	$(foreach p,$(shell find $(PATCHES_SRC)/dxvk-nvapi-vkreflex-layer/ -name "*.patch" | sort),patch -d $(DXVK_NVAPI_VKREFLEX_LAYER_SRC) -Np2 -i $(p) &&) true
 	sed -re 's#@VCS_TAG@#$(shell git -C $(SRCDIR)/dxvk-nvapi describe --always --abbrev=15 --dirty=0)#' \
 	    $(SRCDIR)/dxvk-nvapi/version.h.in > $(DXVK_NVAPI_VKREFLEX_LAYER_SRC)/version.h.in
@@ -1585,7 +1585,7 @@ $(eval $(call rules-source,low_latency_layer,$(SRCDIR)/vklayers/low_latency_laye
 $(eval $(call rules-cmake,low_latency_layer,x86_64,unix))
 $(eval $(call rules-cmake,low_latency_layer,aarch64,unix))
 
-$(OBJ)/.low_latency_layer-post-source: patches-source
+$(OBJ)/.low_latency_layer-post-source:
 	$(foreach p,$(shell find $(PATCHES_SRC)/vklayers/low_latency_layer/ -name "*.patch" | sort),patch -d $(LOW_LATENCY_LAYER_SRC) -Np1 -i $(p) &&) true
 	touch $@
 
@@ -1618,7 +1618,7 @@ $(eval $(call rules-meson,vkbasalt,i386,unix))
 $(eval $(call rules-meson,vkbasalt,x86_64,unix))
 $(eval $(call rules-meson,vkbasalt,aarch64,unix))
 
-$(OBJ)/.vkbasalt-post-source: patches-source
+$(OBJ)/.vkbasalt-post-source:
 	$(foreach p,$(shell find $(PATCHES_SRC)/vklayers/vkbasalt/ -name "*.patch" | sort),patch -d $(VKBASALT_SRC) -Np1 -i $(p) &&) true
 	touch $@
 
@@ -2356,7 +2356,7 @@ deploy: all
 ## make redist
 ##
 
-.PHONY: redist patches-source
+.PHONY: redist
 redist: all
 	mkdir -p $(REDIST_DIR)
 	rsync --delete -arx $(DST_BASE)/ $(REDIST_DIR)
@@ -2365,8 +2365,8 @@ redist: all
 	sha512sum $(BUILD_NAME).tar.gz > $(BUILD_NAME).sha512sum
 	sha256sum $(BUILD_NAME).* > SHA256SUMS
 	@echo "Proton build available at $(BUILD_NAME).tar.gz"
-patches-source:
-	true
+
+
 ##
 ## make module=$dllname module[32,64]
 ##
