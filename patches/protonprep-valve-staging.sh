@@ -56,13 +56,13 @@ apply_all_in_dir() {
     pushd vklayers/low_latency_layer
     git checkout .
     git clean -xdf
-    apply_all_in_dir "../patches/vklayers/low_latency_layer/"
+    apply_all_in_dir "../../patches/vklayers/low_latency_layer/"
     popd
 
     pushd vklayers/vkbasalt
     git checkout .
     git clean -xdf
-    apply_all_in_dir "../patches/vklayers/vkbasalt/"
+    apply_all_in_dir "../../patches/vklayers/vkbasalt/"
     popd
 
     pushd discord-rpc-bridge
