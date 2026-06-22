@@ -138,6 +138,7 @@ include $(SRC)/make/rules-winemaker.mk
 include $(SRC)/make/rules-wine-requests.mk
 include $(SRC)/make/rules-wine-tools.mk
 include $(SRC)/make/rules-cargo.mk
+include $(SRC)/make/rules-nvidia.mk
 
 ##
 ## meson
