@@ -4,7 +4,9 @@ Date: Wed, 17 Jun 2026 00:15:18 -0600
 Subject: [PATCH] fix for arcania games video playback
 
 ---
+ dlls/evr/evr.c                      |  14 +-
  dlls/mfsrcsnk/media_source.c         |  28 ++-
+ dlls/qasf/asfreader.c                |  59 +++++-
  dlls/winedmo/main.c                  |   4 +-
  dlls/winedmo/media_source.c          |   1 +
  dlls/winedmo/quartz_transform.c      | 281 +++++++++++++++++++++------
@@ -14,8 +16,56 @@ Subject: [PATCH] fix for arcania games video playback
  dlls/winedmo/winedmo_quartz_parser.c |  70 +++++--
  dlls/winedmo/wm_reader.c             | 268 +++++++++++++++++--------
  dlls/wmvcore/async_reader.c          |  61 ++++--
- 10 files changed, 640 insertions(+), 174 deletions(-)
+ 12 files changed, 702 insertions(+), 185 deletions(-)
 
+diff --git a/dlls/evr/evr.c b/dlls/evr/evr.c
+index d698cef10a0..7fb9fe15955 100644
+--- a/dlls/evr/evr.c
++++ b/dlls/evr/evr.c
+@@ -353,6 +353,10 @@ static HRESULT evr_copy_sample_buffer(struct evr *filter, const GUID *subtype, I
+     UINT64 frame_size = 0;
+     UINT32 width, lines;
+     LONG src_stride;
++    LONG src_plane_stride;
++    BYTE *src_base;
++    BYTE *src_uv;
++    LONG src_uv_stride;
+     HRESULT hr;
+     BYTE *src;
+     BYTE *dst_uv;
+@@ -372,6 +376,8 @@ static HRESULT evr_copy_sample_buffer(struct evr *filter, const GUID *subtype, I
+         WARN("Failed to get pointer to sample data, hr %#lx.\n", hr);
+         return hr;
+     }
++    src_plane_stride = src_stride < 0 ? -src_stride : src_stride;
++    src_base = src;
+ 
+     if (FAILED(hr = IMFVideoSampleAllocator_AllocateSample(filter->allocator, sample)))
+     {
+@@ -401,16 +407,21 @@ static HRESULT evr_copy_sample_buffer(struct evr *filter, const GUID *subtype, I
+                 }
+                 else if (IsEqualGUID(subtype, &MFVideoFormat_NV12))
+                 {
++                    BYTE *src_y = src_stride < 0 ? src_base : src;
++                    LONG src_y_stride = src_stride < 0 ? src_plane_stride : src_stride;
++
+                     /* Width and height must be rounded up to even. */
+                     width = (width + 1) & ~1;
+                     lines = (lines + 1) & ~1;
+ 
+                     /* Y plane */
+-                    MFCopyImage(locked_rect.pBits, locked_rect.Pitch, src, src_stride, width, lines);
++                    MFCopyImage(locked_rect.pBits, locked_rect.Pitch, src_y, src_y_stride, width, lines);
+ 
+                     /* UV plane */
+                     dst_uv = (BYTE *)locked_rect.pBits + (lines * locked_rect.Pitch);
+-                    MFCopyImage(dst_uv, locked_rect.Pitch, src + (lines * src_stride), src_stride, width, lines / 2);
++                    src_uv = src_base + lines * src_plane_stride;
++                    src_uv_stride = src_y_stride;
++                    MFCopyImage(dst_uv, locked_rect.Pitch, src_uv, src_uv_stride, width, lines / 2);
+                 }
+                 else
+                 {
 diff --git a/dlls/mfsrcsnk/media_source.c b/dlls/mfsrcsnk/media_source.c
 index 882af0d565a..d9ec10ef44f 100644
 --- a/dlls/mfsrcsnk/media_source.c
@@ -308,7 +358,27 @@ index 1b89aefa4e7..8eb3f817002 100644
          if (out_flags & WINEDMO_SAMPLE_FLAG_FORMAT_CHANGED)
          {
              IMediaSample_Release(output_sample);
-@@ -510,12 +496,186 @@ static HRESULT WINAPI transform_sink_receive(struct strmbase_sink *pin, IMediaSa
+@@ -506,18 +496,205 @@ static HRESULT WINAPI transform_sink_receive(struct strmbase_sink *pin, IMediaSa
+         IMediaSample_SetDiscontinuity(output_sample, !!(out_flags & WINEDMO_SAMPLE_FLAG_DISCONTINUITY));
+         IMediaSample_SetPreroll(output_sample, FALSE);
+ 
+         if (out_pts != INT64_MIN)
+         {
+-            REFERENCE_TIME pts_rt = out_pts, end_rt = out_pts + out_dur;
++            REFERENCE_TIME pts_rt, end_rt;
++
++            if (out_dur <= 0
++                    && IsEqualGUID(&filter->source.pin.mt.formattype, &FORMAT_VideoInfo)
++                    && filter->source.pin.mt.cbFormat >= sizeof(VIDEOINFOHEADER))
++            {
++                const VIDEOINFOHEADER *format = (const VIDEOINFOHEADER *)filter->source.pin.mt.pbFormat;
++
++                if (format->AvgTimePerFrame > 0)
++                    out_dur = format->AvgTimePerFrame;
++            }
++
++            pts_rt = out_pts;
++            end_rt = out_pts + out_dur;
              IMediaSample_SetTime(output_sample, &pts_rt, out_dur != INT64_MIN ? &end_rt : NULL);
          }
  
@@ -605,7 +675,14 @@ index f7781420877..490a4a78d6d 100644
  /* -------------------------------------------------------------------------
   * Codec-ID helpers
   * ------------------------------------------------------------------------- */
-@@ -509,6 +511,11 @@ static INT64 get_video_frame_duration( struct unix_transform *t )
+@@ -505,10 +507,15 @@ static INT64 get_video_frame_duration( struct unix_transform *t )
+     INT64 duration;
+ 
+     duration = video_duration_from_rate( t->input_fps_num, t->input_fps_den );
+-    if (t->avctx->codec_id != AV_CODEC_ID_VC1 && t->frame->duration > 0)
++    if (t->frame->duration > 0)
+         duration = t->frame->duration;
+ 
      return duration;
  }
  
@@ -715,8 +792,6 @@ index f7781420877..490a4a78d6d 100644
 +    t->packet->dts = (params->dts != INT64_MIN) ? params->dts
 +            : is_wmv_video_codec( t->avctx->codec_id ) ? AV_NOPTS_VALUE : t->packet->pts;
      t->packet->duration = params->duration != INT64_MIN ? params->duration : 0;
-+    if (is_wmv_video_codec( t->avctx->codec_id ))
-+        t->packet->duration = 0;
      if (params->flags & WINEDMO_SAMPLE_FLAG_SYNC_POINT)
          t->packet->flags |= AV_PKT_FLAG_KEY;
      t->last_input_pts = params->pts; /* track for codecs that don't propagate pts to output frames */
@@ -1040,42 +1115,24 @@ index af4bac37d1b..86f40acef63 100644
          if (stream->decoded_winedmo_format.u.video.height < 0
                  && winedmo_video_format_is_rgb(stream->decoded_winedmo_format.u.video.format))
              out_fmt.video.videoInfo.VideoFlags |= MFVideoFlag_BottomUpLinearRep;
-@@ -304,6 +312,23 @@ static void wm_stream_reset_decoded_timing(struct wm_stream *stream)
+@@ -304,6 +312,7 @@ static void wm_stream_reset_decoded_timing(struct wm_stream *stream)
  {
      stream->last_decoded_pts = INT64_MIN;
      stream->observed_decoded_duration = 0;
 +    stream->next_decoded_cleanpoint = false;
-+}
-+
-+static void wm_stream_set_nominal_video_duration(struct wm_stream *stream, INT64 duration)
-+{
-+    if (duration <= 0 || !IsEqualGUID(&stream->major_type, &MFMediaType_Video))
-+        return;
-+
-+    stream->nominal_decoded_duration = duration;
-+    stream->decoded_winedmo_format.u.video.fps_n = 10000000;
-+    stream->decoded_winedmo_format.u.video.fps_d = duration;
-+
-+    if (stream->compressed_fmt)
-+    {
-+        stream->compressed_fmt->video.videoInfo.FramesPerSecond.Numerator = 10000000;
-+        stream->compressed_fmt->video.videoInfo.FramesPerSecond.Denominator = duration;
-+    }
  }
  
  static INT64 wm_stream_get_video_duration(const struct wm_stream *stream)
-@@ -331,7 +356,11 @@ static BOOL wm_stream_update_decoded_video_timing(struct wm_stream *stream, INT6
-     {
-         delta = *pts - stream->last_decoded_pts;
-         if (delta > 100000 && delta < 1000000 && delta > stream->observed_decoded_duration)
-+        {
-             stream->observed_decoded_duration = delta;
-+            if (!stream->nominal_decoded_duration)
-+                wm_stream_set_nominal_video_duration(stream, delta);
-+        }
-         else if (delta <= 0)
-             return FALSE;
-     }
+@@ -314,6 +339,6 @@ static INT64 wm_stream_get_video_duration(const struct wm_stream *stream)
+ {
+-    if (stream->observed_decoded_duration > 0)
+-        return stream->observed_decoded_duration;
+     if (stream->nominal_decoded_duration > 0)
+         return stream->nominal_decoded_duration;
++    if (stream->observed_decoded_duration > 0)
++        return stream->observed_decoded_duration;
+     return 333333;
+ }
 @@ -549,7 +578,6 @@ static ULONG WINAPI buffer_Release(INSSBuffer *iface)
      ULONG refcount = InterlockedDecrement(&buffer->refcount);
  
@@ -1706,6 +1763,110 @@ index cec97f42eab..279258be98b 100644
  }
  
  static HRESULT WINAPI WMReaderAdvanced_GetMaxStreamSampleSize(IWMReaderAdvanced6 *iface,
+diff --git a/dlls/qasf/asfreader.c b/dlls/qasf/asfreader.c
+index 46a3d7e45d5..d06699599f8 100644
+--- a/dlls/qasf/asfreader.c
++++ b/dlls/qasf/asfreader.c
+@@ -20,6 +20,8 @@
+ 
+ #include "qasf_private.h"
+ 
++#include <string.h>
++
+ #include "mediaobj.h"
+ #include "propsys.h"
+ #include "initguid.h"
+@@ -117,8 +119,9 @@ static HRESULT WINAPI buffer_GetBufferAndLength(INSSBuffer *iface, BYTE **data,
+ {
+     struct buffer *impl = impl_from_INSSBuffer(iface);
+     TRACE("iface %p, data %p, size %p.\n", iface, data, size);
+-    *size = IMediaSample_GetSize(impl->sample);
+-    return IMediaSample_GetPointer(impl->sample, data);
++    if (size) *size = IMediaSample_GetActualDataLength(impl->sample);
++    if (data) return IMediaSample_GetPointer(impl->sample, data);
++    return S_OK;
+ }
+ 
+ static const INSSBufferVtbl buffer_vtbl =
+@@ -518,7 +521,8 @@ static HRESULT asf_reader_init_stream(struct strmbase_filter *iface)
+             break;
+         }
+ 
+-        if (FAILED(hr = IWMReaderAdvanced2_SetAllocateForOutput(reader_advanced, i, TRUE)))
++        if (!IsEqualGUID(&stream->source.pin.mt.majortype, &MEDIATYPE_Video)
++                && FAILED(hr = IWMReaderAdvanced2_SetAllocateForOutput(reader_advanced, i, TRUE)))
+         {
+             WARN("Failed to enable allocation for stream %u, hr %#lx\n", i, hr);
+             break;
+@@ -933,7 +937,10 @@ static HRESULT WINAPI reader_callback_OnSample(IWMReaderCallback *iface, DWORD o
+     struct asf_reader *filter = impl_from_IWMReaderCallback(iface)->filter;
+     REFERENCE_TIME start_time = time, end_time = time + duration;
+     struct asf_stream *stream = filter->streams + output;
++    IMediaSample *media_sample = NULL;
+     struct buffer *buffer;
++    DWORD buffer_len;
++    BYTE *src, *dst;
+     HRESULT hr = S_OK;
+ 
+     TRACE("iface %p, output %lu, time %I64u, duration %I64u, flags %#lx, sample %p, context %p.\n",
+@@ -945,19 +952,51 @@ static HRESULT WINAPI reader_callback_OnSample(IWMReaderCallback *iface, DWORD o
+         return S_OK;
+     }
+ 
+-    if (!(buffer = unsafe_impl_from_INSSBuffer(sample)))
+-        WARN("Unexpected buffer iface %p, discarding.\n", sample);
++    if ((buffer = unsafe_impl_from_INSSBuffer(sample)))
++        media_sample = buffer->sample;
+     else
+     {
+-        IMediaSample_SetTime(buffer->sample, &start_time, &end_time);
+-        IMediaSample_SetDiscontinuity(buffer->sample, !!(flags & WM_SF_DISCONTINUITY));
+-        IMediaSample_SetSyncPoint(buffer->sample, !!(flags & WM_SF_CLEANPOINT));
++        if (FAILED(hr = INSSBuffer_GetBufferAndLength(sample, &src, &buffer_len)))
++        {
++            WARN("Failed to get buffer data, hr %#lx.\n", hr);
++            return hr;
++        }
+ 
+-        hr = IMemInputPin_Receive(stream->source.pMemInputPin, buffer->sample);
++        if (FAILED(hr = IMemAllocator_GetBuffer(stream->source.pAllocator, &media_sample, NULL, NULL, 0)))
++        {
++            WARN("Failed to get a sample, hr %#lx.\n", hr);
++            return hr;
++        }
+ 
+-        TRACE("Receive returned hr %#lx.\n", hr);
++        if (buffer_len > IMediaSample_GetSize(media_sample))
++        {
++            WARN("Allocated media sample is too small, size %lu.\n", buffer_len);
++            IMediaSample_Release(media_sample);
++            return VFW_E_BUFFER_OVERFLOW;
++        }
++
++        if (FAILED(hr = IMediaSample_GetPointer(media_sample, &dst)))
++        {
++            WARN("Failed to get sample pointer, hr %#lx.\n", hr);
++            IMediaSample_Release(media_sample);
++            return hr;
++        }
++
++        memcpy(dst, src, buffer_len);
++        IMediaSample_SetActualDataLength(media_sample, buffer_len);
+     }
+ 
++    IMediaSample_SetTime(media_sample, &start_time, &end_time);
++    IMediaSample_SetDiscontinuity(media_sample, !!(flags & WM_SF_DISCONTINUITY));
++    IMediaSample_SetSyncPoint(media_sample, !!(flags & WM_SF_CLEANPOINT));
++
++    hr = IMemInputPin_Receive(stream->source.pMemInputPin, media_sample);
++
++    TRACE("Receive returned hr %#lx.\n", hr);
++
++    if (!buffer)
++        IMediaSample_Release(media_sample);
++
+     return hr;
+ }
+ 
 -- 
 2.54.0
-

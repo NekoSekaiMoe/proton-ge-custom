@@ -80,6 +80,12 @@ apply_all_in_dir() {
 
 ### END PREP SECTION ###
 
+    git checkout steam_helper
+    git checkout umu_helper
+
+    echo "DISCORD: -DISCORD RPC BRIDGE- patch steam/umu helpers"
+    apply_all_in_dir "patches/discordrpc/helpers"
+
 ### (2) WINE PATCHING ###
 
     pushd wine
@@ -318,6 +324,9 @@ apply_all_in_dir() {
 
     echo "WINE: mutter -> cinnamon detection patch for winex11"
     apply_patch "../patches/proton/winex11-mutter-cinnamon.patch"
+
+    echo "WINE: add optiscaler patch"
+    apply_patch "../patches/proton/0001-HACK-kernelbase-allow-overriding-dlls-for-DLSS-XeSS-.patch"
 
     echo "WINE: -HOTFIX- Implement GE-Proton ffmpeg + winedmo only video playback rework patches"
     apply_all_in_dir "../patches/ge-video-rework/"

@@ -1405,7 +1405,6 @@ class CompatData:
                         os.unlink(nvapi32_dll)
                     if file_exists(nvapi32_dll + '.debug', follow_symlinks=False):
                         os.unlink(nvapi32_dll + '.debug')
-
                 if use_nvcuda and use_nvapi:
                     try_copy(g_proton.arch_pe_dir("wine/nvidia-libs/nvcuda", False) + "nvcuda.dll.so", "drive_c/windows/system32/nvcuda.dll",
                             prefix=self.prefix_dir, track_file=tracked_files, link_debug=True)
@@ -2072,6 +2071,12 @@ class Session:
         self.check_environment("PROTON_USE_SDL", "sdlinput")
         self.check_environment("PROTON_FSR4_INDICATOR", "fsr4hud")
         self.check_environment("PROTON_DLSS_INDICATOR", "dlsshud")
+<<<<<<< HEAD
+=======
+        self.check_environment("PROTON_XESS_UPGRADE", "xess")
+        self.check_environment("PROTON_USE_OPTISCALER", "optiscaler")
+
+>>>>>>> 9ebb07f9aa22d246bd2e6ea7fe1e972a054e740e
         self.check_environment("PROTON_NATIVE_AGS", "nativeags")
 
         if "noesync" in self.compat_config:
