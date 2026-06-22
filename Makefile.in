@@ -2316,7 +2316,7 @@ deploy: all
 ## make redist
 ##
 
-.PHONY: redist
+.PHONY: redist patches-source
 redist: all
 	mkdir -p $(REDIST_DIR)
 	rsync --delete -arx $(DST_BASE)/ $(REDIST_DIR)
@@ -2325,7 +2325,8 @@ redist: all
 	sha512sum $(BUILD_NAME).tar.gz > $(BUILD_NAME).sha512sum
 	sha256sum $(BUILD_NAME).* > SHA256SUMS
 	@echo "Proton build available at $(BUILD_NAME).tar.gz"
-
+patches-source:
+	true
 ##
 ## make module=$dllname module[32,64]
 ##
