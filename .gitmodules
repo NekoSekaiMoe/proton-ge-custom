@@ -136,3 +136,6 @@
 [submodule "libwebp"]
 	path = libwebp
 	url = https://github.com/webmproject/libwebp
+[submodule "bzip2"]
+	path = bzip2
+	url = https://sourceware.org/git/bzip2.git
